@@ -3,7 +3,7 @@ import Login from "./Login.jsx";
 import Cart from "./Cart.jsx";
 function Navbar() {
   return (
-    <nav className="navbar flex justify-between items-center pa1 bg-purple">
+    <nav className="navbar flex justify-between items-center pa1 bg-purple mb3">
       <h2>Creative Stash</h2>
       <SearchBar />
       <Login />

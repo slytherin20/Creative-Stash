@@ -13,9 +13,9 @@ function Highlight() {
   }
 
   return (
-    <div className="corousel-slides vh-50">
+    <div className="flex justify-center corousel-slides vh-50">
       {images.length !== 0 && (
-        <img className="w-100 vh-50" src={images[0].original} alt="banner" />
+        <img className="slide vh-50" src={images[0].original} alt="banner" />
       )}
     </div>
   );
