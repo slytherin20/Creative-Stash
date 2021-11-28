@@ -13,9 +13,13 @@
   right: 50px;
   top: -15px;
 }
-.navbar {
+.categories {
   box-shadow: 0px 5px 5px 1px rgb(179, 176, 176, 0.7);
 }
 .slide {
   width: 95%;
+}
+.category:hover {
+  border-bottom: solid 3px #5e2ca5;
+  color: #5e2ca5;
 }
