@@ -9,7 +9,7 @@ let categories = [
 ];
 function Categories() {
   const [hoveredCategory, setHoveredCategory] = useState("");
-  let subCategories;
+  const [subCategory, setSubCategory] = useState({});
 
   useEffect(() => {
     getSubCategories();
@@ -17,12 +17,15 @@ function Categories() {
 
   async function getSubCategories() {
     let res = await fetch("http://localhost:3000/Categories");
-    subCategories = await res.json();
+    let data = await res.json();
+    setSubCategory(data);
   }
 
   function changeCategory(cat) {
     setHoveredCategory(cat);
-    console.log(subCategories[cat]);
+  }
+  function removeCategory() {
+    setHoveredCategory("");
   }
   return (
     <>
@@ -33,17 +36,16 @@ function Categories() {
             className="btn category list flex items-center flex-auto justify-center"
             onMouseOver={() => changeCategory(cat)}
             onFocus={() => changeCategory(cat)}
+            onMouseOut={() => removeCategory()}
+            onBlur={() => removeCategory()}
           >
             {cat}
+            {hoveredCategory === cat && (
+              <ShowSubCategories options={subCategory[hoveredCategory]} />
+            )}
           </li>
         ))}
       </ul>
-      {hoveredCategory &&
-        console.log(
-          hoveredCategory
-        )
-        //<ShowSubCategories subcategories={subCategories[hoveredCategory]} />
-      }
     </>
   );
 }

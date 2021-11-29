@@ -23,3 +23,10 @@
   border-bottom: solid 3px #5e2ca5;
   color: #5e2ca5;
 }
+.category {
+  position: relative;
+}
+.nav-list {
+  position: absolute;
+  top: 4rem;
+}
