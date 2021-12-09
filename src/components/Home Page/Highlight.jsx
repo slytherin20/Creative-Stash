@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 function Highlight() {
   const [images, setImages] = useState([]);
 

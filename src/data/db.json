@@ -1001,20 +1001,25 @@
   "Cart": [],
   "Carousel": [
     {
+      "id": 1,
       "original": "https://www.creativehands.in/wp-content/uploads/2021/10/COMBO_OFFER_BANNER-768x439.jpg"
     },
     {
+      "id": 2,
       "original": "https://www.creativehands.in/wp-content/uploads/2021/09/Website-Banner-Mt-New-arrivals-768x439.jpg"
     },
     {
+      "id": 3,
       "original": "https://www.creativehands.in/wp-content/uploads/2021/10/COMBO_OFFER_BANNER-768x439.jpg"
     },
     {
+      "id": 4,
       "original": "https://www.creativehands.in/wp-content/uploads/2021/10/COMBO_OFFER_BANNER-768x439.jpg"
     }
   ],
   "Todays-Deals": [
     {
+      "id": 1,
       "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
       "status": true,
       "price": 897,
@@ -1022,6 +1027,7 @@
       "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
     },
     {
+      "id": 2,
       "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
       "status": true,
       "price": 897,
@@ -1029,6 +1035,7 @@
       "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
     },
     {
+      "id": 3,
       "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
       "status": true,
       "price": 897,
@@ -1036,6 +1043,7 @@
       "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
     },
     {
+      "id": 4,
       "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
       "status": true,
       "price": 897,
@@ -1043,6 +1051,7 @@
       "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
     },
     {
+      "id": 5,
       "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
       "status": true,
       "price": 897,
@@ -1050,6 +1059,7 @@
       "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
     },
     {
+      "id": 6,
       "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
       "status": true,
       "price": 897,
@@ -1057,6 +1067,7 @@
       "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
     },
     {
+      "id": 7,
       "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
       "status": true,
       "price": 897,
@@ -1064,6 +1075,7 @@
       "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
     },
     {
+      "id": 8,
       "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
       "status": true,
       "price": 897,
@@ -1071,6 +1083,7 @@
       "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
     },
     {
+      "id": 9,
       "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
       "status": true,
       "price": 897,
@@ -1078,6 +1091,7 @@
       "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
     },
     {
+      "id": 10,
       "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
       "status": true,
       "price": 897,
@@ -1085,100 +1099,110 @@
       "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
     }
   ],
-  "New-Arrivals": {
-    "Paints": {
-      "oil Colours": [
-        {
-          "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
-          "status": true,
-          "price": 897,
-          "description": "These oil colors have Rich pigments, excellent colour strengt .High lightfastness, These colours are lightfast and have a smooth buttery consistency which can be used straight out of the tube or thinned down to create glazes. Offers Great coverage and Excellent durability. made from refined linseed oil and fine artist pigments in high concentration to yield rich, brilliant and permanent result. The colours have smooth consistency.",
-          "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
-        },
-        {
-          "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
-          "status": true,
-          "price": 897,
-          "description": "These oil colors have Rich pigments, excellent colour strengt .High lightfastness, These colours are lightfast and have a smooth buttery consistency which can be used straight out of the tube or thinned down to create glazes. Offers Great coverage and Excellent durability. made from refined linseed oil and fine artist pigments in high concentration to yield rich, brilliant and permanent result. The colours have smooth consistency.",
-          "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
-        },
-        {
-          "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
-          "status": true,
-          "price": 897,
-          "description": "These oil colors have Rich pigments, excellent colour strengt .High lightfastness, These colours are lightfast and have a smooth buttery consistency which can be used straight out of the tube or thinned down to create glazes. Offers Great coverage and Excellent durability. made from refined linseed oil and fine artist pigments in high concentration to yield rich, brilliant and permanent result. The colours have smooth consistency.",
-          "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
-        },
-        {
-          "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
-          "status": true,
-          "price": 897,
-          "description": "These oil colors have Rich pigments, excellent colour strengt .High lightfastness, These colours are lightfast and have a smooth buttery consistency which can be used straight out of the tube or thinned down to create glazes. Offers Great coverage and Excellent durability. made from refined linseed oil and fine artist pigments in high concentration to yield rich, brilliant and permanent result. The colours have smooth consistency.",
-          "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
-        },
-        {
-          "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
-          "status": true,
-          "price": 897,
-          "description": "These oil colors have Rich pigments, excellent colour strengt .High lightfastness, These colours are lightfast and have a smooth buttery consistency which can be used straight out of the tube or thinned down to create glazes. Offers Great coverage and Excellent durability. made from refined linseed oil and fine artist pigments in high concentration to yield rich, brilliant and permanent result. The colours have smooth consistency.",
-          "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
-        },
-        {
-          "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
-          "status": true,
-          "price": 897,
-          "description": "These oil colors have Rich pigments, excellent colour strengt .High lightfastness, These colours are lightfast and have a smooth buttery consistency which can be used straight out of the tube or thinned down to create glazes. Offers Great coverage and Excellent durability. made from refined linseed oil and fine artist pigments in high concentration to yield rich, brilliant and permanent result. The colours have smooth consistency.",
-          "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
-        }
-      ]
+  "New-Arrivals": [
+    {
+      "id": 1,
+      "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
+      "status": true,
+      "price": 897,
+      "description": "These oil colors have Rich pigments, excellent colour strengt .High lightfastness, These colours are lightfast and have a smooth buttery consistency which can be used straight out of the tube or thinned down to create glazes. Offers Great coverage and Excellent durability. made from refined linseed oil and fine artist pigments in high concentration to yield rich, brilliant and permanent result. The colours have smooth consistency.",
+      "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
+    },
+    {
+      "id": 2,
+      "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
+      "status": true,
+      "price": 897,
+      "description": "These oil colors have Rich pigments, excellent colour strengt .High lightfastness, These colours are lightfast and have a smooth buttery consistency which can be used straight out of the tube or thinned down to create glazes. Offers Great coverage and Excellent durability. made from refined linseed oil and fine artist pigments in high concentration to yield rich, brilliant and permanent result. The colours have smooth consistency.",
+      "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
+    },
+    {
+      "id": 3,
+      "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
+      "status": true,
+      "price": 897,
+      "description": "These oil colors have Rich pigments, excellent colour strengt .High lightfastness, These colours are lightfast and have a smooth buttery consistency which can be used straight out of the tube or thinned down to create glazes. Offers Great coverage and Excellent durability. made from refined linseed oil and fine artist pigments in high concentration to yield rich, brilliant and permanent result. The colours have smooth consistency.",
+      "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
+    },
+    {
+      "id": 4,
+      "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
+      "status": true,
+      "price": 897,
+      "description": "These oil colors have Rich pigments, excellent colour strengt .High lightfastness, These colours are lightfast and have a smooth buttery consistency which can be used straight out of the tube or thinned down to create glazes. Offers Great coverage and Excellent durability. made from refined linseed oil and fine artist pigments in high concentration to yield rich, brilliant and permanent result. The colours have smooth consistency.",
+      "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
+    },
+    {
+      "id": 5,
+      "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
+      "status": true,
+      "price": 897,
+      "description": "These oil colors have Rich pigments, excellent colour strengt .High lightfastness, These colours are lightfast and have a smooth buttery consistency which can be used straight out of the tube or thinned down to create glazes. Offers Great coverage and Excellent durability. made from refined linseed oil and fine artist pigments in high concentration to yield rich, brilliant and permanent result. The colours have smooth consistency.",
+      "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
+    },
+    {
+      "id": 6,
+      "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
+      "status": true,
+      "price": 897,
+      "description": "These oil colors have Rich pigments, excellent colour strengt .High lightfastness, These colours are lightfast and have a smooth buttery consistency which can be used straight out of the tube or thinned down to create glazes. Offers Great coverage and Excellent durability. made from refined linseed oil and fine artist pigments in high concentration to yield rich, brilliant and permanent result. The colours have smooth consistency.",
+      "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
     }
-  },
-  "Best-Sellers": {
-    "Paints": {
-      "oil Colours": [
-        {
-          "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
-          "status": true,
-          "price": 897,
-          "description": "These oil colors have Rich pigments, excellent colour strengt .High lightfastness, These colours are lightfast and have a smooth buttery consistency which can be used straight out of the tube or thinned down to create glazes. Offers Great coverage and Excellent durability. made from refined linseed oil and fine artist pigments in high concentration to yield rich, brilliant and permanent result. The colours have smooth consistency.",
-          "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
-        },
-        {
-          "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
-          "status": true,
-          "price": 897,
-          "description": "These oil colors have Rich pigments, excellent colour strengt .High lightfastness, These colours are lightfast and have a smooth buttery consistency which can be used straight out of the tube or thinned down to create glazes. Offers Great coverage and Excellent durability. made from refined linseed oil and fine artist pigments in high concentration to yield rich, brilliant and permanent result. The colours have smooth consistency.",
-          "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
-        },
-        {
-          "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
-          "status": true,
-          "price": 897,
-          "description": "These oil colors have Rich pigments, excellent colour strengt .High lightfastness, These colours are lightfast and have a smooth buttery consistency which can be used straight out of the tube or thinned down to create glazes. Offers Great coverage and Excellent durability. made from refined linseed oil and fine artist pigments in high concentration to yield rich, brilliant and permanent result. The colours have smooth consistency.",
-          "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
-        },
-        {
-          "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
-          "status": true,
-          "price": 897,
-          "description": "These oil colors have Rich pigments, excellent colour strengt .High lightfastness, These colours are lightfast and have a smooth buttery consistency which can be used straight out of the tube or thinned down to create glazes. Offers Great coverage and Excellent durability. made from refined linseed oil and fine artist pigments in high concentration to yield rich, brilliant and permanent result. The colours have smooth consistency.",
-          "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
-        },
-        {
-          "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
-          "status": true,
-          "price": 897,
-          "description": "These oil colors have Rich pigments, excellent colour strengt .High lightfastness, These colours are lightfast and have a smooth buttery consistency which can be used straight out of the tube or thinned down to create glazes. Offers Great coverage and Excellent durability. made from refined linseed oil and fine artist pigments in high concentration to yield rich, brilliant and permanent result. The colours have smooth consistency.",
-          "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
-        },
-        {
-          "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
-          "status": true,
-          "price": 897,
-          "description": "These oil colors have Rich pigments, excellent colour strengt .High lightfastness, These colours are lightfast and have a smooth buttery consistency which can be used straight out of the tube or thinned down to create glazes. Offers Great coverage and Excellent durability. made from refined linseed oil and fine artist pigments in high concentration to yield rich, brilliant and permanent result. The colours have smooth consistency.",
-          "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
-        }
-      ]
+  ],
+  "Best-Sellers": [
+    {
+      "id": 1,
+      "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
+      "status": true,
+      "price": 897,
+      "description": "These oil colors have Rich pigments, excellent colour strengt .High lightfastness, These colours are lightfast and have a smooth buttery consistency which can be used straight out of the tube or thinned down to create glazes. Offers Great coverage and Excellent durability. made from refined linseed oil and fine artist pigments in high concentration to yield rich, brilliant and permanent result. The colours have smooth consistency.",
+      "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg",
+      "count": 34
+    },
+    {
+      "id": 2,
+      "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
+      "status": true,
+      "price": 897,
+      "description": "These oil colors have Rich pigments, excellent colour strengt .High lightfastness, These colours are lightfast and have a smooth buttery consistency which can be used straight out of the tube or thinned down to create glazes. Offers Great coverage and Excellent durability. made from refined linseed oil and fine artist pigments in high concentration to yield rich, brilliant and permanent result. The colours have smooth consistency.",
+      "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg",
+      "count": 30
+    },
+    {
+      "id": 3,
+      "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
+      "status": true,
+      "price": 897,
+      "description": "These oil colors have Rich pigments, excellent colour strengt .High lightfastness, These colours are lightfast and have a smooth buttery consistency which can be used straight out of the tube or thinned down to create glazes. Offers Great coverage and Excellent durability. made from refined linseed oil and fine artist pigments in high concentration to yield rich, brilliant and permanent result. The colours have smooth consistency.",
+      "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg",
+      "count": 26
+    },
+    {
+      "id": 4,
+      "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
+      "status": true,
+      "price": 897,
+      "description": "These oil colors have Rich pigments, excellent colour strengt .High lightfastness, These colours are lightfast and have a smooth buttery consistency which can be used straight out of the tube or thinned down to create glazes. Offers Great coverage and Excellent durability. made from refined linseed oil and fine artist pigments in high concentration to yield rich, brilliant and permanent result. The colours have smooth consistency.",
+      "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg",
+      "count": 23
+    },
+    {
+      "id": 5,
+      "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
+      "status": true,
+      "price": 897,
+      "description": "These oil colors have Rich pigments, excellent colour strengt .High lightfastness, These colours are lightfast and have a smooth buttery consistency which can be used straight out of the tube or thinned down to create glazes. Offers Great coverage and Excellent durability. made from refined linseed oil and fine artist pigments in high concentration to yield rich, brilliant and permanent result. The colours have smooth consistency.",
+      "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg",
+      "count": 20
+    },
+    {
+      "id": 6,
+      "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
+      "status": true,
+      "price": 897,
+      "description": "These oil colors have Rich pigments, excellent colour strengt .High lightfastness, These colours are lightfast and have a smooth buttery consistency which can be used straight out of the tube or thinned down to create glazes. Offers Great coverage and Excellent durability. made from refined linseed oil and fine artist pigments in high concentration to yield rich, brilliant and permanent result. The colours have smooth consistency.",
+      "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg",
+      "count": 10
     }
-  }
+  ]
 }

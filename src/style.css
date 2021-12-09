@@ -30,3 +30,6 @@
   position: absolute;
   top: 4rem;
 }
+.buy-btn:hover {
+  opacity: 0.8;
+}
