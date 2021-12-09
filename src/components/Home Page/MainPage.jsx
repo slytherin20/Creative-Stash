@@ -11,6 +11,13 @@ function MainPage() {
       <TodayDeals />
       <NewArrival />
       <BestSellers />
+      <footer className="w-100 h3 bg-black white f4 tc flex items-center justify-center">
+        Made with
+        <span role="img" aria-label="love">
+          ❤️
+        </span>
+        by Sonali
+      </footer>
     </div>
   );
 }
