@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import Carousel from "./Carousel.jsx";
 
 function Highlight() {
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState();
 
   useEffect(() => {
     requestImages();
@@ -15,9 +16,7 @@ function Highlight() {
 
   return (
     <div className="flex justify-center corousel-slides vh-50">
-      {images.length !== 0 && (
-        <img className="slide vh-50" src={images[0].original} alt="banner" />
-      )}
+      <Carousel images={images} />
     </div>
   );
 }
