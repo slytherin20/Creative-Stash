@@ -1,11 +1,10 @@
-function Login({ userClick }) {
+import { Link } from "react-router-dom";
+
+function Login() {
   return (
-    <button
-      className="btn login-btn bg-white black pa2 b w4"
-      onClick={userClick}
-    >
-      Login
-    </button>
+    <Link to="/login">
+      <button className="btn login-btn bg-white black pa2 b w4">Login</button>
+    </Link>
   );
 }
 
