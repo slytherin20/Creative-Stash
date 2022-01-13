@@ -1,7 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function Carousel({ images }) {
   const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    let timer = setInterval(() => {
+      setActive(active + 1 > 3 ? 0 : active + 1);
+    }, 3000);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, [active]);
 
   function changeImage(e) {
     setActive(Number(e.target.dataset.index));
@@ -18,6 +28,7 @@ function Carousel({ images }) {
               className={i === active ? `${defaultClass} active` : defaultClass}
               data-index={i}
               onClick={changeImage}
+              onBlur={changeImage}
             ></button>
           );
         })}

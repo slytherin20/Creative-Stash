@@ -40,6 +40,9 @@
   border: none;
   background-color: gainsboro;
 }
+.thumbnail:hover {
+  cursor: pointer;
+}
 .active {
   background-color: #5e2ca5;
 }
