@@ -5,7 +5,7 @@ import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <main className="sans-serif">
+    <main className="sans-serif overflow-hidden">
       <Navbar />
       <MainPage />
       <Routes>
