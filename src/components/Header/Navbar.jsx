@@ -13,7 +13,6 @@ function Navbar() {
           <Cart />
         </div>
       </nav>
-      ;
     </>
   );
 }
