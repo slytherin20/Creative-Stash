@@ -53,3 +53,7 @@
 .login-details:focus {
   outline: none;
 }
+
+#modal:empty {
+  display: none;
+}

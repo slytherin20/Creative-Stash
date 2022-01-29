@@ -1,6 +1,6 @@
 import SearchBar from "./SearchBar.jsx";
 import Login from "./Login.jsx";
-import Cart from "./Cart.jsx";
+import CartIcon from "./CartIcon.jsx";
 
 function Navbar() {
   return (
@@ -10,7 +10,7 @@ function Navbar() {
         <SearchBar />
         <div className="w-20 flex justify-around">
           <Login />
-          <Cart />
+          <CartIcon />
         </div>
       </nav>
     </>

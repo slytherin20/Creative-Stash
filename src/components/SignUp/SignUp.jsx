@@ -1,5 +1,4 @@
-import { Link } from "react-router-dom";
-function SignUpForm() {
+function SignUpForm({ changeForm }) {
   return (
     <div className="h-75 flex flex-column justify-center items-center">
       <form className="ma2 flex flex-column items-center justify-between h-90">
@@ -37,11 +36,12 @@ function SignUpForm() {
           Sign Up
         </button>
       </form>
-      <Link to="/login">
-        <button className="btn bg-white purple w5 h2 bn b shadow-4 pa1 mt4">
-          Existing User?Log In
-        </button>
-      </Link>
+      <button
+        className="btn bg-white purple w5 h2 bn b shadow-4 pa1 mt4"
+        onClick={() => changeForm("login")}
+      >
+        Existing User?Log In
+      </button>
     </div>
   );
 }
