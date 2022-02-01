@@ -10,7 +10,7 @@ let categories = [
 function Categories() {
   const [hoveredCategory, setHoveredCategory] = useState("");
   const [subCategory, setSubCategory] = useState({});
-
+  const [showSubCategory, setShowSubCategory] = useState(false);
   useEffect(() => {
     getSubCategories();
   }, []);
@@ -23,9 +23,19 @@ function Categories() {
 
   function changeCategory(cat) {
     setHoveredCategory(cat);
+    setShowSubCategory(true);
   }
+
   function removeCategory() {
-    setHoveredCategory("");
+    if (!showSubCategory) {
+      setHoveredCategory("");
+      console.log("removing category");
+    }
+  }
+
+  function changeSubCatStatus(status) {
+    setShowSubCategory(status);
+    console.log("Sub menu mouse out");
   }
   return (
     <>
@@ -40,8 +50,11 @@ function Categories() {
             onBlur={() => removeCategory()}
           >
             {cat}
-            {hoveredCategory === cat && (
-              <ShowSubCategories options={subCategory[hoveredCategory]} />
+            {hoveredCategory === cat && showSubCategory && (
+              <ShowSubCategories
+                options={subCategory[hoveredCategory]}
+                changeSubCatStatus={changeSubCatStatus}
+              />
             )}
           </li>
         ))}
