@@ -1,4 +1,5 @@
-function ShowSubCategories({ options, changeSubCatStatus }) {
+import { Link } from "react-router-dom";
+function ShowSubCategories({ options, changeSubCatStatus, category }) {
   return (
     <ul
       className="flex flex-column w-100 nav-list bg-white"
@@ -6,9 +7,14 @@ function ShowSubCategories({ options, changeSubCatStatus }) {
       onBlur={() => changeSubCatStatus(false)}
     >
       {options.map((subcat) => (
-        <li key={subcat} className="list f5 pa1 black">
-          {subcat}
-        </li>
+        <Link
+          to={`/products/${category.split(" ").join("-")}/${subcat
+            .split(" ")
+            .join("-")}`}
+          key={subcat}
+        >
+          <li className="list f5 pa1 black">{subcat}</li>
+        </Link>
       ))}
     </ul>
   );

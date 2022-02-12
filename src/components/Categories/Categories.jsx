@@ -54,6 +54,7 @@ function Categories() {
               <ShowSubCategories
                 options={subCategory[hoveredCategory]}
                 changeSubCatStatus={changeSubCatStatus}
+                category={cat}
               />
             )}
           </li>
