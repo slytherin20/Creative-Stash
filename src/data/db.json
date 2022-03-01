@@ -21,6 +21,7 @@
     "Paints": {
       "Water colours": [
         {
+          "id": 1,
           "name": "Brustro Professional Watercolour Half Pan 1.5ml (OPEN STOCK)",
           "status": true,
           "price": 129,
@@ -28,6 +29,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2020/03/n13166998_1-1-600x600.jpg"
         },
         {
+          "id": 2,
           "name": "Brustro Professional Watercolour Half Pan 1.5ml (OPEN STOCK)",
           "status": false,
           "price": 129,
@@ -35,6 +37,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2020/03/n13166998_1-1-600x600.jpg"
         },
         {
+          "id": 3,
           "name": "Brustro Professional Watercolour Half Pan 1.5ml (OPEN STOCK)",
           "status": true,
           "price": 129,
@@ -42,6 +45,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2020/03/n13166998_1-1-600x600.jpg"
         },
         {
+          "id": 4,
           "name": "Brustro Professional Watercolour Half Pan 1.5ml (OPEN STOCK)",
           "status": true,
           "price": 129,
@@ -49,6 +53,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2020/03/n13166998_1-1-600x600.jpg"
         },
         {
+          "id": 5,
           "name": "Brustro Professional Watercolour Half Pan 1.5ml (OPEN STOCK)",
           "status": true,
           "price": 129,
@@ -56,6 +61,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2020/03/n13166998_1-1-600x600.jpg"
         },
         {
+          "id": 6,
           "name": "Brustro Professional Watercolour Half Pan 1.5ml (OPEN STOCK)",
           "status": true,
           "price": 129,
@@ -63,6 +69,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2020/03/n13166998_1-1-600x600.jpg"
         },
         {
+          "id": 7,
           "name": "Brustro Professional Watercolour Half Pan 1.5ml (OPEN STOCK)",
           "status": true,
           "price": 129,
@@ -70,6 +77,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2020/03/n13166998_1-1-600x600.jpg"
         },
         {
+          "id": 8,
           "name": "Brustro Professional Watercolour Half Pan 1.5ml (OPEN STOCK)",
           "status": true,
           "price": 129,
@@ -77,6 +85,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2020/03/n13166998_1-1-600x600.jpg"
         },
         {
+          "id": 9,
           "name": "Brustro Professional Watercolour Half Pan 1.5ml (OPEN STOCK)",
           "status": false,
           "price": 129,
@@ -84,6 +93,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2020/03/n13166998_1-1-600x600.jpg"
         },
         {
+          "id": 10,
           "name": "Brustro Professional Watercolour Half Pan 1.5ml (OPEN STOCK)",
           "status": false,
           "price": 129,
@@ -93,6 +103,7 @@
       ],
       "Oil Colours": [
         {
+          "id": 1,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": false,
           "price": 897,
@@ -100,6 +111,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 2,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -107,6 +119,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 3,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -114,6 +127,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 4,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -121,6 +135,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 5,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -128,6 +143,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 6,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -135,6 +151,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 7,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -142,6 +159,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 8,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -149,6 +167,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 9,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -156,6 +175,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 10,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -163,6 +183,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 11,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -170,6 +191,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 12,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -177,6 +199,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 13,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -184,6 +207,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 14,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -193,6 +217,7 @@
       ],
       "Spray Paints": [
         {
+          "id": 1,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -200,6 +225,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 2,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": false,
           "price": 897,
@@ -207,6 +233,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 3,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -214,6 +241,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 4,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": false,
           "price": 897,
@@ -221,6 +249,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 5,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -228,6 +257,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 6,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -235,6 +265,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 7,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -242,6 +273,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 8,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": false,
           "price": 897,
@@ -249,6 +281,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 9,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -256,6 +289,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 10,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -265,6 +299,7 @@
       ],
       "Acrylics": [
         {
+          "id": 1,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -272,6 +307,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 2,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -279,6 +315,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 3,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -286,6 +323,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 4,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -293,6 +331,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 5,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -300,6 +339,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 6,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": false,
           "price": 897,
@@ -311,6 +351,7 @@
     "Painting Medium": {
       "Acrylic Auxilaries": [
         {
+          "id": 1,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -318,6 +359,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 2,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": false,
           "price": 897,
@@ -325,6 +367,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 3,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -332,6 +375,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 4,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -341,6 +385,7 @@
       ],
       "Gessos and Grounds": [
         {
+          "id": 1,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -348,6 +393,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 2,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -355,6 +401,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 3,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -364,6 +411,7 @@
       ],
       "Fixative and Varnishes": [
         {
+          "id": 1,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -371,6 +419,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 2,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -378,6 +427,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 3,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": false,
           "price": 897,
@@ -385,6 +435,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 4,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -392,6 +443,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 5,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -399,6 +451,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 6,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -406,6 +459,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 7,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -413,6 +467,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 8,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -420,6 +475,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 9,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -427,6 +483,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 10,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": false,
           "price": 897,
@@ -434,6 +491,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 11,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -441,6 +499,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 12,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -450,6 +509,7 @@
       ],
       "Oil Mediums": [
         {
+          "id": 1,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -457,6 +517,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 2,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": false,
           "price": 897,
@@ -466,6 +527,7 @@
       ],
       "Water Colour Mediums": [
         {
+          "id": 1,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -473,6 +535,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 2,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -480,6 +543,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 3,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -487,6 +551,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 4,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -494,6 +559,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 5,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -501,6 +567,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 6,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -508,6 +575,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 7,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -515,6 +583,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 8,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -522,6 +591,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 9,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -529,6 +599,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 10,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -540,6 +611,7 @@
     "Canvas": {
       "Canvas Boards": [
         {
+          "id": 1,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -547,6 +619,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 2,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -554,6 +627,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 3,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -563,6 +637,7 @@
       ],
       "Canvas Rolls": [
         {
+          "id": 1,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -570,6 +645,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 2,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -577,6 +653,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 3,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -584,6 +661,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 4,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -591,6 +669,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 5,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": false,
           "price": 897,
@@ -600,6 +679,7 @@
       ],
       "Stretched Canvas": [
         {
+          "id": 1,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -607,6 +687,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 2,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -614,6 +695,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 3,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -621,6 +703,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 4,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -628,6 +711,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 5,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -639,6 +723,7 @@
     "Brushes": {
       "Acrylic": [
         {
+          "id": 1,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -646,6 +731,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 2,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -653,6 +739,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 3,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -660,6 +747,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 4,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -667,6 +755,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 5,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -674,6 +763,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 6,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -681,6 +771,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 7,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -688,6 +779,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 8,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -695,6 +787,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 9,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -704,6 +797,7 @@
       ],
       "Oil": [
         {
+          "id": 1,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -711,6 +805,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 2,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": false,
           "price": 897,
@@ -718,6 +813,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 3,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -725,6 +821,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 4,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -732,6 +829,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 5,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -739,6 +837,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 6,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -746,6 +845,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 7,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -753,6 +853,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 8,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -760,6 +861,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 9,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -767,6 +869,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 10,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -776,6 +879,7 @@
       ],
       "Water Colour": [
         {
+          "id": 1,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -783,6 +887,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 2,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -790,6 +895,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 3,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -797,6 +903,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 4,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -804,6 +911,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 5,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -811,6 +919,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 6,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -818,6 +927,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 7,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": false,
           "price": 897,
@@ -825,6 +935,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 8,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -836,6 +947,7 @@
     "Pens and Markers": {
       "Acrylic Markers": [
         {
+          "id": 1,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -843,6 +955,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 2,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -850,6 +963,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 3,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -857,6 +971,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 4,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -866,6 +981,7 @@
       ],
       "Pigment Liners": [
         {
+          "id": 1,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -873,6 +989,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 2,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -880,6 +997,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 3,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -889,6 +1007,7 @@
       ],
       "Twin Tip Markers": [
         {
+          "id": 1,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -896,6 +1015,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 2,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -903,6 +1023,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 3,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -912,6 +1033,7 @@
       ],
       "Brush Pens": [
         {
+          "id": 1,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -919,6 +1041,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 2,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -926,6 +1049,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 3,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -933,6 +1057,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 4,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -940,6 +1065,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 5,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -947,6 +1073,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 5,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -954,6 +1081,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 6,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": false,
           "price": 897,
@@ -961,6 +1089,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 7,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -968,6 +1097,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 8,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -975,6 +1105,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 9,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -982,6 +1113,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 10,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
@@ -989,6 +1121,7 @@
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
         {
+          "id": 11,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
