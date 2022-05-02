@@ -19,7 +19,7 @@
   },
   "Products": {
     "Paints": {
-      "Water colours": [
+      "Water Colours": [
         {
           "id": 1,
           "name": "Brustro Professional Watercolour Half Pan 1.5ml (OPEN STOCK)",
@@ -641,6 +641,7 @@
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
+          "brand": "Brustro",
           "description": "These oil colors have Rich pigments, excellent colour strengt .High lightfastness, These colours are lightfast and have a smooth buttery consistency which can be used straight out of the tube or thinned down to create glazes. Offers Great coverage and Excellent durability. made from refined linseed oil and fine artist pigments in high concentration to yield rich, brilliant and permanent result. The colours have smooth consistency.",
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
@@ -649,6 +650,7 @@
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
+          "brand": "Brustro",
           "description": "These oil colors have Rich pigments, excellent colour strengt .High lightfastness, These colours are lightfast and have a smooth buttery consistency which can be used straight out of the tube or thinned down to create glazes. Offers Great coverage and Excellent durability. made from refined linseed oil and fine artist pigments in high concentration to yield rich, brilliant and permanent result. The colours have smooth consistency.",
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
@@ -657,6 +659,7 @@
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
+          "brand": "Brustro",
           "description": "These oil colors have Rich pigments, excellent colour strengt .High lightfastness, These colours are lightfast and have a smooth buttery consistency which can be used straight out of the tube or thinned down to create glazes. Offers Great coverage and Excellent durability. made from refined linseed oil and fine artist pigments in high concentration to yield rich, brilliant and permanent result. The colours have smooth consistency.",
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
@@ -665,6 +668,7 @@
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
+          "brand": "Brustro",
           "description": "These oil colors have Rich pigments, excellent colour strengt .High lightfastness, These colours are lightfast and have a smooth buttery consistency which can be used straight out of the tube or thinned down to create glazes. Offers Great coverage and Excellent durability. made from refined linseed oil and fine artist pigments in high concentration to yield rich, brilliant and permanent result. The colours have smooth consistency.",
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         },
@@ -673,6 +677,7 @@
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": false,
           "price": 897,
+          "brand": "Brustro",
           "description": "These oil colors have Rich pigments, excellent colour strengt .High lightfastness, These colours are lightfast and have a smooth buttery consistency which can be used straight out of the tube or thinned down to create glazes. Offers Great coverage and Excellent durability. made from refined linseed oil and fine artist pigments in high concentration to yield rich, brilliant and permanent result. The colours have smooth consistency.",
           "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
         }
@@ -726,57 +731,64 @@
           "id": 1,
           "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
-          "price": 897,
+          "price": 197,
           "description": "These oil colors have Rich pigments, excellent colour strengt .High lightfastness, These colours are lightfast and have a smooth buttery consistency which can be used straight out of the tube or thinned down to create glazes. Offers Great coverage and Excellent durability. made from refined linseed oil and fine artist pigments in high concentration to yield rich, brilliant and permanent result. The colours have smooth consistency.",
-          "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
+          "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg",
+          "brand": "Brustro"
         },
         {
           "id": 2,
-          "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
+          "name": "Faber-Castell Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
           "description": "These oil colors have Rich pigments, excellent colour strengt .High lightfastness, These colours are lightfast and have a smooth buttery consistency which can be used straight out of the tube or thinned down to create glazes. Offers Great coverage and Excellent durability. made from refined linseed oil and fine artist pigments in high concentration to yield rich, brilliant and permanent result. The colours have smooth consistency.",
-          "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
+          "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg",
+          "brand": "Faber-Castell"
         },
         {
           "id": 3,
-          "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
+          "name": "Camlin Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
-          "price": 897,
+          "price": 8970,
           "description": "These oil colors have Rich pigments, excellent colour strengt .High lightfastness, These colours are lightfast and have a smooth buttery consistency which can be used straight out of the tube or thinned down to create glazes. Offers Great coverage and Excellent durability. made from refined linseed oil and fine artist pigments in high concentration to yield rich, brilliant and permanent result. The colours have smooth consistency.",
-          "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
+          "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg",
+          "brand": "Camlin"
         },
         {
           "id": 4,
-          "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
+          "name": "Pidilite Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
-          "price": 897,
+          "price": 1200,
           "description": "These oil colors have Rich pigments, excellent colour strengt .High lightfastness, These colours are lightfast and have a smooth buttery consistency which can be used straight out of the tube or thinned down to create glazes. Offers Great coverage and Excellent durability. made from refined linseed oil and fine artist pigments in high concentration to yield rich, brilliant and permanent result. The colours have smooth consistency.",
-          "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
+          "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg",
+          "brand": "Pidilite"
         },
         {
           "id": 5,
-          "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
+          "name": "Kabeer Art Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
-          "price": 897,
+          "price": 1897,
           "description": "These oil colors have Rich pigments, excellent colour strengt .High lightfastness, These colours are lightfast and have a smooth buttery consistency which can be used straight out of the tube or thinned down to create glazes. Offers Great coverage and Excellent durability. made from refined linseed oil and fine artist pigments in high concentration to yield rich, brilliant and permanent result. The colours have smooth consistency.",
-          "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
+          "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg",
+          "brand": "Kabir Art"
         },
         {
           "id": 6,
-          "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
+          "name": "Solimo Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
           "description": "These oil colors have Rich pigments, excellent colour strengt .High lightfastness, These colours are lightfast and have a smooth buttery consistency which can be used straight out of the tube or thinned down to create glazes. Offers Great coverage and Excellent durability. made from refined linseed oil and fine artist pigments in high concentration to yield rich, brilliant and permanent result. The colours have smooth consistency.",
-          "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
+          "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg",
+          "brand": "Solimo"
         },
         {
           "id": 7,
-          "name": "BRUSTRO Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
+          "name": "Solimo Artists’ Oil Colour Set of 18 Colours X 12ML Tubes",
           "status": true,
           "price": 897,
           "description": "These oil colors have Rich pigments, excellent colour strengt .High lightfastness, These colours are lightfast and have a smooth buttery consistency which can be used straight out of the tube or thinned down to create glazes. Offers Great coverage and Excellent durability. made from refined linseed oil and fine artist pigments in high concentration to yield rich, brilliant and permanent result. The colours have smooth consistency.",
-          "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
+          "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg",
+          "brand": "Solimo"
         },
         {
           "id": 8,
@@ -784,7 +796,8 @@
           "status": true,
           "price": 897,
           "description": "These oil colors have Rich pigments, excellent colour strengt .High lightfastness, These colours are lightfast and have a smooth buttery consistency which can be used straight out of the tube or thinned down to create glazes. Offers Great coverage and Excellent durability. made from refined linseed oil and fine artist pigments in high concentration to yield rich, brilliant and permanent result. The colours have smooth consistency.",
-          "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
+          "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg",
+          "brand": "Brustro"
         },
         {
           "id": 9,
@@ -792,7 +805,8 @@
           "status": true,
           "price": 897,
           "description": "These oil colors have Rich pigments, excellent colour strengt .High lightfastness, These colours are lightfast and have a smooth buttery consistency which can be used straight out of the tube or thinned down to create glazes. Offers Great coverage and Excellent durability. made from refined linseed oil and fine artist pigments in high concentration to yield rich, brilliant and permanent result. The colours have smooth consistency.",
-          "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg"
+          "image": "https://www.creativehands.in/wp-content/uploads/2021/05/BROC1218-600x573.jpg",
+          "brand": "Brustro"
         }
       ],
       "Oil": [
