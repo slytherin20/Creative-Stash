@@ -8,7 +8,9 @@ function MainPage() {
     <div className="main-page">
       <Categories />
       <Highlight />
-      <TodayDeals />
+      {
+        //  <TodayDeals />
+      }
       <NewArrival />
       <BestSellers />
       <footer className="w-100 h3 bg-black white f4 tc flex items-center justify-center">

@@ -1,6 +1,11 @@
 {
   "Categories": {
-    "Paints": ["Water Colours", "Oil Colours", "Spray Paints", "Acrylics"],
+    "Paints": [
+      "Water Colours",
+      "Oil Colours",
+      "Spray Paints",
+      "Acrylics"
+    ],
     "Painting Medium": [
       "Acrylic Auxilaries",
       "Gessos and Grounds",
@@ -8,8 +13,16 @@
       "Oil Mediums",
       "Water Colour Mediums"
     ],
-    "Canvas": ["Canvas Boards", "Canvas Rolls", "Stretched Canvas"],
-    "Brushes": ["Acrylic", "Oil", "Water Colour"],
+    "Canvas": [
+      "Canvas Boards",
+      "Canvas Rolls",
+      "Stretched Canvas"
+    ],
+    "Brushes": [
+      "Acrylic",
+      "Oil",
+      "Water Colour"
+    ],
     "Pens and Markers": [
       "Acrylic Markers",
       "Pigment Liners",

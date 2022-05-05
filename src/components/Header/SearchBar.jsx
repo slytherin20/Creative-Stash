@@ -3,6 +3,7 @@ function SearchBar() {
   return (
     <form className="w-40 flex">
       <input
+        type="search"
         className="search-field w-100 h2"
         placeholder="Search for a product."
       />

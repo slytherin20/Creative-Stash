@@ -4,7 +4,7 @@ import LoginSignUp from "../Modals/LoginSignUp.jsx";
 import Form from "../Login/Form.jsx";
 import SignUpForm from "../SignUp/SignUp.jsx";
 
-function Login() {
+function Login({ color }) {
   const [showPopup, setShowPopup] = useState(false);
   const [modalType, setModalType] = useState("login");
   function toggleModal() {
@@ -30,7 +30,7 @@ function Login() {
   return (
     <>
       <button
-        className="btn login-btn bg-white black pa2 b w4"
+        className={`btn login-btn bg-white black pa2 b w4 ${color}`}
         onClick={toggleModal}
       >
         Login

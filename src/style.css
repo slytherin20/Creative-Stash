@@ -57,3 +57,7 @@
 #modal:empty {
   display: none;
 }
+.login-btn {
+  width: 200px;
+  height: 40px;
+}
