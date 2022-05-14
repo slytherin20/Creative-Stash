@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import ShowSubCategories from "./ShowSubCategories.jsx";
+import { Link } from "react-router-dom";
 let categories = [
   "Paints",
   "Painting Medium",
@@ -41,13 +42,19 @@ function Categories() {
         {categories.map((cat) => (
           <li
             key={cat}
-            className="btn category list flex items-center flex-auto justify-center"
             onMouseOver={() => changeCategory(cat)}
             onFocus={() => changeCategory(cat)}
             onMouseOut={() => removeCategory()}
             onBlur={() => removeCategory()}
+            className="btn category list flex items-center flex-auto justify-center"
           >
-            {cat}
+            <Link
+              to={`/products/${cat.split(" ").join("-")}`}
+              key={cat}
+              className="cat-link flex justify-center items-center"
+            >
+              {cat}
+            </Link>
             {hoveredCategory === cat && showSubCategory && (
               <ShowSubCategories
                 options={subCategory[hoveredCategory]}

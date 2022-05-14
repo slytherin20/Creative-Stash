@@ -7,3 +7,4 @@ coverage/
 .vscode/
 documentation.txt
 src/images
+src/data
