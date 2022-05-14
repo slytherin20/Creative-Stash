@@ -29,6 +29,7 @@
 .nav-list {
   position: absolute;
   top: 4rem;
+  left: 0;
 }
 .buy-btn:hover {
   opacity: 0.8;
@@ -63,4 +64,19 @@
 }
 .price-color {
   color: green;
+}
+a {
+  text-decoration: none;
+}
+a:active,
+a:visited {
+  color: black;
+}
+.cat-link {
+  width: 100%;
+  height: 100%;
+}
+.search-field:focus {
+  outline: none;
+  border-bottom: solid 3px purple;
 }

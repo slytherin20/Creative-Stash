@@ -30,7 +30,7 @@ function Item({ items, title, cat, subcat, fetchCartHandler }) {
                       item.category.split("-")[0]
                     }&subcat=${item.category.split("-")[1]}&id=${item.id}`}
                   >
-                    <button className=" btn buy-btn w-50 mr2 h2 bg-purple white f6 br1">
+                    <button className=" btn buy-btn mr2 h2 bg-purple white f6 br1">
                       Visit
                     </button>
                   </Link>
@@ -40,13 +40,13 @@ function Item({ items, title, cat, subcat, fetchCartHandler }) {
                       cat.split("-")[0]
                     }&subcat=${subcat}&id=${item.id}`}
                   >
-                    <button className=" btn buy-btn w-50 mr2 h2 bg-purple white f6 br1">
+                    <button className=" btn buy-btn  mr2 h2 bg-purple white f6 br1">
                       Visit
                     </button>
                   </Link>
                 )}
                 <button
-                  className=" btn buy-btn w-50 h2 bg-purple white f6 br1"
+                  className=" btn buy-btn h2 bg-purple white f6 br1"
                   onClick={() => addToCart(item)}
                 >
                   Add to Cart

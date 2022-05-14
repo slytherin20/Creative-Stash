@@ -40,6 +40,7 @@ function ShowAllProducts({ fetchCartHandler }) {
           {products[category].length > 5 ? (
             <Link
               to={`/Products/${params.id}/${category.split(" ").join("-")}`}
+              className="cat-link"
             >
               <button>Show More</button>
             </Link>

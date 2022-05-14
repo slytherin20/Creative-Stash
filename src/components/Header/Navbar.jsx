@@ -6,7 +6,7 @@ import CartIcon from "./CartIcon.jsx";
 function Navbar() {
   return (
     <>
-      <nav className="navbar flex justify-between items-center pa1 bg-purple">
+      <nav className="navbar flex justify-between items-center pa1 shadow-1">
         <Link to="/">
           <h2>Creative Stash</h2>
         </Link>
