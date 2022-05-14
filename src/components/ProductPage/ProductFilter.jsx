@@ -103,7 +103,7 @@ function ProductFilter({ brands, filterProductsByChoice, resetProducts }) {
           <p className="b">Brands</p>
           {brands.map((brand, index) => {
             return (
-              <label htmlFor={brand} key={brand}>
+              <label htmlFor={brand} key={index}>
                 <input type="checkbox" onChange={() => checkValue(index)} />
                 {brand}
               </label>
