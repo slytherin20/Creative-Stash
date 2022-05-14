@@ -7,6 +7,7 @@ import Cart from "./Cart/Cart.jsx";
 import NotFound from "./NotFound.jsx";
 import CartContext from "./Cart/CartContext.jsx";
 import { useState, useEffect } from "react";
+import SingleProduct from "./ProductPage/SingleProduct.jsx";
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -29,18 +30,38 @@ function App() {
               <Cart loginStatus={false} fetchCartHandler={fetchCartItems} />
             }
           />
-          <Route exact path="/" element={<MainPage />} />
-          <Route path="/products/:id" element={<ShowAllProducts />} />
-          <Route path="/products/Paints/:id" element={<ShowProducts />} />
+          <Route
+            exact
+            path="/"
+            element={<MainPage fetchCartHandler={fetchCartItems} />}
+          />
+          <Route
+            path="/products/product"
+            element={<SingleProduct fetchCartHandler={fetchCartItems} />}
+          />
+          <Route
+            path="/products/:id"
+            element={<ShowAllProducts fetchCartHandler={fetchCartItems} />}
+          />
+          <Route
+            path="/products/Paints/:id"
+            element={<ShowProducts fetchCartHandler={fetchCartItems} />}
+          />
           <Route
             path="/products/Painting-Medium/:id"
-            element={<ShowProducts />}
+            element={<ShowProducts fetchCartHandler={fetchCartItems} />}
           />
-          <Route path="/products/Canvas/:id" element={<ShowProducts />} />
-          <Route path="/products/Brushes/:id" element={<ShowProducts />} />
+          <Route
+            path="/products/Canvas/:id"
+            element={<ShowProducts fetchCartHandler={fetchCartItems} />}
+          />
+          <Route
+            path="/products/Brushes/:id"
+            element={<ShowProducts fetchCartHandler={fetchCartItems} />}
+          />
           <Route
             path="/products/Pens-and-Markers/:id"
-            element={<ShowProducts />}
+            element={<ShowProducts fetchCartHandler={fetchCartItems} />}
           />
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -3,7 +3,7 @@ import { useLocation, useParams } from "react-router-dom";
 import NotFound from "../NotFound.jsx";
 import ProductFilter from "./ProductFilter.jsx";
 import Item from "../Home Page/Item.jsx";
-function ShowProducts() {
+function ShowProducts({ fetchCartHandler }) {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [brands, setBrands] = useState([]);
@@ -44,7 +44,6 @@ function ShowProducts() {
     let items = data[cat];
     let subCategory = params.id.split("-").join(" ");
     setProducts(items[subCategory]);
-    console.table(items[subCategory]);
     setFilteredProducts(items[subCategory]);
     //Save brand names.
     let arr = [];
@@ -92,7 +91,13 @@ function ShowProducts() {
         filterProductsByChoice={filterProductsByChoice}
         resetProducts={resetProducts}
       />
-      <Item items={filteredProducts} title={params.id.split("-").join(" ")} />
+      <Item
+        items={filteredProducts}
+        title={params.id.split("-").join(" ")}
+        cat={path.pathname.split("/")[2].split("-").join(" ")}
+        subcat={params.id.split("-").join(" ")}
+        fetchCartHandler={fetchCartHandler}
+      />
     </div>
   );
 }

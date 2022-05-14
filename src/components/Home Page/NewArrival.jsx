@@ -1,6 +1,6 @@
 import Item from "./Item.jsx";
 import { useState, useEffect } from "react";
-function NewArrival() {
+function NewArrival({ fetchCartHandler }) {
   const [arrivals, setArrivals] = useState([]);
 
   useEffect(() => {
@@ -13,7 +13,15 @@ function NewArrival() {
     setArrivals(data);
   }
 
-  return <Item items={arrivals} title="New Arrivals" />;
+  return (
+    <Item
+      items={arrivals}
+      title="New Arrivals"
+      cat={false}
+      subcat={false}
+      fetchCartHandler={fetchCartHandler}
+    />
+  );
 }
 
 export default NewArrival;

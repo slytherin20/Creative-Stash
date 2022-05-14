@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Item from "./Item.jsx";
 
-function BestSellers() {
+function BestSellers({ fetchCartHandler }) {
   const [best, setBest] = useState([]);
 
   useEffect(() => {
@@ -14,6 +14,14 @@ function BestSellers() {
     setBest(data);
   }
 
-  return <Item items={best} title="Best Sellers" />;
+  return (
+    <Item
+      items={best}
+      title="Best Sellers"
+      cat={false}
+      subcat={false}
+      fetchCartHandler={fetchCartHandler}
+    />
+  );
 }
 export default BestSellers;

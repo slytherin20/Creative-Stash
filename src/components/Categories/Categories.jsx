@@ -29,13 +29,11 @@ function Categories() {
   function removeCategory() {
     if (!showSubCategory) {
       setHoveredCategory("");
-      console.log("removing category");
     }
   }
 
   function changeSubCatStatus(status) {
     setShowSubCategory(status);
-    console.log("Sub menu mouse out");
   }
   return (
     <>

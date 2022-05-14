@@ -13,7 +13,9 @@ function TodayDeals() {
     setDeals(data);
   }
 
-  return <Item items={deals} title="Deals of the day" />;
+  return (
+    <Item items={deals} title="Deals of the day" cat={false} subcat={false} />
+  );
 }
 
 export default TodayDeals;

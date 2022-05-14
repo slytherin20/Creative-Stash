@@ -1,4 +1,14 @@
-function Item({ items, title }) {
+import { Link } from "react-router-dom";
+function Item({ items, title, cat, subcat, fetchCartHandler }) {
+  async function addToCart(item) {
+    await fetch("http://localhost:3000/Cart", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(item),
+    })
+      .then(() => fetchCartHandler())
+      .catch((err) => console.log(err));
+  }
   return (
     <div className="w-100 h-25 pa2">
       <p className="f3 ml3">{title}</p>
@@ -14,10 +24,31 @@ function Item({ items, title }) {
               <p className="ma0 mt2 f6">{item.description.slice(0, 40)}...</p>
               <p>Price: ₹{item.price}</p>
               <div className="flex justify-around w-80">
-                <button className=" btn buy-btn w-50 mr2 h2 bg-purple white f6 br1">
-                  Visit
-                </button>
-                <button className=" btn buy-btn w-50 h2 bg-purple white f6 br1">
+                {!cat ? (
+                  <Link
+                    to={`/products/product?cat=${
+                      item.category.split("-")[0]
+                    }&subcat=${item.category.split("-")[1]}&id=${item.id}`}
+                  >
+                    <button className=" btn buy-btn w-50 mr2 h2 bg-purple white f6 br1">
+                      Visit
+                    </button>
+                  </Link>
+                ) : (
+                  <Link
+                    to={`/products/product?cat=${
+                      cat.split("-")[0]
+                    }&subcat=${subcat}&id=${item.id}`}
+                  >
+                    <button className=" btn buy-btn w-50 mr2 h2 bg-purple white f6 br1">
+                      Visit
+                    </button>
+                  </Link>
+                )}
+                <button
+                  className=" btn buy-btn w-50 h2 bg-purple white f6 br1"
+                  onClick={() => addToCart(item)}
+                >
                   Add to Cart
                 </button>
               </div>
