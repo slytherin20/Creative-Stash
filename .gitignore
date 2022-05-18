@@ -8,3 +8,4 @@ coverage/
 documentation.txt
 src/images
 src/data
+src/firebase_config.js
