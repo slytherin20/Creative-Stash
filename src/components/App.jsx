@@ -8,21 +8,31 @@ import NotFound from "./NotFound.jsx";
 import CartContext from "./Cart/CartContext.jsx";
 import { useState, useEffect } from "react";
 import SingleProduct from "./ProductPage/SingleProduct.jsx";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../firebase_config.js";
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
+  const [user] = useAuthState(auth);
   useEffect(() => {
+    console.log(user);
     fetchCartItems();
-  }, []);
+  }, [user]);
+
   async function fetchCartItems() {
-    let res = await fetch("http://localhost:3000/Cart");
-    let cart = await res.json();
-    setCartItems(cart);
+    if (user) {
+      console.log(user);
+      let res = await fetch("http://localhost:3000/Cart");
+      let cart = await res.json();
+      setCartItems(cart);
+    } else {
+      //Handle anonymous guest case
+    }
   }
   return (
     <main className="sans-serif overflow-hidden">
       <CartContext.Provider value={cartItems}>
-        <Navbar />
+        <Navbar user={user} />
         <Routes>
           <Route
             path="/cart"

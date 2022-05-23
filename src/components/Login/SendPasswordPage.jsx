@@ -31,6 +31,7 @@ function SendPasswordPage({ changeModalContent, changeForm }) {
             id="email"
             className="h2 w5 bn login-details"
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
         </label>
         <button type="submit" className="btn bg-purple w5 h2 white">
