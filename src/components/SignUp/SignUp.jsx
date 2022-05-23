@@ -3,29 +3,34 @@ import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
 } from "firebase/auth";
-function SignUpForm({ changeForm }) {
-  let email = "";
-  let password = "";
-  let confirmPassword = "";
+import { useState } from "react";
+function SignUpForm({ changeForm, changeModalContent }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [errMessage, setErrorMessage] = useState("");
 
   function userAuth(e) {
     e.preventDefault();
     if (password === confirmPassword) {
-      const auth = getAuth();
-      createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredentials) =>
-          //Hide modal and show user name instead of login button.
-          sendEmailVerification(auth.currentUser).then(() =>
-            console.log("email verification send!")
-          )
-        )
-        .catch((err) => console.log(err.message))
-        .catch((err) =>
-          //Display error
-          console.log(err.message)
-        );
+      if (password.length >= 6) {
+        const auth = getAuth();
+        createUserWithEmailAndPassword(auth, email, password)
+          .then(() => {
+            changeModalContent("loading");
+            sendEmailVerification(auth.currentUser).then(() => {
+              changeModalContent("email sent");
+            });
+          })
+          .catch(() => setErrorMessage("SignUp issue. please try again."))
+          .catch(() =>
+            setErrorMessage("Signup issue. Please try again later.")
+          );
+      } else {
+        setErrorMessage("Password should be atleast 6 digit long.");
+      }
     } else {
-      //display password not matched.
+      setErrorMessage("Password not matching. Please enter again.");
     }
   }
 
@@ -43,7 +48,7 @@ function SignUpForm({ changeForm }) {
             required
             id="email-id"
             className="bn h2 w5 login-details"
-            onChange={(e) => (email = e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div className="flex flex-column ma2">
@@ -54,7 +59,7 @@ function SignUpForm({ changeForm }) {
             required
             id="password"
             className="h2 w5 bn login-details"
-            onChange={(e) => (password = e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <div className="flex flex-column ma2">
@@ -65,13 +70,14 @@ function SignUpForm({ changeForm }) {
             required
             id="confirm-password"
             className="h2 w5 bn login-details"
-            onChange={(e) => (confirmPassword = e.target.value)}
+            onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </div>
         <button type="submit" className="btn bg-purple w5 h2 white mt3">
           Sign Up
         </button>
       </form>
+      <p className="red">{errMessage}</p>
       <button
         className="btn bg-white purple w5 h2 bn b shadow-4 pa1 mt4"
         onClick={() => changeForm("login")}
