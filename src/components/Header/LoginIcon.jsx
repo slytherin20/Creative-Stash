@@ -5,7 +5,8 @@ import Form from "../Login/Form.jsx";
 import SignUpForm from "../SignUp/SignUp.jsx";
 import VerifyEmailScreen from "../Modals/VerifyEmailScreen.jsx";
 import Loading from "../Modals/Loading.jsx";
-function Login({ color }) {
+
+function LoginIcon({ color }) {
   const [showPopup, setShowPopup] = useState(false);
   const [modalType, setModalType] = useState("login");
   const [modalContent, setModalContent] = useState("LoginSignUp");
@@ -75,4 +76,4 @@ function Login({ color }) {
   );
 }
 
-export default Login;
+export default LoginIcon;

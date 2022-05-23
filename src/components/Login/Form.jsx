@@ -6,11 +6,14 @@ function Form({ changeForm, closePopup, changeModalContent }) {
   const [password, setPassword] = useState("");
   const [error, setErrorMessage] = useState("");
   const [emailField, setEmailField] = useState(false);
+
   function authenticateUser(e) {
     e.preventDefault();
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
-      .then(() => closePopup())
+      .then(() => {
+        closePopup();
+      })
       .catch(() =>
         setErrorMessage("Login Issue. Please signup if not registered already.")
       );
