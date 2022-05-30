@@ -8,5 +8,5 @@ coverage/
 .vscode/
 documentation.txt
 src/images
-src/data
+src/data/db.json
 src/firebase_config.js
