@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar.jsx";
-import Login from "./Login.jsx";
+import LoginIcon from "./LoginIcon.jsx";
 import CartIcon from "./CartIcon.jsx";
+import Logout from "./Logout.jsx";
 
-function Navbar() {
+function Navbar({ user }) {
   return (
     <>
       <nav className="navbar flex justify-between items-center pa1 shadow-1">
@@ -12,7 +13,7 @@ function Navbar() {
         </Link>
         <SearchBar />
         <div className="w-20 flex justify-around">
-          <Login color="" />
+          {user ? <Logout /> : <LoginIcon color="" />}
           <CartIcon />
         </div>
       </nav>

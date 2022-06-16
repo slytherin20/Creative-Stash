@@ -80,3 +80,8 @@ a:visited {
   outline: none;
   border-bottom: solid 3px purple;
 }
+.show-product-img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}

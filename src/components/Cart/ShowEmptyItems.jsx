@@ -1,6 +1,6 @@
 import CartItems from "../../images/bags.jpg";
 import { Link } from "react-router-dom";
-import Login from "../Header/Login.jsx";
+import LoginIcon from "../Header/LoginIcon.jsx";
 function ShowEmptyCart({ cartLen }) {
   return (
     <div className="w-100  flex justify-center items-center">
@@ -9,7 +9,7 @@ function ShowEmptyCart({ cartLen }) {
         <img src={CartItems} alt="Shopping Bags" className="w-20 h-20" />
         <p className="b">No Cart Items to display</p>
         {cartLen > 0 ? (
-          <Login color="login-btn bg-purple white" />
+          <LoginIcon color="login-btn bg-purple white" />
         ) : (
           <Link to="/">
             <button className="btn login-btn bg-purple white">
