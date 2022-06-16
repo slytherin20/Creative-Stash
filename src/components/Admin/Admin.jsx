@@ -59,6 +59,7 @@ function Admin({ userUID }) {
     setAddProductStatus("loading");
     let status = await addProduct(inputs);
     setAddProductStatus(status);
+    setInputs(initialState);
   }
 
   if (userUID && userUID === "s5ZCbbKVo6Uk8noPWXttD0MUF9Y2")
