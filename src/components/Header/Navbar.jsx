@@ -12,7 +12,7 @@ function Navbar({ user }) {
           <h2>Creative Stash</h2>
         </Link>
         <SearchBar />
-        <div className="w-20 flex justify-around">
+        <div className="flex justify-around">
           {user ? <Logout /> : <LoginIcon color="" />}
           <CartIcon />
         </div>

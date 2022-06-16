@@ -46,7 +46,7 @@ function LoginIcon({ color }) {
   return (
     <>
       <button
-        className={`btn login-btn bg-purple white ma2 pa2 b w4 ${color}`}
+        className={`btn  bg-purple white ma2 pa2 b w4 ${color}`}
         onClick={toggleModal}
       >
         Login

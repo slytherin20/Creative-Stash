@@ -8,10 +8,7 @@ function Logout() {
     signOut(auth);
   }
   return (
-    <button
-      className="btn login-btn bg-black white ma2 pa2 b w4"
-      onClick={signOutUser}
-    >
+    <button className="btn bg-black white ma2 pa2 b w4" onClick={signOutUser}>
       Logout
     </button>
   );
