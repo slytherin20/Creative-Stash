@@ -25,7 +25,7 @@ function Admin({ userUID }) {
   const [addProductStatus, setAddProductStatus] = useState("");
 
   useEffect(() => {
-    if (userUID !== "s5ZCbbKVo6Uk8noPWXttD0MUF9Y2") {
+    if (userUID !== "Vdq0x9H1lghqPDr9sSnd8dElHkw1") {
       navigate("/");
     } else {
       getAllItems();
@@ -62,7 +62,7 @@ function Admin({ userUID }) {
     setInputs(initialState);
   }
 
-  if (userUID && userUID === "s5ZCbbKVo6Uk8noPWXttD0MUF9Y2")
+  if (userUID && userUID === "Vdq0x9H1lghqPDr9sSnd8dElHkw1")
     return (
       <section className="w-90 flex flex-column justify-center items-center">
         <h2>Product details</h2>
