@@ -8,11 +8,13 @@ function SingleProduct({ fetchCartHandler }) {
   }, []);
 
   async function getProduct() {
-    let res = await fetch("http://localhost:3000/Products");
+    let cat = searchParams.get("cat").split(" ").join("_");
+    let subcat = searchParams.get("subcat").split(" ").join("_");
+    let itemId = searchParams.get("id");
+    let res = await fetch(
+      `http://localhost:3000/${cat}-${subcat}?id=${itemId}`
+    );
     let data = await res.json();
-    data = data[searchParams.get("cat")];
-    data = data[searchParams.get("subcat")];
-    data = data.filter((item) => item.id == searchParams.get("id"));
     setProduct(...data);
   }
 
@@ -28,7 +30,7 @@ function SingleProduct({ fetchCartHandler }) {
   return (
     <main className="single-product flex ma4">
       <aside className="w-50">
-        <img src={product.image} alt={product.name} className="w-80 h-80" />
+        <img src={product.img} alt={product.name} className="w-80 h-80" />
       </aside>
       <section className="w-50 flex flex-column">
         <h2>{product.name}</h2>

@@ -3,8 +3,10 @@ import { useParams } from "react-router-dom";
 import NotFound from "../NotFound.jsx";
 import Item from "../Home Page/Item.jsx";
 import { Link } from "react-router-dom";
+import fetchCategories from "../../data/fetchCategories.jsx";
 function ShowAllProducts({ fetchCartHandler }) {
   const [products, setProducts] = useState({});
+  const [subcats, setSubcats] = useState([]);
   let params = useParams();
   let categories = [
     "Paints",
@@ -15,19 +17,34 @@ function ShowAllProducts({ fetchCartHandler }) {
   ];
 
   useEffect(() => {
-    if (categories.includes(params.id)) getData();
+    if (categories.includes(params.id)) {
+      fetchCategories().then((subcats) =>
+        setSubcats(subcats[params.id.split("-").join(" ")])
+      );
+    }
   }, []);
+  useEffect(() => getData(), [subcats]);
 
   async function getData() {
-    let res = await fetch("http://localhost:3000/Products");
-    let data = await res.json();
-    setProducts(data[params.id.split("-").join(" ")]);
+    let category = params.id.split("-").join("_");
+    let data = [];
+    subcats.map((subcat) =>
+      fetchSubCatItems(category, subcat).then((items) => (data[subcat] = items))
+    );
+
+    setProducts(data);
+  }
+
+  async function fetchSubCatItems(category, subcat) {
+    let res = await fetch(
+      `http://localhost:3000/${category}-${subcat.split(" ").join("_")}`
+    );
+    return await res.json();
   }
 
   function renderCategory() {
     let arr = [];
     for (let category in products) {
-      console.log(category);
       arr.push(
         <div key={category}>
           <Item

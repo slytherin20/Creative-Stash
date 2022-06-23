@@ -1,9 +1,7 @@
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../firebase_config.js";
 async function fetchCategories() {
-  const docRef = doc(db, "Categories", "OcX5bdTdzBYVt1ItoOYq");
-  const docSnap = await getDoc(docRef);
-  return docSnap.data();
+  let res = await fetch("http://localhost:3000/Categories");
+  let categories = await res.json();
+  return categories;
 }
 
 export default fetchCategories;

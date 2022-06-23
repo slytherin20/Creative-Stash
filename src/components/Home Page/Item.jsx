@@ -19,7 +19,7 @@ function Item({ items, title, cat, subcat, fetchCartHandler }) {
               key={item.id}
               className="flex flex-column justify-center w-20 items-center pa2"
             >
-              <img src={item.image} alt={item.name} className="w-25 h-25" />
+              <img src={item.img} alt={item.name} className="item-icons" />
               <p className="ma0 mt2">{item.name}</p>
               <p className="ma0 mt2 f6">{item.description.slice(0, 40)}...</p>
               <p>Price: ₹{item.price}</p>

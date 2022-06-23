@@ -85,3 +85,7 @@ a:visited {
   height: 200px;
   border-radius: 50%;
 }
+.item-icons {
+  width: 120px;
+  height: 120px;
+}

@@ -24,7 +24,7 @@ function ShowProducts({ fetchCartHandler }) {
     "Stretched-Canvas",
     "Acrylic",
     "Oil",
-    "Water-Colour",
+    "Water",
     "Acrylic-Markers",
     "Pigment-Liners",
     "Twin-Tip-Markers",
@@ -32,22 +32,23 @@ function ShowProducts({ fetchCartHandler }) {
   ];
 
   useEffect(() => {
-    getData();
+    if (productType.includes(params.id)) getData();
   }, []);
 
   async function getData() {
-    //getting the products
-    let res = await fetch("http://localhost:3000/Products");
-    let data = await res.json();
     let cat = path.pathname.split("/")[2]; //Getting the second last part of url.
-    cat = cat.split("-").join(" ");
-    let items = data[cat];
-    let subCategory = params.id.split("-").join(" ");
-    setProducts(items[subCategory]);
-    setFilteredProducts(items[subCategory]);
+    cat = cat.split("-").join("_");
+    //getting the products
+    let res = await fetch(
+      `http://localhost:3000/${cat}-${params.id.split("-").join("_")}`
+    );
+    let items = await res.json();
+    setProducts(items);
+    console.log(items);
+    setFilteredProducts(items);
     //Save brand names.
     let arr = [];
-    items[subCategory].map((item) => {
+    items.map((item) => {
       if (arr.length > 0 && !arr.includes(item.brand)) {
         arr.push(item.brand);
       } else if (arr.length === 0) arr.push(item.brand);

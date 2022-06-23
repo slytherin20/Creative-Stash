@@ -1,18 +1,6 @@
-import { doc, setDoc } from "firebase/firestore";
-import { ref, getStorage, uploadString } from "firebase/storage";
-import { db } from "../firebase_config.js";
-async function addProduct(inputs) {
+function addProduct(inputs) {
   let generateId = Date.now();
-  const storage = getStorage();
-  const docRef = doc(
-    db,
-    `products/${inputs.cat}/${inputs.subcat}`,
-    String(generateId)
-  );
-
-  const imageRef = ref(storage, `images/${generateId}`);
-
-  let addProductDetails = setDoc(docRef, {
+  let productDetails = {
     cat: inputs.cat,
     subcat: inputs.subcat,
     name: inputs.name,
@@ -22,11 +10,21 @@ async function addProduct(inputs) {
     count: inputs.count,
     status: true,
     id: generateId,
-  });
-  let addProductImg = uploadString(imageRef, inputs.imgSrc, "data_url");
-
-  return Promise.all([addProductDetails, addProductImg])
-    .then(() => "success")
+    img: inputs.imgSrc,
+  };
+  return fetch(
+    `http://localhost:3000/${inputs.cat.split(" ").join("_")}-${inputs.subcat
+      .split(" ")
+      .join("_")}`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(productDetails),
+    }
+  )
+    .then((res) => (res.ok ? "success" : "error"))
     .catch(() => "error");
 }
 
