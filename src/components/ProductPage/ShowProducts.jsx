@@ -44,7 +44,6 @@ function ShowProducts({ fetchCartHandler }) {
     );
     let items = await res.json();
     setProducts(items);
-    console.log(items);
     setFilteredProducts(items);
     //Save brand names.
     let arr = [];

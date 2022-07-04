@@ -4,11 +4,14 @@ import { useContext } from "react";
 import CartContext from "./CartContext.jsx";
 function Cart({ loginStatus, fetchCartHandler }) {
   const cartItems = useContext(CartContext);
-
-  return loginStatus && cartItems.length > 0 ? (
-    <ShowCartItems items={cartItems} getCartItems={fetchCartHandler} />
+  return cartItems.length > 0 ? (
+    <ShowCartItems
+      items={cartItems}
+      getCartItems={fetchCartHandler}
+      loginSuccess={loginStatus}
+    />
   ) : (
-    <ShowEmptyCart cartLen={cartItems.length} />
+    <ShowEmptyCart />
   );
 }
 

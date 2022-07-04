@@ -6,7 +6,7 @@ import SignUpForm from "../SignUp/SignUp.jsx";
 import VerifyEmailScreen from "../Modals/VerifyEmailScreen.jsx";
 import Loading from "../Modals/Loading.jsx";
 
-function LoginIcon({ color }) {
+function LoginIcon({ color, btnText }) {
   const [showPopup, setShowPopup] = useState(false);
   const [modalType, setModalType] = useState("login");
   const [modalContent, setModalContent] = useState("LoginSignUp");
@@ -49,7 +49,7 @@ function LoginIcon({ color }) {
         className={`btn  bg-purple white ma2 pa2 b w4 ${color}`}
         onClick={toggleModal}
       >
-        Login
+        {btnText ? btnText : "Login"}
       </button>
       {showPopup ? (
         modalContent === "LoginSignUp" ? (

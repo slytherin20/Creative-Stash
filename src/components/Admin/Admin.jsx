@@ -48,7 +48,6 @@ function Admin({ userUID }) {
   function uploadImage(e) {
     if (e.target.files[0]) {
       let file = e.target.files[0];
-      console.log(file.type);
       let reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onloadend = () => setInputs({ ...inputs, imgSrc: reader.result });

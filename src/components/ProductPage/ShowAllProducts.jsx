@@ -50,8 +50,8 @@ function ShowAllProducts({ fetchCartHandler }) {
           <Item
             items={products[category].slice(0, 5)}
             title={category}
-            cat={params.id}
-            subcat={category}
+            cat={params.id.split("-").join(" ")}
+            subcat={category.split("-").join(" ")}
             fetchCartHandler={fetchCartHandler}
           />
           {products[category].length > 5 ? (

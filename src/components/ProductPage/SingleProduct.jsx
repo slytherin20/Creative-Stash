@@ -1,16 +1,18 @@
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { getAuth } from "firebase/auth";
 function SingleProduct({ fetchCartHandler }) {
   const [product, setProduct] = useState({});
   const [searchParams] = useSearchParams();
+  let cat = searchParams.get("cat").split(" ").join("_");
+  let subcat = searchParams.get("subcat").split(" ").join("_");
+  let itemId = searchParams.get("id");
+  const auth = getAuth();
   useEffect(() => {
     getProduct();
   }, []);
 
   async function getProduct() {
-    let cat = searchParams.get("cat").split(" ").join("_");
-    let subcat = searchParams.get("subcat").split(" ").join("_");
-    let itemId = searchParams.get("id");
     let res = await fetch(
       `http://localhost:3000/${cat}-${subcat}?id=${itemId}`
     );
@@ -19,13 +21,30 @@ function SingleProduct({ fetchCartHandler }) {
   }
 
   async function addToCart() {
-    await fetch("http://localhost:3000/Cart", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(product),
-    })
-      .then(() => fetchCartHandler())
-      .catch((err) => console.log(err));
+    if (auth.currentUser) {
+      //Save to user cart
+      await fetch(`http://localhost:3000/Cart`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...product,
+          uid: auth.currentUser.uid,
+          cartCount: 1,
+        }),
+      })
+        .then(() => fetchCartHandler())
+        .catch((err) => console.log(err));
+    } else {
+      //For anonymyous users
+      let cart = localStorage.getItem("cart");
+      if (cart) {
+        cart = [cart, `${cat}-${subcat}-${itemId}`];
+        localStorage.setItem("cart", cart);
+      } else {
+        localStorage.setItem("cart", [`${cat}-${subcat}-${itemId}`]);
+      }
+      fetchCartHandler();
+    }
   }
   return (
     <main className="single-product flex ma4">

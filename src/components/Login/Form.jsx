@@ -1,18 +1,25 @@
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import addAnonymousCartItems from "../../data/addAnonymousCartItems.jsx";
 import SendPasswordPage from "./SendPasswordPage.jsx";
 function Form({ changeForm, closePopup, changeModalContent }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setErrorMessage] = useState("");
   const [emailField, setEmailField] = useState(false);
-
+  const navigate = useNavigate();
+  const path = useLocation();
+  let currentPage = path.pathname.split("/");
+  currentPage = currentPage[currentPage.length - 1];
   function authenticateUser(e) {
     e.preventDefault();
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
+        addAnonymousCartItems(auth.currentUser.uid);
         closePopup();
+        if (currentPage === "cart") navigate("/cart");
       })
       .catch(() =>
         setErrorMessage("Login Issue. Please signup if not registered already.")

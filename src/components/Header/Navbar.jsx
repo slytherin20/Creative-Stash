@@ -3,8 +3,13 @@ import SearchBar from "./SearchBar.jsx";
 import LoginIcon from "./LoginIcon.jsx";
 import CartIcon from "./CartIcon.jsx";
 import Logout from "./Logout.jsx";
+//import { useEffect } from "react";
 
 function Navbar({ user, admin }) {
+  // useEffect(() => {
+  //   fetchCartHandler();
+  // }, [user]);
+
   return (
     <>
       <nav className="navbar flex justify-between items-center pa1 shadow-1">
@@ -13,7 +18,7 @@ function Navbar({ user, admin }) {
         </Link>
         {!admin && <SearchBar />}
         <div className="flex justify-around">
-          {user ? <Logout /> : <LoginIcon color="" />}
+          {user ? <Logout /> : <LoginIcon color="" btnText="" />}
           {!admin && <CartIcon />}
         </div>
       </nav>

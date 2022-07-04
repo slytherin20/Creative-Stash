@@ -1,4 +1,6 @@
-function TotalPayment({ totalPrice, count }) {
+import { Link } from "react-router-dom";
+import LoginIcon from "../Header/LoginIcon.jsx";
+function TotalPayment({ totalPrice, count, loginStatus }) {
   return (
     <aside className="pa3 w-40 bl b--near-white bw2 flex flex-column">
       <h3>Price Details</h3>
@@ -17,11 +19,17 @@ function TotalPayment({ totalPrice, count }) {
         </article>
       </section>
       <h3>Total: ₹{totalPrice + 50}</h3>
-      <input
-        type="button"
-        className="login-btn btn bg-yellow br1 b self-center"
-        value="Checkout"
-      />
+      <Link to={loginStatus ? "/payment-gateway" : "/cart"}>
+        {loginStatus ? (
+          <input
+            type="button"
+            className="login-btn btn bg-yellow br1 b self-center"
+            value="Checkout"
+          />
+        ) : (
+          <LoginIcon color="" btnText="Checkout" />
+        )}
+      </Link>
     </aside>
   );
 }
