@@ -11,11 +11,7 @@ function ErrorPage({ showModal }) {
         <img src={CloseIcon} alt="close button" />
       </button>
       <p className="f3">Error Encountered. Please try again later</p>
-      <img
-        src={CorrectIcon}
-        alt="Email successfully sent"
-        className="w-10 h-10"
-      />
+      <img src={CorrectIcon} alt="Error" className="w-10 h-10" />
     </div>
   );
 }

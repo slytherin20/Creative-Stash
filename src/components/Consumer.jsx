@@ -8,6 +8,8 @@ import NotFound from "./NotFound.jsx";
 import CartContext from "./Cart/CartContext.jsx";
 import { useState, useEffect } from "react";
 import SingleProduct from "./ProductPage/SingleProduct.jsx";
+import AddBillingAddress from "./BillingAddress/AddBillingAddress.jsx";
+import DisplayBillingAddress from "./BillingAddress/DisplayBillingAddress.jsx";
 
 function Consumer({ userid }) {
   const [cartItems, setCartItems] = useState([]);
@@ -95,6 +97,8 @@ function Consumer({ userid }) {
             path="/products/Pens-and-Markers/:id"
             element={<ShowProducts fetchCartHandler={fetchCartItems} />}
           />
+          <Route path="/add-billing-address" element={<AddBillingAddress />} />
+          <Route path="/billing-details" element={<DisplayBillingAddress />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </CartContext.Provider>

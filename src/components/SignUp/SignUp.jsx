@@ -4,7 +4,7 @@ import {
   sendEmailVerification,
 } from "firebase/auth";
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { /*useLocation,*/ useNavigate } from "react-router-dom";
 import addAnonymousCartItems from "../../data/addAnonymousCartItems.jsx";
 function SignUpForm({ changeForm, changeModalContent }) {
   const [email, setEmail] = useState("");
@@ -12,9 +12,9 @@ function SignUpForm({ changeForm, changeModalContent }) {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
-  const path = useLocation();
-  let currentPage = path.pathname.split("/");
-  currentPage = currentPage[currentPage.length - 1];
+  //const path = useLocation();
+  //let currentPage = path.pathname.split("/");
+  //currentPage = currentPage[currentPage.length - 1];
   function userAuth(e) {
     e.preventDefault();
     if (password === confirmPassword) {
@@ -24,7 +24,8 @@ function SignUpForm({ changeForm, changeModalContent }) {
           .then(() => {
             changeModalContent("loading");
             addAnonymousCartItems(auth.currentUser.uid);
-            if (currentPage === "cart") navigate("/cart");
+            navigate("/add-billing-address");
+            //  if (currentPage === "cart") navigate("/cart");
             sendEmailVerification(auth.currentUser).then(() => {
               changeModalContent("email sent");
             });
