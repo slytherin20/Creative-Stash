@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
 function Address({ address }) {
-  console.log("add", address);
   return (
-    <article className="w-100 flex flex-column justify-center items-center">
+    <article className="w-100 flex flex-column justify-center items-center relative">
       {address.id && (
         <>
           <h3>Billing Details:</h3>

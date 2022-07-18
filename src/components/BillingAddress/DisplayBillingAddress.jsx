@@ -4,7 +4,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Loading from "../Modals/Loading.jsx";
 import NotFound from "../NotFound.jsx";
 import Address from "./Address.jsx";
-function DisplayBillingAddress() {
+function DisplayBillingAddress({ width }) {
   const [address, setAddress] = useState({});
   const [uid, setUid] = useState(undefined);
   const auth = getAuth();
@@ -25,7 +25,7 @@ function DisplayBillingAddress() {
   }
 
   return uid === undefined ? (
-    <div className="w-100 vh-100 flex justify-center items-center">
+    <div className={`w-${width} vh-100 flex justify-center items-center`}>
       <Loading />
     </div>
   ) : uid === null ? (

@@ -12,7 +12,7 @@ function addAnonymousCartItems(userid) {
     let subcat = item[1];
     let itemId = item[2];
     let cartCount = Number(item[3]);
-    console.log(cat, subcat, itemId, cartCount);
+
     fetch(`http://localhost:3000/${cat}-${subcat}?id=${itemId}`)
       .then((res) => res.json())
       .then((data) => {

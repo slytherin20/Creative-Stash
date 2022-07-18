@@ -5,6 +5,7 @@ import Consumer from "./Consumer.jsx";
 
 function App() {
   const [user] = useAuthState(auth);
+
   function checkIfAdmin() {
     if (user) {
       if (user.uid === "Vdq0x9H1lghqPDr9sSnd8dElHkw1") {
