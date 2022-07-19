@@ -4,9 +4,11 @@ import NotFound from "../NotFound.jsx";
 import Item from "../Home Page/Item.jsx";
 import { Link } from "react-router-dom";
 import fetchCategories from "../../data/fetchCategories.jsx";
+import Loading from "../Modals/Loading.jsx";
 function ShowAllProducts({ fetchCartHandler }) {
   const [products, setProducts] = useState({});
   const [subcats, setSubcats] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
   let params = useParams();
   let categories = [
     "Paints",
@@ -24,15 +26,18 @@ function ShowAllProducts({ fetchCartHandler }) {
     }
   }, []);
   useEffect(() => getData(), [subcats]);
-
+  useEffect(() => renderCategory(), [products]);
   async function getData() {
     let category = params.id.split("-").join("_");
-    let data = [];
-    subcats.map((subcat) =>
-      fetchSubCatItems(category, subcat).then((items) => (data[subcat] = items))
+    let data = {};
+    subcats.map((subcat, i) =>
+      fetchSubCatItems(category, subcat).then((items) => {
+        data[subcat] = items;
+        if (subcats.length - 1 === i) {
+          setProducts(data);
+        }
+      })
     );
-
-    setProducts(data);
   }
 
   async function fetchSubCatItems(category, subcat) {
@@ -65,12 +70,13 @@ function ShowAllProducts({ fetchCartHandler }) {
         </div>
       );
     }
-    return arr;
-  }
 
-  if (categories.includes(params.id)) {
-    return <div>{renderCategory()}</div>;
-  } else return <NotFound />;
+    setAllProducts(arr);
+  }
+  if (!categories.includes(params.id)) return <NotFound />;
+  else {
+    return allProducts.length > 0 ? allProducts : <Loading />;
+  }
 }
 
 export default ShowAllProducts;
