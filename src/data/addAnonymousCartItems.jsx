@@ -2,7 +2,6 @@ function addAnonymousCartItems(userid) {
   let cart = localStorage.getItem("cart");
   if (!cart) return [];
   let cartItems = cart.split(",");
-  console.log("cart arr", cartItems);
   let newCartItems = [];
   let cartLength = cartItems.length;
   let noOfFetchedItems = 0;

@@ -19,17 +19,17 @@ function TotalPayment({ totalPrice, count, loginStatus }) {
         </article>
       </section>
       <h3>Total: ₹{totalPrice + 50}</h3>
-      <Link to={loginStatus ? "/payment-gateway" : "/cart"}>
-        {loginStatus ? (
+      {loginStatus ? (
+        <Link to="/payment-gateway">
           <input
             type="button"
             className="login-btn btn bg-yellow br1 b self-center"
             value="Checkout"
           />
-        ) : (
-          <LoginIcon color="" btnText="Checkout" />
-        )}
-      </Link>
+        </Link>
+      ) : (
+        <LoginIcon color="" btnText="Checkout" />
+      )}
     </aside>
   );
 }
