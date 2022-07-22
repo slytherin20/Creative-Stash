@@ -7,7 +7,7 @@ const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
 const bodyParser = require("body-parser");
 
 let amount;
-let paymentIntentId = "";
+let paymentIntentId;
 //Get the amount of items
 app.use(
   cors({
@@ -16,28 +16,38 @@ app.use(
 );
 app.use(bodyParser.json()); //parse application/json
 
-app.post(`/cart`, (req, res) => {
+app.post(`/cart`, async (req, res) => {
   amount = req.body.amount;
+  paymentIntentId = req.body.paymentIntentId;
   amount = amount * 100;
+
   if (typeof amount === "number") {
-    stripe.paymentIntents
-      .update(paymentIntentId, {
-        amount: amount,
-      })
-      .then(() => res.sendStatus(200));
+    await updatePaymentAmount(paymentIntentId);
+    res.sendStatus(200);
   } else res.sendStatus(400);
 });
 
-//Calculate total amount and send it to stripe
-app.get("/secret", async (req, res) => {
-  const paymentIntent = await stripe.paymentIntents.create({
-    amount: 50,
+async function updatePaymentAmount(paymentIntentId) {
+  return await stripe.paymentIntents.update(paymentIntentId, {
+    amount: amount,
     currency: "inr",
-    automatic_payment_methods: { enabled: true },
   });
-  paymentIntentId = paymentIntent.id;
+}
 
-  res.json({ client_secret: paymentIntent.client_secret });
+app.get("/create-intent", async (req, res) => {
+  try {
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: 50,
+      currency: "inr",
+      automatic_payment_methods: { enabled: true },
+    });
+    res.send({
+      client_secret: paymentIntent.client_secret,
+      paymentIntentId: paymentIntent.id,
+    });
+  } catch (e) {
+    res.status(400).json({ error: e.message });
+  }
 });
 
 app.listen(5000, () => {

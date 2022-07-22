@@ -6,7 +6,7 @@ import Loading from "../Modals/Loading.jsx";
 import SuccessIcon from "../../images/correct.png";
 import FailureIcon from "../../images/warning.png";
 //import orderPlaced from "../../data/orderPlaced.jsx";
-function PaymentStatus() {
+function PaymentStatus({ clearSessionHandler }) {
   const stripe = useStripe();
   const [message, setMessage] = useState(1);
   //   const [uid, setUid] = useState(null);
@@ -27,6 +27,7 @@ function PaymentStatus() {
       switch (paymentIntent.status) {
         case "succeeded":
           setMessage(0);
+          clearSessionHandler();
           break;
         case "processing":
           setMessage(1);
@@ -64,14 +65,14 @@ function PaymentStatus() {
       </article>
     );
   } else if (message === 2) {
-    setTimeout(() => navigate("/payment-gatway"), 4000);
+    setTimeout(() => navigate("/"), 4000);
     return (
       <article>
         <section>
           <h3>Payment failed. Please try another payment method</h3>
           <img src={FailureIcon} alt="Payment failed" />
         </section>
-        <h4>Redirecting to payment gateway...</h4>
+        <h4>Redirecting to home page...</h4>
       </article>
     );
   } else if (message === -1) {

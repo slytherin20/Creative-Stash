@@ -14,6 +14,7 @@ import DisplayBillingAddress from "./BillingAddress/DisplayBillingAddress.jsx";
 import CheckoutForm from "./Checkout/CheckoutForm.jsx";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import { TailSpin } from "react-loader-spinner";
 const stripePromise = loadStripe(process.env.PUBLISHABLE_KEY);
 
 function Consumer({ userid }) {
@@ -26,9 +27,20 @@ function Consumer({ userid }) {
   useEffect(() => fetchSecretKey(), []);
 
   async function fetchSecretKey() {
-    let res = await fetch("http://localhost:5000/secret");
-    let key = await res.json();
-    setOptions({ ...options, clientSecret: key.client_secret });
+    let paymentIntentId = sessionStorage.getItem("pid");
+    if (paymentIntentId) {
+      return;
+    } else {
+      let res = await fetch("http://localhost:5000/create-intent");
+      let key = await res.json();
+      sessionStorage.setItem("pid", key.paymentIntentId);
+      setOptions({ ...options, clientSecret: key.client_secret });
+    }
+  }
+
+  function clearSessionStorage() {
+    sessionStorage.clear();
+    fetchSecretKey();
   }
 
   async function fetchCartItems() {
@@ -64,70 +76,82 @@ function Consumer({ userid }) {
     }
   }
   return (
-    options.clientSecret && (
-      <Elements stripe={stripePromise} options={options}>
-        <main className="sans-serif overflow-hidden">
-          <CartContext.Provider value={cartItems}>
-            <Navbar user={userid} admin={false} />
-            <Routes>
-              <Route
-                path="/cart"
-                element={
-                  <Cart
-                    loginStatus={!!userid}
-                    fetchCartHandler={fetchCartItems}
-                  />
-                }
-              />
-              <Route
-                exact
-                path="/"
-                element={<MainPage fetchCartHandler={fetchCartItems} />}
-              />
-              <Route
-                path="/products/product"
-                element={<SingleProduct fetchCartHandler={fetchCartItems} />}
-              />
-              <Route
-                path="/products/:id"
-                element={<ShowAllProducts fetchCartHandler={fetchCartItems} />}
-              />
-              <Route
-                path="/products/Paints/:id"
-                element={<ShowProducts fetchCartHandler={fetchCartItems} />}
-              />
-              <Route
-                path="/products/Painting-Medium/:id"
-                element={<ShowProducts fetchCartHandler={fetchCartItems} />}
-              />
-              <Route
-                path="/products/Canvas/:id"
-                element={<ShowProducts fetchCartHandler={fetchCartItems} />}
-              />
-              <Route
-                path="/products/Brushes/:id"
-                element={<ShowProducts fetchCartHandler={fetchCartItems} />}
-              />
-              <Route
-                path="/products/Pens-and-Markers/:id"
-                element={<ShowProducts fetchCartHandler={fetchCartItems} />}
-              />
-              <Route
-                path="/add-billing-address"
-                element={<AddBillingAddress />}
-              />
-              <Route
-                path="/billing-details"
-                element={<DisplayBillingAddress width={100} />}
-              />
-              <Route path="/payment-gateway" element={<CheckoutForm />} />
-              <Route path="/payment-status" element={<PaymentStatus />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </CartContext.Provider>
-        </main>
-      </Elements>
-    )
+    <main className="sans-serif overflow-hidden">
+      <CartContext.Provider value={cartItems}>
+        <Navbar user={userid} admin={false} />
+        <Routes>
+          <Route
+            path="/cart"
+            element={
+              <Cart loginStatus={!!userid} fetchCartHandler={fetchCartItems} />
+            }
+          />
+          <Route
+            exact
+            path="/"
+            element={<MainPage fetchCartHandler={fetchCartItems} />}
+          />
+          <Route
+            path="/products/product"
+            element={<SingleProduct fetchCartHandler={fetchCartItems} />}
+          />
+          <Route
+            path="/products/:id"
+            element={<ShowAllProducts fetchCartHandler={fetchCartItems} />}
+          />
+          <Route
+            path="/products/Paints/:id"
+            element={<ShowProducts fetchCartHandler={fetchCartItems} />}
+          />
+          <Route
+            path="/products/Painting-Medium/:id"
+            element={<ShowProducts fetchCartHandler={fetchCartItems} />}
+          />
+          <Route
+            path="/products/Canvas/:id"
+            element={<ShowProducts fetchCartHandler={fetchCartItems} />}
+          />
+          <Route
+            path="/products/Brushes/:id"
+            element={<ShowProducts fetchCartHandler={fetchCartItems} />}
+          />
+          <Route
+            path="/products/Pens-and-Markers/:id"
+            element={<ShowProducts fetchCartHandler={fetchCartItems} />}
+          />
+          <Route path="/add-billing-address" element={<AddBillingAddress />} />
+          <Route
+            path="/billing-details"
+            element={<DisplayBillingAddress width={100} />}
+          />
+          <Route
+            path="/payment-gateway"
+            element={
+              options.clientSecret ? (
+                <Elements stripe={stripePromise} options={options}>
+                  <CheckoutForm />
+                </Elements>
+              ) : (
+                <TailSpin color="gray" width={30} height={30} />
+              )
+            }
+          />
+          <Route
+            path="/payment-status"
+            element={
+              stripePromise ? (
+                <Elements stripe={stripePromise}>
+                  <PaymentStatus clearSessionHandler={clearSessionStorage} />
+                </Elements>
+              ) : (
+                <TailSpin color="gray" width={30} height={30} />
+              )
+            }
+          />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </CartContext.Provider>
+    </main>
   );
 }
 
