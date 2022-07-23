@@ -16,7 +16,16 @@ app.use(
 );
 app.use(bodyParser.json()); //parse application/json
 
-app.post(`/cart`, async (req, res) => {
+app.post("/secret", async (req, res) => {
+  try {
+    paymentIntentId = req.body.pid;
+    let paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
+    res.send({ client_secret: paymentIntent.client_secret });
+  } catch (e) {
+    res.status(400).json({ error: e.message });
+  }
+});
+app.post("/cart", async (req, res) => {
   amount = req.body.amount;
   paymentIntentId = req.body.paymentIntentId;
   amount = amount * 100;
