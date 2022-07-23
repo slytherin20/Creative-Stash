@@ -15,6 +15,7 @@ import CheckoutForm from "./Checkout/CheckoutForm.jsx";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { TailSpin } from "react-loader-spinner";
+
 const stripePromise = loadStripe(process.env.PUBLISHABLE_KEY);
 
 function Consumer({ userid }) {
@@ -26,20 +27,47 @@ function Consumer({ userid }) {
 
   useEffect(() => fetchSecretKey(), []);
 
-  async function fetchSecretKey() {
-    let paymentIntentId = sessionStorage.getItem("pid");
+  function fetchSecretKey() {
+    let paymentIntentId = localStorage.getItem("pid");
     if (paymentIntentId) {
-      return;
+      if (options.clientSecret) return;
+      else {
+        fetch("http://localhost:5000/secret", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ pid: paymentIntentId }),
+        })
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) =>
+            setOptions({ ...options, clientSecret: data.client_secret })
+          )
+          .catch(() => {
+            console.log("Server Connection Error. Connecting Again...");
+            fetchSecretKey();
+          });
+      }
     } else {
-      let res = await fetch("http://localhost:5000/create-intent");
-      let key = await res.json();
-      sessionStorage.setItem("pid", key.paymentIntentId);
-      setOptions({ ...options, clientSecret: key.client_secret });
+      fetch("http://localhost:5000/create-intent")
+        .then((res) => {
+          return res.json();
+        })
+        .then((key) => {
+          localStorage.setItem("pid", key.paymentIntentId);
+          setOptions({ ...options, clientSecret: key.client_secret });
+        })
+        .catch(() => {
+          console.log("Server Connection Error. Connecting again...");
+          fetchSecretKey();
+        });
     }
   }
 
   function clearSessionStorage() {
-    sessionStorage.clear();
+    localStorage.removeItem("pid");
     fetchSecretKey();
   }
 
@@ -141,7 +169,10 @@ function Consumer({ userid }) {
             element={
               stripePromise ? (
                 <Elements stripe={stripePromise}>
-                  <PaymentStatus clearSessionHandler={clearSessionStorage} />
+                  <PaymentStatus
+                    clearSessionHandler={clearSessionStorage}
+                    fetchCartHandler={fetchCartItems}
+                  />
                 </Elements>
               ) : (
                 <TailSpin color="gray" width={30} height={30} />

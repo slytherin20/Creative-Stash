@@ -30,7 +30,7 @@ function CheckoutForm() {
       return addition;
     }, 50);
     setAmt(res);
-    let paymentIntentId = sessionStorage.getItem("pid");
+    let paymentIntentId = localStorage.getItem("pid");
     fetch("http://localhost:5000/cart", {
       method: "POST",
       headers: {
@@ -71,30 +71,32 @@ function CheckoutForm() {
   return (
     <article className="flex w-100">
       <DisplayBillingAddress width={50} />
-      <form className="w-40 h-100 pa4" onSubmit={handleSubmit}>
-        <p className="f3">Total: ₹{amt}</p>
-        <PaymentElement />
-        <button
-          className={
-            showPayBtn
-              ? "bg-dark-blue w5 h2 white bn btn"
-              : "bg-light-gray w5 h2 white bn btn flex justify-center items-center"
-          }
-          disabled={!showPayBtn}
-        >
-          {!showPayBtn ? (
-            <TailSpin color="black" height={20} width={20} />
-          ) : (
-            "Pay"
-          )}
-        </button>
-      </form>
+      <div className="mt3">
+        <p className="red tc">{error}</p>
+        <form className="w-40 h-100 pa4 w-100" onSubmit={handleSubmit}>
+          <p className="f3">Total: ₹{amt}</p>
+          <PaymentElement />
+          <button
+            className={
+              showPayBtn
+                ? "bg-dark-blue w5 h2 white bn btn"
+                : "bg-light-gray w5 h2 white bn btn flex justify-center items-center"
+            }
+            disabled={!showPayBtn}
+          >
+            {!showPayBtn ? (
+              <TailSpin color="black" height={20} width={20} />
+            ) : (
+              "Pay"
+            )}
+          </button>
+        </form>
+      </div>
       {error && popupStatus && (
         <Modal>
           <ErrorPage showModal={closePopup} />
         </Modal>
       )}
-      {<div>{error}</div>}
     </article>
   );
 }
