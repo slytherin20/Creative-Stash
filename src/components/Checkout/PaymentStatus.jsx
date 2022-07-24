@@ -80,7 +80,7 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
         productId: item.id,
         id: Date.now(),
         orderDate: dateOrdered,
-        name: addressObject.name,
+        userName: addressObject.name,
         phoneNo: addressObject.phoneNo,
         address:
           addressObject.deliveryAddress +
@@ -99,10 +99,19 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
   function decreaseProductCount() {
     Promise.all(
       cartItems.map((item) => {
-        let updatedItemCount = {
-          ...item,
-          count: Number(item.count) - item.cartCount,
-        };
+        let updatedItemCount;
+        if (Number(item.count) - item.cartCount === 0) {
+          updatedItemCount = {
+            ...item,
+            count: `${Number(item.count) - item.cartCount}`,
+            status: false,
+          };
+        } else {
+          updatedItemCount = {
+            ...item,
+            count: `${Number(item.count) - item.cartCount}`,
+          };
+        }
         return fetch(
           `http://localhost:3000/${item.cat.split(" ").join("_")}-${item.subcat
             .split(" ")
