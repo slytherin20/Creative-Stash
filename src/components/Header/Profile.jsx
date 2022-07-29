@@ -25,7 +25,9 @@ function Profile() {
             <Link to="/billing-details">
               <p className="bb border-bottom pa2">Billing Address</p>
             </Link>
-            <p>Orders</p>
+            <Link to="/orders">
+              <p>Orders</p>
+            </Link>
           </div>
         )}
       </button>

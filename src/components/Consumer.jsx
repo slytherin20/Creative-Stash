@@ -15,12 +15,15 @@ import CheckoutForm from "./Checkout/CheckoutForm.jsx";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { TailSpin } from "react-loader-spinner";
+import ShowOrders from "./Order/ShowOrders.jsx";
+import OrderItemDetails from "./Order/OrderItemDetails.jsx";
 
 const stripePromise = loadStripe(process.env.PUBLISHABLE_KEY);
 
 function Consumer({ userid }) {
   const [cartItems, setCartItems] = useState([]);
   const [options, setOptions] = useState({ clientSecret: "" });
+
   useEffect(() => {
     fetchCartItems();
   }, [userid]);
@@ -152,6 +155,7 @@ function Consumer({ userid }) {
             path="/billing-details"
             element={<DisplayBillingAddress width={100} />}
           />
+          <Route path="/orders" element={<ShowOrders />} />
           <Route
             path="/payment-gateway"
             element={
@@ -179,6 +183,7 @@ function Consumer({ userid }) {
               )
             }
           />
+          <Route path="/order-details/:id" element={<OrderItemDetails />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </CartContext.Provider>
