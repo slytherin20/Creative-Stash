@@ -8,7 +8,7 @@ import Modal from "../Modals/Modal.jsx";
 import Loading from "../Modals/Loading.jsx";
 import ProductAdded from "../Modals/productAdded.jsx";
 import ErrorPage from "../Modals/ErrorPage.jsx";
-function Admin({ userUID }) {
+function AddProducts({ userUID }) {
   let initialState = {
     cat: "",
     subcat: "",
@@ -25,7 +25,7 @@ function Admin({ userUID }) {
   const [addProductStatus, setAddProductStatus] = useState("");
 
   useEffect(() => {
-    if (userUID !== "Vdq0x9H1lghqPDr9sSnd8dElHkw1") {
+    if (userUID !== process.env.REACT_APP_ADMIN_UID) {
       navigate("/");
     } else {
       getAllItems();
@@ -61,7 +61,7 @@ function Admin({ userUID }) {
     setInputs(initialState);
   }
 
-  if (userUID && userUID === "Vdq0x9H1lghqPDr9sSnd8dElHkw1")
+  if (userUID && userUID === process.env.REACT_APP_ADMIN_UID)
     return (
       <section className="w-90 flex flex-column justify-center items-center">
         <h2>Product details</h2>
@@ -205,4 +205,4 @@ function Admin({ userUID }) {
   else return <NotFound />;
 }
 
-export default Admin;
+export default AddProducts;

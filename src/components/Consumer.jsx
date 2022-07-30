@@ -14,21 +14,64 @@ import DisplayBillingAddress from "./BillingAddress/DisplayBillingAddress.jsx";
 import CheckoutForm from "./Checkout/CheckoutForm.jsx";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import { TailSpin } from "react-loader-spinner";
+import ShowOrders from "./Order/ShowOrders.jsx";
+import OrderItemDetails from "./Order/OrderItemDetails.jsx";
+
 const stripePromise = loadStripe(process.env.PUBLISHABLE_KEY);
 
 function Consumer({ userid }) {
   const [cartItems, setCartItems] = useState([]);
   const [options, setOptions] = useState({ clientSecret: "" });
+
   useEffect(() => {
     fetchCartItems();
   }, [userid]);
 
   useEffect(() => fetchSecretKey(), []);
 
-  async function fetchSecretKey() {
-    let res = await fetch("http://localhost:5000/secret");
-    let key = await res.json();
-    setOptions({ ...options, clientSecret: key.client_secret });
+  function fetchSecretKey() {
+    let paymentIntentId = localStorage.getItem("pid");
+    if (paymentIntentId) {
+      if (options.clientSecret) return;
+      else {
+        fetch("http://localhost:5000/secret", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ pid: paymentIntentId }),
+        })
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) =>
+            setOptions({ ...options, clientSecret: data.client_secret })
+          )
+          .catch(() => {
+            console.log("Server Connection Error. Connecting Again...");
+            fetchSecretKey();
+          });
+      }
+    } else {
+      fetch("http://localhost:5000/create-intent")
+        .then((res) => {
+          return res.json();
+        })
+        .then((key) => {
+          localStorage.setItem("pid", key.paymentIntentId);
+          setOptions({ ...options, clientSecret: key.client_secret });
+        })
+        .catch(() => {
+          console.log("Server Connection Error. Connecting again...");
+          fetchSecretKey();
+        });
+    }
+  }
+
+  function clearSessionStorage() {
+    localStorage.removeItem("pid");
+    fetchSecretKey();
   }
 
   async function fetchCartItems() {
@@ -64,70 +107,87 @@ function Consumer({ userid }) {
     }
   }
   return (
-    options.clientSecret && (
-      <Elements stripe={stripePromise} options={options}>
-        <main className="sans-serif overflow-hidden">
-          <CartContext.Provider value={cartItems}>
-            <Navbar user={userid} admin={false} />
-            <Routes>
-              <Route
-                path="/cart"
-                element={
-                  <Cart
-                    loginStatus={!!userid}
+    <main className="sans-serif overflow-hidden">
+      <CartContext.Provider value={cartItems}>
+        <Navbar user={userid} admin={false} />
+        <Routes>
+          <Route
+            path="/cart"
+            element={
+              <Cart loginStatus={!!userid} fetchCartHandler={fetchCartItems} />
+            }
+          />
+          <Route
+            exact
+            path="/"
+            element={<MainPage fetchCartHandler={fetchCartItems} />}
+          />
+          <Route
+            path="/products/product"
+            element={<SingleProduct fetchCartHandler={fetchCartItems} />}
+          />
+          <Route
+            path="/products/:id"
+            element={<ShowAllProducts fetchCartHandler={fetchCartItems} />}
+          />
+          <Route
+            path="/products/Paints/:id"
+            element={<ShowProducts fetchCartHandler={fetchCartItems} />}
+          />
+          <Route
+            path="/products/Painting-Medium/:id"
+            element={<ShowProducts fetchCartHandler={fetchCartItems} />}
+          />
+          <Route
+            path="/products/Canvas/:id"
+            element={<ShowProducts fetchCartHandler={fetchCartItems} />}
+          />
+          <Route
+            path="/products/Brushes/:id"
+            element={<ShowProducts fetchCartHandler={fetchCartItems} />}
+          />
+          <Route
+            path="/products/Pens-and-Markers/:id"
+            element={<ShowProducts fetchCartHandler={fetchCartItems} />}
+          />
+          <Route path="/add-billing-address" element={<AddBillingAddress />} />
+          <Route
+            path="/billing-details"
+            element={<DisplayBillingAddress width={100} />}
+          />
+          <Route path="/orders" element={<ShowOrders />} />
+          <Route
+            path="/payment-gateway"
+            element={
+              options.clientSecret ? (
+                <Elements stripe={stripePromise} options={options}>
+                  <CheckoutForm />
+                </Elements>
+              ) : (
+                <TailSpin color="gray" width={30} height={30} />
+              )
+            }
+          />
+          <Route
+            path="/payment-status"
+            element={
+              stripePromise ? (
+                <Elements stripe={stripePromise}>
+                  <PaymentStatus
+                    clearSessionHandler={clearSessionStorage}
                     fetchCartHandler={fetchCartItems}
                   />
-                }
-              />
-              <Route
-                exact
-                path="/"
-                element={<MainPage fetchCartHandler={fetchCartItems} />}
-              />
-              <Route
-                path="/products/product"
-                element={<SingleProduct fetchCartHandler={fetchCartItems} />}
-              />
-              <Route
-                path="/products/:id"
-                element={<ShowAllProducts fetchCartHandler={fetchCartItems} />}
-              />
-              <Route
-                path="/products/Paints/:id"
-                element={<ShowProducts fetchCartHandler={fetchCartItems} />}
-              />
-              <Route
-                path="/products/Painting-Medium/:id"
-                element={<ShowProducts fetchCartHandler={fetchCartItems} />}
-              />
-              <Route
-                path="/products/Canvas/:id"
-                element={<ShowProducts fetchCartHandler={fetchCartItems} />}
-              />
-              <Route
-                path="/products/Brushes/:id"
-                element={<ShowProducts fetchCartHandler={fetchCartItems} />}
-              />
-              <Route
-                path="/products/Pens-and-Markers/:id"
-                element={<ShowProducts fetchCartHandler={fetchCartItems} />}
-              />
-              <Route
-                path="/add-billing-address"
-                element={<AddBillingAddress />}
-              />
-              <Route
-                path="/billing-details"
-                element={<DisplayBillingAddress width={100} />}
-              />
-              <Route path="/payment-gateway" element={<CheckoutForm />} />
-              <Route path="/payment-status" element={<PaymentStatus />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </CartContext.Provider>
-        </main>
-      </Elements>
-    )
+                </Elements>
+              ) : (
+                <TailSpin color="gray" width={30} height={30} />
+              )
+            }
+          />
+          <Route path="/order-details/:id" element={<OrderItemDetails />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </CartContext.Provider>
+    </main>
   );
 }
 

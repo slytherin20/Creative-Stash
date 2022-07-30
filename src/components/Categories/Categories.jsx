@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import ShowSubCategories from "./ShowSubCategories.jsx";
 import { Link } from "react-router-dom";
+import { TailSpin } from "react-loader-spinner";
 let categories = [
   "Paints",
   "Painting Medium",
@@ -55,13 +56,17 @@ function Categories() {
             >
               {cat}
             </Link>
-            {hoveredCategory === cat && showSubCategory && (
-              <ShowSubCategories
-                options={subCategory[hoveredCategory]}
-                changeSubCatStatus={changeSubCatStatus}
-                category={cat}
-              />
-            )}
+            {hoveredCategory === cat &&
+              showSubCategory &&
+              (subCategory[hoveredCategory] ? (
+                <ShowSubCategories
+                  options={subCategory[hoveredCategory]}
+                  changeSubCatStatus={changeSubCatStatus}
+                  category={cat}
+                />
+              ) : (
+                <TailSpin color="gray" width={10} height={10} />
+              ))}
           </li>
         ))}
       </ul>

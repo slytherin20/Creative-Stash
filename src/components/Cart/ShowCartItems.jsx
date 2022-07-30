@@ -12,6 +12,7 @@ function ShowCartItems({ items, getCartItems, loginSuccess }) {
   }, [items]);
 
   async function increaseItemCount(item) {
+    if (item.cartCount + 1 > item.count) return;
     let newItem = {
       id: item.id,
       name: item.name,
@@ -149,6 +150,14 @@ function ShowCartItems({ items, getCartItems, loginSuccess }) {
                   <p>
                     <b>Price:</b> ₹{item.price}/-
                   </p>
+                  {item.count == 1 ? (
+                    <>
+                      <p className="red">Only 1 item remaining</p>
+                      <p className="red">Cannot add more than 1.</p>
+                    </>
+                  ) : (
+                    ""
+                  )}
                   <article>
                     Items:
                     <input

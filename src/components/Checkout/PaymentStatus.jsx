@@ -1,19 +1,27 @@
 import { useStripe } from "@stripe/react-stripe-js";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import Loading from "../Modals/Loading.jsx";
+import CartContext from "../Cart/CartContext.jsx";
 //import { getAuth, onAuthStateChanged } from "firebase/app";
 import SuccessIcon from "../../images/correct.png";
 import FailureIcon from "../../images/warning.png";
 //import orderPlaced from "../../data/orderPlaced.jsx";
-function PaymentStatus() {
+function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
   const stripe = useStripe();
   const [message, setMessage] = useState(1);
+  const [orderStatus, setOrderStatus] = useState(false);
+  const [orderPlaced, setOrderPlaced] = useState(false);
+  const cartItems = useContext(CartContext);
   //   const [uid, setUid] = useState(null);
   //const auth = getAuth();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
+  useEffect(() => getStatus(), [stripe]);
+  useEffect(() => {
+    if (!orderPlaced && orderStatus && cartItems.length) placeOrder();
+  }, [orderStatus, cartItems]);
   //   onAuthStateChanged(auth, (user) => {
   //     if (user) setUid(user.uid);
   //   });
@@ -26,7 +34,7 @@ function PaymentStatus() {
     stripe.retrievePaymentIntent(client_secret).then(({ paymentIntent }) => {
       switch (paymentIntent.status) {
         case "succeeded":
-          setMessage(0);
+          setOrderStatus(true);
           break;
         case "processing":
           setMessage(1);
@@ -40,7 +48,101 @@ function PaymentStatus() {
       }
     });
   }
-  useEffect(() => getStatus(), [stripe]);
+
+  async function placeOrder() {
+    setOrderPlaced(true);
+    let addressObject = await fetchUserAddress(cartItems[0].uid);
+    let updatedItems = addCurrentDateAndAddressToItems(addressObject);
+    Promise.all(
+      updatedItems.map((item) =>
+        fetch("http://localhost:3000/Orders", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(item),
+        })
+      )
+    ).then(() => decreaseProductCount());
+  }
+
+  async function fetchUserAddress(uid) {
+    let res = await fetch(`http://localhost:3000/Address?id=${uid}`);
+    let address = await res.json();
+
+    return address[0];
+  }
+  function addCurrentDateAndAddressToItems(addressObject) {
+    let dateOrdered = new Date();
+    let items = cartItems.map((item) => {
+      return {
+        ...item,
+        productId: item.id,
+        id: Date.now(),
+        orderDate: dateOrdered,
+        userName: addressObject.name,
+        phoneNo: addressObject.phoneNo,
+        address:
+          addressObject.deliveryAddress +
+          "," +
+          addressObject.city +
+          "," +
+          addressObject.state +
+          "," +
+          addressObject.pinCode,
+      };
+    });
+
+    return items;
+  }
+
+  function decreaseProductCount() {
+    Promise.all(
+      cartItems.map((item) => {
+        let updatedItemCount;
+        if (Number(item.count) - item.cartCount === 0) {
+          updatedItemCount = {
+            ...item,
+            count: `${Number(item.count) - item.cartCount}`,
+            status: false,
+          };
+        } else {
+          updatedItemCount = {
+            ...item,
+            count: `${Number(item.count) - item.cartCount}`,
+          };
+        }
+        return fetch(
+          `http://localhost:3000/${item.cat.split(" ").join("_")}-${item.subcat
+            .split(" ")
+            .join("_")}/${item.id}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updatedItemCount),
+          }
+        );
+      })
+    )
+      .then(() => refreshCart())
+      .catch((err) => console.log(err));
+  }
+
+  function refreshCart() {
+    Promise.all(
+      cartItems.map((item) =>
+        fetch(`http://localhost:3000/Cart/${item.id}`, {
+          method: "DELETE",
+        })
+      )
+    ).then(() => {
+      fetchCartHandler();
+      clearSessionHandler();
+      setMessage(0);
+    });
+  }
 
   if (message === 0) {
     // orderPlaced(uid);
@@ -64,14 +166,14 @@ function PaymentStatus() {
       </article>
     );
   } else if (message === 2) {
-    setTimeout(() => navigate("/payment-gatway"), 4000);
+    setTimeout(() => navigate("/"), 4000);
     return (
       <article>
         <section>
           <h3>Payment failed. Please try another payment method</h3>
           <img src={FailureIcon} alt="Payment failed" />
         </section>
-        <h4>Redirecting to payment gateway...</h4>
+        <h4>Redirecting to home page...</h4>
       </article>
     );
   } else if (message === -1) {

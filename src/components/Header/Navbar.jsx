@@ -19,7 +19,7 @@ function Navbar({ user, admin }) {
         </Link>
         {!admin && <SearchBar />}
         <div className="flex justify-around">
-          {user ? <Profile /> : null}
+          {user && !admin ? <Profile /> : null}
           {user ? <Logout /> : <LoginIcon color="" btnText="" />}
           {!admin && <CartIcon />}
         </div>
