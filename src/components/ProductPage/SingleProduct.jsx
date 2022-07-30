@@ -57,19 +57,23 @@ function SingleProduct({ fetchCartHandler }) {
           Price: <span className="price-color">₹{product.price}/-</span>
         </h2>
         <p className="f4 pa2">{product.description}</p>
-        <article className="w-60 flex justify-between self-center">
-          <input
-            type="button"
-            value="Add to Cart"
-            className="login-btn bg-yellow btn"
-            onClick={addToCart}
-          />
-          <input
-            type="button"
-            value="Buy"
-            className="login-btn bg-yellow btn"
-          />
-        </article>
+        {product.status ? (
+          <article className="w-60 flex justify-between self-center">
+            <input
+              type="button"
+              value="Add to Cart"
+              className="login-btn bg-yellow btn"
+              onClick={addToCart}
+            />
+            <input
+              type="button"
+              value="Buy"
+              className="login-btn bg-yellow btn"
+            />
+          </article>
+        ) : (
+          <p className="red">Out of Stock</p>
+        )}
       </section>
     </main>
   );

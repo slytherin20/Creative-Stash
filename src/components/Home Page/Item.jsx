@@ -51,6 +51,7 @@ function Item({ items, title, cat, subcat, fetchCartHandler }) {
               <p className="ma0 mt2">{item.name}</p>
               <p className="ma0 mt2 f6">{item.description.slice(0, 40)}...</p>
               <p>Price: ₹{item.price}</p>
+              {item.status ? "" : <p className="red">Out of Stock</p>}
               <div className="flex justify-around w-80">
                 {!cat ? (
                   <Link
@@ -73,12 +74,14 @@ function Item({ items, title, cat, subcat, fetchCartHandler }) {
                     </button>
                   </Link>
                 )}
-                <button
-                  className=" btn buy-btn h2 bg-purple white f6 br1"
-                  onClick={() => addToCart(item)}
-                >
-                  Add to Cart
-                </button>
+                {item.status ? (
+                  <button
+                    className=" btn buy-btn h2 bg-purple white f6 br1"
+                    onClick={() => addToCart(item)}
+                  >
+                    Add to Cart
+                  </button>
+                ) : null}
               </div>
             </div>
           ))}

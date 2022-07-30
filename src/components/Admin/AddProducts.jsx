@@ -8,7 +8,7 @@ import Modal from "../Modals/Modal.jsx";
 import Loading from "../Modals/Loading.jsx";
 import ProductAdded from "../Modals/productAdded.jsx";
 import ErrorPage from "../Modals/ErrorPage.jsx";
-function Admin({ userUID }) {
+function AddProducts({ userUID }) {
   let initialState = {
     cat: "",
     subcat: "",
@@ -205,4 +205,4 @@ function Admin({ userUID }) {
   else return <NotFound />;
 }
 
-export default Admin;
+export default AddProducts;
