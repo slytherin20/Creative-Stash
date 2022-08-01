@@ -7,7 +7,7 @@ function Item({ item, uid, cat, subcat, addToCart }) {
   const [wishlist, setWishlist] = useState({ status: false, id: -1 });
 
   useEffect(() => {
-    wishlistStatus(item.id);
+    if (uid) wishlistStatus(item.id);
   }, []);
 
   async function wishlistStatus(id) {
@@ -42,10 +42,10 @@ function Item({ item, uid, cat, subcat, addToCart }) {
       <p>Price: ₹{item.price}</p>
       {item.status ? "" : <p className="red">Out of Stock</p>}
       <div className="flex justify-around w-80">
-        {wishlist.status ? (
+        {wishlist.status && uid ? (
           <button onClick={() => removeWishlisted(wishlist.id)}>Hearted</button>
         ) : (
-          <button onClick={() => addWishlisted(item, uid)}>Heart</button>
+          uid && <button onClick={() => addWishlisted(item, uid)}>Heart</button>
         )}
         {!cat ? (
           <Link

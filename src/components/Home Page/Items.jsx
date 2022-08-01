@@ -47,7 +47,7 @@ function Items({ items, title, cat, subcat, fetchCartHandler }) {
             <Item
               key={item.id}
               item={item}
-              uid={auth.currentUser.uid}
+              uid={auth.currentUser ? auth.currentUser.uid : false}
               cat={cat}
               subcat={subcat}
               addToCart={addToCart}

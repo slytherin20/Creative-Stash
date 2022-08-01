@@ -3,7 +3,7 @@ import { auth } from "../firebase_config.js";
 import { useState } from "react";
 import AdminPortal from "./Admin/AdminPortal.jsx";
 import Consumer from "./Consumer.jsx";
-import Loading from "./Modals/Loading.jsx";
+
 function App() {
   const [user, setUser] = useState(undefined);
 
@@ -19,15 +19,14 @@ function App() {
       }
       return false;
     } else if (user === null) return false;
+    else return false;
   }
 
-  if (user === undefined) return <Loading />;
-  else
-    return checkIfAdmin() ? (
-      <AdminPortal userid={user} />
-    ) : (
-      <Consumer userid={user ? user : undefined} />
-    );
+  return checkIfAdmin() ? (
+    <AdminPortal userid={user} />
+  ) : (
+    <Consumer userid={user ? user : undefined} />
+  );
 }
 
 export default App;

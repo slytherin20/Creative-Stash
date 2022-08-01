@@ -14,7 +14,6 @@ function SingleProduct({ fetchCartHandler }) {
   const auth = getAuth();
   useEffect(() => {
     getProduct();
-    wishlistStatus();
   }, []);
 
   async function getProduct() {
@@ -23,7 +22,7 @@ function SingleProduct({ fetchCartHandler }) {
     );
     let data = await res.json();
     setProduct(...data);
-    wishlistStatus(data[0].id);
+    if (auth.currentUser) wishlistStatus(data[0].id);
   }
 
   async function wishlistStatus(id) {
@@ -88,31 +87,26 @@ function SingleProduct({ fetchCartHandler }) {
         </h2>
         <p className="f4 pa2">{product.description}</p>
         <article className="w-60 flex justify-between self-center">
-          {wishlist.status ? (
-            <button onClick={() => removeWishlisted(wishlist.id)}>
-              Hearted
-            </button>
-          ) : (
-            <button
-              onClick={() => addWishlisted(product, auth.currentUser.uid)}
-            >
-              Heart
-            </button>
-          )}
+          {wishlist.status
+            ? auth.currentUser && (
+                <button onClick={() => removeWishlisted(wishlist.id)}>
+                  Hearted
+                </button>
+              )
+            : auth.currentUser && (
+                <button
+                  onClick={() => addWishlisted(product, auth.currentUser.uid)}
+                >
+                  Heart
+                </button>
+              )}
           {product.status ? (
-            <>
-              <input
-                type="button"
-                value="Add to Cart"
-                className="login-btn bg-yellow btn"
-                onClick={addToCart}
-              />
-              <input
-                type="button"
-                value="Heart"
-                className="login-btn bg-yellow btn"
-              />
-            </>
+            <input
+              type="button"
+              value="Add to Cart"
+              className="login-btn bg-yellow btn"
+              onClick={addToCart}
+            />
           ) : (
             <p className="red">Out of Stock</p>
           )}
