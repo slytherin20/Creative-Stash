@@ -3,6 +3,7 @@ import SearchBar from "./SearchBar.jsx";
 import LoginIcon from "./LoginIcon.jsx";
 import CartIcon from "./CartIcon.jsx";
 import Profile from "./Profile.jsx";
+import Logout from "./Logout.jsx";
 //import { useEffect } from "react";
 
 function Navbar({ user, admin }) {
@@ -21,6 +22,7 @@ function Navbar({ user, admin }) {
           {user && !admin ? <Profile /> : null}
           {user ? "" : <LoginIcon color="" btnText="" />}
           {!admin && <CartIcon />}
+          {admin && <Logout />}
         </div>
       </nav>
     </>
