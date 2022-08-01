@@ -102,14 +102,29 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
         let updatedItemCount;
         if (Number(item.count) - item.cartCount === 0) {
           updatedItemCount = {
-            ...item,
+            cat: item.cat,
+            subcat: item.subcat,
+            name: item.name,
+            brand: item.brand,
+            price: item.price,
+            description: item.description,
+            id: item.id,
+            img: item.img,
             count: `${Number(item.count) - item.cartCount}`,
             status: false,
           };
         } else {
           updatedItemCount = {
-            ...item,
+            cat: item.cat,
+            subcat: item.subcat,
+            name: item.name,
+            brand: item.brand,
+            price: item.price,
+            description: item.description,
+            id: item.id,
+            img: item.img,
             count: `${Number(item.count) - item.cartCount}`,
+            status: item.status,
           };
         }
         return fetch(
