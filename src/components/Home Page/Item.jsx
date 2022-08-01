@@ -1,90 +1,81 @@
+import addToWishlist from "../../data/addToWishlist";
+import checkItemWishlisted from "../../data/checkItemWishlisted";
+import removeFromWishlist from "../../data/removeFromWishlist";
 import { Link } from "react-router-dom";
-import { getAuth } from "firebase/auth";
-function Item({ items, title, cat, subcat, fetchCartHandler }) {
-  const auth = getAuth();
-  async function addToCart(item) {
-    if (auth.currentUser) {
-      //Save to user cart
-      await fetch(`http://localhost:3000/Cart`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...item,
-          uid: auth.currentUser.uid,
-          cartCount: 1,
-        }),
-      })
-        .then(() => fetchCartHandler())
-        .catch((err) => console.log(err));
-    } else {
-      //For anonymyous users
-      let cart = localStorage.getItem("cart");
-      if (cart) {
-        cart = [
-          cart,
-          `${item.cat.split(" ").join("_")}-${item.subcat
-            .split(" ")
-            .join("_")}-${item.id}-1`,
-        ];
-        localStorage.setItem("cart", cart);
-      } else {
-        localStorage.setItem("cart", [
-          `${item.cat.split(" ").join("_")}-${item.subcat
-            .split(" ")
-            .join("_")}-${item.id}-1`,
-        ]);
-      }
-      fetchCartHandler();
-    }
+import { useState, useEffect } from "react";
+function Item({ item, uid, cat, subcat, addToCart }) {
+  const [wishlist, setWishlist] = useState({ status: false, id: -1 });
+
+  useEffect(() => {
+    if (uid) wishlistStatus(item.id);
+  }, []);
+
+  async function wishlistStatus(id) {
+    let [status, wishlistId] = await checkItemWishlisted(uid, id);
+    setWishlist({
+      status: status,
+      id: wishlistId,
+    });
   }
+
+  function removeWishlisted(id) {
+    removeFromWishlist(id);
+    setWishlist({
+      status: false,
+      id: -1,
+    });
+  }
+
+  async function addWishlisted(item, uid) {
+    await addToWishlist(item, uid);
+    wishlistStatus(item.id);
+  }
+
   return (
-    <div className="w-100 h-25 pa2">
-      <p className="f3 ml3">{title}</p>
-      <div className="w-100 flex h-100 flex-wrap">
-        {items.length != 0 &&
-          items.map((item) => (
-            <div
-              key={item.id}
-              className="flex flex-column justify-center w-20 items-center pa2"
-            >
-              <img src={item.img} alt={item.name} className="item-icons" />
-              <p className="ma0 mt2">{item.name}</p>
-              <p className="ma0 mt2 f6">{item.description.slice(0, 40)}...</p>
-              <p>Price: ₹{item.price}</p>
-              {item.status ? "" : <p className="red">Out of Stock</p>}
-              <div className="flex justify-around w-80">
-                {!cat ? (
-                  <Link
-                    to={`/products/product?cat=${
-                      item.category.split("-")[0]
-                    }&subcat=${item.category.split("-")[1]}&id=${item.id}`}
-                  >
-                    <button className=" btn buy-btn mr2 h2 bg-purple white f6 br1">
-                      Visit
-                    </button>
-                  </Link>
-                ) : (
-                  <Link
-                    to={`/products/product?cat=${
-                      cat.split("-")[0]
-                    }&subcat=${subcat}&id=${item.id}`}
-                  >
-                    <button className=" btn buy-btn  mr2 h2 bg-purple white f6 br1">
-                      Visit
-                    </button>
-                  </Link>
-                )}
-                {item.status ? (
-                  <button
-                    className=" btn buy-btn h2 bg-purple white f6 br1"
-                    onClick={() => addToCart(item)}
-                  >
-                    Add to Cart
-                  </button>
-                ) : null}
-              </div>
-            </div>
-          ))}
+    <div
+      key={item.id}
+      className="flex flex-column justify-center w-20 items-center pa2"
+    >
+      <img src={item.img} alt={item.name} className="item-icons" />
+      <p className="ma0 mt2">{item.name}</p>
+      <p className="ma0 mt2 f6">{item.description.slice(0, 40)}...</p>
+      <p>Price: ₹{item.price}</p>
+      {item.status ? "" : <p className="red">Out of Stock</p>}
+      <div className="flex justify-around w-80">
+        {wishlist.status && uid ? (
+          <button onClick={() => removeWishlisted(wishlist.id)}>Hearted</button>
+        ) : (
+          uid && <button onClick={() => addWishlisted(item, uid)}>Heart</button>
+        )}
+        {!cat ? (
+          <Link
+            to={`/products/product?cat=${item.category.split("-")[0]}&subcat=${
+              item.category.split("-")[1]
+            }&id=${item.id}`}
+          >
+            <button className=" btn buy-btn mr2 h2 bg-purple white f6 br1">
+              Visit
+            </button>
+          </Link>
+        ) : (
+          <Link
+            to={`/products/product?cat=${
+              cat.split("-")[0]
+            }&subcat=${subcat}&id=${item.id}`}
+          >
+            <button className=" btn buy-btn  mr2 h2 bg-purple white f6 br1">
+              Visit
+            </button>
+          </Link>
+        )}
+        {item.status ? (
+          <button
+            className=" btn buy-btn h2 bg-purple white f6 br1"
+            onClick={() => addToCart(item)}
+          >
+            Add to Cart
+          </button>
+        ) : null}
       </div>
     </div>
   );

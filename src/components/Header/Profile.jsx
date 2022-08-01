@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Logout from "./Logout.jsx";
 
 function Profile() {
   const [showMenu, setShowMenu] = useState(false);
@@ -28,6 +29,10 @@ function Profile() {
             <Link to="/orders">
               <p>Orders</p>
             </Link>
+            <Link to="/wishlist">
+              <p>Wishlist</p>
+            </Link>
+            <Logout />
           </div>
         )}
       </button>

@@ -1,4 +1,4 @@
-import Item from "./Item.jsx";
+import Items from "./Items.jsx";
 import { useState, useEffect } from "react";
 function NewArrival({ fetchCartHandler }) {
   const [arrivals, setArrivals] = useState([]);
@@ -14,7 +14,7 @@ function NewArrival({ fetchCartHandler }) {
   }
 
   return (
-    <Item
+    <Items
       items={arrivals}
       title="New Arrivals"
       cat={false}

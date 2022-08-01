@@ -17,6 +17,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { TailSpin } from "react-loader-spinner";
 import ShowOrders from "./Order/ShowOrders.jsx";
 import OrderItemDetails from "./Order/OrderItemDetails.jsx";
+import Wishlist from "./Wishlist/Wishlist.jsx";
 
 const stripePromise = loadStripe(process.env.PUBLISHABLE_KEY);
 
@@ -184,6 +185,10 @@ function Consumer({ userid }) {
             }
           />
           <Route path="/order-details/:id" element={<OrderItemDetails />} />
+          <Route
+            path="/wishlist"
+            element={<Wishlist fetchCartHandler={fetchCartItems} />}
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </CartContext.Provider>
