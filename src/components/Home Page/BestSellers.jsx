@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Item from "./Item.jsx";
+import Items from "./Items.jsx";
 
 function BestSellers({ fetchCartHandler }) {
   const [best, setBest] = useState([]);
@@ -15,7 +15,7 @@ function BestSellers({ fetchCartHandler }) {
   }
 
   return (
-    <Item
+    <Items
       items={best}
       title="Best Sellers"
       cat={false}

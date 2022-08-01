@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Item from "./Item.jsx";
+import Items from "./Items.jsx";
 function TodayDeals() {
   const [deals, setDeals] = useState([]);
 
@@ -14,7 +14,7 @@ function TodayDeals() {
   }
 
   return (
-    <Item items={deals} title="Deals of the day" cat={false} subcat={false} />
+    <Items items={deals} title="Deals of the day" cat={false} subcat={false} />
   );
 }
 
