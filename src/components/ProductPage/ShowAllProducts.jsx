@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import NotFound from "../NotFound.jsx";
-import Item from "../Home Page/Item.jsx";
+import Items from "../Home Page/Items.jsx";
 import { Link } from "react-router-dom";
 import fetchCategories from "../../data/fetchCategories.jsx";
 import Loading from "../Modals/Loading.jsx";
@@ -52,7 +52,7 @@ function ShowAllProducts({ fetchCartHandler }) {
     for (let category in products) {
       arr.push(
         <div key={category}>
-          <Item
+          <Items
             items={products[category].slice(0, 5)}
             title={category}
             cat={params.id.split("-").join(" ")}

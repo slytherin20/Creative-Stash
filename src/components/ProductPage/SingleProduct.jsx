@@ -1,8 +1,12 @@
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getAuth } from "firebase/auth";
+import addToWishlist from "../../data/addToWishlist.js";
+import checkItemWishlisted from "../../data/checkItemWishlisted.js";
+import removeFromWishlist from "../../data/removeFromWishlist.js";
 function SingleProduct({ fetchCartHandler }) {
   const [product, setProduct] = useState({});
+  const [wishlist, setWishlist] = useState({ status: false, id: -1 });
   const [searchParams] = useSearchParams();
   let cat = searchParams.get("cat").split(" ").join("_");
   let subcat = searchParams.get("subcat").split(" ").join("_");
@@ -10,6 +14,7 @@ function SingleProduct({ fetchCartHandler }) {
   const auth = getAuth();
   useEffect(() => {
     getProduct();
+    wishlistStatus();
   }, []);
 
   async function getProduct() {
@@ -18,6 +23,31 @@ function SingleProduct({ fetchCartHandler }) {
     );
     let data = await res.json();
     setProduct(...data);
+    wishlistStatus(data[0].id);
+  }
+
+  async function wishlistStatus(id) {
+    let [status, wishlistId] = await checkItemWishlisted(
+      auth.currentUser.uid,
+      id
+    );
+    setWishlist({
+      status: status,
+      id: wishlistId,
+    });
+  }
+
+  function removeWishlisted(id) {
+    removeFromWishlist(id);
+    setWishlist({
+      status: false,
+      id: -1,
+    });
+  }
+
+  async function addWishlisted(item, uid) {
+    await addToWishlist(item, uid);
+    wishlistStatus(item.id);
   }
 
   async function addToCart() {
@@ -57,23 +87,36 @@ function SingleProduct({ fetchCartHandler }) {
           Price: <span className="price-color">₹{product.price}/-</span>
         </h2>
         <p className="f4 pa2">{product.description}</p>
-        {product.status ? (
-          <article className="w-60 flex justify-between self-center">
-            <input
-              type="button"
-              value="Add to Cart"
-              className="login-btn bg-yellow btn"
-              onClick={addToCart}
-            />
-            <input
-              type="button"
-              value="Buy"
-              className="login-btn bg-yellow btn"
-            />
-          </article>
-        ) : (
-          <p className="red">Out of Stock</p>
-        )}
+        <article className="w-60 flex justify-between self-center">
+          {wishlist.status ? (
+            <button onClick={() => removeWishlisted(wishlist.id)}>
+              Hearted
+            </button>
+          ) : (
+            <button
+              onClick={() => addWishlisted(product, auth.currentUser.uid)}
+            >
+              Heart
+            </button>
+          )}
+          {product.status ? (
+            <>
+              <input
+                type="button"
+                value="Add to Cart"
+                className="login-btn bg-yellow btn"
+                onClick={addToCart}
+              />
+              <input
+                type="button"
+                value="Heart"
+                className="login-btn bg-yellow btn"
+              />
+            </>
+          ) : (
+            <p className="red">Out of Stock</p>
+          )}
+        </article>
       </section>
     </main>
   );

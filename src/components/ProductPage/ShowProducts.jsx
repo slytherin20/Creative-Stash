@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import NotFound from "../NotFound.jsx";
 import ProductFilter from "./ProductFilter.jsx";
-import Item from "../Home Page/Item.jsx";
+import Items from "../Home Page/Items.jsx";
 function ShowProducts({ fetchCartHandler }) {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -91,7 +91,7 @@ function ShowProducts({ fetchCartHandler }) {
         filterProductsByChoice={filterProductsByChoice}
         resetProducts={resetProducts}
       />
-      <Item
+      <Items
         items={filteredProducts}
         title={params.id.split("-").join(" ")}
         cat={path.pathname.split("/")[2].split("-").join(" ")}
