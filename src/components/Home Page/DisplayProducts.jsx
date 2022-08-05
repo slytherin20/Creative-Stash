@@ -9,13 +9,12 @@ function DisplayProducts() {
 
   async function fetchProducts() {
     let categories = await fetchCategories();
-    console.log(categories);
     let subcats = [];
     for (let cat in categories) {
       subcats.push({ subcat: categories[cat][0], cat: cat });
       subcats.push({ subcat: categories[cat][1], cat: cat });
     }
-    console.log(subcats);
+
     setPickedcategories(subcats);
   }
   return (

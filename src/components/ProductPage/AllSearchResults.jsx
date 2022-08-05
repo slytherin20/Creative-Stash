@@ -1,0 +1,97 @@
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import Item from "../Home Page/Item.jsx";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import Loading from "../Modals/Loading.jsx";
+function AllSearchResults({ fetchCartHandler }) {
+  const [products, setProducts] = useState([]);
+  const [user, setUser] = useState(undefined);
+  const auth = getAuth();
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) setUser(user.uid);
+    else setUser(null);
+  });
+  useEffect(() => fetchData(), []);
+  const [searchParams] = useSearchParams();
+  let keyword = searchParams.get("keyword");
+
+  async function fetchData() {
+    let res = await fetch("http://localhost:3000/BrandSearch");
+    let data = await res.json();
+    let items = [];
+    data.map(async (obj) => {
+      if (
+        obj.cat.startsWith(keyword) ||
+        obj.subcat.startsWith(keyword) ||
+        obj.brand.startsWith(keyword)
+      ) {
+        let fetchedItem = await fetchProductItem(obj);
+        items.push(fetchedItem);
+      }
+      let arr = [...items];
+      setProducts(arr);
+    });
+  }
+
+  async function fetchProductItem(obj) {
+    let res = await fetch(
+      `http://localhost:3000/${obj.cat.split(" ").join("_")}-${obj.subcat
+        .split(" ")
+        .join("_")}?id=${obj.id}`
+    );
+    let item = await res.json();
+    return item[0];
+  }
+
+  async function addToCart(item) {
+    if (auth.currentUser) {
+      //Save to user cart
+      await fetch(`http://localhost:3000/Cart`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...item,
+          uid: auth.currentUser.uid,
+          cartCount: 1,
+        }),
+      })
+        .then(() => fetchCartHandler())
+        .catch((err) => console.log(err));
+    } else {
+      //For anonymyous users
+      let cart = localStorage.getItem("cart");
+      if (cart) {
+        cart = [
+          cart,
+          `${item.cat.split(" ").join("_")}-${item.subcat
+            .split(" ")
+            .join("_")}-${item.id}-1`,
+        ];
+        localStorage.setItem("cart", cart);
+      } else {
+        localStorage.setItem("cart", [
+          `${item.cat.split(" ").join("_")}-${item.subcat
+            .split(" ")
+            .join("_")}-${item.id}-1`,
+        ]);
+      }
+      fetchCartHandler();
+    }
+  }
+
+  if (products.length < 0) return <Loading />;
+  else
+    return products.map((item, i) => (
+      <Item
+        key={i}
+        item={item}
+        cat={item.cat}
+        subcat={item.subcat}
+        uid={user}
+        addToCart={addToCart}
+      />
+    ));
+}
+
+export default AllSearchResults;

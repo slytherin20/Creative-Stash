@@ -18,6 +18,8 @@ import { TailSpin } from "react-loader-spinner";
 import ShowOrders from "./Order/ShowOrders.jsx";
 import OrderItemDetails from "./Order/OrderItemDetails.jsx";
 import Wishlist from "./Wishlist/Wishlist.jsx";
+import AllSearchResults from "./ProductPage/AllSearchResults.jsx";
+import SearchByBrand from "./ProductPage/SearchByBrand.jsx";
 
 const stripePromise = loadStripe(process.env.PUBLISHABLE_KEY);
 
@@ -188,6 +190,14 @@ function Consumer({ userid }) {
           <Route
             path="/wishlist"
             element={<Wishlist fetchCartHandler={fetchCartItems} />}
+          />
+          <Route
+            path="/search"
+            element={<AllSearchResults fetchCartHandler={fetchCartItems} />}
+          />
+          <Route
+            path="/products/brands"
+            element={<SearchByBrand fetchCartHandler={fetchCartItems} />}
           />
           <Route path="*" element={<NotFound />} />
         </Routes>
