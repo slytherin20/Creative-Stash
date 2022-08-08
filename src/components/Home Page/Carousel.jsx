@@ -18,7 +18,7 @@ function Carousel({ images }) {
   }
   const defaultClass = "thumbnail br-100";
   return (
-    <div className="carousel flex items-center flex-column vh-50">
+    <div className="carousel flex items-center flex-column vh-50 mt3">
       <img src={images[active].original} alt="banner" className="slide vh-50" />
       <div className="thumbnails w4 flex justify-between mt2">
         {images.map((img, i) => {

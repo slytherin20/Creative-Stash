@@ -45,10 +45,7 @@ function LoginIcon({ color, btnText }) {
 
   return (
     <>
-      <button
-        className={`btn  bg-purple white ma2 pa2 b w4 ${color}`}
-        onClick={toggleModal}
-      >
+      <button className={`btn  bg-purple white ${color}`} onClick={toggleModal}>
         {btnText ? btnText : "Login"}
       </button>
       {showPopup ? (

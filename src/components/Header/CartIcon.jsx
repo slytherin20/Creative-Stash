@@ -9,9 +9,9 @@ function CartIcon() {
 
   return (
     <Link to="/cart">
-      <button className="cart btn bg-purple flex items-center justify-center ma2 pa1 w4">
-        <img src={CartImg} alt="cart" />
-        <span className="white b ml1">Cart</span>
+      <button className="btn bg-purple flex items-center justify-center ma1 cart-btn lg-btn mt2">
+        <img src={CartImg} alt="cart" className="cart-img" />
+        <span className="white">Cart</span>
         {cart.length > 0 && (
           <span className="cart-count w1 h1 pa1 white bg-dark-red br-100 ba">
             {cart.length}

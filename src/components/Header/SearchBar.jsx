@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import SearchIcon from "../../images/search.svg";
 import { Link } from "react-router-dom";
 
-function SearchBar() {
+function SearchBar({ isMobile }) {
   const [input, setInput] = useState("");
   const [keywords, setKeywords] = useState([]);
   const [displayResults, setDisplayResults] = useState([]);
@@ -32,12 +32,13 @@ function SearchBar() {
             .split(" ")
             .join("-")}`,
         });
-      if (obj.brand.startsWith(e.target.value))
+      if (obj.brand.startsWith(e.target.value)) {
         selectedWords.push({
           name: obj.brand,
           type: "brand",
           link: `/products/brands?brand=${encodeURIComponent(obj.brand)}`,
         });
+      }
       if (selectedWords.length > 0) {
         selectedKeywords.push(...selectedWords);
       }
@@ -66,41 +67,69 @@ function SearchBar() {
   function removeSuggestionsHandler() {
     setShowSuggestions(false);
   }
+
+  function checkKeyType(e) {
+    if (e.which == 10 || e.which == 13) {
+      searchValueHandler(e);
+    }
+  }
+
   return (
     <div
-      className="w-40"
+      className={isMobile ? "w-80" : "w-50"}
       onMouseOver={showSuggestionsHandler}
       onFocus={showSuggestionsHandler}
       onMouseLeave={removeSuggestionsHandler}
     >
-      <form className="w-100 flex ba b--gray">
+      <form className="w-100 flex search-field-form">
         <input
           type="search"
-          className="search-field w-100 h2 pa0"
-          placeholder="Search for a product."
+          className="search-field w-100 h2 pa1 f6"
+          placeholder="Search for a brand or category"
           onChange={searchValueHandler}
+          onKeyPress={checkKeyType}
         />
-        <Link to={`/search?keyword=${input}`}>
-          <span className="search-icon bg-white h2 w2">
-            <img className="h2 w2" src={SearchIcon} alt="search-icon" />
+        <Link
+          to={`/search?keyword=${input}`}
+          onClick={removeSuggestionsHandler}
+        >
+          <span className="search-icon h2 w2">
+            <img
+              className="search-icon-img pa1"
+              src={SearchIcon}
+              alt="search-icon"
+            />
           </span>
         </Link>
       </form>
       {showSuggestions && (
-        <div className="absolute z-999 bg-white w-40">
-          <ul className="pa0 pl4">
-            {displayResults.length > 0 &&
-              displayResults.slice(0, 10).map((obj, i) => (
-                <Link key={i} to={obj.link}>
-                  <li className="list pa2 ">{obj.name}</li>
+        <div
+          className={`absolute z-999 bg-white ${
+            isMobile ? "w-80" : ""
+          } shadow-1 search-bar`}
+        >
+          {showSuggestions && (
+            <ul className={showSuggestions ? "pa0 pl2" : ""}>
+              {displayResults.length > 0 &&
+                displayResults.slice(0, 10).map((obj, i) => (
+                  <Link
+                    key={i}
+                    to={obj.link}
+                    onClick={removeSuggestionsHandler}
+                  >
+                    <li className="list pa2 dark-gray">{obj.name}</li>
+                  </Link>
+                ))}
+              {displayResults.length > 0 && (
+                <Link
+                  to={`/search?keyword=${input}`}
+                  onClick={removeSuggestionsHandler}
+                >
+                  <li className="list pa2 tc purple">See more</li>
                 </Link>
-              ))}
-            {displayResults.length > 0 && (
-              <Link to={`/search?keyword=${input}`}>
-                <li className="list pa2 tc">See more</li>
-              </Link>
-            )}
-          </ul>
+              )}
+            </ul>
+          )}
         </div>
       )}
     </div>

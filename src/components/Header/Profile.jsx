@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Logout from "./Logout.jsx";
-
-function Profile() {
+import ProfileIcon from "../../images/profile.png";
+function Profile({ admin }) {
   const [showMenu, setShowMenu] = useState(false);
 
   function showMenuHandler() {
@@ -14,24 +14,29 @@ function Profile() {
   return (
     <>
       <button
-        className="btn bg-purple white relative"
+        className={`btn bg-white black relative ${admin ? "mr5" : ""}`}
         onMouseOver={showMenuHandler}
         onFocus={showMenuHandler}
         onMouseLeave={hideMenuHandler}
         onBlur={hideMenuHandler}
       >
-        Profile
-        {showMenu && (
+        <img src={ProfileIcon} alt="profile" />
+        {!admin && (
           <div className="bg-white black  z-999 profile shadow-1">
-            <Link to="/billing-details">
-              <p className="bb border-bottom pa2">Billing Address</p>
+            <Link to="/billing-details" className="ma2">
+              <p className="bb border-bottom pa1 ma0">Billing Address</p>
             </Link>
-            <Link to="/orders">
-              <p>Orders</p>
+            <Link to="/orders" className="ma2">
+              <p className="bb border-bottom pa1 ma0">Orders</p>
             </Link>
-            <Link to="/wishlist">
-              <p>Wishlist</p>
+            <Link to="/wishlist" className="ma2">
+              <p className="bb border-bottom pa1 ma0">Wishlist</p>
             </Link>
+            <Logout />
+          </div>
+        )}
+        {showMenu && admin && (
+          <div className="bg-white black  z-999 profile shadow-1 pa1">
             <Logout />
           </div>
         )}

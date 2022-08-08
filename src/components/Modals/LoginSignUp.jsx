@@ -13,7 +13,7 @@ function LoginSignUp({ title, text, form, showModal }) {
       </div>
       <div className="login-form w-60 flex flex-column ">
         <button
-          className="bn bg-inherit ma1 close-btn w3 self-end"
+          className="bn bg-inherit ma1 close-btn self-end"
           onClick={showModal}
           onBlur={showModal}
         >
