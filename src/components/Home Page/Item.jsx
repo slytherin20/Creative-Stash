@@ -2,10 +2,11 @@ import addToWishlist from "../../data/addToWishlist";
 import checkItemWishlisted from "../../data/checkItemWishlisted";
 import removeFromWishlist from "../../data/removeFromWishlist";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import DeviceContext from "../DeviceContext.jsx";
 function Item({ item, uid, cat, subcat, addToCart }) {
   const [wishlist, setWishlist] = useState({ status: false, id: -1 });
-
+  const isMobile = useContext(DeviceContext);
   useEffect(() => {
     if (uid) wishlistStatus(item.id);
   }, []);
@@ -34,7 +35,9 @@ function Item({ item, uid, cat, subcat, addToCart }) {
   return (
     <div
       key={item.id}
-      className="flex flex-column justify-center w-20 items-center pa2"
+      className={`flex flex-column justify-center ${
+        isMobile ? "items-size" : "w-20"
+      } items-center pa2`}
     >
       <img src={item.img} alt={item.name} className="item-icons" />
       <p className="ma0 mt2">{item.name}</p>

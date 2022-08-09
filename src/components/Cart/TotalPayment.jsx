@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
 import LoginIcon from "../Header/LoginIcon.jsx";
-function TotalPayment({ totalPrice, count, loginStatus }) {
+function TotalPayment({ totalPrice, count, loginStatus, isMobile }) {
   return (
-    <aside className="pa3 w-40 bl b--near-white bw2 flex flex-column">
+    <aside
+      className={`pa3 ${
+        isMobile ? "w-100" : "w-40"
+      } bl b--near-white bw2 flex flex-column`}
+    >
       <h3>Price Details</h3>
       <section className="list w-100">
         <article className="w-100 flex flex-row justify-between ma2">
@@ -28,7 +32,10 @@ function TotalPayment({ totalPrice, count, loginStatus }) {
           />
         </Link>
       ) : (
-        <LoginIcon color="" btnText="Checkout" />
+        <LoginIcon
+          color={`w4 h2 ${isMobile ? "fr relative cart-checkout-btn" : ""}`}
+          btnText="Checkout"
+        />
       )}
     </aside>
   );

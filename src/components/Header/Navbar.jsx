@@ -8,6 +8,7 @@ import CategoriesForMobile from "../Categories/CategoriesForMobile.jsx";
 import HamburgerMenuIcon from "../../images/hamburger-menu.png";
 import DeviceContext from "../DeviceContext.jsx";
 import { useContext, useState } from "react";
+import Modal from "../Modals/Modal.jsx";
 
 function Navbar({ user, admin }) {
   const [showMenuStatus, setShowMenuStatus] = useState(false);
@@ -22,6 +23,7 @@ function Navbar({ user, admin }) {
     setShowMenuStatus(false);
     body.classList.remove("overflow-hidden");
   }
+
   return (
     <>
       <nav className="navbar  flex flex-column justify-center items-center pa1 shadow-1">
@@ -38,7 +40,7 @@ function Navbar({ user, admin }) {
             ""
           )}
           <Link to="/">
-            <p className="f1-m b">Creative Stash</p>
+            <p className="b">Creative Stash</p>
           </Link>
           {!admin && !isMobile && <SearchBar />}
           <div className="flex justify-around">
@@ -49,7 +51,12 @@ function Navbar({ user, admin }) {
         </div>
         {!admin && isMobile && <SearchBar isMobile={isMobile} />}
         {showMenuStatus && (
-          <CategoriesForMobile hideMenuHandler={hideMenuHandler} />
+          <Modal>
+            <CategoriesForMobile
+              hideMenuHandler={hideMenuHandler}
+              closeMenu={hideMenuHandler}
+            />
+          </Modal>
         )}
       </nav>
     </>

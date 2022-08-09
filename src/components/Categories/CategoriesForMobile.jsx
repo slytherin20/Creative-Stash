@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+
 let categories = [
   "Paints",
   "Painting Medium",
@@ -7,7 +8,7 @@ let categories = [
   "Brushes",
   "Pens and Markers",
 ];
-function CategoriesForMobile({ hideMenuHandler }) {
+function CategoriesForMobile({ hideMenuHandler, closeMenu }) {
   const [subcat, setSubcat] = useState([]);
   const [selectedCat, setSelectedCat] = useState("");
   const [downBtn, setDownBtn] = useState(true);
@@ -30,7 +31,13 @@ function CategoriesForMobile({ hideMenuHandler }) {
   }
 
   return (
-    <div className="relative z-9  w-100 categories-mobile white top-1 overflow-scroll">
+    <div className="w-100 h-100 categories-mobile white overflow-scroll">
+      <button
+        className="bg-transparent bn white f3  relative close-pos mb4"
+        onClick={closeMenu}
+      >
+        X
+      </button>
       {categories.map((cat) => (
         <div key={cat}>
           <div className="pa2 white bb flex">

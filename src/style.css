@@ -140,6 +140,18 @@ a:visited {
   border: none;
 }
 .categories-mobile {
-  height: 85vh;
   background-color: rgba(94, 44, 165, 0.7);
+}
+.cart-checkout-btn {
+  left: 50%;
+}
+.filter-pos {
+  left: 80%;
+}
+.close-pos {
+  left: 85%;
+  top: 25px;
+}
+.items-size {
+  width: 47%;
 }
