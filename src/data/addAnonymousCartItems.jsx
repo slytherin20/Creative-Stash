@@ -15,7 +15,7 @@ function addAnonymousCartItems(userid) {
     fetch(`http://localhost:3000/${cat}-${subcat}?id=${itemId}`)
       .then((res) => res.json())
       .then((data) => {
-        data[0].cartCount = cartCount;
+        data[0].cartCount = Number(cartCount);
         data[0].uid = userid;
         newCartItems.push(...data);
         ++noOfFetchedItems;

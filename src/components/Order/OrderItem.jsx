@@ -12,7 +12,7 @@ function OrderItem({ item }) {
         <img src={item.img} alt={item.name} className="w4 h4" />
         <section>
           <p>{item.name}</p>
-          <p>₹{item.price * item.cartCount + 50}/-</p>
+          <p>₹{Number(item.price) * Number(item.cartCount) + 50}/-</p>
           <p>{item.cartCount}</p>
         </section>
       </section>

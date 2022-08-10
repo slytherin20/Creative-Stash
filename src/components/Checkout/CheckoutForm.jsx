@@ -26,7 +26,7 @@ function CheckoutForm() {
 
   function sendCartItemsToServer() {
     let res = cartItems.reduce((acc, obj) => {
-      let addition = acc + Number(obj.price) * obj.cartCount;
+      let addition = acc + Number(obj.price) * Number(obj.cartCount);
       return addition;
     }, 50);
     setAmt(res);

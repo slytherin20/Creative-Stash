@@ -21,7 +21,7 @@ function Profile({ admin }) {
         onBlur={hideMenuHandler}
       >
         <img src={ProfileIcon} alt="profile" />
-        {!admin && (
+        {showMenu && !admin && (
           <div className="bg-white black  z-999 profile shadow-1">
             <Link to="/billing-details" className="ma2">
               <p className="bb border-bottom pa1 ma0">Billing Address</p>

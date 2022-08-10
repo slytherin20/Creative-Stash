@@ -23,13 +23,16 @@ function DisplayOrderItem({ order }) {
             </section>
             <section>
               <p>Payment Details:</p>
-              <p>Total Product Amount: ₹{order.price * order.cartCount}/-</p>
+              <p>
+                Total Product Amount: ₹
+                {Number(order.price) * Number(order.cartCount)}/-
+              </p>
               <p>Delivery Charges: ₹50/-</p>
               <p>
                 Total Amount:{" "}
                 <span className="bt">
                   {" "}
-                  ₹{order.price * order.cartCount + 50}/-
+                  ₹{Number(order.price) * Number(order.cartCount) + 50}/-
                 </span>
               </p>
             </section>

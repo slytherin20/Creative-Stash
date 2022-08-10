@@ -59,6 +59,7 @@ function SingleProduct({ fetchCartHandler }) {
           ...product,
           uid: auth.currentUser.uid,
           cartCount: 1,
+          count: Number(product.count),
         }),
       })
         .then(() => fetchCartHandler())
@@ -67,10 +68,10 @@ function SingleProduct({ fetchCartHandler }) {
       //For anonymyous users
       let cart = localStorage.getItem("cart");
       if (cart) {
-        cart = [cart, `${cat}-${subcat}-${itemId}`];
+        cart = [cart, `${cat}-${subcat}-${itemId}-1`];
         localStorage.setItem("cart", cart);
       } else {
-        localStorage.setItem("cart", [`${cat}-${subcat}-${itemId}`]);
+        localStorage.setItem("cart", [`${cat}-${subcat}-${itemId}-1`]);
       }
       fetchCartHandler();
     }

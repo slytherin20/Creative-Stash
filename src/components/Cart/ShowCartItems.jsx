@@ -7,22 +7,22 @@ function ShowCartItems({ items, getCartItems, loginSuccess }) {
   useEffect(() => {
     let total = 0;
     items.map((item) => {
-      total += Number(item.price) * item.cartCount;
+      total += Number(item.price) * Number(item.cartCount);
     });
     setTotalPrice(total);
   }, [items]);
 
   async function increaseItemCount(item) {
-    if (item.cartCount + 1 > item.count) return;
+    if (Number(item.cartCount) + 1 > item.count) return;
     let newItem = {
       id: item.id,
       name: item.name,
-      cartCount: item.cartCount + 1,
-      price: item.price,
+      cartCount: Number(item.cartCount) + 1,
+      price: Number(item.price),
       description: item.description,
       img: item.img,
       status: true,
-      count: item.count,
+      count: Number(item.count),
       cat: item.cat,
       subcat: item.subcat,
       brand: item.brand,
@@ -70,12 +70,12 @@ function ShowCartItems({ items, getCartItems, loginSuccess }) {
     let newItem = {
       id: item.id,
       name: item.name,
-      cartCount: item.cartCount - 1,
-      price: item.price,
+      cartCount: Number(item.cartCount) - 1,
+      price: Number(item.price),
       description: item.description,
       img: item.img,
       status: true,
-      count: item.count,
+      count: Number(item.count),
       cat: item.cat,
       subcat: item.subcat,
       brand: item.brand,
