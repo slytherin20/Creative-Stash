@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SearchBar from "./SearchBar.jsx";
 import LoginIcon from "./LoginIcon.jsx";
 import CartIcon from "./CartIcon.jsx";
@@ -14,14 +14,16 @@ function Navbar({ user, admin }) {
   const [showMenuStatus, setShowMenuStatus] = useState(false);
   const isMobile = useContext(DeviceContext);
   const body = document.getElementById("body");
-
+  const navigate = useNavigate();
   function showMenu() {
     setShowMenuStatus(!showMenuStatus);
     if (showMenuStatus === true) body.classList.remove("overflow-hidden");
   }
-  function hideMenuHandler() {
+  function hideMenuHandler(link) {
     setShowMenuStatus(false);
     body.classList.remove("overflow-hidden");
+    navigate(link);
+    window.location.reload();
   }
 
   return (

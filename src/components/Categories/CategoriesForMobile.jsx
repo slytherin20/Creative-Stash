@@ -44,7 +44,9 @@ function CategoriesForMobile({ hideMenuHandler, closeMenu }) {
             <Link
               to={`/products/${cat.split(" ").join("-")}`}
               className="white w-70"
-              onClick={hideMenuHandler}
+              onClick={() =>
+                hideMenuHandler(`/products/${cat.split(" ").join("-")}`)
+              }
             >
               <h4 className="white">{cat}</h4>
             </Link>
@@ -73,7 +75,13 @@ function CategoriesForMobile({ hideMenuHandler, closeMenu }) {
                   to={`/products/${cat.split(" ").join("-")}/${val
                     .split(" ")
                     .join("-")}`}
-                  onClick={hideMenuHandler}
+                  onClick={() =>
+                    hideMenuHandler(
+                      `/products/${cat.split(" ").join("-")}/${val
+                        .split(" ")
+                        .join("-")}`
+                    )
+                  }
                 >
                   <li className="list white pa1">{val}</li>
                 </Link>
