@@ -7,7 +7,7 @@ import { useContext } from "react";
 // import NewArrival from "./NewArrival.jsx";
 // import BestSellers from "./BestSellers.jsx";
 function MainPage() {
-  const isMobile = useContext(DeviceContext);
+  const { isMobile } = useContext(DeviceContext);
   return (
     <div className="main-page">
       {isMobile ? "" : <Categories />}

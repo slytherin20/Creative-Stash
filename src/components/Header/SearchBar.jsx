@@ -102,7 +102,7 @@ function SearchBar({ isMobile }) {
           </span>
         </Link>
       </form>
-      {showSuggestions && (
+      {showSuggestions && displayResults.length > 0 && (
         <div
           className={`absolute z-999 bg-white ${
             isMobile ? "w-80" : ""

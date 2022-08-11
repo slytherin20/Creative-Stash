@@ -1,14 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import NotFound from "../NotFound.jsx";
 import Items from "../Home Page/Items.jsx";
 import { Link } from "react-router-dom";
 import fetchCategories from "../../data/fetchCategories.jsx";
 import Loading from "../Modals/Loading.jsx";
+import DeviceContext from "../DeviceContext.jsx";
 function ShowAllProducts({ fetchCartHandler }) {
   const [products, setProducts] = useState({});
   const [subcats, setSubcats] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
+  const { isMobile } = useContext(DeviceContext);
   let params = useParams();
   let categories = [
     "Paints",
@@ -51,20 +53,35 @@ function ShowAllProducts({ fetchCartHandler }) {
     let arr = [];
     for (let category in products) {
       arr.push(
-        <div key={category}>
+        <div
+          key={category}
+          className="flex flex-column justify-center items-center"
+        >
           <Items
-            items={products[category].slice(0, 5)}
+            items={
+              isMobile
+                ? products[category].slice(0, 2)
+                : products[category].slice(0, 5)
+            }
             title={category}
             cat={params.id.split("-").join(" ")}
             subcat={category.split("-").join(" ")}
             fetchCartHandler={fetchCartHandler}
           />
-          {products[category].length > 5 ? (
+          {!isMobile && products[category].length > 5 ? (
             <Link
               to={`/Products/${params.id}/${category.split(" ").join("-")}`}
               className="cat-link"
             >
               <button>Show More</button>
+            </Link>
+          ) : null}
+          {isMobile && products[category].length > 2 ? (
+            <Link
+              to={`/Products/${params.id}/${category.split(" ").join("-")}`}
+              className="cat-link"
+            >
+              <button className="purple bg-transparent bn tc">Show More</button>
             </Link>
           ) : null}
         </div>

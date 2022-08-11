@@ -13,7 +13,7 @@ function ShowProducts({ fetchCartHandler }) {
   const [mobileFilter, setMobileFilter] = useState(false);
   const params = useParams();
   const path = useLocation();
-  const isMobile = useContext(DeviceContext);
+  const { isMobile } = useContext(DeviceContext);
   let productType = [
     "Water-Colours",
     "Oil-Colours",

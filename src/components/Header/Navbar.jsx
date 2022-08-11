@@ -12,7 +12,7 @@ import Modal from "../Modals/Modal.jsx";
 
 function Navbar({ user, admin }) {
   const [showMenuStatus, setShowMenuStatus] = useState(false);
-  const isMobile = useContext(DeviceContext);
+  const { isMobile } = useContext(DeviceContext);
   const body = document.getElementById("body");
   const navigate = useNavigate();
   function showMenu() {

@@ -39,7 +39,7 @@ function Items({ items, title, cat, subcat, fetchCartHandler }) {
     }
   }
   return (
-    <div className="w-100 h-25 pa2">
+    <div className="w-100 pa2 h-100">
       <p className="f3 ml3">{title}</p>
       <div className="w-100 flex h-100 flex-wrap">
         {items.length != 0 &&

@@ -1,12 +1,16 @@
 import { useSearchParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { getAuth } from "firebase/auth";
 import addToWishlist from "../../data/addToWishlist.js";
 import checkItemWishlisted from "../../data/checkItemWishlisted.js";
 import removeFromWishlist from "../../data/removeFromWishlist.js";
+import HeartIcon from "../../images/heart.png";
+import HeartedIcon from "../../images/hearted.png";
+import DeviceContext from "../DeviceContext.jsx";
 function SingleProduct({ fetchCartHandler }) {
   const [product, setProduct] = useState({});
   const [wishlist, setWishlist] = useState({ status: false, id: -1 });
+  const { isMobile } = useContext(DeviceContext);
   const [searchParams] = useSearchParams();
   let cat = searchParams.get("cat").split(" ").join("_");
   let subcat = searchParams.get("subcat").split(" ").join("_");
@@ -77,11 +81,11 @@ function SingleProduct({ fetchCartHandler }) {
     }
   }
   return (
-    <main className="single-product flex ma4">
-      <aside className="w-50">
+    <main className={isMobile ? "flex flex-column pa1" : "flex ma4"}>
+      <aside className={isMobile ? "w-100" : "w-50"}>
         <img src={product.img} alt={product.name} className="w-80 h-80" />
       </aside>
-      <section className="w-50 flex flex-column">
+      <section className={`${isMobile ? "w-100" : "w-50"} flex flex-column`}>
         <h2>{product.name}</h2>
         <h2>
           Price: <span className="price-color">₹{product.price}/-</span>
@@ -90,15 +94,23 @@ function SingleProduct({ fetchCartHandler }) {
         <article className="w-60 flex justify-between self-center">
           {wishlist.status
             ? auth.currentUser && (
-                <button onClick={() => removeWishlisted(wishlist.id)}>
-                  Hearted
+                <button
+                  onClick={() => removeWishlisted(wishlist.id)}
+                  className="bn bg-white"
+                >
+                  <img
+                    src={HeartedIcon}
+                    alt="wishlisted"
+                    className="wishlist"
+                  />
                 </button>
               )
             : auth.currentUser && (
                 <button
                   onClick={() => addWishlisted(product, auth.currentUser.uid)}
+                  className="bn bg-white"
                 >
-                  Heart
+                  <img src={HeartIcon} alt="wishlisted" className="wishlist" />
                 </button>
               )}
           {product.status ? (

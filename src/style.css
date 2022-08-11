@@ -1,3 +1,6 @@
+* {
+  box-sizing: border-box;
+}
 .text-color {
   color: rgb(46, 44, 44);
 }
@@ -67,6 +70,10 @@
   left: -3rem;
   width: 150px;
 }
+.buy-btn {
+  width: 150px;
+  height: 30px;
+}
 .buy-btn:hover {
   opacity: 0.8;
 }
@@ -130,6 +137,10 @@ a:visited {
   width: 120px;
   height: 120px;
 }
+.item-mobile-icons {
+  width: 100px;
+  height: 80px;
+}
 .border-bottom {
   border-color: gainsboro;
 }
@@ -152,6 +163,39 @@ a:visited {
   left: 85%;
   top: 25px;
 }
+.close-pos-login {
+  left: 90%;
+}
 .items-size {
+  width: 220px;
+  height: 300px;
+}
+.item-name {
+  height: 40px;
+  font-size: 14px;
+}
+.items-mobile-size {
   width: 47%;
+}
+.item-mobile-name {
+  font-size: 12px;
+  font-weight: bold;
+}
+.items-mobile-size p {
+  margin: 0;
+}
+.border-purple {
+  border: solid 1px #5e2ca5;
+}
+.border-purple:hover {
+  border: none;
+  background-color: #5e2ca5;
+  color: white;
+}
+.order-border {
+  border-bottom: solid 1px gainsboro;
+}
+.wishlist {
+  width: 24px;
+  height: 24px;
 }

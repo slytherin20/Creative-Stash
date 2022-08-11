@@ -11,7 +11,7 @@ import Winsor from "../../images/Winson.jpeg";
 import DeviceContext from "../DeviceContext.jsx";
 import { useContext } from "react";
 function DisplayProducts() {
-  const isMobile = useContext(DeviceContext);
+  const { isMobile } = useContext(DeviceContext);
   let categories = [
     { cat: "Paints", subcat: "Water Colours", img: WaterColor },
     { cat: "Painting Medium", subcat: "Gessos and Grounds", img: Gessos },

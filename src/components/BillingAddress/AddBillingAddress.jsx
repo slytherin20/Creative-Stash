@@ -146,7 +146,7 @@ function BillingDetails() {
             </label>
             <button
               type="submit"
-              className="ma2 login-btn bg-purple white bn pointer:hover"
+              className="ma2 login-btn bg-purple white bn pointer:hover btn"
             >
               Add Address
             </button>

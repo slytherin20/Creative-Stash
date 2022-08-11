@@ -1,10 +1,14 @@
 import { Link } from "react-router-dom";
+import HeartIcon from "../../images/hearted.png";
+import DeviceContext from "../DeviceContext.jsx";
+import { useContext } from "react";
 function WishlistSingleItem({
   item,
   uid,
   removeItemFromWishlist,
   fetchCartHandler,
 }) {
+  const { isMobile } = useContext(DeviceContext);
   async function addToCart() {
     await fetch(`http://localhost:3000/Cart`, {
       method: "POST",
@@ -19,24 +23,32 @@ function WishlistSingleItem({
       .catch((err) => console.log(err));
   }
   return (
-    <div className="flex flex-column justify-center w-20 items-center pa2">
-      <img src={item.img} alt={item.name} className="item-icons" />
-      <p className="ma0 mt2">{item.name}</p>
-      <p className="ma0 mt2 f6">{item.description.slice(0, 40)}...</p>
-      <p>Price: ₹{item.price}</p>
+    <div
+      className={`flex flex-column justify-center ${
+        isMobile ? "w-90" : "w-30"
+      } items-center pa2`}
+    >
+      <Link
+        to={`/products/product?cat=${item.cat}&subcat=${item.subcat}&id=${item.productId}`}
+        className="flex flex-column justify-content items-center"
+      >
+        <img src={item.img} alt={item.name} className="item-icons" />
+        <p className="ma0 mt2">{item.name.slice(0, 30)}...</p>
+        <p className="ma0 mt2 f6">{item.description.slice(0, 40)}...</p>
+        <p>Price: ₹{item.price}</p>
+      </Link>
       {item.status ? "" : <p className="red">Out of Stock</p>}
-      <div className="flex justify-around w-80">
-        <button onClick={() => removeItemFromWishlist(item.id)}>Heart</button>
-        <Link
-          to={`/products/product?cat=${item.cat}&subcat=${item.subcat}&id=${item.productId}`}
+      <div className="flex justify-center items-center f6">
+        <button
+          onClick={() => removeItemFromWishlist(item.id)}
+          className="bg-white bn flex items-center"
         >
-          <button className=" btn buy-btn mr2 h2 bg-purple white f6 br1">
-            Visit
-          </button>
-        </Link>
+          <img src={HeartIcon} alt="wishlisted" className="wishlist" />
+          Wishlisted
+        </button>
         {item.status ? (
           <button
-            className=" btn buy-btn h2 bg-purple white f6 br1"
+            className="btn h2 w4 bg-purple white f6 br1 ma1"
             onClick={() => addToCart(item)}
           >
             Add to Cart

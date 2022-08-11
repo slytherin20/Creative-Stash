@@ -13,7 +13,7 @@ function CartIcon() {
         <img src={CartImg} alt="cart" className="cart-img" />
         <span className="white">Cart</span>
         {cart.length > 0 && (
-          <span className="cart-count w1 h1 pa1 white bg-dark-red br-100 ba">
+          <span className="cart-count w1 h1 pa1 white bg-dark-red br-100 bn  z-99">
             {cart.length}
           </span>
         )}

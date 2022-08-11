@@ -3,7 +3,7 @@ import TotalPayment from "./TotalPayment.jsx";
 import DeviceContext from "../DeviceContext.jsx";
 function ShowCartItems({ items, getCartItems, loginSuccess }) {
   const [totalPrice, setTotalPrice] = useState(0);
-  const isMobile = useContext(DeviceContext);
+  const { isMobile } = useContext(DeviceContext);
   useEffect(() => {
     let total = 0;
     items.map((item) => {
