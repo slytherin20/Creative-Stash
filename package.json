@@ -8,8 +8,9 @@
     "format": "prettier --write \"src/**/*.{js,jsx}\"",
     "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
     "dev": "parcel src/index.html",
-    "server": "nodemon src/PaymentServer/server.jsx",
-    "start": "concurrently \"npm run dev\" \"json-server --watch src/data/db.json\" \"npm run server\""
+    "server": "node src/PaymentServer/server.jsx",
+    "jsonServer": "node src/JSONServer/server.js",
+    "start": "concurrently \"npm run dev\" \"npm run jsonServer\" \"npm run server\""
   },
   "author": "Sonali Gupta",
   "license": "ISC",
