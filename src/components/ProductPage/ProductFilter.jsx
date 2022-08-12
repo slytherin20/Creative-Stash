@@ -1,6 +1,12 @@
 import { useState, useRef } from "react";
-
-function ProductFilter({ brands, filterProductsByChoice, resetProducts }) {
+import closeIcon from "../../images/close.png";
+function ProductFilter({
+  brands,
+  filterProductsByChoice,
+  resetProducts,
+  isMobile,
+  closeFilter,
+}) {
   const [price, setPrice] = useState("-1");
   const [checked, setChecked] = useState(new Array(brands.length).fill(false));
   const formRef = useRef(null);
@@ -40,15 +46,40 @@ function ProductFilter({ brands, filterProductsByChoice, resetProducts }) {
     resetProducts();
   }
   return (
-    <div className="w-30 pa2">
+    <div
+      className={`${
+        isMobile ? "w-100 bg-white w-100 h-100 pl4 f4" : "w-30 ma3"
+      } pa2`}
+    >
+      {isMobile ? (
+        <button
+          className="w2 h2 relative  close-pos bg-transparent bn"
+          onClick={closeFilter}
+        >
+          <img src={closeIcon} alt="close filter" />
+        </button>
+      ) : (
+        ""
+      )}
+
       <h3 className="tc">Filters</h3>
       <form ref={formRef}>
-        <button type="button" onClick={submitSelection}>
-          Apply
-        </button>
-        <button type="button" onClick={resetFilter}>
-          Clear
-        </button>
+        <div className="flex  justify-between align-center">
+          <button
+            type="button"
+            onClick={submitSelection}
+            className="btn bg-purple white pa1 ma1 w3"
+          >
+            Apply
+          </button>
+          <button
+            type="button"
+            onClick={resetFilter}
+            className="btn bg-white black pa1 ma1 w3 mr4"
+          >
+            Clear
+          </button>
+        </div>
         <div className="price-filter">
           <p className="b">Price</p>
           <div className="flex flex-column">
@@ -58,6 +89,7 @@ function ProductFilter({ brands, filterProductsByChoice, resetProducts }) {
                 name="price"
                 value="500"
                 onChange={changeRange}
+                className="mr2"
               />
               Less than ₹500
             </label>
@@ -67,6 +99,7 @@ function ProductFilter({ brands, filterProductsByChoice, resetProducts }) {
                 name="price"
                 value="1000"
                 onChange={changeRange}
+                className="mr2"
               />
               Between ₹500 and ₹1000
             </label>
@@ -76,6 +109,7 @@ function ProductFilter({ brands, filterProductsByChoice, resetProducts }) {
                 name="price"
                 value="1500"
                 onChange={changeRange}
+                className="mr2"
               />
               Between ₹1000 and ₹1500
             </label>
@@ -85,6 +119,7 @@ function ProductFilter({ brands, filterProductsByChoice, resetProducts }) {
                 name="price"
                 value="2000"
                 onChange={changeRange}
+                className="mr2"
               />
               Between ₹1500 and ₹2000
             </label>
@@ -94,6 +129,7 @@ function ProductFilter({ brands, filterProductsByChoice, resetProducts }) {
                 name="price"
                 value="200000"
                 onChange={changeRange}
+                className="mr2"
               />
               Greater than ₹2000
             </label>
@@ -104,7 +140,11 @@ function ProductFilter({ brands, filterProductsByChoice, resetProducts }) {
           {brands.map((brand, index) => {
             return (
               <label htmlFor={brand} key={index}>
-                <input type="checkbox" onChange={() => checkValue(index)} />
+                <input
+                  type="checkbox"
+                  onChange={() => checkValue(index)}
+                  className="mr2"
+                />
                 {brand}
               </label>
             );

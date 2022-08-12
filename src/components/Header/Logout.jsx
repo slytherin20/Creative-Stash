@@ -11,7 +11,7 @@ function Logout() {
     <input
       type="button"
       value="Logout"
-      className="btn bg-black white ma2 pa2 b w4"
+      className="btn bg-white w-100 black b pb2"
       onClick={signOutUser}
     />
   );

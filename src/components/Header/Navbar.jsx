@@ -1,29 +1,65 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SearchBar from "./SearchBar.jsx";
 import LoginIcon from "./LoginIcon.jsx";
 import CartIcon from "./CartIcon.jsx";
+import CancelIcon from "../../images/close.png";
 import Profile from "./Profile.jsx";
-import Logout from "./Logout.jsx";
-//import { useEffect } from "react";
+import CategoriesForMobile from "../Categories/CategoriesForMobile.jsx";
+import HamburgerMenuIcon from "../../images/hamburger-menu.png";
+import DeviceContext from "../DeviceContext.jsx";
+import { useContext, useState } from "react";
+import Modal from "../Modals/Modal.jsx";
 
 function Navbar({ user, admin }) {
-  // useEffect(() => {
-  //   fetchCartHandler();
-  // }, [user]);
+  const [showMenuStatus, setShowMenuStatus] = useState(false);
+  const { isMobile } = useContext(DeviceContext);
+  const body = document.getElementById("body");
+  const navigate = useNavigate();
+  function showMenu() {
+    setShowMenuStatus(!showMenuStatus);
+    if (showMenuStatus === true) body.classList.remove("overflow-hidden");
+  }
+  function hideMenuHandler(link) {
+    setShowMenuStatus(false);
+    body.classList.remove("overflow-hidden");
+    navigate(link);
+    window.location.reload();
+  }
 
   return (
     <>
-      <nav className="navbar flex justify-between items-center pa1 shadow-1">
-        <Link to="/">
-          <h2>Creative Stash</h2>
-        </Link>
-        {!admin && <SearchBar />}
-        <div className="flex justify-around">
-          {user && !admin ? <Profile /> : null}
-          {user ? "" : <LoginIcon color="" btnText="" />}
-          {!admin && <CartIcon />}
-          {admin && <Logout />}
+      <nav className="navbar  flex flex-column justify-center items-center pa1 shadow-1">
+        <div className="flex w-100 justify-between items-center pa1">
+          {isMobile ? (
+            <button className="menu" onClick={showMenu}>
+              {!showMenuStatus ? (
+                <img src={HamburgerMenuIcon} alt="menu" />
+              ) : (
+                <img src={CancelIcon} alt="close menu" className="w-50 w-50" />
+              )}
+            </button>
+          ) : (
+            ""
+          )}
+          <Link to="/">
+            <p className="b">Creative Stash</p>
+          </Link>
+          {!admin && !isMobile && <SearchBar />}
+          <div className="flex justify-around">
+            {user ? <Profile admin={admin} /> : null}
+            {user ? "" : <LoginIcon color="bg-purple h2 ma1 mt2" btnText="" />}
+            {!admin && <CartIcon />}
+          </div>
         </div>
+        {!admin && isMobile && <SearchBar isMobile={isMobile} />}
+        {showMenuStatus && (
+          <Modal>
+            <CategoriesForMobile
+              hideMenuHandler={hideMenuHandler}
+              closeMenu={hideMenuHandler}
+            />
+          </Modal>
+        )}
       </nav>
     </>
   );

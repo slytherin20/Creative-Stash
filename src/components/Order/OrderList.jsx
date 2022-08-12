@@ -13,12 +13,12 @@ function OrderList({ uid, setOrderDetailsHandler }) {
   }
 
   return (
-    <div>
+    <div className="w-100 ma2">
       <h2>Orders</h2>
       {orderList.length === 0 ? (
         <Loading />
       ) : (
-        <article className="w-70">
+        <article className="w-90">
           {orderList.map((item) => (
             <OrderItem
               key={item.id}

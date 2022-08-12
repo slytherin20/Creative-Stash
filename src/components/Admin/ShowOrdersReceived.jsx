@@ -16,7 +16,8 @@ function ShowOrdersReceived() {
   else if (!orders) return <Loading />;
   else
     return (
-      <section>
+      <section className="w-80 ma2 flex flex-column">
+        <h2>Orders Received</h2>
         {orders.map((order) => (
           <Order key={order.id} order={order} />
         ))}

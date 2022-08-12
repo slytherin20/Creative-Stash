@@ -1,14 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import NotFound from "../NotFound.jsx";
 import ProductFilter from "./ProductFilter.jsx";
 import Items from "../Home Page/Items.jsx";
+import DeviceContext from "../DeviceContext.jsx";
+import Filtericon from "../../images/filter.png";
+import Modal from "../Modals/Modal.jsx";
 function ShowProducts({ fetchCartHandler }) {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [brands, setBrands] = useState([]);
+  const [mobileFilter, setMobileFilter] = useState(false);
   const params = useParams();
   const path = useLocation();
+  const { isMobile } = useContext(DeviceContext);
   let productType = [
     "Water-Colours",
     "Oil-Colours",
@@ -78,26 +83,71 @@ function ShowProducts({ fetchCartHandler }) {
       );
     }
     setFilteredProducts(items);
+    if (isMobile) closeFilter();
   }
   function resetProducts() {
     setFilteredProducts(products);
   }
 
+  function showMobileFilterMenu() {
+    setMobileFilter(true);
+  }
+
+  function closeFilter() {
+    setMobileFilter(false);
+  }
+
   if (!productType.includes(params.id)) return <NotFound />;
   return (
-    <div className="flex">
-      <ProductFilter
-        brands={brands}
-        filterProductsByChoice={filterProductsByChoice}
-        resetProducts={resetProducts}
-      />
-      <Items
-        items={filteredProducts}
-        title={params.id.split("-").join(" ")}
-        cat={path.pathname.split("/")[2].split("-").join(" ")}
-        subcat={params.id.split("-").join(" ")}
-        fetchCartHandler={fetchCartHandler}
-      />
+    <div className={`flex ${isMobile ? "flex-column" : ""}`}>
+      {isMobile ? (
+        <>
+          <button
+            className=" mt3 flex flex-column  black w3 bn bg-white relative filter-pos"
+            onClick={showMobileFilterMenu}
+          >
+            <img src={Filtericon} alt="filter products" />
+            Filters
+          </button>
+          <Items
+            items={filteredProducts}
+            title={params.id.split("-").join(" ")}
+            cat={path.pathname.split("/")[2].split("-").join(" ")}
+            subcat={params.id.split("-").join(" ")}
+            fetchCartHandler={fetchCartHandler}
+          />
+          {mobileFilter && (
+            // <div className="absolute z-9999 t0 bg-white w-100 h-100">
+            <Modal>
+              <ProductFilter
+                brands={brands}
+                filterProductsByChoice={filterProductsByChoice}
+                resetProducts={resetProducts}
+                isMobile={isMobile}
+                closeFilter={closeFilter}
+              />
+            </Modal>
+            //  </div>
+          )}
+        </>
+      ) : (
+        <>
+          <ProductFilter
+            brands={brands}
+            filterProductsByChoice={filterProductsByChoice}
+            resetProducts={resetProducts}
+            isMobile={isMobile}
+            closeFilter={closeFilter}
+          />
+          <Items
+            items={filteredProducts}
+            title={params.id.split("-").join(" ")}
+            cat={path.pathname.split("/")[2].split("-").join(" ")}
+            subcat={params.id.split("-").join(" ")}
+            fetchCartHandler={fetchCartHandler}
+          />
+        </>
+      )}
     </div>
   );
 }

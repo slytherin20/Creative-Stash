@@ -1,9 +1,35 @@
+* {
+  box-sizing: border-box;
+}
+.text-color {
+  color: rgb(46, 44, 44);
+}
+.cart-img {
+  height: 20px;
+  width: 20px;
+}
 .search-field,
 .btn {
   border: none;
 }
+.btn {
+  border-radius: 5px;
+}
 .search-icon {
   padding: 1px 2px;
+}
+.search-field,
+.search-field-form {
+  background-color: rgb(245, 245, 246);
+}
+.search-field:focus {
+  background-color: white;
+  border: solid 1px gainsboro;
+}
+
+.search-icon-img {
+  height: 20px;
+  width: 20px;
 }
 .btn:hover {
   cursor: pointer;
@@ -13,12 +39,19 @@
   right: 50px;
   top: -15px;
 }
+.cart-btn {
+  padding: 6px;
+}
 .categories {
   box-shadow: 0px 5px 5px 1px rgb(179, 176, 176, 0.7);
 }
 .category:hover,
 .login-details {
   border-bottom: solid 3px #5e2ca5;
+}
+.search-bar {
+  border-top: solid 2px #5e2ca5;
+  width: 47%;
 }
 .category:hover {
   color: #5e2ca5;
@@ -37,6 +70,10 @@
   left: -3rem;
   width: 150px;
 }
+.buy-btn {
+  width: 150px;
+  height: 30px;
+}
 .buy-btn:hover {
   opacity: 0.8;
 }
@@ -45,10 +82,14 @@
   width: 95%;
 }
 .thumbnail {
-  width: 20px;
-  height: 20px;
+  width: 12px;
+  height: 12px;
   border: none;
   background-color: gainsboro;
+}
+.close-btn {
+  height: 30px;
+  width: 30px;
 }
 .thumbnail:hover,
 .close-btn:hover {
@@ -73,18 +114,19 @@
 }
 a {
   text-decoration: none;
+  color: rgb(46, 44, 44);
 }
 a:active,
 a:visited {
-  color: black;
+  color: rgb(46, 44, 44);
 }
 .cat-link {
   width: 100%;
   height: 100%;
+  color: rgb(46, 44, 44);
 }
 .search-field:focus {
   outline: none;
-  border-bottom: solid 3px purple;
 }
 .show-product-img {
   width: 200px;
@@ -95,6 +137,65 @@ a:visited {
   width: 120px;
   height: 120px;
 }
+.item-mobile-icons {
+  width: 100px;
+  height: 80px;
+}
 .border-bottom {
   border-color: gainsboro;
+}
+.menu {
+  width: 48px;
+  height: 48px;
+  background-color: transparent;
+  border: none;
+}
+.categories-mobile {
+  background-color: rgba(94, 44, 165, 0.7);
+}
+.cart-checkout-btn {
+  left: 50%;
+}
+.filter-pos {
+  left: 80%;
+}
+.close-pos {
+  left: 85%;
+  top: 25px;
+}
+.close-pos-login {
+  left: 90%;
+}
+.items-size {
+  width: 220px;
+  height: 300px;
+}
+.item-name {
+  height: 40px;
+  font-size: 14px;
+}
+.items-mobile-size {
+  width: 47%;
+}
+.item-mobile-name {
+  font-size: 12px;
+  font-weight: bold;
+}
+.items-mobile-size p {
+  margin: 0;
+}
+.border-purple {
+  border: solid 1px #5e2ca5;
+}
+.border-purple:hover {
+  border: none;
+  background-color: #5e2ca5;
+  color: white;
+}
+.order-border {
+  border-bottom: solid 1px gainsboro;
+}
+.wishlist {
+  width: 24px;
+  height: 24px;
 }

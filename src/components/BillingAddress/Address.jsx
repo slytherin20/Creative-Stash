@@ -10,28 +10,28 @@ function Address({ address }) {
               Edit
             </button>
           </Link>
-          <section className="w-60 flex flex-column justify-center items-center mt4">
-            <p className="w-50 flex ma1">
+          <section className="w-100 flex flex-column justify-center items-center mt4">
+            <p className="w-50 flex ma2">
               <span className="b dib w-50">Name:</span>
               <span className="dib w-50">{address.name}</span>
             </p>
-            <p className="w-50 flex ma1">
+            <p className="w-50 flex ma2">
               <span className="b dib w-50">Phone Number:</span>
               <span className="dib w-50">{address.phoneNo}</span>
             </p>
-            <p className="w-50 flex ma1">
+            <p className="w-50 flex ma2">
               <span className="b dib w-50">Address:</span>
               <span className="dib w-50">{address.deliveryAddress}</span>
             </p>
-            <p className="w-50 flex ma1">
+            <p className="w-50 flex ma2">
               <span className="b dib w-50">City:</span>
               <span className="dib w-50">{address.city}</span>
             </p>
-            <p className="w-50 flex ma1">
+            <p className="w-50 flex ma2">
               <span className="b dib w-50">State:</span>
               <span className="dib w-50">{address.state}</span>
             </p>
-            <p className="w-50 flex ma1">
+            <p className="w-50 flex ma2">
               <span className="b dib w-50">Pin code:</span>
               <span className="dib w-50">{address.pinCode}</span>
             </p>
@@ -48,7 +48,6 @@ function Address({ address }) {
           </Link>
         </section>
       )}
-      <hr className="bg-gray w-90" />
     </article>
   );
 }

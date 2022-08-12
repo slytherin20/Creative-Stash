@@ -1,27 +1,28 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import TotalPayment from "./TotalPayment.jsx";
-
+import DeviceContext from "../DeviceContext.jsx";
 function ShowCartItems({ items, getCartItems, loginSuccess }) {
   const [totalPrice, setTotalPrice] = useState(0);
+  const { isMobile } = useContext(DeviceContext);
   useEffect(() => {
     let total = 0;
     items.map((item) => {
-      total += Number(item.price) * item.cartCount;
+      total += Number(item.price) * Number(item.cartCount);
     });
     setTotalPrice(total);
   }, [items]);
 
   async function increaseItemCount(item) {
-    if (item.cartCount + 1 > item.count) return;
+    if (Number(item.cartCount) + 1 > item.count) return;
     let newItem = {
       id: item.id,
       name: item.name,
-      cartCount: item.cartCount + 1,
-      price: item.price,
+      cartCount: Number(item.cartCount) + 1,
+      price: Number(item.price),
       description: item.description,
       img: item.img,
       status: true,
-      count: item.count,
+      count: Number(item.count),
       cat: item.cat,
       subcat: item.subcat,
       brand: item.brand,
@@ -69,12 +70,12 @@ function ShowCartItems({ items, getCartItems, loginSuccess }) {
     let newItem = {
       id: item.id,
       name: item.name,
-      cartCount: item.cartCount - 1,
-      price: item.price,
+      cartCount: Number(item.cartCount) - 1,
+      price: Number(item.price),
       description: item.description,
       img: item.img,
       status: true,
-      count: item.count,
+      count: Number(item.count),
       cat: item.cat,
       subcat: item.subcat,
       brand: item.brand,
@@ -137,9 +138,14 @@ function ShowCartItems({ items, getCartItems, loginSuccess }) {
   }
 
   return (
-    <div className="cart-container flex justify-center items-center w-100 h-100 mt4">
-      <section className="shadow-2 w-70 flex justify-between">
-        <section className="w-60 pa3">
+    <div className="cart-container flex  justify-center items-center w-100 h-100 mt4 mb2">
+      <section
+        className={`shadow-2  flex justify-between ${
+          isMobile ? "flex-column-reverse w-90" : "w-70"
+        }`}
+      >
+        <section className={`${isMobile ? "w-100" : "w-60"} pa3`}>
+          <h3>Cart Items</h3>
           {items.map((item) => {
             return (
               <section key={item.id} className="w-80 h-40 flex">
@@ -183,6 +189,7 @@ function ShowCartItems({ items, getCartItems, loginSuccess }) {
           totalPrice={totalPrice}
           count={items.length}
           loginStatus={loginSuccess}
+          isMobile={isMobile}
         />
       </section>
     </div>

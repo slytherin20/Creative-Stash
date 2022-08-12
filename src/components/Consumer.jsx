@@ -98,7 +98,7 @@ function Consumer({ userid }) {
           fetch(`http://localhost:3000/${cat}-${subcat}?id=${itemId}`)
             .then((res) => res.json())
             .then((data) => {
-              data[0].cartCount = cartCount;
+              data[0].cartCount = Number(cartCount);
               cartItems.push(...data);
               noOfFetcheditems += 1;
               if (cartLen === noOfFetcheditems) setCartItems(cartItems);

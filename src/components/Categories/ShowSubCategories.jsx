@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 function ShowSubCategories({ options, changeSubCatStatus, category }) {
   return (
     <ul
-      className="flex flex-column w-100 nav-list bg-white"
+      className="flex flex-column w-100 nav-list bg-white shadow-1"
       onMouseLeave={() => changeSubCatStatus(false)}
       onBlur={() => changeSubCatStatus(false)}
     >
@@ -13,7 +13,7 @@ function ShowSubCategories({ options, changeSubCatStatus, category }) {
             .join("-")}`}
           key={subcat}
         >
-          <li className="list f5 pa1 black">{subcat}</li>
+          <li className="list f5 pa2 text-color">{subcat}</li>
         </Link>
       ))}
     </ul>

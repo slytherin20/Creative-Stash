@@ -47,7 +47,7 @@ function Categories() {
             onFocus={() => changeCategory(cat)}
             onMouseOut={() => removeCategory()}
             onBlur={() => removeCategory()}
-            className="btn category list flex items-center flex-auto justify-center"
+            className="btn category list flex items-center flex-auto justify-center text-color"
           >
             <Link
               to={`/products/${cat.split(" ").join("-")}`}

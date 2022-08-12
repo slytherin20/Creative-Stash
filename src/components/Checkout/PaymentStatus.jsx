@@ -100,17 +100,17 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
     Promise.all(
       cartItems.map((item) => {
         let updatedItemCount;
-        if (Number(item.count) - item.cartCount === 0) {
+        if (Number(item.count) - Number(item.cartCount) === 0) {
           updatedItemCount = {
             cat: item.cat,
             subcat: item.subcat,
             name: item.name,
             brand: item.brand,
-            price: item.price,
+            price: Number(item.price),
             description: item.description,
             id: item.id,
             img: item.img,
-            count: `${Number(item.count) - item.cartCount}`,
+            count: `${Number(item.count) - Number(item.cartCount)}`,
             status: false,
           };
         } else {
@@ -119,11 +119,11 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
             subcat: item.subcat,
             name: item.name,
             brand: item.brand,
-            price: item.price,
+            price: Number(item.price),
             description: item.description,
             id: item.id,
             img: item.img,
-            count: `${Number(item.count) - item.cartCount}`,
+            count: `${Number(item.count) - Number(item.cartCount)}`,
             status: item.status,
           };
         }
@@ -169,7 +169,7 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
           <img src={SuccessIcon} alt="success" className="w2 h2" />
         </section>
         <Link to="/">
-          <button>Continue Shopping</button>
+          <button className="btn white bg-purple">Continue Shopping</button>
         </Link>
       </article>
     );

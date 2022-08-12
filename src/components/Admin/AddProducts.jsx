@@ -69,7 +69,7 @@ function AddProducts({ userUID }) {
           onSubmit={submitProductDetails}
           className="w-100 flex flex-column justify-center items-center"
         >
-          <label htmlFor="category" className="ma2">
+          <label htmlFor="category" className="ma2 w-60 flex justify-between">
             Product Category:
             <select
               value={inputs.cat}
@@ -87,7 +87,10 @@ function AddProducts({ userUID }) {
                 ))}
             </select>
           </label>
-          <label htmlFor="subcategory" className="ma2">
+          <label
+            htmlFor="subcategory"
+            className="ma2 w-60 flex justify-between"
+          >
             Product Sub Category:
             <select
               value={inputs.subcat}
@@ -107,7 +110,7 @@ function AddProducts({ userUID }) {
                 ))}
             </select>
           </label>
-          <label htmlFor="name" className="ma2">
+          <label htmlFor="name" className="ma2 w-60 flex justify-between">
             Product Name:
             <input
               type="text"
@@ -118,7 +121,7 @@ function AddProducts({ userUID }) {
               required
             />
           </label>
-          <label htmlFor="brand" className="ma2">
+          <label htmlFor="brand" className="ma2 w-60 flex justify-between">
             Product Brand:
             <input
               type="text"
@@ -129,7 +132,10 @@ function AddProducts({ userUID }) {
               required
             />
           </label>
-          <label htmlFor="Description" className="ma2">
+          <label
+            htmlFor="Description"
+            className="ma2 w-60 flex justify-between"
+          >
             Add description:
             <textarea
               name="description"
@@ -139,7 +145,7 @@ function AddProducts({ userUID }) {
               required
             ></textarea>
           </label>
-          <label htmlFor="Price" className="ma2">
+          <label htmlFor="Price" className="ma2 w-60 flex justify-between">
             Price:
             <input
               type="number"
@@ -151,7 +157,10 @@ function AddProducts({ userUID }) {
               required
             />
           </label>
-          <label htmlFor="number-items" className="ma2">
+          <label
+            htmlFor="number-items"
+            className="ma2 w-60 flex justify-between"
+          >
             Number of product:
             <input
               type="number"
@@ -163,7 +172,7 @@ function AddProducts({ userUID }) {
               required
             />
           </label>
-          <article className="ma2 flex flex-column">
+          <article className="ma2 w-60 flex flex-column">
             {inputs.imgSrc ? (
               <img
                 src={inputs.imgSrc}

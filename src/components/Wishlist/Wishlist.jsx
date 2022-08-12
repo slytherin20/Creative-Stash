@@ -38,16 +38,19 @@ function Wishlist({ fetchCartHandler }) {
     if (wishlistItems.length == 0) return <h2>Your Wishlist is empty</h2>;
     else
       return (
-        <article>
-          {wishlistItems.map((item) => (
-            <WishlistSingleItem
-              key={item.id}
-              item={item}
-              uid={user}
-              fetchCartHandler={fetchCartHandler}
-              removeItemFromWishlist={removeItemFromWishlistHandler}
-            />
-          ))}
+        <article className="pa2">
+          <h2>Wishlist</h2>
+          <div className="flex flex-wrap">
+            {wishlistItems.map((item) => (
+              <WishlistSingleItem
+                key={item.id}
+                item={item}
+                uid={user}
+                fetchCartHandler={fetchCartHandler}
+                removeItemFromWishlist={removeItemFromWishlistHandler}
+              />
+            ))}
+          </div>
         </article>
       );
   }

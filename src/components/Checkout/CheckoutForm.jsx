@@ -10,11 +10,13 @@ import { useState, useContext, useEffect } from "react";
 import CartContext from "../Cart/CartContext.jsx";
 import ErrorPage from "../Modals/ErrorPage.jsx";
 import Modal from "../Modals/Modal.jsx";
+import DeviceContext from "../DeviceContext.jsx";
 function CheckoutForm() {
   const [amt, setAmt] = useState(0);
   const [error, setErrorMessage] = useState(null);
   const [popupStatus, setPopupStatus] = useState(false);
   const [showPayBtn, setShowPayBtn] = useState(false);
+  const { isMobile } = useContext(DeviceContext);
   const elements = useElements();
   const stripe = useStripe();
   // const auth = getAuth();
@@ -26,7 +28,7 @@ function CheckoutForm() {
 
   function sendCartItemsToServer() {
     let res = cartItems.reduce((acc, obj) => {
-      let addition = acc + Number(obj.price) * obj.cartCount;
+      let addition = acc + Number(obj.price) * Number(obj.cartCount);
       return addition;
     }, 50);
     setAmt(res);
@@ -69,7 +71,7 @@ function CheckoutForm() {
     setPopupStatus(false);
   }
   return (
-    <article className="flex w-100">
+    <article className={isMobile ? "flex flex-column w-100" : "flex w-100"}>
       <DisplayBillingAddress width={50} />
       <div className="mt3">
         <p className="red tc">{error}</p>
