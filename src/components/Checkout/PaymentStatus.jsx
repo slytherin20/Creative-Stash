@@ -83,7 +83,7 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
       return {
         ...item,
         productId: item.id,
-        id: Date.now(),
+        id: Date.now() + item.id,
         orderDate: dateOrdered,
         userName: addressObject.name,
         phoneNo: addressObject.phoneNo,
