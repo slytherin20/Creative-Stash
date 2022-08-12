@@ -1,17 +1,22 @@
 import Item from "./Item.jsx";
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useState } from "react";
 function Items({ items, title, cat, subcat, fetchCartHandler }) {
+  const [user, setUser] = useState(undefined);
   const auth = getAuth();
-
+  onAuthStateChanged(auth, (user) => {
+    if (user.uid) setUser(user.uid);
+    else setUser(null);
+  });
   async function addToCart(item) {
-    if (auth.currentUser) {
+    if (user) {
       //Save to user cart
       await fetch(`http://localhost:3000/Cart`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...item,
-          uid: auth.currentUser.uid,
+          uid: user,
           cartCount: 1,
         }),
       })
@@ -47,7 +52,7 @@ function Items({ items, title, cat, subcat, fetchCartHandler }) {
             <Item
               key={item.id}
               item={item}
-              uid={auth.currentUser ? auth.currentUser.uid : false}
+              uid={user ? user : false}
               cat={cat}
               subcat={subcat}
               addToCart={addToCart}
