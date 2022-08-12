@@ -8,7 +8,11 @@ function NewArrival({ fetchCartHandler }) {
   }, []);
 
   async function requestData() {
-    let res = await fetch("http://localhost:3000/New-Arrivals");
+    let res = await fetch("http://localhost:3000/New-Arrivals", {
+      headers: {
+        "Transfer-Encoding": "chunked",
+      },
+    });
     let data = await res.json();
     setArrivals(data);
   }

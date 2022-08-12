@@ -18,7 +18,11 @@ function Categories() {
   }, []);
 
   async function getSubCategories() {
-    let res = await fetch("http://localhost:3000/Categories");
+    let res = await fetch("http://localhost:3000/Categories", {
+      headers: {
+        "Transfer-Encoding": "chunked",
+      },
+    });
     let data = await res.json();
     setSubCategory(data);
   }

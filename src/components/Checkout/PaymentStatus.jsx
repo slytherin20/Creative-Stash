@@ -59,6 +59,7 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "Transfer-Encoding": "chunked",
           },
           body: JSON.stringify(item),
         })
@@ -67,7 +68,11 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
   }
 
   async function fetchUserAddress(uid) {
-    let res = await fetch(`http://localhost:3000/Address?id=${uid}`);
+    let res = await fetch(`http://localhost:3000/Address?id=${uid}`, {
+      headers: {
+        "Transfer-Encoding": "chunked",
+      },
+    });
     let address = await res.json();
 
     return address[0];
@@ -135,6 +140,7 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
+              "Transfer-Encoding": "chunked",
             },
             body: JSON.stringify(updatedItemCount),
           }
@@ -150,6 +156,9 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
       cartItems.map((item) =>
         fetch(`http://localhost:3000/Cart/${item.id}`, {
           method: "DELETE",
+          headers: {
+            "Transfer-Encoding": "chunked",
+          },
         })
       )
     ).then(() => {

@@ -9,7 +9,11 @@ function BestSellers({ fetchCartHandler }) {
   }, []);
 
   async function requestData() {
-    let res = await fetch("http://localhost:3000/Best-Sellers");
+    let res = await fetch("http://localhost:3000/Best-Sellers", {
+      headers: {
+        "Transfer-Encoding": "chunked",
+      },
+    });
     let data = await res.json();
     setBest(data);
   }

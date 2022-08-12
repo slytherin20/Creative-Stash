@@ -28,7 +28,12 @@ function SingleProduct({ fetchCartHandler }) {
 
   async function getProduct() {
     let res = await fetch(
-      `http://localhost:3000/${cat}-${subcat}?id=${itemId}`
+      `http://localhost:3000/${cat}-${subcat}?id=${itemId}`,
+      {
+        headers: {
+          "Transfer-Encoding": "chunked",
+        },
+      }
     );
     let data = await res.json();
     setProduct(...data);
@@ -61,7 +66,10 @@ function SingleProduct({ fetchCartHandler }) {
       //Save to user cart
       await fetch(`http://localhost:3000/Cart`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Transfer-Encoding": "chunked",
+        },
         body: JSON.stringify({
           ...product,
           uid: user,

@@ -1,6 +1,11 @@
 async function checkItemWishlisted(uid, productId) {
   let res = await fetch(
-    `http://localhost:3000/Wishlist?uid=${uid}&&productId=${productId}`
+    `http://localhost:3000/Wishlist?uid=${uid}&&productId=${productId}`,
+    {
+      headers: {
+        "Transfer-Encoding": "chunked",
+      },
+    }
   );
   if (res.status == 400 || !res.ok) return [false, -1];
   else {

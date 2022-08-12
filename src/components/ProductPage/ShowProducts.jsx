@@ -45,7 +45,12 @@ function ShowProducts({ fetchCartHandler }) {
     cat = cat.split("-").join("_");
     //getting the products
     let res = await fetch(
-      `http://localhost:3000/${cat}-${params.id.split("-").join("_")}`
+      `http://localhost:3000/${cat}-${params.id.split("-").join("_")}`,
+      {
+        headers: {
+          "Transfer-Encoding": "chunked",
+        },
+      }
     );
     let items = await res.json();
     setProducts(items);

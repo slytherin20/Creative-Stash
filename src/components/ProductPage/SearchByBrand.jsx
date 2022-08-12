@@ -22,7 +22,12 @@ function SearchByBrand({ fetchCartHandler }) {
 
   async function fetchProductsByBrands() {
     let res = await fetch(
-      `http://localhost:3000/BrandSearch?brand=${encodeURIComponent(brand)}`
+      `http://localhost:3000/BrandSearch?brand=${encodeURIComponent(brand)}`,
+      {
+        headers: {
+          "Transfer-Encoding": "chunked",
+        },
+      }
     );
     let data = await res.json();
     let productArr = [];
@@ -30,7 +35,12 @@ function SearchByBrand({ fetchCartHandler }) {
       let res = await fetch(
         `http://localhost:3000/${obj.cat.split(" ").join("_")}-${obj.subcat
           .split(" ")
-          .join("_")}?id=${obj.id}`
+          .join("_")}?id=${obj.id}`,
+        {
+          headers: {
+            "Transfer-Encoding": "chunked",
+          },
+        }
       );
       let product = await res.json();
       productArr.push(product[0]);
@@ -43,7 +53,10 @@ function SearchByBrand({ fetchCartHandler }) {
       //Save to user cart
       await fetch(`http://localhost:3000/Cart`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Transfer-Encoding": "chunked",
+        },
         body: JSON.stringify({
           ...item,
           uid: auth.currentUser.uid,

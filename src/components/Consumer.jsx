@@ -42,6 +42,7 @@ function Consumer({ userid }) {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "Transfer-Encoding": "chunked",
           },
           body: JSON.stringify({ pid: paymentIntentId }),
         })
@@ -57,7 +58,11 @@ function Consumer({ userid }) {
           });
       }
     } else {
-      fetch("http://localhost:5000/create-intent")
+      fetch("http://localhost:5000/create-intent", {
+        headers: {
+          "Transfer-Encoding": "chunked",
+        },
+      })
         .then((res) => {
           return res.json();
         })
@@ -79,7 +84,11 @@ function Consumer({ userid }) {
 
   async function fetchCartItems() {
     if (userid) {
-      let res = await fetch(`http://localhost:3000/Cart?uid=${userid}`);
+      let res = await fetch(`http://localhost:3000/Cart?uid=${userid}`, {
+        headers: {
+          "Transfer-Encoding": "chunked",
+        },
+      });
       let cart = await res.json();
       setCartItems(cart);
     } else {
@@ -95,7 +104,11 @@ function Consumer({ userid }) {
           let subcat = values[1];
           let itemId = values[2];
           let cartCount = Number(values[3]);
-          fetch(`http://localhost:3000/${cat}-${subcat}?id=${itemId}`)
+          fetch(`http://localhost:3000/${cat}-${subcat}?id=${itemId}`, {
+            headers: {
+              "Transfer-Encoding": "chunked",
+            },
+          })
             .then((res) => res.json())
             .then((data) => {
               data[0].cartCount = Number(cartCount);

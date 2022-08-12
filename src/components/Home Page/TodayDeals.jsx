@@ -8,7 +8,11 @@ function TodayDeals() {
   }, []);
 
   async function requestData() {
-    let res = await fetch("http://localhost:3000/Todays-Deals");
+    let res = await fetch("http://localhost:3000/Todays-Deals", {
+      headers: {
+        "Transfer-Encoding": "chunked",
+      },
+    });
     let data = await res.json();
     setDeals(data);
   }

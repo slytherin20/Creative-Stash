@@ -44,7 +44,12 @@ function ShowAllProducts({ fetchCartHandler }) {
 
   async function fetchSubCatItems(category, subcat) {
     let res = await fetch(
-      `http://localhost:3000/${category}-${subcat.split(" ").join("_")}`
+      `http://localhost:3000/${category}-${subcat.split(" ").join("_")}`,
+      {
+        headers: {
+          "Transfer-Encoding": "chunked",
+        },
+      }
     );
     return await res.json();
   }

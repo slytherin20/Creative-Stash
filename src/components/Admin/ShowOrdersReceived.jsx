@@ -6,7 +6,11 @@ function ShowOrdersReceived() {
   useEffect(() => fetchOrdersReceived(), []);
 
   async function fetchOrdersReceived() {
-    let res = await fetch("http://localhost:3000/orders");
+    let res = await fetch("http://localhost:3000/orders", {
+      headers: {
+        "Transfer-Encoding": "chunked",
+      },
+    });
     if (!res.ok) setOrders(null);
     let ordersReceived = await res.json();
     setOrders(ordersReceived);

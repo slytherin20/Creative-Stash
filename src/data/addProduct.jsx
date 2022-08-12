@@ -27,7 +27,7 @@ async function addProduct(inputs) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Connection: "keep-alive",
+        "Transfer-Encoding": "chunked",
       },
       body: JSON.stringify(productDetails),
     }
@@ -37,7 +37,7 @@ async function addProduct(inputs) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Connection: "keep-alive",
+      "Transfer-Encoding": "chunked",
     },
     body: JSON.stringify(newBrand),
   });

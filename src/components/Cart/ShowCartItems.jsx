@@ -33,6 +33,7 @@ function ShowCartItems({ items, getCartItems, loginSuccess }) {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          "Transfer-Encoding": "chunked",
         },
         body: JSON.stringify(newItem),
       })
@@ -86,6 +87,7 @@ function ShowCartItems({ items, getCartItems, loginSuccess }) {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          "Transfer-Encoding": "chunked",
         },
         body: JSON.stringify(newItem),
       })
@@ -116,6 +118,9 @@ function ShowCartItems({ items, getCartItems, loginSuccess }) {
     if (loginSuccess) {
       await fetch(`http://localhost:3000/Cart/${item.id}`, {
         method: "DELETE",
+        headers: {
+          "Transfer-Encoding": "chunked",
+        },
       })
         .then(() => getCartItems())
         .catch((err) => console.log(err));

@@ -12,7 +12,10 @@ function WishlistSingleItem({
   async function addToCart() {
     await fetch(`http://localhost:3000/Cart`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "Transfer-Encoding": "chunked",
+      },
       body: JSON.stringify({
         ...item,
         uid: uid,

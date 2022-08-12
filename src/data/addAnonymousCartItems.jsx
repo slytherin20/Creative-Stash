@@ -12,7 +12,11 @@ function addAnonymousCartItems(userid) {
     let itemId = item[2];
     let cartCount = Number(item[3]);
 
-    fetch(`http://localhost:3000/${cat}-${subcat}?id=${itemId}`)
+    fetch(`http://localhost:3000/${cat}-${subcat}?id=${itemId}`, {
+      headers: {
+        "Transfer-Encoding": "chunked",
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         data[0].cartCount = Number(cartCount);
@@ -31,6 +35,7 @@ function addItemsToDB(items) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Transfer-Encoding": "chunked",
       },
       body: JSON.stringify(item),
     })
