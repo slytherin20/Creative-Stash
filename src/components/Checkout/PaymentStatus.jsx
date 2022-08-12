@@ -172,19 +172,19 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
     // orderPlaced(uid);
     //payment succeeded
     return (
-      <article>
+      <article className="w-100 vh-100 flex flex-column justify-center items-center">
         <section>
           <h3>Payment Succeeded!</h3>
           <img src={SuccessIcon} alt="success" className="w2 h2" />
         </section>
         <Link to="/">
-          <button className="btn white bg-purple">Continue Shopping</button>
+          <button className="btn white bg-purple pa2">Continue Shopping</button>
         </Link>
       </article>
     );
   } else if (message === 1) {
     return (
-      <article>
+      <article className="w-100 vh-100 flex flex-column justify-center items-center">
         <h3>Payment processing... </h3>
         <Loading />
       </article>
@@ -192,7 +192,7 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
   } else if (message === 2) {
     setTimeout(() => navigate("/"), 4000);
     return (
-      <article>
+      <article className="w-100 vh-100 flex flex-column justify-center items-center">
         <section>
           <h3>Payment failed. Please try another payment method</h3>
           <img src={FailureIcon} alt="Payment failed" />
@@ -202,7 +202,7 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
     );
   } else if (message === -1) {
     return (
-      <article>
+      <article className="w-100 vh-100 flex flex-column justify-center items-center">
         <h3>Something went wrong. Please try again later</h3>
         <img src={FailureIcon} alt="payment failed" />
       </article>

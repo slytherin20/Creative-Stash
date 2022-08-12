@@ -91,7 +91,6 @@ function SearchByBrand({ fetchCartHandler }) {
     return <Loading />;
   } else
     return items.map((item, i) => {
-      console.log("item", item);
       return (
         <Item
           key={i}

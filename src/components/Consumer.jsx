@@ -14,12 +14,12 @@ import DisplayBillingAddress from "./BillingAddress/DisplayBillingAddress.jsx";
 import CheckoutForm from "./Checkout/CheckoutForm.jsx";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import { TailSpin } from "react-loader-spinner";
 import ShowOrders from "./Order/ShowOrders.jsx";
 import OrderItemDetails from "./Order/OrderItemDetails.jsx";
 import Wishlist from "./Wishlist/Wishlist.jsx";
 import AllSearchResults from "./ProductPage/AllSearchResults.jsx";
 import SearchByBrand from "./ProductPage/SearchByBrand.jsx";
+import Loading from "./Modals/Loading.jsx";
 
 const stripePromise = loadStripe(process.env.PUBLISHABLE_KEY);
 
@@ -180,7 +180,7 @@ function Consumer({ userid }) {
                   <CheckoutForm />
                 </Elements>
               ) : (
-                <TailSpin color="gray" width={30} height={30} />
+                <Loading />
               )
             }
           />
@@ -195,7 +195,7 @@ function Consumer({ userid }) {
                   />
                 </Elements>
               ) : (
-                <TailSpin color="gray" width={30} height={30} />
+                <Loading />
               )
             }
           />

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ShowSubCategories from "./ShowSubCategories.jsx";
 import { Link } from "react-router-dom";
-import { TailSpin } from "react-loader-spinner";
+import Loading from "../Modals/Loading.jsx";
 let categories = [
   "Paints",
   "Painting Medium",
@@ -69,7 +69,7 @@ function Categories() {
                   category={cat}
                 />
               ) : (
-                <TailSpin color="gray" width={10} height={10} />
+                <Loading />
               ))}
           </li>
         ))}
