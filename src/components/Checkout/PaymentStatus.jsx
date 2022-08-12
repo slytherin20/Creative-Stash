@@ -169,7 +169,7 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
           <img src={SuccessIcon} alt="success" className="w2 h2" />
         </section>
         <Link to="/">
-          <button>Continue Shopping</button>
+          <button className="btn white bg-purple">Continue Shopping</button>
         </Link>
       </article>
     );

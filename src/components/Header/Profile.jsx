@@ -1,16 +1,23 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import Logout from "./Logout.jsx";
 import ProfileIcon from "../../images/profile.png";
+import DeviceContext from "../DeviceContext.jsx";
 function Profile({ admin }) {
   const [showMenu, setShowMenu] = useState(false);
+  const { isMobile, isTablet } = useContext(DeviceContext);
 
   function showMenuHandler() {
-    setShowMenu(true);
+    if (!isMobile && !isTablet) setShowMenu(true);
   }
   function hideMenuHandler() {
-    setShowMenu(false);
+    if (!isMobile && !isTablet) setShowMenu(false);
   }
+
+  function mobileTabletMenuHandler() {
+    setShowMenu(!showMenu);
+  }
+
   return (
     <>
       <button
@@ -19,6 +26,7 @@ function Profile({ admin }) {
         onFocus={showMenuHandler}
         onMouseLeave={hideMenuHandler}
         onBlur={hideMenuHandler}
+        onClick={mobileTabletMenuHandler}
       >
         <img src={ProfileIcon} alt="profile" />
         {showMenu && !admin && (

@@ -45,7 +45,6 @@ async function addProduct(inputs) {
   return Promise.all([addProductToDB, addBrandsToDB])
     .then((res) => {
       if (res.ok || res.status == 201) {
-        console.log("1.", res.status);
         resStatus = res.status;
         return "success";
       } else {
@@ -53,7 +52,6 @@ async function addProduct(inputs) {
       }
     })
     .catch(() => {
-      console.log("2.", resStatus);
       if (resStatus == 201) return "success";
       return "error";
     });

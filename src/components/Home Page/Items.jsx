@@ -5,7 +5,7 @@ function Items({ items, title, cat, subcat, fetchCartHandler }) {
   const [user, setUser] = useState(undefined);
   const auth = getAuth();
   onAuthStateChanged(auth, (user) => {
-    if (user.uid) setUser(user.uid);
+    if (user) setUser(user.uid);
     else setUser(null);
   });
   async function addToCart(item) {
