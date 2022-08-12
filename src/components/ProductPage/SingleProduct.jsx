@@ -1,6 +1,6 @@
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import addToWishlist from "../../data/addToWishlist.js";
 import checkItemWishlisted from "../../data/checkItemWishlisted.js";
 import removeFromWishlist from "../../data/removeFromWishlist.js";
@@ -10,12 +10,18 @@ import DeviceContext from "../DeviceContext.jsx";
 function SingleProduct({ fetchCartHandler }) {
   const [product, setProduct] = useState({});
   const [wishlist, setWishlist] = useState({ status: false, id: -1 });
+  const [user, setUser] = useState(undefined);
   const { isMobile } = useContext(DeviceContext);
   const [searchParams] = useSearchParams();
   let cat = searchParams.get("cat").split(" ").join("_");
   let subcat = searchParams.get("subcat").split(" ").join("_");
   let itemId = searchParams.get("id");
   const auth = getAuth();
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) setUser(user.uid);
+    else setUser(null);
+  });
   useEffect(() => {
     getProduct();
   }, []);
@@ -26,14 +32,11 @@ function SingleProduct({ fetchCartHandler }) {
     );
     let data = await res.json();
     setProduct(...data);
-    if (auth.currentUser) wishlistStatus(data[0].id);
+    if (user) wishlistStatus(data[0].id);
   }
 
   async function wishlistStatus(id) {
-    let [status, wishlistId] = await checkItemWishlisted(
-      auth.currentUser.uid,
-      id
-    );
+    let [status, wishlistId] = await checkItemWishlisted(user, id);
     setWishlist({
       status: status,
       id: wishlistId,
@@ -54,14 +57,14 @@ function SingleProduct({ fetchCartHandler }) {
   }
 
   async function addToCart() {
-    if (auth.currentUser) {
+    if (user) {
       //Save to user cart
       await fetch(`http://localhost:3000/Cart`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...product,
-          uid: auth.currentUser.uid,
+          uid: user,
           cartCount: 1,
           count: Number(product.count),
         }),
@@ -93,7 +96,7 @@ function SingleProduct({ fetchCartHandler }) {
         <p className="f4 pa2">{product.description}</p>
         <article className="w-60 flex justify-between self-center">
           {wishlist.status
-            ? auth.currentUser && (
+            ? user && (
                 <button
                   onClick={() => removeWishlisted(wishlist.id)}
                   className="bn bg-white"
@@ -105,9 +108,9 @@ function SingleProduct({ fetchCartHandler }) {
                   />
                 </button>
               )
-            : auth.currentUser && (
+            : user && (
                 <button
-                  onClick={() => addWishlisted(product, auth.currentUser.uid)}
+                  onClick={() => addWishlisted(product, user)}
                   className="bn bg-white"
                 >
                   <img src={HeartIcon} alt="wishlisted" className="wishlist" />
