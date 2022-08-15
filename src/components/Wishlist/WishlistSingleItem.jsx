@@ -10,7 +10,7 @@ function WishlistSingleItem({
 }) {
   const { isMobile } = useContext(DeviceContext);
   async function addToCart() {
-    await fetch(`http://localhost:3000/Cart`, {
+    await fetch(`${process.env.REACT_APP_URI}:3000/Cart`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

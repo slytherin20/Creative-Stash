@@ -8,7 +8,7 @@ async function addToWishlist(item, uid) {
     productId: item.id,
   };
 
-  await fetch("http://localhost:3000/Wishlist", {
+  await fetch(`${process.env.REACT_APP_URI}:3000/Wishlist`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

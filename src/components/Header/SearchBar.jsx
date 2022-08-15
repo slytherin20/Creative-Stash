@@ -57,7 +57,7 @@ function SearchBar({ isMobile }) {
   }
 
   async function fetchSearchResults() {
-    let res = await fetch("http://localhost:3000/BrandSearch", {
+    let res = await fetch(`${process.env.REACT_APP_URI}:3000/BrandSearch`, {
       headers: {
         "Transfer-Encoding": "chunked",
       },

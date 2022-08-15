@@ -33,7 +33,7 @@ function CheckoutForm() {
     }, 50);
     setAmt(res);
     let paymentIntentId = localStorage.getItem("pid");
-    fetch("http://localhost:5000/cart", {
+    fetch(`${process.env.REACT_APP_URI}:5000/cart`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -55,7 +55,7 @@ function CheckoutForm() {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: "http://localhost:1234/payment-status",
+        return_url: `${process.env.REACT_APP_URI}/payment-status`,
       },
     });
 

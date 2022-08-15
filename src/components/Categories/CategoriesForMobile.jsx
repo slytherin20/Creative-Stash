@@ -20,7 +20,7 @@ function CategoriesForMobile({ hideMenuHandler, closeMenu }) {
 
   async function getSubCategories() {
     body.classList.add("overflow-hidden");
-    let res = await fetch("http://localhost:3000/Categories", {
+    let res = await fetch(`${process.env.REACT_APP_URI}:3000/Categories`, {
       headers: {
         "Transfer-Encoding": "chunked",
       },

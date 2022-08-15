@@ -17,7 +17,7 @@ function AllSearchResults({ fetchCartHandler }) {
   let keyword = searchParams.get("keyword");
 
   async function fetchData() {
-    let res = await fetch("http://localhost:3000/BrandSearch", {
+    let res = await fetch(`${process.env.REACT_APP_URI}:3000/BrandSearch`, {
       headers: {
         "Transfer-Encoding": "chunked",
       },
@@ -40,9 +40,9 @@ function AllSearchResults({ fetchCartHandler }) {
 
   async function fetchProductItem(obj) {
     let res = await fetch(
-      `http://localhost:3000/${obj.cat.split(" ").join("_")}-${obj.subcat
+      `${process.env.REACT_APP_URI}:3000/${obj.cat
         .split(" ")
-        .join("_")}?id=${obj.id}`,
+        .join("_")}-${obj.subcat.split(" ").join("_")}?id=${obj.id}`,
       {
         headers: {
           "Transfer-Encoding": "chunked",
@@ -56,7 +56,7 @@ function AllSearchResults({ fetchCartHandler }) {
   async function addToCart(item) {
     if (auth.currentUser) {
       //Save to user cart
-      await fetch(`http://localhost:3000/Cart`, {
+      await fetch(`${process.env.REACT_APP_URI}:3000/Cart`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

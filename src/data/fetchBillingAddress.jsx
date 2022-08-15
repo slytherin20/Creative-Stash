@@ -1,6 +1,6 @@
 async function fetchBillingAddress(uid) {
   if (!uid) return;
-  let res = await fetch(`http://localhost:3000/Address?id=${uid}`, {
+  let res = await fetch(`${process.env.REACT_APP_URI}:3000/Address?id=${uid}`, {
     headers: {
       "Transfer-Encoding": "chunked",
     },

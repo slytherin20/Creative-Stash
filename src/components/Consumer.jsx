@@ -38,7 +38,7 @@ function Consumer({ userid }) {
     if (paymentIntentId) {
       if (options.clientSecret) return;
       else {
-        fetch("http://localhost:5000/secret", {
+        fetch(`${process.env.REACT_APP_URI}:5000/secret`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -58,7 +58,7 @@ function Consumer({ userid }) {
           });
       }
     } else {
-      fetch("http://localhost:5000/create-intent", {
+      fetch(`${process.env.REACT_APP_URI}:5000/create-intent`, {
         headers: {
           "Transfer-Encoding": "chunked",
         },
@@ -84,11 +84,14 @@ function Consumer({ userid }) {
 
   async function fetchCartItems() {
     if (userid) {
-      let res = await fetch(`http://localhost:3000/Cart?uid=${userid}`, {
-        headers: {
-          "Transfer-Encoding": "chunked",
-        },
-      });
+      let res = await fetch(
+        `${process.env.REACT_APP_URI}:3000/Cart?uid=${userid}`,
+        {
+          headers: {
+            "Transfer-Encoding": "chunked",
+          },
+        }
+      );
       let cart = await res.json();
       setCartItems(cart);
     } else {
@@ -104,11 +107,14 @@ function Consumer({ userid }) {
           let subcat = values[1];
           let itemId = values[2];
           let cartCount = Number(values[3]);
-          fetch(`http://localhost:3000/${cat}-${subcat}?id=${itemId}`, {
-            headers: {
-              "Transfer-Encoding": "chunked",
-            },
-          })
+          fetch(
+            `${process.env.REACT_APP_URI}:3000/${cat}-${subcat}?id=${itemId}`,
+            {
+              headers: {
+                "Transfer-Encoding": "chunked",
+              },
+            }
+          )
             .then((res) => res.json())
             .then((data) => {
               data[0].cartCount = Number(cartCount);

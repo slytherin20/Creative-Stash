@@ -11,7 +11,7 @@ function Items({ items, title, cat, subcat, fetchCartHandler }) {
   async function addToCart(item) {
     if (user) {
       //Save to user cart
-      await fetch(`http://localhost:3000/Cart`, {
+      await fetch(`${process.env.REACT_APP_URI}:3000/Cart`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

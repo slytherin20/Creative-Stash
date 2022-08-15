@@ -44,7 +44,7 @@ function BillingDetails() {
   }
 
   function modifyAddress() {
-    fetch(`http://localhost:3000/Address/${auth.currentUser.uid}`, {
+    fetch(`${process.env.REACT_APP_URI}:3000/Address/${auth.currentUser.uid}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -60,7 +60,7 @@ function BillingDetails() {
   }
 
   function addNewAddress() {
-    fetch("http://localhost:3000/Address", {
+    fetch(`${process.env.REACT_APP_URI}:3000/Address`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

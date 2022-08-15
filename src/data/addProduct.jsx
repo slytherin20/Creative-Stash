@@ -20,9 +20,9 @@ async function addProduct(inputs) {
     id: generateId,
   };
   let addProductToDB = fetch(
-    `http://localhost:3000/${inputs.cat.split(" ").join("_")}-${inputs.subcat
+    `${process.env.REACT_APP_URI}:3000/${inputs.cat
       .split(" ")
-      .join("_")}`,
+      .join("_")}-${inputs.subcat.split(" ").join("_")}`,
     {
       method: "POST",
       headers: {
@@ -33,7 +33,7 @@ async function addProduct(inputs) {
     }
   );
 
-  let addBrandsToDB = fetch("http://localhost:3000/BrandSearch", {
+  let addBrandsToDB = fetch(`${process.env.REACT_APP_URI}:3000/BrandSearch`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -12,7 +12,7 @@ function addAnonymousCartItems(userid) {
     let itemId = item[2];
     let cartCount = Number(item[3]);
 
-    fetch(`http://localhost:3000/${cat}-${subcat}?id=${itemId}`, {
+    fetch(`${process.env.REACT_APP_URI}:3000/${cat}-${subcat}?id=${itemId}`, {
       headers: {
         "Transfer-Encoding": "chunked",
       },
@@ -31,7 +31,7 @@ function addAnonymousCartItems(userid) {
 function addItemsToDB(items) {
   let itemsLength = items.length;
   items.forEach((item) => {
-    fetch("http://localhost:3000/Cart", {
+    fetch(`${process.env.REACT_APP_URI}:3000/Cart`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

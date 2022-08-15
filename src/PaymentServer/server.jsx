@@ -11,7 +11,7 @@ let paymentIntentId;
 //Get the amount of items
 app.use(
   cors({
-    origin: "http://localhost:1234",
+    origin: process.env.REACT_APP_URI,
   })
 );
 app.use(bodyParser.json()); //parse application/json

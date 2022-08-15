@@ -29,7 +29,7 @@ function ShowCartItems({ items, getCartItems, loginSuccess }) {
       uid: item.uid,
     };
     if (loginSuccess) {
-      fetch(`http://localhost:3000/Cart/${item.id}`, {
+      fetch(`${process.env.REACT_APP_URI}:3000/Cart/${item.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -83,7 +83,7 @@ function ShowCartItems({ items, getCartItems, loginSuccess }) {
       uid: item.uid,
     };
     if (loginSuccess) {
-      fetch(`http://localhost:3000/Cart/${item.id}`, {
+      fetch(`${process.env.REACT_APP_URI}:3000/Cart/${item.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -116,7 +116,7 @@ function ShowCartItems({ items, getCartItems, loginSuccess }) {
 
   async function removeItem(item) {
     if (loginSuccess) {
-      await fetch(`http://localhost:3000/Cart/${item.id}`, {
+      await fetch(`${process.env.REACT_APP_URI}:3000/Cart/${item.id}`, {
         method: "DELETE",
         headers: {
           "Transfer-Encoding": "chunked",

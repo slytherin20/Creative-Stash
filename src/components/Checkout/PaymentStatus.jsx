@@ -55,7 +55,7 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
     let updatedItems = addCurrentDateAndAddressToItems(addressObject);
     Promise.all(
       updatedItems.map((item) =>
-        fetch("http://localhost:3000/Orders", {
+        fetch(`${process.env.REACT_APP_URI} :3000/Orders`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -68,11 +68,14 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
   }
 
   async function fetchUserAddress(uid) {
-    let res = await fetch(`http://localhost:3000/Address?id=${uid}`, {
-      headers: {
-        "Transfer-Encoding": "chunked",
-      },
-    });
+    let res = await fetch(
+      `${process.env.REACT_APP_URI}:3000/Address?id=${uid}`,
+      {
+        headers: {
+          "Transfer-Encoding": "chunked",
+        },
+      }
+    );
     let address = await res.json();
 
     return address[0];
@@ -133,9 +136,9 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
           };
         }
         return fetch(
-          `http://localhost:3000/${item.cat.split(" ").join("_")}-${item.subcat
+          `${process.env.REACT_APP_URI}:3000/${item.cat
             .split(" ")
-            .join("_")}/${item.id}`,
+            .join("_")}-${item.subcat.split(" ").join("_")}/${item.id}`,
           {
             method: "PUT",
             headers: {
@@ -154,7 +157,7 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
   function refreshCart() {
     Promise.all(
       cartItems.map((item) =>
-        fetch(`http://localhost:3000/Cart/${item.id}`, {
+        fetch(`${process.env.REACT_APP_URI}:3000/Cart/${item.id}`, {
           method: "DELETE",
           headers: {
             "Transfer-Encoding": "chunked",

@@ -9,7 +9,7 @@ function Highlight() {
   }, []);
 
   async function requestImages() {
-    let res = await fetch("http://localhost:3000/Carousel", {
+    let res = await fetch(`${process.env.REACT_APP_URI}:3000/Carousel`, {
       headers: {
         "Transfer-Encoding": "chunked",
       },

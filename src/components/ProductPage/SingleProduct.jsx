@@ -28,7 +28,7 @@ function SingleProduct({ fetchCartHandler }) {
 
   async function getProduct() {
     let res = await fetch(
-      `http://localhost:3000/${cat}-${subcat}?id=${itemId}`,
+      `${process.env.REACT_APP_URI}:3000/${cat}-${subcat}?id=${itemId}`,
       {
         headers: {
           "Transfer-Encoding": "chunked",
@@ -64,7 +64,7 @@ function SingleProduct({ fetchCartHandler }) {
   async function addToCart() {
     if (user) {
       //Save to user cart
-      await fetch(`http://localhost:3000/Cart`, {
+      await fetch(`${process.env.REACT_APP_URI}:3000/Cart`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

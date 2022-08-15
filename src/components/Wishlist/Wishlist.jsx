@@ -22,11 +22,14 @@ function Wishlist({ fetchCartHandler }) {
   }, [user]);
 
   async function fetchWishlistItems() {
-    let res = await fetch(`http://localhost:3000/Wishlist?uid=${user}`, {
-      headers: {
-        "Transfer-Encoding": "chunked",
-      },
-    });
+    let res = await fetch(
+      `${process.env.REACT_APP_URI}:3000/Wishlist?uid=${user}`,
+      {
+        headers: {
+          "Transfer-Encoding": "chunked",
+        },
+      }
+    );
     let items = await res.json();
     setWishlistItems(items);
   }

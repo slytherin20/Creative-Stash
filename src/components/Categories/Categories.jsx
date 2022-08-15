@@ -18,7 +18,7 @@ function Categories() {
   }, []);
 
   async function getSubCategories() {
-    let res = await fetch("http://localhost:3000/Categories", {
+    let res = await fetch(`${process.env.REACT_APP_URI}:3000/Categories`, {
       headers: {
         "Transfer-Encoding": "chunked",
       },
