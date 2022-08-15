@@ -5,7 +5,7 @@ function Address({ address }) {
       {address.id && (
         <>
           <h3>Billing Details:</h3>
-          <Link to={`${process.env.REACT_APP_URI}/add-billing-address`}>
+          <Link to={`/add-billing-address`}>
             <button className="bn w3 h2 bg-purple white btn absolute right-2">
               Edit
             </button>
@@ -41,7 +41,7 @@ function Address({ address }) {
       {address.length === 0 && (
         <section>
           <p>No saved address.</p>
-          <Link to={`${process.env.REACT_APP_URI}/add-billing-address`}>
+          <Link to={`/add-billing-address`}>
             <button className="login-btn bg-purple white pointer:hover">
               Add Adress Now
             </button>

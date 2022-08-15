@@ -6,11 +6,18 @@ function ShowOrdersReceived() {
   useEffect(() => fetchOrdersReceived(), []);
 
   async function fetchOrdersReceived() {
-    let res = await fetch(`${process.env.REACT_APP_URI}:3000/orders`, {
-      headers: {
-        "Transfer-Encoding": "chunked",
-      },
-    });
+    let res = await fetch(
+      `${
+        process.env.NODE_ENV == "production"
+          ? process.env.REACT_APP_URI
+          : "http://localhost"
+      }:3000/orders`,
+      {
+        headers: {
+          "Transfer-Encoding": "chunked",
+        },
+      }
+    );
     if (!res.ok) setOrders(null);
     let ordersReceived = await res.json();
     setOrders(ordersReceived);

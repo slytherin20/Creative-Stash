@@ -55,21 +55,32 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
     let updatedItems = addCurrentDateAndAddressToItems(addressObject);
     Promise.all(
       updatedItems.map((item) =>
-        fetch(`${process.env.REACT_APP_URI} :3000/Orders`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Transfer-Encoding": "chunked",
-          },
-          body: JSON.stringify(item),
-        })
+        fetch(
+          `${
+            process.env.NODE_ENV == "production"
+              ? process.env.REACT_APP_URI
+              : "http://localhost"
+          }:3000/Orders`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Transfer-Encoding": "chunked",
+            },
+            body: JSON.stringify(item),
+          }
+        )
       )
     ).then(() => decreaseProductCount());
   }
 
   async function fetchUserAddress(uid) {
     let res = await fetch(
-      `${process.env.REACT_APP_URI}:3000/Address?id=${uid}`,
+      `${
+        process.env.NODE_ENV == "production"
+          ? process.env.REACT_APP_URI
+          : "http://localhost"
+      }:3000/Address?id=${uid}`,
       {
         headers: {
           "Transfer-Encoding": "chunked",
@@ -136,9 +147,13 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
           };
         }
         return fetch(
-          `${process.env.REACT_APP_URI}:3000/${item.cat
+          `${
+            process.env.NODE_ENV == "production"
+              ? process.env.REACT_APP_URI
+              : "http://localhost"
+          }:3000/${item.cat.split(" ").join("_")}-${item.subcat
             .split(" ")
-            .join("_")}-${item.subcat.split(" ").join("_")}/${item.id}`,
+            .join("_")}/${item.id}`,
           {
             method: "PUT",
             headers: {
@@ -157,12 +172,19 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
   function refreshCart() {
     Promise.all(
       cartItems.map((item) =>
-        fetch(`${process.env.REACT_APP_URI}:3000/Cart/${item.id}`, {
-          method: "DELETE",
-          headers: {
-            "Transfer-Encoding": "chunked",
-          },
-        })
+        fetch(
+          `${
+            process.env.NODE_ENV == "production"
+              ? process.env.REACT_APP_URI
+              : "http://localhost"
+          }:3000/Cart/${item.id}`,
+          {
+            method: "DELETE",
+            headers: {
+              "Transfer-Encoding": "chunked",
+            },
+          }
+        )
       )
     ).then(() => {
       fetchCartHandler();
@@ -180,7 +202,7 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
           <h3>Payment Succeeded!</h3>
           <img src={SuccessIcon} alt="success" className="w2 h2" />
         </section>
-        <Link to={process.env.REACT_APP_URI}>
+        <Link to="/">
           <button className="btn white bg-purple pa2">Continue Shopping</button>
         </Link>
       </article>
@@ -193,7 +215,7 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
       </article>
     );
   } else if (message === 2) {
-    setTimeout(() => navigate(process.env.REACT_APP_URI), 4000);
+    setTimeout(() => navigate("/"), 4000);
     return (
       <article className="w-100 vh-100 flex flex-column justify-center items-center">
         <section>

@@ -20,9 +20,13 @@ async function addProduct(inputs) {
     id: generateId,
   };
   let addProductToDB = fetch(
-    `${process.env.REACT_APP_URI}:3000/${inputs.cat
+    `${
+      process.env.NODE_ENV == "production"
+        ? process.env.REACT_APP_URI
+        : "http://localhost"
+    }:3000/${inputs.cat.split(" ").join("_")}-${inputs.subcat
       .split(" ")
-      .join("_")}-${inputs.subcat.split(" ").join("_")}`,
+      .join("_")}`,
     {
       method: "POST",
       headers: {
@@ -33,14 +37,21 @@ async function addProduct(inputs) {
     }
   );
 
-  let addBrandsToDB = fetch(`${process.env.REACT_APP_URI}:3000/BrandSearch`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Transfer-Encoding": "chunked",
-    },
-    body: JSON.stringify(newBrand),
-  });
+  let addBrandsToDB = fetch(
+    `${
+      process.env.NODE_ENV == "production"
+        ? process.env.REACT_APP_URI
+        : "http://localhost"
+    }:3000/BrandSearch`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Transfer-Encoding": "chunked",
+      },
+      body: JSON.stringify(newBrand),
+    }
+  );
   let resStatus;
   return Promise.all([addProductToDB, addBrandsToDB])
     .then((res) => {

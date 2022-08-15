@@ -33,14 +33,21 @@ function CheckoutForm() {
     }, 50);
     setAmt(res);
     let paymentIntentId = localStorage.getItem("pid");
-    fetch(`${process.env.REACT_APP_URI}:5000/cart`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Transfer-Encoding": "chunked",
-      },
-      body: JSON.stringify({ amount: res, paymentIntentId: paymentIntentId }),
-    })
+    fetch(
+      `${
+        process.env.NODE_ENV == "production"
+          ? process.env.REACT_APP_URI
+          : "http://localhost"
+      }:5000/cart`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Transfer-Encoding": "chunked",
+        },
+        body: JSON.stringify({ amount: res, paymentIntentId: paymentIntentId }),
+      }
+    )
       .then((res) => {
         if (!res.ok) Promise.reject();
         else setShowPayBtn(true);
@@ -55,7 +62,10 @@ function CheckoutForm() {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: `${process.env.REACT_APP_URI}/payment-status`,
+        return_url:
+          process.env.NODE_ENV == "development"
+            ? "http://localhost:1234/payment-status"
+            : `${process.env.REACT_APP_URI}/payment-status`,
       },
     });
 

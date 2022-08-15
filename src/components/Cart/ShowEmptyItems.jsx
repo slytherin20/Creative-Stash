@@ -7,7 +7,7 @@ function ShowEmptyCart() {
         <h2 className="self-start ma0">My Cart</h2>
         <img src={CartItems} alt="Shopping Bags" className="w-40 h-40" />
         <p className="b">No Cart Items to display</p>
-        <Link to={process.env.REACT_APP_URI}>
+        <Link to="/">
           <button className="btn login-btn bg-purple white">
             Continue Shopping
           </button>

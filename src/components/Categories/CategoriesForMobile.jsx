@@ -20,11 +20,18 @@ function CategoriesForMobile({ hideMenuHandler, closeMenu }) {
 
   async function getSubCategories() {
     body.classList.add("overflow-hidden");
-    let res = await fetch(`${process.env.REACT_APP_URI}:3000/Categories`, {
-      headers: {
-        "Transfer-Encoding": "chunked",
-      },
-    });
+    let res = await fetch(
+      `${
+        process.env.NODE_ENV == "production"
+          ? process.env.REACT_APP_URI
+          : "http://localhost"
+      }:3000/Categories`,
+      {
+        headers: {
+          "Transfer-Encoding": "chunked",
+        },
+      }
+    );
     let data = await res.json();
     setSubcat(data);
   }
@@ -46,9 +53,7 @@ function CategoriesForMobile({ hideMenuHandler, closeMenu }) {
         <div key={cat}>
           <div className="pa2 white bb flex">
             <Link
-              to={`${process.env.REACT_APP_URI}/products/${cat
-                .split(" ")
-                .join("-")}`}
+              to={`/products/${cat.split(" ").join("-")}`}
               className="white w-70"
               onClick={() =>
                 hideMenuHandler(`/products/${cat.split(" ").join("-")}`)
@@ -78,9 +83,9 @@ function CategoriesForMobile({ hideMenuHandler, closeMenu }) {
               subcat[cat].map((val) => (
                 <Link
                   key={val}
-                  to={`${process.env.REACT_APP_URI}/products/${cat
+                  to={`/products/${cat.split(" ").join("-")}/${val
                     .split(" ")
-                    .join("-")}/${val.split(" ").join("-")}`}
+                    .join("-")}`}
                   onClick={() =>
                     hideMenuHandler(
                       `/products/${cat.split(" ").join("-")}/${val

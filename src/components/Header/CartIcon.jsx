@@ -8,7 +8,7 @@ function CartIcon() {
   const cart = useContext(CartContext);
 
   return (
-    <Link to={`${process.env.REACT_APP_URI}/cart`}>
+    <Link to={`/cart`}>
       <button className="btn bg-purple flex items-center justify-center ma1 cart-btn lg-btn mt2">
         <img src={CartImg} alt="cart" className="cart-img" />
         <span className="white">Cart</span>

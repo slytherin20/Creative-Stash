@@ -12,11 +12,18 @@ function addAnonymousCartItems(userid) {
     let itemId = item[2];
     let cartCount = Number(item[3]);
 
-    fetch(`${process.env.REACT_APP_URI}:3000/${cat}-${subcat}?id=${itemId}`, {
-      headers: {
-        "Transfer-Encoding": "chunked",
-      },
-    })
+    fetch(
+      `${
+        process.env.NODE_ENV == "production"
+          ? process.env.REACT_APP_URI
+          : "http://localhost"
+      }:3000/${cat}-${subcat}?id=${itemId}`,
+      {
+        headers: {
+          "Transfer-Encoding": "chunked",
+        },
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         data[0].cartCount = Number(cartCount);
@@ -31,14 +38,21 @@ function addAnonymousCartItems(userid) {
 function addItemsToDB(items) {
   let itemsLength = items.length;
   items.forEach((item) => {
-    fetch(`${process.env.REACT_APP_URI}:3000/Cart`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Transfer-Encoding": "chunked",
-      },
-      body: JSON.stringify(item),
-    })
+    fetch(
+      `${
+        process.env.NODE_ENV == "production"
+          ? process.env.REACT_APP_URI
+          : "http://localhost"
+      }:3000/Cart`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Transfer-Encoding": "chunked",
+        },
+        body: JSON.stringify(item),
+      }
+    )
       .then(() => {
         --itemsLength;
         if (itemsLength === 0) localStorage.removeItem("cart");

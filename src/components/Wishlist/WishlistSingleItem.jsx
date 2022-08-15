@@ -10,18 +10,25 @@ function WishlistSingleItem({
 }) {
   const { isMobile } = useContext(DeviceContext);
   async function addToCart() {
-    await fetch(`${process.env.REACT_APP_URI}:3000/Cart`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Transfer-Encoding": "chunked",
-      },
-      body: JSON.stringify({
-        ...item,
-        uid: uid,
-        cartCount: 1,
-      }),
-    })
+    await fetch(
+      `${
+        process.env.NODE_ENV == "production"
+          ? process.env.REACT_APP_URI
+          : "http://localhost"
+      }:3000/Cart`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Transfer-Encoding": "chunked",
+        },
+        body: JSON.stringify({
+          ...item,
+          uid: uid,
+          cartCount: 1,
+        }),
+      }
+    )
       .then(() => fetchCartHandler())
       .catch((err) => console.log(err));
   }
@@ -32,7 +39,7 @@ function WishlistSingleItem({
       } items-center pa2`}
     >
       <Link
-        to={`${process.env.REACT_APP_URI}/products/product?cat=${item.cat}&subcat=${item.subcat}&id=${item.productId}`}
+        to={`/products/product?cat=${item.cat}&subcat=${item.subcat}&id=${item.productId}`}
         className="flex flex-column justify-content items-center"
       >
         <img src={item.img} alt={item.name} className="item-icons" />

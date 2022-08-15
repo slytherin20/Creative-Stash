@@ -21,26 +21,22 @@ function SearchBar({ isMobile }) {
         selectedWords.push({
           name: obj.cat,
           type: "cat",
-          link: `${process.env.REACT_APP_URI}/products/${obj.cat
-            .split(" ")
-            .join("-")}`,
+          link: `/products/${obj.cat.split(" ").join("-")}`,
         });
       if (obj.subcat.startsWith(e.target.value))
         selectedWords.push({
           name: obj.subcat,
           type: "subcat",
           cat: obj.cat,
-          link: `${process.env.REACT_APP_URI}/products/${obj.cat
+          link: `/products/${obj.cat.split(" ").join("-")}/${obj.subcat
             .split(" ")
-            .join("-")}/${obj.subcat.split(" ").join("-")}`,
+            .join("-")}`,
         });
       if (obj.brand.startsWith(e.target.value)) {
         selectedWords.push({
           name: obj.brand,
           type: "brand",
-          link: `${
-            process.env.REACT_APP_URI
-          }/products/brands?brand=${encodeURIComponent(obj.brand)}`,
+          link: `/products/brands?brand=${encodeURIComponent(obj.brand)}`,
         });
       }
       if (selectedWords.length > 0) {
@@ -61,11 +57,18 @@ function SearchBar({ isMobile }) {
   }
 
   async function fetchSearchResults() {
-    let res = await fetch(`${process.env.REACT_APP_URI}:3000/BrandSearch`, {
-      headers: {
-        "Transfer-Encoding": "chunked",
-      },
-    });
+    let res = await fetch(
+      `${
+        process.env.NODE_ENV == "production"
+          ? process.env.REACT_APP_URI
+          : "http://localhost"
+      }:3000/BrandSearch`,
+      {
+        headers: {
+          "Transfer-Encoding": "chunked",
+        },
+      }
+    );
     let data = await res.json();
     setKeywords(data);
   }
@@ -98,7 +101,7 @@ function SearchBar({ isMobile }) {
           onKeyPress={checkKeyType}
         />
         <Link
-          to={`${process.env.REACT_APP_URI}/search?keyword=${input}`}
+          to={`/search?keyword=${input}`}
           onClick={removeSuggestionsHandler}
         >
           <span className="search-icon h2 w2">
@@ -130,7 +133,7 @@ function SearchBar({ isMobile }) {
                 ))}
               {displayResults.length > 0 && (
                 <Link
-                  to={`${process.env.REACT_APP_URI}/search?keyword=${input}`}
+                  to={`/search?keyword=${input}`}
                   onClick={removeSuggestionsHandler}
                 >
                   <li className="list pa2 tc purple">See more</li>

@@ -8,14 +8,21 @@ async function addToWishlist(item, uid) {
     productId: item.id,
   };
 
-  await fetch(`${process.env.REACT_APP_URI}:3000/Wishlist`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Transfer-Encoding": "chunked",
-    },
-    body: JSON.stringify(updatedItem),
-  });
+  await fetch(
+    `${
+      process.env.NODE_ENV == "production"
+        ? process.env.REACT_APP_URI
+        : "http://localhost"
+    }:3000/Wishlist`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Transfer-Encoding": "chunked",
+      },
+      body: JSON.stringify(updatedItem),
+    }
+  );
   return;
 }
 

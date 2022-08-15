@@ -26,7 +26,7 @@ function AddProducts({ userUID }) {
 
   useEffect(() => {
     if (userUID !== process.env.REACT_APP_ADMIN_UID) {
-      navigate(process.env.REACT_APP_URI);
+      navigate("/");
     } else {
       getAllItems();
     }

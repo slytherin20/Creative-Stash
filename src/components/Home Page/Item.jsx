@@ -43,9 +43,9 @@ function Item({ item, uid, cat, subcat, addToCart }) {
     >
       {!cat ? (
         <Link
-          to={`${process.env.REACT_APP_URI}/products/product?cat=${
-            item.category.split("-")[0]
-          }&subcat=${item.category.split("-")[1]}&id=${item.id}`}
+          to={`/products/product?cat=${item.category.split("-")[0]}&subcat=${
+            item.category.split("-")[1]
+          }&id=${item.id}`}
           className="flex flex-column justify-center items-center"
         >
           <img
@@ -66,9 +66,9 @@ function Item({ item, uid, cat, subcat, addToCart }) {
         </Link>
       ) : (
         <Link
-          to={`${process.env.REACT_APP_URI}/products/product?cat=${
-            cat.split("-")[0]
-          }&subcat=${subcat}&id=${item.id}`}
+          to={`/products/product?cat=${cat.split("-")[0]}&subcat=${subcat}&id=${
+            item.id
+          }`}
           className="flex flex-column justify-center items-center"
         >
           <img

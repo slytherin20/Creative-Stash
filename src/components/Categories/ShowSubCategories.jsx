@@ -8,9 +8,9 @@ function ShowSubCategories({ options, changeSubCatStatus, category }) {
     >
       {options.map((subcat) => (
         <Link
-          to={`${process.env.REACT_APP_URI}/products/${category
+          to={`/products/${category.split(" ").join("-")}/${subcat
             .split(" ")
-            .join("-")}/${subcat.split(" ").join("-")}`}
+            .join("-")}`}
           key={subcat}
         >
           <li className="list f5 pa2 text-color">{subcat}</li>

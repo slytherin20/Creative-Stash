@@ -44,32 +44,46 @@ function BillingDetails() {
   }
 
   function modifyAddress() {
-    fetch(`${process.env.REACT_APP_URI}:3000/Address/${auth.currentUser.uid}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        "Transfer-Encoding": "chunked",
-      },
-      body: JSON.stringify(details),
-    })
+    fetch(
+      `${
+        process.env.NODE_ENV == "production"
+          ? process.env.REACT_APP_URI
+          : "http://localhost"
+      }:3000/Address/${auth.currentUser.uid}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Transfer-Encoding": "chunked",
+        },
+        body: JSON.stringify(details),
+      }
+    )
       .then((res) => {
-        if (res.ok) navigate(`${process.env.REACT_APP_URI}/billing-details`);
+        if (res.ok) navigate(`/billing-details`);
         else Promise.reject();
       })
       .catch(() => setShowError(true));
   }
 
   function addNewAddress() {
-    fetch(`${process.env.REACT_APP_URI}:3000/Address`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Transfer-Encoding": "chunked",
-      },
-      body: JSON.stringify(details),
-    })
+    fetch(
+      `${
+        process.env.NODE_ENV == "production"
+          ? process.env.REACT_APP_URI
+          : "http://localhost"
+      }:3000/Address`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Transfer-Encoding": "chunked",
+        },
+        body: JSON.stringify(details),
+      }
+    )
       .then((res) => {
-        if (res.ok) navigate(`${process.env.REACT_APP_URI}/billing-details`);
+        if (res.ok) navigate(`/billing-details`);
         else Promise.reject();
       })
       .catch(() => setShowError(true));

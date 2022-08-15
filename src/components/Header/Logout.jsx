@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 function Logout() {
   const navigate = useNavigate();
   function signOutUser() {
-    navigate(process.env.REACT_APP_URI);
+    navigate("/");
     const auth = getAuth();
     signOut(auth);
   }

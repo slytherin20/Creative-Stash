@@ -18,11 +18,18 @@ function Categories() {
   }, []);
 
   async function getSubCategories() {
-    let res = await fetch(`${process.env.REACT_APP_URI}:3000/Categories`, {
-      headers: {
-        "Transfer-Encoding": "chunked",
-      },
-    });
+    let res = await fetch(
+      `${
+        process.env.NODE_ENV == "production"
+          ? process.env.REACT_APP_URI
+          : "http://localhost"
+      }:3000/Categories`,
+      {
+        headers: {
+          "Transfer-Encoding": "chunked",
+        },
+      }
+    );
     let data = await res.json();
     setSubCategory(data);
   }
@@ -54,9 +61,7 @@ function Categories() {
             className="btn category list flex items-center flex-auto justify-center text-color"
           >
             <Link
-              to={`${process.env.REACT_APP_URI}/products/${cat
-                .split(" ")
-                .join("-")}`}
+              to={`/products/${cat.split(" ").join("-")}`}
               key={cat}
               className="cat-link flex justify-center items-center"
             >

@@ -10,7 +10,7 @@
     "dev": "parcel src/index.html",
     "server": "node src/PaymentServer/server.jsx",
     "jsonServer": "node src/JSONServer/server.js",
-    "start": "concurrently \"npm run dev\" \"npm run jsonServer\" \"npm run server\""
+    "start": "concurrently \"npm run dev\" \"npm run jsonServer\" \"npm run server\" "
   },
   "author": "Sonali Gupta",
   "license": "ISC",

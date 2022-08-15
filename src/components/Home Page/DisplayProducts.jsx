@@ -36,9 +36,9 @@ function DisplayProducts() {
           {categories.map((obj) => (
             <Link
               key={obj.subcat}
-              to={`${process.env.REACT_APP_URI}/products/${obj.cat
+              to={`/products/${obj.cat.split(" ").join("-")}/${obj.subcat
                 .split(" ")
-                .join("-")}/${obj.subcat.split(" ").join("-")}`}
+                .join("-")}`}
             >
               <div
                 className={`bn shadow-1 pa2 ma4 ${
@@ -61,9 +61,7 @@ function DisplayProducts() {
           {brands.map((brand) => (
             <Link
               key={brand.brand}
-              to={`${
-                process.env.REACT_APP_URI
-              }/products/brands?brand=${encodeURIComponent(brand.brand)}`}
+              to={`/products/brands?brand=${encodeURIComponent(brand.brand)}`}
             >
               <div
                 style={{

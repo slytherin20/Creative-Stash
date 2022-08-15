@@ -9,15 +9,12 @@ function AdminPortal({ userid }) {
     <main className="sans-serif overflow-hidden">
       <Navbar user={userid} admin={true} />
       <Routes>
-        <Route path={process.env.REACT_APP_URI} element={<AdminHomepage />} />
+        <Route path="/" element={<AdminHomepage />} />
         <Route
-          path={`${process.env.REACT_APP_URI}/add-products`}
+          path={`/add-products`}
           element={<AddProducts userUID={userid} />}
         />
-        <Route
-          path={`${process.env.REACT_APP_URI}/orders-received`}
-          element={<ShowOrdersReceived />}
-        />
+        <Route path={`/orders-received`} element={<ShowOrdersReceived />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </main>
