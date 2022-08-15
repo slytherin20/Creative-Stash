@@ -54,7 +54,9 @@ function Categories() {
             className="btn category list flex items-center flex-auto justify-center text-color"
           >
             <Link
-              to={`/products/${cat.split(" ").join("-")}`}
+              to={`${process.env.REACT_APP_URI}/products/${cat
+                .split(" ")
+                .join("-")}`}
               key={cat}
               className="cat-link flex justify-center items-center"
             >

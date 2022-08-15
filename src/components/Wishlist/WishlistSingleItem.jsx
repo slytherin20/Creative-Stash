@@ -32,7 +32,7 @@ function WishlistSingleItem({
       } items-center pa2`}
     >
       <Link
-        to={`/products/product?cat=${item.cat}&subcat=${item.subcat}&id=${item.productId}`}
+        to={`${process.env.REACT_APP_URI}/products/product?cat=${item.cat}&subcat=${item.subcat}&id=${item.productId}`}
         className="flex flex-column justify-content items-center"
       >
         <img src={item.img} alt={item.name} className="item-icons" />

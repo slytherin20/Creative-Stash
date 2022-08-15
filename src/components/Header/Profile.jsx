@@ -31,13 +31,16 @@ function Profile({ admin }) {
         <img src={ProfileIcon} alt="profile" />
         {showMenu && !admin && (
           <div className="bg-white black  z-999 profile shadow-1">
-            <Link to="/billing-details" className="ma2">
+            <Link
+              to={`${process.env.REACT_APP_URI}/billing-details`}
+              className="ma2"
+            >
               <p className="bb border-bottom pa1 ma0">Billing Address</p>
             </Link>
-            <Link to="/orders" className="ma2">
+            <Link to={`${process.env.REACT_APP_URI}/orders`} className="ma2">
               <p className="bb border-bottom pa1 ma0">Orders</p>
             </Link>
-            <Link to="/wishlist" className="ma2">
+            <Link to={`${process.env.REACT_APP_URI}/wishlist`} className="ma2">
               <p className="bb border-bottom pa1 ma0">Wishlist</p>
             </Link>
             <Logout />

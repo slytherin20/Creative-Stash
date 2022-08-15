@@ -46,7 +46,9 @@ function CategoriesForMobile({ hideMenuHandler, closeMenu }) {
         <div key={cat}>
           <div className="pa2 white bb flex">
             <Link
-              to={`/products/${cat.split(" ").join("-")}`}
+              to={`${process.env.REACT_APP_URI}/products/${cat
+                .split(" ")
+                .join("-")}`}
               className="white w-70"
               onClick={() =>
                 hideMenuHandler(`/products/${cat.split(" ").join("-")}`)
@@ -76,9 +78,9 @@ function CategoriesForMobile({ hideMenuHandler, closeMenu }) {
               subcat[cat].map((val) => (
                 <Link
                   key={val}
-                  to={`/products/${cat.split(" ").join("-")}/${val
+                  to={`${process.env.REACT_APP_URI}/products/${cat
                     .split(" ")
-                    .join("-")}`}
+                    .join("-")}/${val.split(" ").join("-")}`}
                   onClick={() =>
                     hideMenuHandler(
                       `/products/${cat.split(" ").join("-")}/${val

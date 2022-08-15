@@ -134,52 +134,58 @@ function Consumer({ userid }) {
         <Navbar user={userid} admin={false} />
         <Routes>
           <Route
-            path="/cart"
+            path={`${process.env.REACT_APP_URI}/cart`}
             element={
               <Cart loginStatus={!!userid} fetchCartHandler={fetchCartItems} />
             }
           />
           <Route
             exact
-            path="/"
+            path={`${process.env.REACT_APP_URI}`}
             element={<MainPage fetchCartHandler={fetchCartItems} />}
           />
           <Route
-            path="/products/product"
+            path={`${process.env.REACT_APP_URI}/products/product`}
             element={<SingleProduct fetchCartHandler={fetchCartItems} />}
           />
           <Route
-            path="/products/:id"
+            path={`${process.env.REACT_APP_URI}/products/:id`}
             element={<ShowAllProducts fetchCartHandler={fetchCartItems} />}
           />
           <Route
-            path="/products/Paints/:id"
+            path={`${process.env.REACT_APP_URI}/products/Paints/:id`}
             element={<ShowProducts fetchCartHandler={fetchCartItems} />}
           />
           <Route
-            path="/products/Painting-Medium/:id"
+            path={`${process.env.REACT_APP_URI}/products/Painting-Medium/:id`}
             element={<ShowProducts fetchCartHandler={fetchCartItems} />}
           />
           <Route
-            path="/products/Canvas/:id"
+            path={`${process.env.REACT_APP_URI}/products/Canvas/:id`}
             element={<ShowProducts fetchCartHandler={fetchCartItems} />}
           />
           <Route
-            path="/products/Brushes/:id"
+            path={`${process.env.REACT_APP_URI}/products/Brushes/:id`}
             element={<ShowProducts fetchCartHandler={fetchCartItems} />}
           />
           <Route
-            path="/products/Pens-and-Markers/:id"
+            path={`${process.env.REACT_APP_URI}/products/Pens-and-Markers/:id`}
             element={<ShowProducts fetchCartHandler={fetchCartItems} />}
           />
-          <Route path="/add-billing-address" element={<AddBillingAddress />} />
           <Route
-            path="/billing-details"
+            path={`${process.env.REACT_APP_URI}/add-billing-address`}
+            element={<AddBillingAddress />}
+          />
+          <Route
+            path={`${process.env.REACT_APP_URI}/billing-details`}
             element={<DisplayBillingAddress width={100} />}
           />
-          <Route path="/orders" element={<ShowOrders />} />
           <Route
-            path="/payment-gateway"
+            path={`${process.env.REACT_APP_URI}/orders`}
+            element={<ShowOrders />}
+          />
+          <Route
+            path={`${process.env.REACT_APP_URI}/payment-gateway`}
             element={
               options.clientSecret ? (
                 <Elements stripe={stripePromise} options={options}>
@@ -191,7 +197,7 @@ function Consumer({ userid }) {
             }
           />
           <Route
-            path="/payment-status"
+            path={`${process.env.REACT_APP_URI}/payment-status`}
             element={
               stripePromise ? (
                 <Elements stripe={stripePromise}>
@@ -205,17 +211,20 @@ function Consumer({ userid }) {
               )
             }
           />
-          <Route path="/order-details/:id" element={<OrderItemDetails />} />
           <Route
-            path="/wishlist"
+            path={`${process.env.REACT_APP_URI}/order-details/:id`}
+            element={<OrderItemDetails />}
+          />
+          <Route
+            path={`${process.env.REACT_APP_URI}/wishlist`}
             element={<Wishlist fetchCartHandler={fetchCartItems} />}
           />
           <Route
-            path="/search"
+            path={`${process.env.REACT_APP_URI}/search`}
             element={<AllSearchResults fetchCartHandler={fetchCartItems} />}
           />
           <Route
-            path="/products/brands"
+            path={`${process.env.REACT_APP_URI}/products/brands`}
             element={<SearchByBrand fetchCartHandler={fetchCartItems} />}
           />
           <Route path="*" element={<NotFound />} />

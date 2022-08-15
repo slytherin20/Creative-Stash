@@ -41,7 +41,7 @@ function Navbar({ user, admin }) {
           ) : (
             ""
           )}
-          <Link to="/">
+          <Link to={process.env.REACT_APP_URI}>
             <p className="b">Creative Stash</p>
           </Link>
           {!admin && !isMobile && <SearchBar />}

@@ -21,22 +21,26 @@ function SearchBar({ isMobile }) {
         selectedWords.push({
           name: obj.cat,
           type: "cat",
-          link: `/products/${obj.cat.split(" ").join("-")}`,
+          link: `${process.env.REACT_APP_URI}/products/${obj.cat
+            .split(" ")
+            .join("-")}`,
         });
       if (obj.subcat.startsWith(e.target.value))
         selectedWords.push({
           name: obj.subcat,
           type: "subcat",
           cat: obj.cat,
-          link: `/products/${obj.cat.split(" ").join("-")}/${obj.subcat
+          link: `${process.env.REACT_APP_URI}/products/${obj.cat
             .split(" ")
-            .join("-")}`,
+            .join("-")}/${obj.subcat.split(" ").join("-")}`,
         });
       if (obj.brand.startsWith(e.target.value)) {
         selectedWords.push({
           name: obj.brand,
           type: "brand",
-          link: `/products/brands?brand=${encodeURIComponent(obj.brand)}`,
+          link: `${
+            process.env.REACT_APP_URI
+          }/products/brands?brand=${encodeURIComponent(obj.brand)}`,
         });
       }
       if (selectedWords.length > 0) {
@@ -94,7 +98,7 @@ function SearchBar({ isMobile }) {
           onKeyPress={checkKeyType}
         />
         <Link
-          to={`/search?keyword=${input}`}
+          to={`${process.env.REACT_APP_URI}/search?keyword=${input}`}
           onClick={removeSuggestionsHandler}
         >
           <span className="search-icon h2 w2">
@@ -126,7 +130,7 @@ function SearchBar({ isMobile }) {
                 ))}
               {displayResults.length > 0 && (
                 <Link
-                  to={`/search?keyword=${input}`}
+                  to={`${process.env.REACT_APP_URI}/search?keyword=${input}`}
                   onClick={removeSuggestionsHandler}
                 >
                   <li className="list pa2 tc purple">See more</li>

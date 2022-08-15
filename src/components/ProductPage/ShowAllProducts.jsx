@@ -77,7 +77,9 @@ function ShowAllProducts({ fetchCartHandler }) {
           />
           {!isMobile && products[category].length > 5 ? (
             <Link
-              to={`/Products/${params.id}/${category.split(" ").join("-")}`}
+              to={`${process.env.REACT_APP_URI}/Products/${params.id}/${category
+                .split(" ")
+                .join("-")}`}
               className="cat-link"
             >
               <button>Show More</button>
@@ -85,7 +87,9 @@ function ShowAllProducts({ fetchCartHandler }) {
           ) : null}
           {isMobile && products[category].length > 2 ? (
             <Link
-              to={`/Products/${params.id}/${category.split(" ").join("-")}`}
+              to={`${process.env.REACT_APP_URI}/Products/${params.id}/${category
+                .split(" ")
+                .join("-")}`}
               className="cat-link"
             >
               <button className="purple bg-transparent bn tc">Show More</button>

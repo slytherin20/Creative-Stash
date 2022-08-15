@@ -180,7 +180,7 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
           <h3>Payment Succeeded!</h3>
           <img src={SuccessIcon} alt="success" className="w2 h2" />
         </section>
-        <Link to="/">
+        <Link to={process.env.REACT_APP_URI}>
           <button className="btn white bg-purple pa2">Continue Shopping</button>
         </Link>
       </article>
@@ -193,7 +193,7 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
       </article>
     );
   } else if (message === 2) {
-    setTimeout(() => navigate("/"), 4000);
+    setTimeout(() => navigate(process.env.REACT_APP_URI), 4000);
     return (
       <article className="w-100 vh-100 flex flex-column justify-center items-center">
         <section>

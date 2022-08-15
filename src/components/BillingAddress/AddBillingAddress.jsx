@@ -53,7 +53,7 @@ function BillingDetails() {
       body: JSON.stringify(details),
     })
       .then((res) => {
-        if (res.ok) navigate("/billing-details");
+        if (res.ok) navigate(`${process.env.REACT_APP_URI}/billing-details`);
         else Promise.reject();
       })
       .catch(() => setShowError(true));
@@ -69,7 +69,7 @@ function BillingDetails() {
       body: JSON.stringify(details),
     })
       .then((res) => {
-        if (res.ok) navigate("/billing-details");
+        if (res.ok) navigate(`${process.env.REACT_APP_URI}/billing-details`);
         else Promise.reject();
       })
       .catch(() => setShowError(true));

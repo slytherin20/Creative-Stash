@@ -24,7 +24,7 @@ function SignUpForm({ changeForm, changeModalContent }) {
           .then(() => {
             changeModalContent("loading");
             addAnonymousCartItems(auth.currentUser.uid);
-            navigate("/add-billing-address");
+            navigate(`${process.env.REACT_APP_URI}/add-billing-address`);
             //  if (currentPage === "cart") navigate("/cart");
             sendEmailVerification(auth.currentUser).then(() => {
               changeModalContent("email sent");

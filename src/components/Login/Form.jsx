@@ -10,7 +10,7 @@ function Form({ changeForm, closePopup, changeModalContent }) {
   const [emailField, setEmailField] = useState(false);
   const navigate = useNavigate();
   const path = useLocation();
-  let currentPage = path.pathname.split("/");
+  let currentPage = path.pathname.split(process.env.REACT_APP_URI);
   currentPage = currentPage[currentPage.length - 1];
   function authenticateUser(e) {
     e.preventDefault();
@@ -19,7 +19,8 @@ function Form({ changeForm, closePopup, changeModalContent }) {
       .then(() => {
         addAnonymousCartItems(auth.currentUser.uid);
         closePopup();
-        if (currentPage === "cart") navigate("/cart");
+        if (currentPage === "cart")
+          navigate(`${process.env.REACT_APP_URI}/cart`);
       })
       .catch(() =>
         setErrorMessage("Login Issue. Please signup if not registered already.")

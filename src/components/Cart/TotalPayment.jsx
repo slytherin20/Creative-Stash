@@ -24,7 +24,7 @@ function TotalPayment({ totalPrice, count, loginStatus, isMobile }) {
       </section>
       <h3>Total: ₹{totalPrice + 50}</h3>
       {loginStatus ? (
-        <Link to="/payment-gateway">
+        <Link to={`${process.env.REACT_APP_URI}/payment-gateway`}>
           <input
             type="button"
             className="login-btn btn bg-yellow br1 b self-center"
