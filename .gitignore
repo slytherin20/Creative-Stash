@@ -7,6 +7,3 @@ dist/
 coverage/
 .vscode/
 documentation.txt
-src/images
-src/data/db.json
-src/firebase_config.js
