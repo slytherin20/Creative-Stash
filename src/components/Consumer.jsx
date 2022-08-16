@@ -40,10 +40,10 @@ function Consumer({ userid }) {
       else {
         fetch(
           `${
-            process.env.NODE_ENV == "production"
-              ? process.env.REACT_APP_URI
-              : "http://localhost"
-          }:5000/secret`,
+            process.env.NODE_ENV == "development"
+              ? "http://localhost:5000"
+              : process.env.REACT_APP_URI
+          }/secret`,
           {
             method: "POST",
             headers: {
@@ -67,15 +67,10 @@ function Consumer({ userid }) {
     } else {
       fetch(
         `${
-          process.env.NODE_ENV == "production"
-            ? process.env.REACT_APP_URI
-            : "http://localhost"
-        }:5000/create-intent`,
-        {
-          headers: {
-            "Transfer-Encoding": "chunked",
-          },
-        }
+          process.env.NODE_ENV == "development"
+            ? "http://localhost:5000"
+            : process.env.REACT_APP_URI
+        }/create-intent`
       )
         .then((res) => {
           return res.json();
