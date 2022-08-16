@@ -44,11 +44,9 @@ function ShowAllProducts({ fetchCartHandler }) {
 
   async function fetchSubCatItems(category, subcat) {
     let res = await fetch(
-      `${
-        process.env.NODE_ENV == "production"
-          ? process.env.REACT_APP_URI
-          : "http://localhost"
-      }:3000/${category}-${subcat.split(" ").join("_")}`,
+      `${process.env.REACT_APP_MOCKBACKEND}/${category}-${subcat
+        .split(" ")
+        .join("_")}`,
       {
         headers: {
           "Transfer-Encoding": "chunked",

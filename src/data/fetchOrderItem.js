@@ -1,10 +1,6 @@
 async function fetchOrderItem(orderId) {
   let res = await fetch(
-    `${
-      process.env.NODE_ENV == "production"
-        ? process.env.REACT_APP_URI
-        : "http://localhost"
-    }:3000/orders/${orderId}`,
+    `${process.env.REACT_APP_MOCKBACKEND}/orders/${orderId}`,
     {
       headers: {
         "Transfer-Encoding": "chunked",

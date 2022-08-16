@@ -17,18 +17,11 @@ function AllSearchResults({ fetchCartHandler }) {
   let keyword = searchParams.get("keyword");
 
   async function fetchData() {
-    let res = await fetch(
-      `${
-        process.env.NODE_ENV == "production"
-          ? process.env.REACT_APP_URI
-          : "http://localhost"
-      }:3000/BrandSearch`,
-      {
-        headers: {
-          "Transfer-Encoding": "chunked",
-        },
-      }
-    );
+    let res = await fetch(`${process.env.REACT_APP_MOCKBACKEND}/BrandSearch`, {
+      headers: {
+        "Transfer-Encoding": "chunked",
+      },
+    });
     let data = await res.json();
     let items = [];
     data.map(async (obj) => {
@@ -47,13 +40,9 @@ function AllSearchResults({ fetchCartHandler }) {
 
   async function fetchProductItem(obj) {
     let res = await fetch(
-      `${
-        process.env.NODE_ENV == "production"
-          ? process.env.REACT_APP_URI
-          : "http://localhost"
-      }:3000/${obj.cat.split(" ").join("_")}-${obj.subcat
+      `${process.env.REACT_APP_MOCKBACKEND}/${obj.cat
         .split(" ")
-        .join("_")}?id=${obj.id}`,
+        .join("_")}-${obj.subcat.split(" ").join("_")}?id=${obj.id}`,
       {
         headers: {
           "Transfer-Encoding": "chunked",
@@ -67,25 +56,18 @@ function AllSearchResults({ fetchCartHandler }) {
   async function addToCart(item) {
     if (auth.currentUser) {
       //Save to user cart
-      await fetch(
-        `${
-          process.env.NODE_ENV == "production"
-            ? process.env.REACT_APP_URI
-            : "http://localhost"
-        }:3000/Cart`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Transfer-Encoding": "chunked",
-          },
-          body: JSON.stringify({
-            ...item,
-            uid: auth.currentUser.uid,
-            cartCount: 1,
-          }),
-        }
-      )
+      await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Cart`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Transfer-Encoding": "chunked",
+        },
+        body: JSON.stringify({
+          ...item,
+          uid: auth.currentUser.uid,
+          cartCount: 1,
+        }),
+      })
         .then(() => fetchCartHandler())
         .catch((err) => console.log(err));
     } else {

@@ -20,18 +20,11 @@ function CategoriesForMobile({ hideMenuHandler, closeMenu }) {
 
   async function getSubCategories() {
     body.classList.add("overflow-hidden");
-    let res = await fetch(
-      `${
-        process.env.NODE_ENV == "production"
-          ? process.env.REACT_APP_URI
-          : "http://localhost"
-      }:3000/Categories`,
-      {
-        headers: {
-          "Transfer-Encoding": "chunked",
-        },
-      }
-    );
+    let res = await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Categories`, {
+      headers: {
+        "Transfer-Encoding": "chunked",
+      },
+    });
     let data = await res.json();
     setSubcat(data);
   }

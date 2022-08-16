@@ -45,11 +45,7 @@ function BillingDetails() {
 
   function modifyAddress() {
     fetch(
-      `${
-        process.env.NODE_ENV == "production"
-          ? process.env.REACT_APP_URI
-          : "http://localhost"
-      }:3000/Address/${auth.currentUser.uid}`,
+      `${process.env.REACT_APP_MOCKBACKEND}/Address/${auth.currentUser.uid}`,
       {
         method: "PUT",
         headers: {
@@ -67,21 +63,14 @@ function BillingDetails() {
   }
 
   function addNewAddress() {
-    fetch(
-      `${
-        process.env.NODE_ENV == "production"
-          ? process.env.REACT_APP_URI
-          : "http://localhost"
-      }:3000/Address`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Transfer-Encoding": "chunked",
-        },
-        body: JSON.stringify(details),
-      }
-    )
+    fetch(`${process.env.REACT_APP_MOCKBACKEND}/Address`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Transfer-Encoding": "chunked",
+      },
+      body: JSON.stringify(details),
+    })
       .then((res) => {
         if (res.ok) navigate(`/billing-details`);
         else Promise.reject();

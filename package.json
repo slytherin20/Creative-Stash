@@ -9,8 +9,8 @@
     "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
     "dev": "parcel src/index.html",
     "server": "node src/PaymentServer/server.jsx",
-    "jsonServer": "node src/JSONServer/server.js",
-    "start": "concurrently \"npm run dev\" \"npm run jsonServer\" \"npm run server\" "
+    "start": "npm run server",
+    "build": "parcel src/index.html"
   },
   "author": "Sonali Gupta",
   "license": "ISC",
@@ -18,7 +18,6 @@
     "@stripe/react-stripe-js": "^1.9.0",
     "@stripe/stripe-js": "^1.32.0",
     "body-parser": "^1.20.0",
-    "concurrently": "^7.2.2",
     "cors": "^2.8.5",
     "dotenv": "^5.0.1",
     "express": "^4.18.1",

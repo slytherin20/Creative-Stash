@@ -29,21 +29,14 @@ function ShowCartItems({ items, getCartItems, loginSuccess }) {
       uid: item.uid,
     };
     if (loginSuccess) {
-      fetch(
-        `${
-          process.env.NODE_ENV == "production"
-            ? process.env.REACT_APP_URI
-            : "http://localhost"
-        }:3000/Cart/${item.id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            "Transfer-Encoding": "chunked",
-          },
-          body: JSON.stringify(newItem),
-        }
-      )
+      fetch(`${process.env.REACT_APP_MOCKBACKEND}/Cart/${item.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Transfer-Encoding": "chunked",
+        },
+        body: JSON.stringify(newItem),
+      })
         .then(() => getCartItems())
         .catch((err) => console.log(err));
     } else {
@@ -90,21 +83,14 @@ function ShowCartItems({ items, getCartItems, loginSuccess }) {
       uid: item.uid,
     };
     if (loginSuccess) {
-      fetch(
-        `${
-          process.env.NODE_ENV == "production"
-            ? process.env.REACT_APP_URI
-            : "http://localhost"
-        }:3000/Cart/${item.id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            "Transfer-Encoding": "chunked",
-          },
-          body: JSON.stringify(newItem),
-        }
-      )
+      fetch(`${process.env.REACT_APP_MOCKBACKEND}/Cart/${item.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Transfer-Encoding": "chunked",
+        },
+        body: JSON.stringify(newItem),
+      })
         .then(() => getCartItems())
         .catch((err) => console.log(err));
     } else {
@@ -130,19 +116,12 @@ function ShowCartItems({ items, getCartItems, loginSuccess }) {
 
   async function removeItem(item) {
     if (loginSuccess) {
-      await fetch(
-        `${
-          process.env.NODE_ENV == "production"
-            ? process.env.REACT_APP_URI
-            : "http://localhost"
-        }:3000/Cart/${item.id}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Transfer-Encoding": "chunked",
-          },
-        }
-      )
+      await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Cart/${item.id}`, {
+        method: "DELETE",
+        headers: {
+          "Transfer-Encoding": "chunked",
+        },
+      })
         .then(() => getCartItems())
         .catch((err) => console.log(err));
     } else {

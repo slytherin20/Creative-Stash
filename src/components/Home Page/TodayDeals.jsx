@@ -8,7 +8,7 @@ function TodayDeals() {
   }, []);
 
   async function requestData() {
-    let res = await fetch(`${process.env.REACT_APP_URI}:3000/Todays-Deals`, {
+    let res = await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Todays-Deals`, {
       headers: {
         "Transfer-Encoding": "chunked",
       },

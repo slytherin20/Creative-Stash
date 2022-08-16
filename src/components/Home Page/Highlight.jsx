@@ -9,18 +9,11 @@ function Highlight() {
   }, []);
 
   async function requestImages() {
-    let res = await fetch(
-      `${
-        process.env.NODE_ENV == "production"
-          ? process.env.REACT_APP_URI
-          : "http://localhost"
-      }:3000/Carousel`,
-      {
-        headers: {
-          "Transfer-Encoding": "chunked",
-        },
-      }
-    );
+    let res = await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Carousel`, {
+      headers: {
+        "Transfer-Encoding": "chunked",
+      },
+    });
     let images = await res.json();
     setImages(images);
   }

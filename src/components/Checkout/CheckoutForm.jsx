@@ -33,21 +33,14 @@ function CheckoutForm() {
     }, 50);
     setAmt(res);
     let paymentIntentId = localStorage.getItem("pid");
-    fetch(
-      `${
-        process.env.NODE_ENV == "production"
-          ? process.env.REACT_APP_URI
-          : "http://localhost"
-      }:5000/cart`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Transfer-Encoding": "chunked",
-        },
-        body: JSON.stringify({ amount: res, paymentIntentId: paymentIntentId }),
-      }
-    )
+    fetch(`${process.env.REACT_APP_MOCKBACKEND}/cart`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Transfer-Encoding": "chunked",
+      },
+      body: JSON.stringify({ amount: res, paymentIntentId: paymentIntentId }),
+    })
       .then((res) => {
         if (!res.ok) Promise.reject();
         else setShowPayBtn(true);

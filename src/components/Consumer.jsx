@@ -99,11 +99,7 @@ function Consumer({ userid }) {
   async function fetchCartItems() {
     if (userid) {
       let res = await fetch(
-        `${
-          process.env.NODE_ENV == "production"
-            ? process.env.REACT_APP_URI
-            : "http://localhost"
-        }:3000/Cart?uid=${userid}`,
+        `${process.env.REACT_APP_MOCKBACKEND}/Cart?uid=${userid}`,
         {
           headers: {
             "Transfer-Encoding": "chunked",
@@ -126,11 +122,7 @@ function Consumer({ userid }) {
           let itemId = values[2];
           let cartCount = Number(values[3]);
           fetch(
-            `${
-              process.env.NODE_ENV == "production"
-                ? process.env.REACT_APP_URI
-                : "http://localhost"
-            }:3000/${cat}-${subcat}?id=${itemId}`,
+            `${process.env.REACT_APP_MOCKBACKEND}/${cat}-${subcat}?id=${itemId}`,
             {
               headers: {
                 "Transfer-Encoding": "chunked",

@@ -55,32 +55,21 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
     let updatedItems = addCurrentDateAndAddressToItems(addressObject);
     Promise.all(
       updatedItems.map((item) =>
-        fetch(
-          `${
-            process.env.NODE_ENV == "production"
-              ? process.env.REACT_APP_URI
-              : "http://localhost"
-          }:3000/Orders`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "Transfer-Encoding": "chunked",
-            },
-            body: JSON.stringify(item),
-          }
-        )
+        fetch(`${process.env.REACT_APP_MOCKBACKEND}/Orders`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Transfer-Encoding": "chunked",
+          },
+          body: JSON.stringify(item),
+        })
       )
     ).then(() => decreaseProductCount());
   }
 
   async function fetchUserAddress(uid) {
     let res = await fetch(
-      `${
-        process.env.NODE_ENV == "production"
-          ? process.env.REACT_APP_URI
-          : "http://localhost"
-      }:3000/Address?id=${uid}`,
+      `${process.env.REACT_APP_MOCKBACKEND}/Address?id=${uid}`,
       {
         headers: {
           "Transfer-Encoding": "chunked",
@@ -147,13 +136,9 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
           };
         }
         return fetch(
-          `${
-            process.env.NODE_ENV == "production"
-              ? process.env.REACT_APP_URI
-              : "http://localhost"
-          }:3000/${item.cat.split(" ").join("_")}-${item.subcat
+          `${process.env.REACT_APP_MOCKBACKEND}/${item.cat
             .split(" ")
-            .join("_")}/${item.id}`,
+            .join("_")}-${item.subcat.split(" ").join("_")}/${item.id}`,
           {
             method: "PUT",
             headers: {
@@ -172,19 +157,12 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
   function refreshCart() {
     Promise.all(
       cartItems.map((item) =>
-        fetch(
-          `${
-            process.env.NODE_ENV == "production"
-              ? process.env.REACT_APP_URI
-              : "http://localhost"
-          }:3000/Cart/${item.id}`,
-          {
-            method: "DELETE",
-            headers: {
-              "Transfer-Encoding": "chunked",
-            },
-          }
-        )
+        fetch(`${process.env.REACT_APP_MOCKBACKEND}/Cart/${item.id}`, {
+          method: "DELETE",
+          headers: {
+            "Transfer-Encoding": "chunked",
+          },
+        })
       )
     ).then(() => {
       fetchCartHandler();

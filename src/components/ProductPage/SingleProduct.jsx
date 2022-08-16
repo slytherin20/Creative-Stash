@@ -28,11 +28,7 @@ function SingleProduct({ fetchCartHandler }) {
 
   async function getProduct() {
     let res = await fetch(
-      `${
-        process.env.NODE_ENV == "production"
-          ? process.env.REACT_APP_URI
-          : "http://localhost"
-      }:3000/${cat}-${subcat}?id=${itemId}`,
+      `${process.env.REACT_APP_MOCKBACKEND}/${cat}-${subcat}?id=${itemId}`,
       {
         headers: {
           "Transfer-Encoding": "chunked",
@@ -68,26 +64,19 @@ function SingleProduct({ fetchCartHandler }) {
   async function addToCart() {
     if (user) {
       //Save to user cart
-      await fetch(
-        `${
-          process.env.NODE_ENV == "production"
-            ? process.env.REACT_APP_URI
-            : "http://localhost"
-        }:3000/Cart`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Transfer-Encoding": "chunked",
-          },
-          body: JSON.stringify({
-            ...product,
-            uid: user,
-            cartCount: 1,
-            count: Number(product.count),
-          }),
-        }
-      )
+      await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Cart`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Transfer-Encoding": "chunked",
+        },
+        body: JSON.stringify({
+          ...product,
+          uid: user,
+          cartCount: 1,
+          count: Number(product.count),
+        }),
+      })
         .then(() => fetchCartHandler())
         .catch((err) => console.log(err));
     } else {

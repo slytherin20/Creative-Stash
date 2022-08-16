@@ -8,18 +8,11 @@ function NewArrival({ fetchCartHandler }) {
   }, []);
 
   async function requestData() {
-    let res = await fetch(
-      `${
-        process.env.NODE_ENV == "production"
-          ? process.env.REACT_APP_URI
-          : "http://localhost"
-      }:3000/New-Arrivals`,
-      {
-        headers: {
-          "Transfer-Encoding": "chunked",
-        },
-      }
-    );
+    let res = await fetch(`${process.env.REACT_APP_MOCKBACKEND}/New-Arrivals`, {
+      headers: {
+        "Transfer-Encoding": "chunked",
+      },
+    });
     let data = await res.json();
     setArrivals(data);
   }

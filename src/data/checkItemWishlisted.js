@@ -1,10 +1,6 @@
 async function checkItemWishlisted(uid, productId) {
   let res = await fetch(
-    `${
-      process.env.NODE_ENV == "production"
-        ? process.env.REACT_APP_URI
-        : "http://localhost"
-    }:3000/Wishlist?uid=${uid}&&productId=${productId}`,
+    `${process.env.REACT_APP_MOCKBACKEND}/Wishlist?uid=${uid}&&productId=${productId}`,
     {
       headers: {
         "Transfer-Encoding": "chunked",

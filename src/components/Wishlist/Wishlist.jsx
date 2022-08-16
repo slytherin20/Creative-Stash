@@ -23,11 +23,7 @@ function Wishlist({ fetchCartHandler }) {
 
   async function fetchWishlistItems() {
     let res = await fetch(
-      `${
-        process.env.NODE_ENV == "production"
-          ? process.env.REACT_APP_URI
-          : "http://localhost"
-      }:3000/Wishlist?uid=${user}`,
+      `${process.env.REACT_APP_MOCKBACKEND}/Wishlist?uid=${user}`,
       {
         headers: {
           "Transfer-Encoding": "chunked",

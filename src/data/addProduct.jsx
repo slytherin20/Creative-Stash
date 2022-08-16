@@ -20,13 +20,9 @@ async function addProduct(inputs) {
     id: generateId,
   };
   let addProductToDB = fetch(
-    `${
-      process.env.NODE_ENV == "production"
-        ? process.env.REACT_APP_URI
-        : "http://localhost"
-    }:3000/${inputs.cat.split(" ").join("_")}-${inputs.subcat
+    `${process.env.REACT_APP_MOCKBACKEND}/${inputs.cat
       .split(" ")
-      .join("_")}`,
+      .join("_")}-${inputs.subcat.split(" ").join("_")}`,
     {
       method: "POST",
       headers: {
@@ -38,11 +34,7 @@ async function addProduct(inputs) {
   );
 
   let addBrandsToDB = fetch(
-    `${
-      process.env.NODE_ENV == "production"
-        ? process.env.REACT_APP_URI
-        : "http://localhost"
-    }:3000/BrandSearch`,
+    `${process.env.REACT_APP_MOCKBACKEND}/BrandSearch`,
     {
       method: "POST",
       headers: {

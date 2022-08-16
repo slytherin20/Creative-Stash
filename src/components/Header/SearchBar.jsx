@@ -57,18 +57,11 @@ function SearchBar({ isMobile }) {
   }
 
   async function fetchSearchResults() {
-    let res = await fetch(
-      `${
-        process.env.NODE_ENV == "production"
-          ? process.env.REACT_APP_URI
-          : "http://localhost"
-      }:3000/BrandSearch`,
-      {
-        headers: {
-          "Transfer-Encoding": "chunked",
-        },
-      }
-    );
+    let res = await fetch(`${process.env.REACT_APP_MOCKBACKEND}/BrandSearch`, {
+      headers: {
+        "Transfer-Encoding": "chunked",
+      },
+    });
     let data = await res.json();
     setKeywords(data);
   }
