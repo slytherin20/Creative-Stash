@@ -15,7 +15,7 @@ app.use(
     origin:
       process.env.NODE_ENV == "development"
         ? "http://localhost:5000"
-        : process.env.REACT_APP_URI,
+        : [process.env.REACT_APP_URI, process.env.REACT_APP_HTTP_URI],
   })
 );
 app.use(bodyParser.json()); //parse application/json
