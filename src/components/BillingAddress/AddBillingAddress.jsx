@@ -39,7 +39,10 @@ function BillingDetails() {
     if (addressExists) {
       modifyAddress();
     } else {
-      addNewAddress();
+      addNewAddress({
+        ...details,
+        id: auth.currentUser.uid,
+      });
     }
   }
 
@@ -62,14 +65,14 @@ function BillingDetails() {
       .catch(() => setShowError(true));
   }
 
-  function addNewAddress() {
+  function addNewAddress(addressObj) {
     fetch(`${process.env.REACT_APP_MOCKBACKEND}/Address`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Transfer-Encoding": "gzip",
       },
-      body: JSON.stringify(details),
+      body: JSON.stringify(addressObj),
     })
       .then((res) => {
         if (res.ok) navigate(`/billing-details`);
