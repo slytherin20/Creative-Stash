@@ -1,14 +1,24 @@
 import { Link } from "react-router-dom";
 import HeartIcon from "../../images/hearted.png";
 import DeviceContext from "../DeviceContext.jsx";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import fetchProductImg from "../../data/fetchProductImg.js";
+import { TailSpin } from "react-loader-spinner";
 function WishlistSingleItem({
   item,
   uid,
   removeItemFromWishlist,
   fetchCartHandler,
 }) {
+  const [img, setImg] = useState(undefined);
   const { isMobile } = useContext(DeviceContext);
+
+  useEffect(() => fetchImage(), []);
+
+  async function fetchImage() {
+    let res = await fetchProductImg(item.productId);
+    setImg(res);
+  }
   async function addToCart() {
     await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Cart`, {
       method: "POST",
@@ -35,7 +45,14 @@ function WishlistSingleItem({
         to={`/products/product?cat=${item.cat}&subcat=${item.subcat}&id=${item.productId}`}
         className="flex flex-column justify-content items-center"
       >
-        <img src={item.img} alt={item.name} className="item-icons" />
+        {img != undefined ? (
+          <img src={img} alt={item.name} className="item-icons" />
+        ) : (
+          <div className="w-20 h-100 bg-white flex justify-center items-center">
+            <TailSpin width={20} height={20} color="purple" />
+          </div>
+        )}
+
         <p className="ma0 mt2">{item.name.slice(0, 30)}...</p>
         <p className="ma0 mt2 f6">{item.description.slice(0, 40)}...</p>
         <p>Price: ₹{item.price}</p>

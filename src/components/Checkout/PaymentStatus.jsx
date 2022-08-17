@@ -117,7 +117,6 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
             price: Number(item.price),
             description: item.description,
             id: item.id,
-            img: item.img,
             count: `${Number(item.count) - Number(item.cartCount)}`,
             status: false,
           };
@@ -130,7 +129,6 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
             price: Number(item.price),
             description: item.description,
             id: item.id,
-            img: item.img,
             count: `${Number(item.count) - Number(item.cartCount)}`,
             status: item.status,
           };

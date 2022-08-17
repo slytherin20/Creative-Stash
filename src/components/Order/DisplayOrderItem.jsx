@@ -1,9 +1,19 @@
 import DeviceContext from "../DeviceContext.jsx";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
+import fetchProductImg from "../../data/fetchProductImg.js";
+import { TailSpin } from "react-loader-spinner";
 function DisplayOrderItem({ order }) {
+  const [img, setImg] = useState(undefined);
   const { isMobile } = useContext(DeviceContext);
   let dateObj = new Date(order.orderDate);
   let date = dateObj.toLocaleString([], { hour12: true });
+
+  useEffect(() => fetchOrderImage(), []);
+
+  async function fetchOrderImage() {
+    let res = await fetchProductImg(order.productId);
+    setImg(res);
+  }
   return (
     <article className="w-100 pa3">
       <header className="order-border  flex   justify-between">
@@ -28,7 +38,13 @@ function DisplayOrderItem({ order }) {
             isMobile ? "flex-column w-100" : " flex-row w-50"
           }  ma2 items-center justify-between`}
         >
-          <img src={order.img} alt="product" className="h4 w4 " />
+          {img != undefined ? (
+            <img src={img} alt="product" className="h4 w4 " />
+          ) : (
+            <div className="w-20 h-100 bg-white flex justify-center items-center">
+              <TailSpin width={20} height={20} color="purple" />
+            </div>
+          )}
           <section className={isMobile ? "w-100" : "w-60"}>
             <section>
               <p className="b">{order.name}</p>

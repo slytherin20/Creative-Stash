@@ -2,11 +2,16 @@ import { useState, useEffect, useContext } from "react";
 import TotalPayment from "./TotalPayment.jsx";
 import DeviceContext from "../DeviceContext.jsx";
 import Modal from "../Modals/Modal.jsx";
+import fetchAllProductImgs from "../../data/fetchAllProductImgs.js";
+import addimgToDisplayCart from "../../data/addimgToDisplayCart";
 import { TailSpin } from "react-loader-spinner";
 function ShowCartItems({ items, getCartItems, loginSuccess }) {
   const [totalPrice, setTotalPrice] = useState(0);
+  const [cartImgs, setCartImgs] = useState([]);
+  const [cartItems, setCartItems] = useState(items);
   const [loading, setLoading] = useState(false);
   const { isMobile } = useContext(DeviceContext);
+
   useEffect(() => {
     let total = 0;
     items.map((item) => {
@@ -14,6 +19,26 @@ function ShowCartItems({ items, getCartItems, loginSuccess }) {
     });
     setTotalPrice(total);
   }, [items]);
+
+  useEffect(() => {
+    fetchCartItemImgs();
+  }, [items]);
+
+  async function fetchCartItemImgs() {
+    if (items.length === 0) return;
+    if (cartImgs.length > 0) mergeImgsAndCartDetails(cartImgs);
+    else {
+      let imgs = await fetchAllProductImgs(items);
+      setCartImgs(imgs);
+      mergeImgsAndCartDetails(imgs);
+    }
+  }
+
+  function mergeImgsAndCartDetails(imgs) {
+    if (items.length === 0) return;
+    let mergedItems = addimgToDisplayCart(imgs, items);
+    setCartItems(mergedItems);
+  }
 
   async function increaseItemCount(item) {
     if (Number(item.cartCount) + 1 > item.count) return;
@@ -24,7 +49,6 @@ function ShowCartItems({ items, getCartItems, loginSuccess }) {
       cartCount: Number(item.cartCount) + 1,
       price: Number(item.price),
       description: item.description,
-      img: item.img,
       status: true,
       count: Number(item.count),
       cat: item.cat,
@@ -77,7 +101,6 @@ function ShowCartItems({ items, getCartItems, loginSuccess }) {
       cartCount: Number(item.cartCount) - 1,
       price: Number(item.price),
       description: item.description,
-      img: item.img,
       status: true,
       count: Number(item.count),
       cat: item.cat,
@@ -161,52 +184,62 @@ function ShowCartItems({ items, getCartItems, loginSuccess }) {
         >
           <section className={`${isMobile ? "w-100" : "w-60"} pa3`}>
             <h3>Cart Items</h3>
-            {items.map((item) => {
-              return (
-                <section key={item.id} className="w-80 h-40 flex">
-                  <img
-                    src={item.img}
-                    alt="product icon"
-                    className="w-20 h-100"
-                  />
-                  <section className="w-80 h-100">
-                    <h4>{item.name}</h4>
-                    <p>{item.description.slice(0, 100)}...</p>
-                    <p>
-                      <b>Price:</b> ₹{item.price}/-
-                    </p>
-                    {item.count == 1 ? (
-                      <>
-                        <p className="red">Only 1 item remaining</p>
-                        <p className="red">Cannot add more than 1.</p>
-                      </>
+            {cartItems.length > 0 &&
+              cartItems.map((item) => {
+                return (
+                  <section
+                    key={item.id}
+                    className="w-80 h-40 flex items-center"
+                  >
+                    {item.img != undefined ? (
+                      <img
+                        src={item.img}
+                        alt="product icon"
+                        className="w-20 h-100"
+                      />
                     ) : (
-                      ""
+                      <div className="w-20 h-100 bg-white flex justify-center items-center">
+                        <TailSpin width={20} height={20} color="purple" />
+                      </div>
                     )}
-                    <article>
-                      Items:
-                      <input
-                        type="button"
-                        value="+"
-                        className="add bg-white b--light-silver br4 ma1"
-                        onClick={() => increaseItemCount(item)}
-                      />
-                      <span className="ma3">{item.cartCount}</span>
-                      <input
-                        type="button"
-                        value="-"
-                        className="remove bg-white b--light-silver br4 ma1"
-                        onClick={() => decreaseItemCount(item)}
-                      />
-                    </article>
+                    <section className="w-80 h-100">
+                      <h4>{item.name}</h4>
+                      <p>{item.description.slice(0, 100)}...</p>
+                      <p>
+                        <b>Price:</b> ₹{item.price}/-
+                      </p>
+                      {item.count == 1 ? (
+                        <>
+                          <p className="red">Only 1 item remaining</p>
+                          <p className="red">Cannot add more than 1.</p>
+                        </>
+                      ) : (
+                        ""
+                      )}
+                      <article>
+                        Items:
+                        <input
+                          type="button"
+                          value="+"
+                          className="add bg-white b--light-silver br4 ma1"
+                          onClick={() => increaseItemCount(item)}
+                        />
+                        <span className="ma3">{item.cartCount}</span>
+                        <input
+                          type="button"
+                          value="-"
+                          className="remove bg-white b--light-silver br4 ma1"
+                          onClick={() => decreaseItemCount(item)}
+                        />
+                      </article>
+                    </section>
                   </section>
-                </section>
-              );
-            })}
+                );
+              })}
           </section>
           <TotalPayment
             totalPrice={totalPrice}
-            count={items.length}
+            count={cartItems.length}
             loginStatus={loginSuccess}
             isMobile={isMobile}
           />

@@ -8,20 +8,33 @@ import HeartIcon from "../../images/heart.png";
 import HeartedIcon from "../../images/hearted.png";
 import Modal from "../Modals/Modal.jsx";
 import { TailSpin } from "react-loader-spinner";
+import fetchProductImg from "../../data/fetchProductImg.js";
 function Item({ item, uid, cat, subcat, addToCart }) {
   const [wishlist, setWishlist] = useState({ status: false, id: -1 });
   const [loading, setLoading] = useState({ status: false, text: "" });
+  const [img, setImg] = useState(undefined);
   const { isMobile } = useContext(DeviceContext);
   useEffect(() => {
     if (uid) wishlistStatus(item.id);
+    else fetchImage(item.id);
   }, []);
 
   async function wishlistStatus(id) {
-    let [status, wishlistId] = await checkItemWishlisted(uid, id);
+    let wishlistPromise = checkItemWishlisted(uid, id);
+    let imagePromise = fetchProductImg(item.id);
+    let responses = await Promise.all([wishlistPromise, imagePromise]);
+    let [status, wishlistId] = responses[0];
+    let res = responses[1];
     setWishlist({
       status: status,
       id: wishlistId,
     });
+    setImg(res);
+  }
+
+  async function fetchImage(id) {
+    let res = await fetchProductImg(id);
+    setImg(res);
   }
 
   function removeWishlisted(id) {
@@ -56,11 +69,17 @@ function Item({ item, uid, cat, subcat, addToCart }) {
             }&id=${item.id}`}
             className="flex flex-column justify-center items-center"
           >
-            <img
-              src={item.img}
-              alt={item.name}
-              className={` ${isMobile ? "item-icons" : "item-mobile-icons"}`}
-            />
+            {img != undefined ? (
+              <img
+                src={img}
+                alt={item.name}
+                className={` ${isMobile ? "item-icons" : "item-mobile-icons"}`}
+              />
+            ) : (
+              <div className="w-20 h-100 bg-white flex justify-center items-center">
+                <TailSpin width={20} height={20} color="purple" />
+              </div>
+            )}
             <p
               className={`ma0 mt2 tc ${
                 isMobile ? " item-mobile-name mb2" : "item-name b"
@@ -79,11 +98,17 @@ function Item({ item, uid, cat, subcat, addToCart }) {
             }&subcat=${subcat}&id=${item.id}`}
             className="flex flex-column justify-center items-center"
           >
-            <img
-              src={item.img}
-              alt={item.name}
-              className={` ${isMobile ? "item-icons" : "item-mobile-icons"}`}
-            />
+            {img != undefined ? (
+              <img
+                src={img}
+                alt={item.name}
+                className={` ${isMobile ? "item-icons" : "item-mobile-icons"}`}
+              />
+            ) : (
+              <div className="w-20 h-100 bg-white flex justify-center items-center">
+                <TailSpin width={20} height={20} color="purple" />
+              </div>
+            )}
             <p
               className={`ma0 mt2 tc ${
                 isMobile ? "item-mobile-name mb2" : "item-name b"

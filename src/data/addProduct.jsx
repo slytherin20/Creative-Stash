@@ -10,7 +10,6 @@ async function addProduct(inputs) {
     count: Number(inputs.count),
     status: true,
     id: generateId,
-    img: inputs.imgSrc,
   };
 
   let newBrand = {
@@ -19,6 +18,18 @@ async function addProduct(inputs) {
     subcat: inputs.subcat,
     id: generateId,
   };
+  let image = {
+    id: generateId,
+    img: inputs.imgSrc,
+  };
+  let addImageToDB = fetch(`${process.env.REACT_APP_MOCKBACKEND}/images`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Transfer-Encoding": "gzip",
+    },
+    body: JSON.stringify(image),
+  });
   let addProductToDB = fetch(
     `${process.env.REACT_APP_MOCKBACKEND}/${inputs.cat
       .split(" ")
@@ -45,7 +56,7 @@ async function addProduct(inputs) {
     }
   );
   let resStatus;
-  return Promise.all([addProductToDB, addBrandsToDB])
+  return Promise.all([addProductToDB, addBrandsToDB, addImageToDB])
     .then((res) => {
       if (res.ok || res.status == 201) {
         resStatus = res.status;
