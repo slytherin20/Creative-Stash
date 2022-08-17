@@ -50,7 +50,7 @@ function BillingDetails() {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          "Transfer-Encoding": "chunked",
+          "Transfer-Encoding": "gzip",
         },
         body: JSON.stringify(details),
       }
@@ -67,7 +67,7 @@ function BillingDetails() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Transfer-Encoding": "chunked",
+        "Transfer-Encoding": "gzip",
       },
       body: JSON.stringify(details),
     })

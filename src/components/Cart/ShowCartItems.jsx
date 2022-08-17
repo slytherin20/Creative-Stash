@@ -1,8 +1,11 @@
 import { useState, useEffect, useContext } from "react";
 import TotalPayment from "./TotalPayment.jsx";
 import DeviceContext from "../DeviceContext.jsx";
+import Modal from "../Modals/Modal.jsx";
+import { TailSpin } from "react-loader-spinner";
 function ShowCartItems({ items, getCartItems, loginSuccess }) {
   const [totalPrice, setTotalPrice] = useState(0);
+  const [loading, setLoading] = useState(false);
   const { isMobile } = useContext(DeviceContext);
   useEffect(() => {
     let total = 0;
@@ -14,6 +17,7 @@ function ShowCartItems({ items, getCartItems, loginSuccess }) {
 
   async function increaseItemCount(item) {
     if (Number(item.cartCount) + 1 > item.count) return;
+    setLoading(true);
     let newItem = {
       id: item.id,
       name: item.name,
@@ -33,19 +37,16 @@ function ShowCartItems({ items, getCartItems, loginSuccess }) {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          "Transfer-Encoding": "chunked",
+          "Transfer-Encoding": "gzip",
         },
         body: JSON.stringify(newItem),
       })
-        .then(() => getCartItems())
+        .then(() => {
+          getCartItems();
+          setLoading(false);
+        })
         .catch((err) => console.log(err));
     } else {
-      // //Changing UI element
-      // let newList = [...items];
-      // let itemIndex = newList.findIndex((el) => el.id === item.id);
-      // newList[itemIndex] = newItem;
-      // setCartList(newList);
-      //Changing the count in local storage
       let cart = localStorage.getItem("cart");
       let cartItems = cart.split(",");
       let product = "";
@@ -63,11 +64,13 @@ function ShowCartItems({ items, getCartItems, loginSuccess }) {
       cart = cartItems.join(",");
       localStorage.setItem("cart", cart);
       getCartItems();
+      setLoading(false);
     }
   }
 
   async function decreaseItemCount(item) {
     if (item.cartCount == 1) return removeItem(item);
+    setLoading(true);
     let newItem = {
       id: item.id,
       name: item.name,
@@ -87,11 +90,14 @@ function ShowCartItems({ items, getCartItems, loginSuccess }) {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          "Transfer-Encoding": "chunked",
+          "Transfer-Encoding": "gzip",
         },
         body: JSON.stringify(newItem),
       })
-        .then(() => getCartItems())
+        .then(() => {
+          getCartItems();
+          setLoading(false);
+        })
         .catch((err) => console.log(err));
     } else {
       let cart = localStorage.getItem("cart");
@@ -111,23 +117,25 @@ function ShowCartItems({ items, getCartItems, loginSuccess }) {
       cart = cartItems.join(",");
       localStorage.setItem("cart", cart);
       getCartItems();
+      setLoading(false);
     }
   }
 
   async function removeItem(item) {
+    setLoading(true);
     if (loginSuccess) {
       await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Cart/${item.id}`, {
         method: "DELETE",
         headers: {
-          "Transfer-Encoding": "chunked",
+          "Transfer-Encoding": "gzip",
         },
       })
-        .then(() => getCartItems())
+        .then(() => {
+          getCartItems();
+          setLoading(false);
+        })
         .catch((err) => console.log(err));
     } else {
-      // let index = cartList.findIndex((el) => el.id === item.id);
-      // let newCartList = cartList.splice(index, 1);
-      // setCartList(newCartList);
       let cart = localStorage.getItem("cart");
       let cartItems = cart.split(",");
       if (cartItems.length === 1) {
@@ -139,65 +147,80 @@ function ShowCartItems({ items, getCartItems, loginSuccess }) {
         localStorage.setItem("cart", cart);
       }
       getCartItems();
+      setLoading(false);
     }
   }
 
   return (
-    <div className="cart-container flex  justify-center items-center w-100 h-100 mt4 mb2">
-      <section
-        className={`shadow-2  flex justify-between ${
-          isMobile ? "flex-column-reverse w-90" : "w-70"
-        }`}
-      >
-        <section className={`${isMobile ? "w-100" : "w-60"} pa3`}>
-          <h3>Cart Items</h3>
-          {items.map((item) => {
-            return (
-              <section key={item.id} className="w-80 h-40 flex">
-                <img src={item.img} alt="product icon" className="w-20 h-100" />
-                <section className="w-80 h-100">
-                  <h4>{item.name}</h4>
-                  <p>{item.description.slice(0, 100)}...</p>
-                  <p>
-                    <b>Price:</b> ₹{item.price}/-
-                  </p>
-                  {item.count == 1 ? (
-                    <>
-                      <p className="red">Only 1 item remaining</p>
-                      <p className="red">Cannot add more than 1.</p>
-                    </>
-                  ) : (
-                    ""
-                  )}
-                  <article>
-                    Items:
-                    <input
-                      type="button"
-                      value="+"
-                      className="add bg-white b--light-silver br4 ma1"
-                      onClick={() => increaseItemCount(item)}
-                    />
-                    <span className="ma3">{item.cartCount}</span>
-                    <input
-                      type="button"
-                      value="-"
-                      className="remove bg-white b--light-silver br4 ma1"
-                      onClick={() => decreaseItemCount(item)}
-                    />
-                  </article>
+    <>
+      <div className="cart-container flex  justify-center items-center w-100 h-100 mt4 mb2">
+        <section
+          className={`shadow-2  flex justify-between ${
+            isMobile ? "flex-column-reverse w-90" : "w-70"
+          }`}
+        >
+          <section className={`${isMobile ? "w-100" : "w-60"} pa3`}>
+            <h3>Cart Items</h3>
+            {items.map((item) => {
+              return (
+                <section key={item.id} className="w-80 h-40 flex">
+                  <img
+                    src={item.img}
+                    alt="product icon"
+                    className="w-20 h-100"
+                  />
+                  <section className="w-80 h-100">
+                    <h4>{item.name}</h4>
+                    <p>{item.description.slice(0, 100)}...</p>
+                    <p>
+                      <b>Price:</b> ₹{item.price}/-
+                    </p>
+                    {item.count == 1 ? (
+                      <>
+                        <p className="red">Only 1 item remaining</p>
+                        <p className="red">Cannot add more than 1.</p>
+                      </>
+                    ) : (
+                      ""
+                    )}
+                    <article>
+                      Items:
+                      <input
+                        type="button"
+                        value="+"
+                        className="add bg-white b--light-silver br4 ma1"
+                        onClick={() => increaseItemCount(item)}
+                      />
+                      <span className="ma3">{item.cartCount}</span>
+                      <input
+                        type="button"
+                        value="-"
+                        className="remove bg-white b--light-silver br4 ma1"
+                        onClick={() => decreaseItemCount(item)}
+                      />
+                    </article>
+                  </section>
                 </section>
-              </section>
-            );
-          })}
+              );
+            })}
+          </section>
+          <TotalPayment
+            totalPrice={totalPrice}
+            count={items.length}
+            loginStatus={loginSuccess}
+            isMobile={isMobile}
+          />
         </section>
-        <TotalPayment
-          totalPrice={totalPrice}
-          count={items.length}
-          loginStatus={loginSuccess}
-          isMobile={isMobile}
-        />
-      </section>
-    </div>
+      </div>
+      {loading ? (
+        <Modal>
+          <div className="pa3 bg-white flex flex-column justify-center items-center">
+            <TailSpin width={20} height={20} />
+            <p>Updating Cart...</p>
+          </div>
+        </Modal>
+      ) : null}
+    </>
   );
 }
 

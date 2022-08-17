@@ -6,6 +6,7 @@ import Items from "../Home Page/Items.jsx";
 import DeviceContext from "../DeviceContext.jsx";
 import Filtericon from "../../images/filter.png";
 import Modal from "../Modals/Modal.jsx";
+import Loading from "../Modals/Loading.jsx";
 function ShowProducts({ fetchCartHandler }) {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -50,7 +51,7 @@ function ShowProducts({ fetchCartHandler }) {
         .join("_")}`,
       {
         headers: {
-          "Transfer-Encoding": "chunked",
+          "Transfer-Encoding": "gzip",
         },
       }
     );
@@ -105,58 +106,60 @@ function ShowProducts({ fetchCartHandler }) {
   }
 
   if (!productType.includes(params.id)) return <NotFound />;
-  return (
-    <div className={`flex ${isMobile ? "flex-column" : ""}`}>
-      {isMobile ? (
-        <>
-          <button
-            className=" mt3 flex flex-column  black w3 bn bg-white relative filter-pos"
-            onClick={showMobileFilterMenu}
-          >
-            <img src={Filtericon} alt="filter products" />
-            Filters
-          </button>
-          <Items
-            items={filteredProducts}
-            title={params.id.split("-").join(" ")}
-            cat={path.pathname.split("/")[2].split("-").join(" ")}
-            subcat={params.id.split("-").join(" ")}
-            fetchCartHandler={fetchCartHandler}
-          />
-          {mobileFilter && (
-            // <div className="absolute z-9999 t0 bg-white w-100 h-100">
-            <Modal>
-              <ProductFilter
-                brands={brands}
-                filterProductsByChoice={filterProductsByChoice}
-                resetProducts={resetProducts}
-                isMobile={isMobile}
-                closeFilter={closeFilter}
-              />
-            </Modal>
-            //  </div>
-          )}
-        </>
-      ) : (
-        <>
-          <ProductFilter
-            brands={brands}
-            filterProductsByChoice={filterProductsByChoice}
-            resetProducts={resetProducts}
-            isMobile={isMobile}
-            closeFilter={closeFilter}
-          />
-          <Items
-            items={filteredProducts}
-            title={params.id.split("-").join(" ")}
-            cat={path.pathname.split("/")[2].split("-").join(" ")}
-            subcat={params.id.split("-").join(" ")}
-            fetchCartHandler={fetchCartHandler}
-          />
-        </>
-      )}
-    </div>
-  );
+  if (products.length === 0) return <Loading />;
+  else
+    return (
+      <div className={`flex ${isMobile ? "flex-column" : ""}`}>
+        {isMobile ? (
+          <>
+            <button
+              className=" mt3 flex flex-column  black w3 bn bg-white relative filter-pos"
+              onClick={showMobileFilterMenu}
+            >
+              <img src={Filtericon} alt="filter products" />
+              Filters
+            </button>
+            <Items
+              items={filteredProducts}
+              title={params.id.split("-").join(" ")}
+              cat={path.pathname.split("/")[2].split("-").join(" ")}
+              subcat={params.id.split("-").join(" ")}
+              fetchCartHandler={fetchCartHandler}
+            />
+            {mobileFilter && (
+              // <div className="absolute z-9999 t0 bg-white w-100 h-100">
+              <Modal>
+                <ProductFilter
+                  brands={brands}
+                  filterProductsByChoice={filterProductsByChoice}
+                  resetProducts={resetProducts}
+                  isMobile={isMobile}
+                  closeFilter={closeFilter}
+                />
+              </Modal>
+              //  </div>
+            )}
+          </>
+        ) : (
+          <>
+            <ProductFilter
+              brands={brands}
+              filterProductsByChoice={filterProductsByChoice}
+              resetProducts={resetProducts}
+              isMobile={isMobile}
+              closeFilter={closeFilter}
+            />
+            <Items
+              items={filteredProducts}
+              title={params.id.split("-").join(" ")}
+              cat={path.pathname.split("/")[2].split("-").join(" ")}
+              subcat={params.id.split("-").join(" ")}
+              fetchCartHandler={fetchCartHandler}
+            />
+          </>
+        )}
+      </div>
+    );
 }
 
 export default ShowProducts;

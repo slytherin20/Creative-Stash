@@ -12,7 +12,7 @@ async function addToWishlist(item, uid) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Transfer-Encoding": "chunked",
+      "Transfer-Encoding": "gzip",
     },
     body: JSON.stringify(updatedItem),
   });

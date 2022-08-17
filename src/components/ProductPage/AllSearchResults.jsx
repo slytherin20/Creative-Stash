@@ -19,7 +19,7 @@ function AllSearchResults({ fetchCartHandler }) {
   async function fetchData() {
     let res = await fetch(`${process.env.REACT_APP_MOCKBACKEND}/BrandSearch`, {
       headers: {
-        "Transfer-Encoding": "chunked",
+        "Transfer-Encoding": "gzip",
       },
     });
     let data = await res.json();
@@ -45,7 +45,7 @@ function AllSearchResults({ fetchCartHandler }) {
         .join("_")}-${obj.subcat.split(" ").join("_")}?id=${obj.id}`,
       {
         headers: {
-          "Transfer-Encoding": "chunked",
+          "Transfer-Encoding": "gzip",
         },
       }
     );
@@ -60,7 +60,7 @@ function AllSearchResults({ fetchCartHandler }) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Transfer-Encoding": "chunked",
+          "Transfer-Encoding": "gzip",
         },
         body: JSON.stringify({
           ...item,

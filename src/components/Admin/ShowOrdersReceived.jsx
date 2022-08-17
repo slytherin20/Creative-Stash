@@ -8,7 +8,7 @@ function ShowOrdersReceived() {
   async function fetchOrdersReceived() {
     let res = await fetch(`${process.env.REACT_APP_MOCKBACKEND}/orders`, {
       headers: {
-        "Transfer-Encoding": "chunked",
+        "Transfer-Encoding": "gzip",
       },
     });
     if (!res.ok) setOrders(null);

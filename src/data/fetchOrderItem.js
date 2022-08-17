@@ -3,7 +3,7 @@ async function fetchOrderItem(orderId) {
     `${process.env.REACT_APP_MOCKBACKEND}/orders/${orderId}`,
     {
       headers: {
-        "Transfer-Encoding": "chunked",
+        "Transfer-Encoding": "gzip",
       },
     }
   );

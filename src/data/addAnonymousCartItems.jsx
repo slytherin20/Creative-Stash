@@ -16,7 +16,7 @@ function addAnonymousCartItems(userid) {
       `${process.env.REACT_APP_MOCKBACKEND}/${cat}-${subcat}?id=${itemId}`,
       {
         headers: {
-          "Transfer-Encoding": "chunked",
+          "Transfer-Encoding": "gzip",
         },
       }
     )
@@ -38,7 +38,7 @@ function addItemsToDB(items) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Transfer-Encoding": "chunked",
+        "Transfer-Encoding": "gzip",
       },
       body: JSON.stringify(item),
     })

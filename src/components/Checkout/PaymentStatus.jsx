@@ -59,7 +59,7 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Transfer-Encoding": "chunked",
+            "Transfer-Encoding": "gzip",
           },
           body: JSON.stringify(item),
         })
@@ -72,7 +72,7 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
       `${process.env.REACT_APP_MOCKBACKEND}/Address?id=${uid}`,
       {
         headers: {
-          "Transfer-Encoding": "chunked",
+          "Transfer-Encoding": "gzip",
         },
       }
     );
@@ -143,7 +143,7 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
-              "Transfer-Encoding": "chunked",
+              "Transfer-Encoding": "gzip",
             },
             body: JSON.stringify(updatedItemCount),
           }
@@ -160,7 +160,7 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
         fetch(`${process.env.REACT_APP_MOCKBACKEND}/Cart/${item.id}`, {
           method: "DELETE",
           headers: {
-            "Transfer-Encoding": "chunked",
+            "Transfer-Encoding": "gzip",
           },
         })
       )

@@ -11,7 +11,7 @@ function Highlight() {
   async function requestImages() {
     let res = await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Carousel`, {
       headers: {
-        "Transfer-Encoding": "chunked",
+        "Transfer-Encoding": "gzip",
       },
     });
     let images = await res.json();

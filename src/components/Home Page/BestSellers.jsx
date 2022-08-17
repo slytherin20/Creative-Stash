@@ -11,7 +11,7 @@ function BestSellers({ fetchCartHandler }) {
   async function requestData() {
     let res = await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Best-Sellers`, {
       headers: {
-        "Transfer-Encoding": "chunked",
+        "Transfer-Encoding": "gzip",
       },
     });
     let data = await res.json();

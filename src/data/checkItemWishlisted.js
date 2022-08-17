@@ -3,7 +3,7 @@ async function checkItemWishlisted(uid, productId) {
     `${process.env.REACT_APP_MOCKBACKEND}/Wishlist?uid=${uid}&&productId=${productId}`,
     {
       headers: {
-        "Transfer-Encoding": "chunked",
+        "Transfer-Encoding": "gzip",
       },
     }
   );

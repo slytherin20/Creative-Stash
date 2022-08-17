@@ -10,7 +10,7 @@ function NewArrival({ fetchCartHandler }) {
   async function requestData() {
     let res = await fetch(`${process.env.REACT_APP_MOCKBACKEND}/New-Arrivals`, {
       headers: {
-        "Transfer-Encoding": "chunked",
+        "Transfer-Encoding": "gzip",
       },
     });
     let data = await res.json();

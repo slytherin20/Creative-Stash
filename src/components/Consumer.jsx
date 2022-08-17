@@ -48,7 +48,7 @@ function Consumer({ userid }) {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              "Transfer-Encoding": "chunked",
+              "Transfer-Encoding": "gzip",
             },
             body: JSON.stringify({ pid: paymentIntentId }),
           }
@@ -97,7 +97,7 @@ function Consumer({ userid }) {
         `${process.env.REACT_APP_MOCKBACKEND}/Cart?uid=${userid}`,
         {
           headers: {
-            "Transfer-Encoding": "chunked",
+            "Transfer-Encoding": "gzip",
           },
         }
       );
@@ -120,7 +120,7 @@ function Consumer({ userid }) {
             `${process.env.REACT_APP_MOCKBACKEND}/${cat}-${subcat}?id=${itemId}`,
             {
               headers: {
-                "Transfer-Encoding": "chunked",
+                "Transfer-Encoding": "gzip",
               },
             }
           )

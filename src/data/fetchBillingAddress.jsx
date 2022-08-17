@@ -4,7 +4,7 @@ async function fetchBillingAddress(uid) {
     `${process.env.REACT_APP_MOCKBACKEND}/Address?id=${uid}`,
     {
       headers: {
-        "Transfer-Encoding": "chunked",
+        "Transfer-Encoding": "gzip",
       },
     }
   );

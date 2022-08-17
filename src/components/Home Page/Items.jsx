@@ -15,7 +15,7 @@ function Items({ items, title, cat, subcat, fetchCartHandler }) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Transfer-Encoding": "chunked",
+          "Transfer-Encoding": "gzip",
         },
         body: JSON.stringify({
           ...item,

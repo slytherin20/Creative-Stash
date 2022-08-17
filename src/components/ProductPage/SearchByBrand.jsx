@@ -27,7 +27,7 @@ function SearchByBrand({ fetchCartHandler }) {
       }/BrandSearch?brand=${encodeURIComponent(brand)}`,
       {
         headers: {
-          "Transfer-Encoding": "chunked",
+          "Transfer-Encoding": "gzip",
         },
       }
     );
@@ -40,7 +40,7 @@ function SearchByBrand({ fetchCartHandler }) {
           .join("_")}-${obj.subcat.split(" ").join("_")}?id=${obj.id}`,
         {
           headers: {
-            "Transfer-Encoding": "chunked",
+            "Transfer-Encoding": "gzip",
           },
         }
       );
@@ -57,7 +57,7 @@ function SearchByBrand({ fetchCartHandler }) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Transfer-Encoding": "chunked",
+          "Transfer-Encoding": "gzip",
         },
         body: JSON.stringify({
           ...item,

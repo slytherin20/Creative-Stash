@@ -49,7 +49,7 @@ function ShowAllProducts({ fetchCartHandler }) {
         .join("_")}`,
       {
         headers: {
-          "Transfer-Encoding": "chunked",
+          "Transfer-Encoding": "gzip",
         },
       }
     );

@@ -22,7 +22,7 @@ function CategoriesForMobile({ hideMenuHandler, closeMenu }) {
     body.classList.add("overflow-hidden");
     let res = await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Categories`, {
       headers: {
-        "Transfer-Encoding": "chunked",
+        "Transfer-Encoding": "gzip",
       },
     });
     let data = await res.json();
