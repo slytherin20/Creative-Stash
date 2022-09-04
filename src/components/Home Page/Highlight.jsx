@@ -1,6 +1,6 @@
 import PaintBanner from "../../images/banner1.png";
-import WinsorBanner from "../../images/banner2.png";
-import BrustroBanner from "../../images/banner3.png";
+import WinsorBanner from "../../images/banner3.png";
+import BrustroBanner from "../../images/banner2.png";
 import CanvasBanner from "../../images/banner4.png";
 import Carousel from "./Carousel.jsx";
 import { useContext } from "react";
@@ -9,18 +9,22 @@ let images = [
   {
     id: 1,
     original: CanvasBanner,
+    link: "/products/Canvas",
   },
   {
     id: 2,
     original: WinsorBanner,
+    link: "/products/brands?brand=Winsor%20%26%20Newton",
   },
   {
     id: 3,
     original: PaintBanner,
+    link: "/products/Paints/Spray-Paints",
   },
   {
     id: 4,
     original: BrustroBanner,
+    link: "/products/brands?brand=Brustro",
   },
 ];
 function Highlight() {
