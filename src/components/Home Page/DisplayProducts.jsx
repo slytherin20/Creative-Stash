@@ -42,7 +42,7 @@ function DisplayProducts() {
             >
               <div
                 className={`bn shadow-1 pa2 ma4 ${
-                  isMobile ? "w3 h3" : "w4 h4"
+                  isMobile ? "featured-products" : "w4 h4"
                 } br-100 flex justify-center items-center`}
                 style={{
                   backgroundImage: `url(${obj.img})`,
@@ -69,7 +69,7 @@ function DisplayProducts() {
                   backgroundSize: "cover",
                 }}
                 className={`bn shadow-1 pa2 ma4 ${
-                  isMobile ? "w3 h3" : "w4 h4"
+                  isMobile ? "featured-products" : "w4 h4"
                 } br-100 flex justify-center items-center`}
               >
                 <button className="bg-white bn br-100 btn">

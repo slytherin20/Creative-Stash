@@ -6,6 +6,7 @@ import CancelIcon from "../../images/close.png";
 import Profile from "./Profile.jsx";
 import CategoriesForMobile from "../Categories/CategoriesForMobile.jsx";
 import HamburgerMenuIcon from "../../images/hamburger-menu.png";
+import logo from "../../images/logo.png";
 import DeviceContext from "../DeviceContext.jsx";
 import { useContext, useState } from "react";
 import Modal from "../Modals/Modal.jsx";
@@ -42,12 +43,15 @@ function Navbar({ user, admin }) {
             ""
           )}
           <Link to="/">
-            <p className="b">Creative Stash</p>
+            <img src={logo} alt="creative stash" className="logo-img" />
           </Link>
           {!admin && !isMobile && <SearchBar />}
           <div className="flex justify-around">
-            {user ? <Profile admin={admin} /> : null}
-            {user ? "" : <LoginIcon color="bg-purple h2 ma1 mt2" btnText="" />}
+            {user ? (
+              <Profile admin={admin} />
+            ) : (
+              <LoginIcon color="bg-purple h2 ma1 mt2" btnText="" />
+            )}
             {!admin && <CartIcon />}
           </div>
         </div>

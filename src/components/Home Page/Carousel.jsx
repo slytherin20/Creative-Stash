@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
-
+import { useState, useEffect, useContext } from "react";
+import DeviceContext from "../DeviceContext.jsx";
 function Carousel({ images }) {
   const [active, setActive] = useState(0);
-
+  const { isMobile } = useContext(DeviceContext);
   useEffect(() => {
     let timer = setInterval(() => {
       setActive(active + 1 > 3 ? 0 : active + 1);
@@ -19,7 +19,11 @@ function Carousel({ images }) {
   const defaultClass = "thumbnail br-100";
   return (
     <div className="carousel flex items-center flex-column vh-50 mt3">
-      <img src={images[active].original} alt="banner" className="slide vh-50" />
+      <img
+        src={images[active].original}
+        alt="banner"
+        className={isMobile ? "slide mobile-carousel" : "slide vh-50"}
+      />
       <div className="thumbnails w4 flex justify-between mt2">
         {images.map((img, i) => {
           return (
@@ -37,13 +41,4 @@ function Carousel({ images }) {
   );
 }
 
-Carousel.defaultProps = {
-  images: [
-    {
-      id: 0,
-      original:
-        "https://www.creativehands.in/wp-content/uploads/2021/10/COMBO_OFFER_BANNER-768x439.jpg",
-    },
-  ],
-};
 export default Carousel;
