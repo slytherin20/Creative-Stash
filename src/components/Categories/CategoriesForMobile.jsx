@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-
+import DownArrow from "../../images/arrow-down.png";
+import UpArrow from "../../images/arrow-up.png";
 let categories = [
   "Paints",
   "Painting Medium",
@@ -44,7 +45,7 @@ function CategoriesForMobile({ hideMenuHandler, closeMenu }) {
       </button>
       {categories.map((cat) => (
         <div key={cat}>
-          <div className="pa2 white bb flex">
+          <div className="pa2 white bb flex justify-between">
             <Link
               to={`/products/${cat.split(" ").join("-")}`}
               className="white w-70"
@@ -56,24 +57,24 @@ function CategoriesForMobile({ hideMenuHandler, closeMenu }) {
             </Link>
             {downBtn && (
               <button
-                className="w-20 w4"
+                className="w-20 w4 bg-transparent bn"
                 onClick={() => setCategoryHandler(cat)}
               >
-                &#8595;
+                <img src={DownArrow} alt="open sub menu" className="w1" />
               </button>
             )}
             {!downBtn && (
               <button
-                className="w-20 w4"
+                className="w-20 w4 bg-transparent bn"
                 onClick={() => setCategoryHandler("")}
               >
-                &#8593;
+                <img src={UpArrow} alt="open sub menu" className="w1" />
               </button>
             )}
           </div>
-          <ul>
-            {selectedCat === cat &&
-              subcat[cat].map((val) => (
+          {selectedCat === cat && (
+            <ul className="bg-white ma0 pa2">
+              {subcat[cat].map((val) => (
                 <Link
                   key={val}
                   to={`/products/${cat.split(" ").join("-")}/${val
@@ -87,10 +88,11 @@ function CategoriesForMobile({ hideMenuHandler, closeMenu }) {
                     )
                   }
                 >
-                  <li className="list white pa1">{val}</li>
+                  <li className="list black pa2">{val}</li>
                 </Link>
               ))}
-          </ul>
+            </ul>
+          )}
         </div>
       ))}
     </div>

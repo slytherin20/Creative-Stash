@@ -51,7 +51,11 @@
 }
 .search-bar {
   border-top: solid 2px #5e2ca5;
-  width: 47%;
+  width: 49%;
+}
+.searchbar-m {
+  border-top: solid 2px #5e2ca5;
+  width: 78%;
 }
 .category:hover {
   color: #5e2ca5;

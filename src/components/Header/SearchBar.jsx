@@ -71,6 +71,10 @@ function SearchBar({ isMobile }) {
   function removeSuggestionsHandler() {
     setShowSuggestions(false);
   }
+  function removeSearchValue() {
+    setInput("");
+    setShowSuggestions(false);
+  }
 
   function checkKeyType(e) {
     if (e.which == 10 || e.which == 13) {
@@ -93,10 +97,17 @@ function SearchBar({ isMobile }) {
           onChange={searchValueHandler}
           onKeyPress={checkKeyType}
         />
-        <Link
-          to={`/search?keyword=${input}`}
-          onClick={removeSuggestionsHandler}
-        >
+        {input ? (
+          <Link to={`/search?keyword=${input}`} onClick={removeSearchValue}>
+            <span className="search-icon h2 w2">
+              <img
+                className="search-icon-img pa1"
+                src={SearchIcon}
+                alt="search-icon"
+              />
+            </span>
+          </Link>
+        ) : (
           <span className="search-icon h2 w2">
             <img
               className="search-icon-img pa1"
@@ -104,13 +115,13 @@ function SearchBar({ isMobile }) {
               alt="search-icon"
             />
           </span>
-        </Link>
+        )}
       </form>
       {showSuggestions && displayResults.length > 0 && (
         <div
-          className={`absolute z-999 bg-white ${
-            isMobile ? "w-80" : ""
-          } shadow-1 search-bar`}
+          className={`absolute z-999 bg-white shadow-1 ${
+            isMobile ? "searchbar-m" : "search-bar"
+          }`}
         >
           {showSuggestions && (
             <ul className={showSuggestions ? "pa0 pl2" : ""}>

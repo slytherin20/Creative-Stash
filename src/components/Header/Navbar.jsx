@@ -27,6 +27,11 @@ function Navbar({ user, admin }) {
     window.location.reload();
   }
 
+  function closeMobileMenu() {
+    setShowMenuStatus(false);
+    body.classList.remove("overflow-hidden");
+  }
+
   return (
     <>
       <nav className="navbar  flex flex-column justify-center items-center pa1 shadow-1">
@@ -60,7 +65,7 @@ function Navbar({ user, admin }) {
           <Modal>
             <CategoriesForMobile
               hideMenuHandler={hideMenuHandler}
-              closeMenu={hideMenuHandler}
+              closeMenu={closeMobileMenu}
             />
           </Modal>
         )}
