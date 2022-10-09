@@ -3,6 +3,7 @@ import HeartIcon from "../../images/hearted.png";
 import DeviceContext from "../DeviceContext.jsx";
 import { useContext, useEffect, useState } from "react";
 import fetchProductImg from "../../data/fetchProductImg.js";
+import checkCartItemExists from "../../data/checkCartItemExists";
 import { TailSpin } from "react-loader-spinner";
 function WishlistSingleItem({
   item,
@@ -20,20 +21,47 @@ function WishlistSingleItem({
     setImg(res);
   }
   async function addToCart() {
-    await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Cart`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Transfer-Encoding": "gzip",
-      },
-      body: JSON.stringify({
-        ...item,
-        uid: uid,
-        cartCount: 1,
-      }),
-    })
-      .then(() => fetchCartHandler())
-      .catch((err) => console.log(err));
+    let itemExists = await checkCartItemExists(item, uid);
+    if (itemExists.length > 0) {
+      await fetch(
+        `${process.env.REACT_APP_MOCKBACKEND}/Cart/${item.productId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ...itemExists[0],
+            cartCount: itemExists[0].cartCount + 1,
+          }),
+        }
+      )
+        .then(() => fetchCartHandler())
+        .catch((err) => console.log(err));
+    } else {
+      await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Cart`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Transfer-Encoding": "gzip",
+        },
+        body: JSON.stringify({
+          cat: item.cat,
+          subcat: item.subcat,
+          name: item.name,
+          description: item.description,
+          id: item.productId,
+          brand: item.brand,
+          price: item.price,
+          count: item.count,
+          status: item.status,
+          uid: uid,
+          cartCount: 1,
+        }),
+      })
+        .then(() => fetchCartHandler())
+        .catch((err) => console.log(err));
+    }
   }
   return (
     <div

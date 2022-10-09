@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import Item from "../Home Page/Item.jsx";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Loading from "../Modals/Loading.jsx";
+import checkCartItemExists from "../../data/checkCartItemExists.js";
 function AllSearchResults({ fetchCartHandler }) {
   const [products, setProducts] = useState([]);
   const [user, setUser] = useState(undefined);
@@ -56,20 +57,36 @@ function AllSearchResults({ fetchCartHandler }) {
   async function addToCart(item) {
     if (auth.currentUser) {
       //Save to user cart
-      await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Cart`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Transfer-Encoding": "gzip",
-        },
-        body: JSON.stringify({
-          ...item,
-          uid: auth.currentUser.uid,
-          cartCount: 1,
-        }),
-      })
-        .then(() => fetchCartHandler())
-        .catch((err) => console.log(err));
+      let itemExists = await checkCartItemExists(item, auth.currentUser.uid);
+      if (itemExists.length > 0) {
+        await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Cart/${item.id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ...itemExists[0],
+            cartCount: itemExists[0].cartCount + 1,
+          }),
+        })
+          .then(() => fetchCartHandler())
+          .catch((err) => console.log(err));
+      } else {
+        await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Cart`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Transfer-Encoding": "gzip",
+          },
+          body: JSON.stringify({
+            ...item,
+            uid: auth.currentUser.uid,
+            cartCount: 1,
+          }),
+        })
+          .then(() => fetchCartHandler())
+          .catch((err) => console.log(err));
+      }
     } else {
       //For anonymyous users
       let cart = localStorage.getItem("cart");

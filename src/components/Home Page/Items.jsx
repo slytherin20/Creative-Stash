@@ -1,6 +1,7 @@
 import Item from "./Item.jsx";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useState } from "react";
+import checkCartItemExists from "../../data/checkCartItemExists.js";
 function Items({ items, title, cat, subcat, fetchCartHandler }) {
   const [user, setUser] = useState(undefined);
   const auth = getAuth();
@@ -11,20 +12,36 @@ function Items({ items, title, cat, subcat, fetchCartHandler }) {
   async function addToCart(item) {
     if (user) {
       //Save to user cart
-      await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Cart`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Transfer-Encoding": "gzip",
-        },
-        body: JSON.stringify({
-          ...item,
-          uid: user,
-          cartCount: 1,
-        }),
-      })
-        .then(() => fetchCartHandler())
-        .catch((err) => console.log(err));
+      let itemExists = await checkCartItemExists(item, user);
+      if (itemExists.length > 0) {
+        await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Cart/${item.id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ...itemExists[0],
+            cartCount: itemExists[0].cartCount + 1,
+          }),
+        })
+          .then(() => fetchCartHandler())
+          .catch((err) => console.log(err));
+      } else {
+        await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Cart`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Transfer-Encoding": "gzip",
+          },
+          body: JSON.stringify({
+            ...item,
+            uid: user,
+            cartCount: 1,
+          }),
+        })
+          .then(() => fetchCartHandler())
+          .catch((err) => console.log(err));
+      }
     } else {
       //For anonymyous users
       let cart = localStorage.getItem("cart");
