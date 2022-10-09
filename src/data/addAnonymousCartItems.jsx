@@ -1,3 +1,4 @@
+import checkCartItemExists from "./checkCartItemExists";
 function addAnonymousCartItems(userid) {
   let cart = localStorage.getItem("cart");
   if (!cart) return [];
@@ -26,27 +27,46 @@ function addAnonymousCartItems(userid) {
         data[0].uid = userid;
         newCartItems.push(...data);
         ++noOfFetchedItems;
-        if (noOfFetchedItems === cartLength) addItemsToDB(newCartItems);
+        if (noOfFetchedItems === cartLength) addItemsToDB(newCartItems, userid);
       });
   });
 }
 
-function addItemsToDB(items) {
+function addItemsToDB(items, userid) {
   let itemsLength = items.length;
-  items.forEach((item) => {
-    fetch(`${process.env.REACT_APP_MOCKBACKEND}/Cart`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Transfer-Encoding": "gzip",
-      },
-      body: JSON.stringify(item),
-    })
-      .then(() => {
-        --itemsLength;
-        if (itemsLength === 0) localStorage.removeItem("cart");
+  items.forEach(async (item) => {
+    let itemExists = await checkCartItemExists(item, userid);
+    if (itemExists.length > 0) {
+      await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Cart/${item.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...itemExists[0],
+          cartCount: itemExists[0].cartCount + 1,
+        }),
       })
-      .catch((err) => console.log(err));
+        .then(() => {
+          --itemsLength;
+          if (itemsLength === 0) localStorage.removeItem("cart");
+        })
+        .catch((err) => console.log(err));
+    } else {
+      fetch(`${process.env.REACT_APP_MOCKBACKEND}/Cart`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Transfer-Encoding": "gzip",
+        },
+        body: JSON.stringify(item),
+      })
+        .then(() => {
+          --itemsLength;
+          if (itemsLength === 0) localStorage.removeItem("cart");
+        })
+        .catch((err) => console.log(err));
+    }
   });
 }
 
