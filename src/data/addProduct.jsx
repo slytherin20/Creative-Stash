@@ -18,55 +18,51 @@ async function addProduct(inputs) {
     subcat: inputs.subcat,
     id: generateId,
   };
-  let image = {
-    id: generateId,
-    img: inputs.imgSrc,
-  };
-  let addImageToDB = fetch(`${process.env.REACT_APP_MOCKBACKEND}/images`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Transfer-Encoding": "gzip",
-    },
-    body: JSON.stringify(image),
-  });
-  let addProductToDB = fetch(
-    `${process.env.REACT_APP_MOCKBACKEND}/${inputs.cat
-      .split(" ")
-      .join("_")}-${inputs.subcat.split(" ").join("_")}`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Transfer-Encoding": "gzip",
-      },
-      body: JSON.stringify(productDetails),
-    }
-  );
 
-  let addBrandsToDB = fetch(
-    `${process.env.REACT_APP_MOCKBACKEND}/BrandSearch`,
-    {
+  async function addImageToDB() {
+    let formdata = new FormData();
+    formdata.append("file", inputs.img);
+    let res = await fetch(`${process.env.REACT_APP_MOCKBACKEND}/images`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Transfer-Encoding": "gzip",
-      },
-      body: JSON.stringify(newBrand),
-    }
-  );
-  let resStatus;
-  return Promise.all([addProductToDB, addBrandsToDB, addImageToDB])
-    .then((res) => {
-      if (res.ok || res.status == 201) {
-        resStatus = res.status;
+      body: formdata,
+    });
+    let data = await res.json();
+    productDetails.cloudinaryId = data.public_id;
+  }
+
+  return addImageToDB()
+    .then(async () => {
+      try {
+        await fetch(
+          `${process.env.REACT_APP_MOCKBACKEND}/${inputs.cat
+            .split(" ")
+            .join("-")}`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Transfer-Encoding": "gzip",
+            },
+            body: JSON.stringify(productDetails),
+          }
+        );
+        await fetch(
+          `${process.env.REACT_APP_MOCKBACKEND}/dashboard/BrandSearch`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Transfer-Encoding": "gzip",
+            },
+            body: JSON.stringify(newBrand),
+          }
+        );
         return "success";
-      } else {
+      } catch (err) {
         return "error";
       }
     })
     .catch(() => {
-      if (resStatus == 201) return "success";
       return "error";
     });
 }
