@@ -10,7 +10,7 @@ import DeviceContext from "../DeviceContext.jsx";
 import Loading from "../Modals/Loading.jsx";
 import Modal from "../Modals/Modal.jsx";
 import { TailSpin } from "react-loader-spinner";
-import fetchProductImg from "../../data/fetchProductImg.js";
+// import fetchProductImg from "../../data/fetchProductImg.js";
 import checkCartItemExists from "../../data/checkCartItemExists.js";
 function SingleProduct({ fetchCartHandler }) {
   const [product, setProduct] = useState({});
@@ -19,7 +19,7 @@ function SingleProduct({ fetchCartHandler }) {
   const [loading, setLoading] = useState({ status: false, text: "" });
   const { isMobile } = useContext(DeviceContext);
   const [searchParams] = useSearchParams();
-  const [img, setImg] = useState(undefined);
+  // const [img, setImg] = useState(undefined);
   let cat = searchParams.get("cat").split(" ").join("-");
   let subcat = searchParams.get("subcat").split(" ").join("-");
   let itemId = searchParams.get("id");
@@ -45,13 +45,13 @@ function SingleProduct({ fetchCartHandler }) {
     let data = await res.json();
     setProduct(data);
     if (user) wishlistStatus(data.id);
-    fetchImage(data.id);
+    // fetchImage(data.id);
   }
 
-  async function fetchImage(id) {
-    let res = await fetchProductImg(id);
-    setImg(res);
-  }
+  // async function fetchImage(id) {
+  //   let res = await fetchProductImg(id);
+  //   setImg(res);
+  // }
 
   async function wishlistStatus(id) {
     let [status, wishlistId] = await checkItemWishlisted(user, id);
@@ -126,13 +126,17 @@ function SingleProduct({ fetchCartHandler }) {
     <>
       <main className={isMobile ? "flex flex-column pa1" : "flex ma4"}>
         <aside className={isMobile ? "w-100" : "w-50"}>
-          {img != undefined ? (
-            <img src={img} alt={product.name} className="w-80 h-80" />
-          ) : (
+          {/* {img != undefined ? ( */}
+          <img
+            src={process.env.REACT_IMG_URL + product.cloudinaryId}
+            alt={product.name}
+            className="w-80 h-80"
+          />
+          {/* ) : (
             <div className="w-20 h-100 bg-white flex justify-center items-center">
               <TailSpin width={20} height={20} color="purple" />
             </div>
-          )}
+          )} */}
         </aside>
         <section className={`${isMobile ? "w-100" : "w-50"} flex flex-column`}>
           <h2>{product.name}</h2>
