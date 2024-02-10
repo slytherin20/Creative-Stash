@@ -44,9 +44,9 @@ function ShowAllProducts({ fetchCartHandler }) {
 
   async function fetchSubCatItems(category, subcat) {
     let res = await fetch(
-      `${process.env.REACT_APP_MOCKBACKEND}/${category}-${subcat
+      `${process.env.REACT_APP_MOCKBACKEND}/${category
         .split(" ")
-        .join("_")}`,
+        .join("-")}/${subcat.split(" ").join("-")}`,
       {
         headers: {
           "Transfer-Encoding": "gzip",
