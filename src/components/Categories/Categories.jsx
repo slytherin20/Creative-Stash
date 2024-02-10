@@ -18,11 +18,14 @@ function Categories() {
   }, []);
 
   async function getSubCategories() {
-    let res = await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Categories`, {
-      headers: {
-        "Transfer-Encoding": "gzip",
-      },
-    });
+    let res = await fetch(
+      `${process.env.REACT_APP_MOCKBACKEND}/dashboard/Categories`,
+      {
+        headers: {
+          "Transfer-Encoding": "gzip",
+        },
+      }
+    );
     let data = await res.json();
     setSubCategory(data);
   }

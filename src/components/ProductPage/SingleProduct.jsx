@@ -20,8 +20,8 @@ function SingleProduct({ fetchCartHandler }) {
   const { isMobile } = useContext(DeviceContext);
   const [searchParams] = useSearchParams();
   const [img, setImg] = useState(undefined);
-  let cat = searchParams.get("cat").split(" ").join("_");
-  let subcat = searchParams.get("subcat").split(" ").join("_");
+  let cat = searchParams.get("cat").split(" ").join("-");
+  let subcat = searchParams.get("subcat").split(" ").join("-");
   let itemId = searchParams.get("id");
   const auth = getAuth();
 
@@ -35,7 +35,7 @@ function SingleProduct({ fetchCartHandler }) {
 
   async function getProduct() {
     let res = await fetch(
-      `${process.env.REACT_APP_MOCKBACKEND}/${cat}-${subcat}?id=${itemId}`,
+      `${process.env.REACT_APP_MOCKBACKEND}/${cat}/${itemId}`,
       {
         headers: {
           "Transfer-Encoding": "gzip",
@@ -43,9 +43,9 @@ function SingleProduct({ fetchCartHandler }) {
       }
     );
     let data = await res.json();
-    setProduct(...data);
-    if (user) wishlistStatus(data[0].id);
-    fetchImage(data[0].id);
+    setProduct(data);
+    if (user) wishlistStatus(data.id);
+    fetchImage(data.id);
   }
 
   async function fetchImage(id) {
@@ -114,10 +114,10 @@ function SingleProduct({ fetchCartHandler }) {
       //For anonymyous users
       let cart = localStorage.getItem("cart");
       if (cart) {
-        cart = [cart, `${cat}-${subcat}-${itemId}-1`];
+        cart = [cart, `${cat}|${subcat}|${itemId}|1`];
         localStorage.setItem("cart", cart);
       } else {
-        localStorage.setItem("cart", [`${cat}-${subcat}-${itemId}-1`]);
+        localStorage.setItem("cart", [`${cat}|${subcat}|${itemId}|1`]);
       }
       fetchCartHandler();
     }

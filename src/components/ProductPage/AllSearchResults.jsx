@@ -18,11 +18,14 @@ function AllSearchResults({ fetchCartHandler }) {
   let keyword = searchParams.get("keyword");
 
   async function fetchData() {
-    let res = await fetch(`${process.env.REACT_APP_MOCKBACKEND}/BrandSearch`, {
-      headers: {
-        "Transfer-Encoding": "gzip",
-      },
-    });
+    let res = await fetch(
+      `${process.env.REACT_APP_MOCKBACKEND}/dashboard/BrandSearch`,
+      {
+        headers: {
+          "Transfer-Encoding": "gzip",
+        },
+      }
+    );
     let data = await res.json();
     let items = [];
     data.map(async (obj) => {
@@ -43,7 +46,7 @@ function AllSearchResults({ fetchCartHandler }) {
     let res = await fetch(
       `${process.env.REACT_APP_MOCKBACKEND}/${obj.cat
         .split(" ")
-        .join("_")}-${obj.subcat.split(" ").join("_")}?id=${obj.id}`,
+        .join("-")}?id=${obj.id}`,
       {
         headers: {
           "Transfer-Encoding": "gzip",
@@ -93,16 +96,16 @@ function AllSearchResults({ fetchCartHandler }) {
       if (cart) {
         cart = [
           cart,
-          `${item.cat.split(" ").join("_")}-${item.subcat
+          `${item.cat.split(" ").join("-")}|${item.subcat
             .split(" ")
-            .join("_")}-${item.id}-1`,
+            .join("-")}|${item.id}|1`,
         ];
         localStorage.setItem("cart", cart);
       } else {
         localStorage.setItem("cart", [
-          `${item.cat.split(" ").join("_")}-${item.subcat
+          `${item.cat.split(" ").join("-")}|${item.subcat
             .split(" ")
-            .join("_")}-${item.id}-1`,
+            .join("-")}|${item.id}|1`,
         ]);
       }
       fetchCartHandler();
