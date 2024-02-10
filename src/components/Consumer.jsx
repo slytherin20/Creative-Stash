@@ -111,23 +111,19 @@ function Consumer({ userid }) {
         let cartLen = cart.length;
         let noOfFetcheditems = 0;
         cart.forEach((item) => {
-          let values = item.split("-");
+          let values = item.split("|");
           let cat = values[0];
-          let subcat = values[1];
           let itemId = values[2];
           let cartCount = Number(values[3]);
-          fetch(
-            `${process.env.REACT_APP_MOCKBACKEND}/${cat}-${subcat}?id=${itemId}`,
-            {
-              headers: {
-                "Transfer-Encoding": "gzip",
-              },
-            }
-          )
+          fetch(`${process.env.REACT_APP_MOCKBACKEND}/${cat}/${itemId}`, {
+            headers: {
+              "Transfer-Encoding": "gzip",
+            },
+          })
             .then((res) => res.json())
             .then((data) => {
-              data[0].cartCount = Number(cartCount);
-              cartItems.push(...data);
+              data.cartCount = Number(cartCount);
+              cartItems.push(data);
               noOfFetcheditems += 1;
               if (cartLen === noOfFetcheditems) setCartItems(cartItems);
             });

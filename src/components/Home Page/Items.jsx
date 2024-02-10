@@ -48,16 +48,16 @@ function Items({ items, title, cat, subcat, fetchCartHandler }) {
       if (cart) {
         cart = [
           cart,
-          `${item.cat.split(" ").join("_")}-${item.subcat
+          `${item.cat.split(" ").join("-")}|${item.subcat
             .split(" ")
-            .join("_")}-${item.id}-1`,
+            .join("-")}|${item.id}|1`,
         ];
         localStorage.setItem("cart", cart);
       } else {
         localStorage.setItem("cart", [
-          `${item.cat.split(" ").join("_")}-${item.subcat
+          `${item.cat.split(" ").join("-")}|${item.subcat
             .split(" ")
-            .join("_")}-${item.id}-1`,
+            .join("-")}|${item.id}|1`,
         ]);
       }
       fetchCartHandler();

@@ -7,20 +7,16 @@ function addAnonymousCartItems(userid) {
   let cartLength = cartItems.length;
   let noOfFetchedItems = 0;
   cartItems.forEach((item) => {
-    item = item.split("-");
+    item = item.split("|");
     let cat = item[0];
-    let subcat = item[1];
     let itemId = item[2];
     let cartCount = Number(item[3]);
 
-    fetch(
-      `${process.env.REACT_APP_MOCKBACKEND}/${cat}-${subcat}?id=${itemId}`,
-      {
-        headers: {
-          "Transfer-Encoding": "gzip",
-        },
-      }
-    )
+    fetch(`${process.env.REACT_APP_MOCKBACKEND}/${cat}?id=${itemId}`, {
+      headers: {
+        "Transfer-Encoding": "gzip",
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         data[0].cartCount = Number(cartCount);
