@@ -25,7 +25,7 @@ function SearchByBrand({ fetchCartHandler }) {
     let res = await fetch(
       `${
         process.env.REACT_APP_MOCKBACKEND
-      }/BrandSearch?brand=${encodeURIComponent(brand)}`,
+      }/dashboard/BrandSearch?brand=${encodeURIComponent(brand)}`,
       {
         headers: {
           "Transfer-Encoding": "gzip",
@@ -38,7 +38,7 @@ function SearchByBrand({ fetchCartHandler }) {
       let res = await fetch(
         `${process.env.REACT_APP_MOCKBACKEND}/${obj.cat
           .split(" ")
-          .join("_")}-${obj.subcat.split(" ").join("_")}?id=${obj.id}`,
+          .join("-")}?id=${obj.id}`,
         {
           headers: {
             "Transfer-Encoding": "gzip",
@@ -89,16 +89,16 @@ function SearchByBrand({ fetchCartHandler }) {
       if (cart) {
         cart = [
           cart,
-          `${item.cat.split(" ").join("_")}-${item.subcat
+          `${item.cat.split(" ").join("-")}|${item.subcat
             .split(" ")
-            .join("_")}-${item.id}-1`,
+            .join("-")}|${item.id}|1`,
         ];
         localStorage.setItem("cart", cart);
       } else {
         localStorage.setItem("cart", [
-          `${item.cat.split(" ").join("_")}-${item.subcat
+          `${item.cat.split(" ").join("-")}|${item.subcat
             .split(" ")
-            .join("_")}-${item.id}-1`,
+            .join("-")}|${item.id}|1`,
         ]);
       }
       fetchCartHandler();
