@@ -93,14 +93,12 @@ function Consumer({ userid }) {
 
   async function fetchCartItems() {
     if (userid) {
-      let res = await fetch(
-        `${process.env.REACT_APP_MOCKBACKEND}/Cart?uid=${userid}`,
-        {
-          headers: {
-            "Transfer-Encoding": "gzip",
-          },
-        }
-      );
+      let res = await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Cart`, {
+        headers: {
+          "Transfer-Encoding": "gzip",
+          Authorization: "Bearer " + sessionStorage.getItem("tokenId"),
+        },
+      });
       let cart = await res.json();
       setCartItems(cart);
     } else {
