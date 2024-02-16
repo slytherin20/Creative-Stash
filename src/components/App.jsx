@@ -5,13 +5,23 @@ import AdminPortal from "./Admin/AdminPortal.jsx";
 import Consumer from "./Consumer.jsx";
 import { useMediaQuery } from "react-responsive";
 import DeviceContext from "./DeviceContext.jsx";
+
 function App() {
   const [user, setUser] = useState(undefined);
   const isMobile = useMediaQuery({ query: "(max-width:480px)" });
   const isTablet = useMediaQuery({ query: "(max-width:1224px)" });
   onAuthStateChanged(auth, (user) => {
-    if (user) setUser(user.uid);
-    else setUser(null);
+    if (user) {
+      setUser(user.uid);
+      auth.currentUser
+        .getIdToken()
+        .then(function (idtoken) {
+          sessionStorage.setItem("tokenId", idtoken);
+        })
+        .catch((err) => {
+          console.log("Error fetching authentication token", err);
+        });
+    } else setUser(null);
   });
 
   function checkIfAdmin() {
