@@ -44,9 +44,9 @@ function AllSearchResults({ fetchCartHandler }) {
 
   async function fetchProductItem(obj) {
     let res = await fetch(
-      `${process.env.REACT_APP_MOCKBACKEND}/${obj.cat
-        .split(" ")
-        .join("-")}?id=${obj.id}`,
+      `${process.env.REACT_APP_MOCKBACKEND}/${obj.cat.split(" ").join("-")}/${
+        obj.id
+      }`,
       {
         headers: {
           "Transfer-Encoding": "gzip",
@@ -68,8 +68,8 @@ function AllSearchResults({ fetchCartHandler }) {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            ...itemExists[0],
             cartCount: itemExists[0].cartCount + 1,
+            tokenId: sessionStorage.getItem("tokenId"),
           }),
         })
           .then(() => fetchCartHandler())
@@ -82,9 +82,11 @@ function AllSearchResults({ fetchCartHandler }) {
             "Transfer-Encoding": "gzip",
           },
           body: JSON.stringify({
-            ...item,
-            uid: auth.currentUser.uid,
-            cartCount: 1,
+            item: {
+              ...item,
+              cartCount: 1,
+            },
+            tokenId: sessionStorage.getItem("tokenId"),
           }),
         })
           .then(() => fetchCartHandler())
