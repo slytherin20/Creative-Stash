@@ -61,7 +61,7 @@ function Consumer({ userid }) {
           )
           .catch(() => {
             console.log("Server Connection Error. Connecting Again...");
-            fetchSecretKey();
+            // fetchSecretKey();
           });
       }
     } else {
@@ -81,7 +81,7 @@ function Consumer({ userid }) {
         })
         .catch(() => {
           console.log("Server Connection Error. Connecting again...");
-          fetchSecretKey();
+          // fetchSecretKey();
         });
     }
   }
@@ -100,7 +100,7 @@ function Consumer({ userid }) {
         },
       });
       let cart = await res.json();
-      setCartItems(cart);
+      if (cart?.cart) setCartItems(cart.cart);
     } else {
       let cart = localStorage.getItem("cart");
       if (cart) {

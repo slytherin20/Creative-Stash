@@ -6,6 +6,8 @@ import {
 import { useState } from "react";
 import { /*useLocation,*/ useNavigate } from "react-router-dom";
 import addAnonymousCartItems from "../../data/addAnonymousCartItems.jsx";
+import { createCart } from "../../data/createCart.js";
+
 function SignUpForm({ changeForm, changeModalContent }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,7 +25,12 @@ function SignUpForm({ changeForm, changeModalContent }) {
         createUserWithEmailAndPassword(auth, email, password)
           .then(() => {
             changeModalContent("loading");
-            addAnonymousCartItems(auth.currentUser.uid);
+            auth.currentUser.getIdToken().then(async (token) => {
+              let resStatus = await createCart(token);
+              if (resStatus == 200) {
+                addAnonymousCartItems(token);
+              }
+            });
             navigate("/add-billing-address");
             //  if (currentPage === "cart") navigate("/cart");
             sendEmailVerification(auth.currentUser).then(() => {

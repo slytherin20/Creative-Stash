@@ -20,8 +20,8 @@ function Items({ items, title, cat, subcat, fetchCartHandler }) {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            ...itemExists[0],
             cartCount: itemExists[0].cartCount + 1,
+            tokenId: sessionStorage.getItem("tokenId"),
           }),
         })
           .then(() => fetchCartHandler())
@@ -34,9 +34,11 @@ function Items({ items, title, cat, subcat, fetchCartHandler }) {
             "Transfer-Encoding": "gzip",
           },
           body: JSON.stringify({
-            ...item,
-            uid: user,
-            cartCount: 1,
+            item: {
+              ...item,
+              cartCount: 1,
+            },
+            tokenId: sessionStorage.getItem("tokenId"),
           }),
         })
           .then(() => fetchCartHandler())

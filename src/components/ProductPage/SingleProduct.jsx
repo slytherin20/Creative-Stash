@@ -88,8 +88,8 @@ function SingleProduct({ fetchCartHandler }) {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            ...itemExists[0],
             cartCount: itemExists[0].cartCount + 1,
+            tokenId: sessionStorage.getItem("tokenId"),
           }),
         })
           .then(() => fetchCartHandler())
@@ -102,9 +102,11 @@ function SingleProduct({ fetchCartHandler }) {
             "Transfer-Encoding": "gzip",
           },
           body: JSON.stringify({
-            ...product,
-            uid: user,
-            cartCount: 1,
+            item: {
+              ...product,
+              cartCount: 1,
+            },
+            tokenId: sessionStorage.getItem("tokenId"),
           }),
         })
           .then(() => fetchCartHandler())

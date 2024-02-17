@@ -20,19 +20,7 @@ function ShowCartItems({ items, getCartItems, loginSuccess }) {
   async function increaseItemCount(item) {
     if (Number(item.cartCount) + 1 > item.count) return;
     setLoading(true);
-    let newItem = {
-      id: item.id,
-      name: item.name,
-      cartCount: Number(item.cartCount) + 1,
-      price: Number(item.price),
-      description: item.description,
-      status: true,
-      count: Number(item.count),
-      cat: item.cat,
-      subcat: item.subcat,
-      brand: item.brand,
-      uid: item.uid,
-    };
+
     if (loginSuccess) {
       fetch(`${process.env.REACT_APP_MOCKBACKEND}/Cart/${item.id}`, {
         method: "PUT",
@@ -40,7 +28,10 @@ function ShowCartItems({ items, getCartItems, loginSuccess }) {
           "Content-Type": "application/json",
           "Transfer-Encoding": "gzip",
         },
-        body: JSON.stringify(newItem),
+        body: JSON.stringify({
+          cartCount: Number(item.cartCount) + 1,
+          tokenId: sessionStorage.getItem("tokenId"),
+        }),
       })
         .then(() => {
           getCartItems();
@@ -72,19 +63,7 @@ function ShowCartItems({ items, getCartItems, loginSuccess }) {
   async function decreaseItemCount(item) {
     if (item.cartCount == 1) return removeItem(item);
     setLoading(true);
-    let newItem = {
-      id: item.id,
-      name: item.name,
-      cartCount: Number(item.cartCount) - 1,
-      price: Number(item.price),
-      description: item.description,
-      status: true,
-      count: Number(item.count),
-      cat: item.cat,
-      subcat: item.subcat,
-      brand: item.brand,
-      uid: item.uid,
-    };
+
     if (loginSuccess) {
       fetch(`${process.env.REACT_APP_MOCKBACKEND}/Cart/${item.id}`, {
         method: "PUT",
@@ -92,7 +71,10 @@ function ShowCartItems({ items, getCartItems, loginSuccess }) {
           "Content-Type": "application/json",
           "Transfer-Encoding": "gzip",
         },
-        body: JSON.stringify(newItem),
+        body: JSON.stringify({
+          cartCount: Number(item.cartCount) - 1,
+          tokenId: sessionStorage.getItem("tokenId"),
+        }),
       })
         .then(() => {
           getCartItems();
@@ -127,8 +109,10 @@ function ShowCartItems({ items, getCartItems, loginSuccess }) {
       await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Cart/${item.id}`, {
         method: "DELETE",
         headers: {
+          "Content-Type": "application/json",
           "Transfer-Encoding": "gzip",
         },
+        body: JSON.stringify({ tokenId: sessionStorage.getItem("tokenId") }),
       })
         .then(() => {
           getCartItems();

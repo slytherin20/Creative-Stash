@@ -12,11 +12,11 @@ function App() {
   const isTablet = useMediaQuery({ query: "(max-width:1224px)" });
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      setUser(user.uid);
       auth.currentUser
         .getIdToken()
         .then(function (idtoken) {
           sessionStorage.setItem("tokenId", idtoken);
+          setUser(user.uid);
         })
         .catch((err) => {
           console.log("Error fetching authentication token", err);

@@ -1,5 +1,5 @@
 import checkCartItemExists from "./checkCartItemExists";
-function addAnonymousCartItems(userid) {
+function addAnonymousCartItems() {
   let cart = localStorage.getItem("cart");
   if (!cart) return [];
   let cartItems = cart.split(",");
@@ -12,35 +12,34 @@ function addAnonymousCartItems(userid) {
     let itemId = item[2];
     let cartCount = Number(item[3]);
 
-    fetch(`${process.env.REACT_APP_MOCKBACKEND}/${cat}?id=${itemId}`, {
+    fetch(`${process.env.REACT_APP_MOCKBACKEND}/${cat}/${itemId}`, {
       headers: {
         "Transfer-Encoding": "gzip",
       },
     })
       .then((res) => res.json())
       .then((data) => {
-        data[0].cartCount = Number(cartCount);
-        data[0].uid = userid;
-        newCartItems.push(...data);
+        data.cartCount = Number(cartCount);
+        newCartItems.push(data);
         ++noOfFetchedItems;
-        if (noOfFetchedItems === cartLength) addItemsToDB(newCartItems, userid);
+        if (noOfFetchedItems === cartLength) addItemsToDB(newCartItems);
       });
   });
 }
 
-function addItemsToDB(items, userid) {
+function addItemsToDB(items) {
   let itemsLength = items.length;
   items.forEach(async (item) => {
-    let itemExists = await checkCartItemExists(item, userid);
-    if (itemExists.length > 0) {
+    let itemExists = await checkCartItemExists(item);
+    if (itemExists) {
       await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Cart/${item.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          ...itemExists[0],
-          cartCount: itemExists[0].cartCount + 1,
+          cartCount: itemExists.cartCount + 1,
+          tokenId: sessionStorage.getItem("tokenId"),
         }),
       })
         .then(() => {
@@ -55,7 +54,10 @@ function addItemsToDB(items, userid) {
           "Content-Type": "application/json",
           "Transfer-Encoding": "gzip",
         },
-        body: JSON.stringify(item),
+        body: JSON.stringify({
+          item,
+          tokenId: sessionStorage.getItem("tokenId"),
+        }),
       })
         .then(() => {
           --itemsLength;
