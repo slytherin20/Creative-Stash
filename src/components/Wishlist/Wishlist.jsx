@@ -23,14 +23,12 @@ function Wishlist({ fetchCartHandler }) {
   }, [user]);
 
   async function fetchWishlistItems() {
-    let res = await fetch(
-      `${process.env.REACT_APP_MOCKBACKEND}/Wishlist?uid=${user}`,
-      {
-        headers: {
-          "Transfer-Encoding": "gzip",
-        },
-      }
-    );
+    let res = await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Wishlist`, {
+      headers: {
+        "Transfer-Encoding": "gzip",
+        Authorization: "Bearer " + sessionStorage.getItem("tokenId"),
+      },
+    });
     let items = await res.json();
     setWishlistItems(items);
     setLoading(false);
@@ -53,7 +51,7 @@ function Wishlist({ fetchCartHandler }) {
         <article className="pa2">
           <h2>Wishlist</h2>
           <div className="flex flex-wrap">
-            {wishlistItems.map((item) => (
+            {wishlistItems.wishlist.map((item) => (
               <WishlistSingleItem
                 key={item.id}
                 item={item}
