@@ -6,14 +6,13 @@ import checkCartItemExists from "../../data/checkCartItemExists";
 
 function WishlistSingleItem({
   item,
-  uid,
   removeItemFromWishlist,
   fetchCartHandler,
 }) {
   const { isMobile } = useContext(DeviceContext);
 
   async function addToCart() {
-    let itemExists = await checkCartItemExists(item, uid);
+    let itemExists = await checkCartItemExists(item);
     if (itemExists && itemExists.length > 0) {
       await fetch(
         `${process.env.REACT_APP_MOCKBACKEND}/Cart/${item.productId}`,

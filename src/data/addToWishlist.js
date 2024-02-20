@@ -4,7 +4,6 @@ async function addToWishlist(item, uid) {
   let updatedItem = {
     ...item,
     id: id,
-    uid: uid,
     productId: item.id,
   };
 

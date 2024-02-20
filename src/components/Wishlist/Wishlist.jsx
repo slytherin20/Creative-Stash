@@ -55,7 +55,6 @@ function Wishlist({ fetchCartHandler }) {
               <WishlistSingleItem
                 key={item.id}
                 item={item}
-                uid={user}
                 fetchCartHandler={fetchCartHandler}
                 removeItemFromWishlist={removeItemFromWishlistHandler}
               />
