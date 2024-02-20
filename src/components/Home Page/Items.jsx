@@ -13,7 +13,7 @@ function Items({ items, title, cat, subcat, fetchCartHandler }) {
     if (user) {
       //Save to user cart
       let itemExists = await checkCartItemExists(item, user);
-      if (itemExists.length > 0) {
+      if (itemExists && itemExists.length > 0) {
         await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Cart/${item.id}`, {
           method: "PUT",
           headers: {

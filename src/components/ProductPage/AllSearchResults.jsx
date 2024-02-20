@@ -61,7 +61,7 @@ function AllSearchResults({ fetchCartHandler }) {
     if (auth.currentUser) {
       //Save to user cart
       let itemExists = await checkCartItemExists(item, auth.currentUser.uid);
-      if (itemExists.length > 0) {
+      if (itemExists && itemExists.length > 0) {
         await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Cart/${item.id}`, {
           method: "PUT",
           headers: {

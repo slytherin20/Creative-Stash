@@ -81,7 +81,7 @@ function SingleProduct({ fetchCartHandler }) {
   async function addToCart() {
     if (user) {
       let itemExists = await checkCartItemExists(product, user);
-      if (itemExists.length > 0) {
+      if (itemExists && itemExists.length > 0) {
         await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Cart/${product.id}`, {
           method: "PUT",
           headers: {

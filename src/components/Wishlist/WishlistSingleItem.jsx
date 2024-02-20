@@ -14,7 +14,7 @@ function WishlistSingleItem({
 
   async function addToCart() {
     let itemExists = await checkCartItemExists(item, uid);
-    if (itemExists.length > 0) {
+    if (itemExists && itemExists.length > 0) {
       await fetch(
         `${process.env.REACT_APP_MOCKBACKEND}/Cart/${item.productId}`,
         {

@@ -54,7 +54,7 @@ function SearchByBrand({ fetchCartHandler }) {
   async function addToCart(item) {
     if (auth.currentUser) {
       let itemExists = await checkCartItemExists(item, auth.currentUser.uid);
-      if (itemExists.length > 0) {
+      if (itemExists && itemExists.length > 0) {
         await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Cart/${item.id}`, {
           method: "PUT",
           headers: {
