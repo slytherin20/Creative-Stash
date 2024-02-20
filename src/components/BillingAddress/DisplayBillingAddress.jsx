@@ -21,8 +21,8 @@ function DisplayBillingAddress({ width }) {
   async function getAddress() {
     if (!uid) return;
     let data = await fetchBillingAddress(uid);
-    if (data.length > 0) {
-      setAddress(...data);
+    if (data) {
+      setAddress(data);
     } else {
       navigate("/add-billing-address");
     }

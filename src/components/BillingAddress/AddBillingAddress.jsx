@@ -34,30 +34,29 @@ function BillingDetails() {
       ...details,
       id: auth.currentUser.uid,
     });
-    let addressExists = await fetchBillingAddress(auth.currentUser.uid);
-    addressExists = addressExists.length;
+    let addressExists = await fetchBillingAddress();
     if (addressExists) {
       modifyAddress();
     } else {
       addNewAddress({
-        ...details,
+        details,
         id: auth.currentUser.uid,
       });
     }
   }
 
   function modifyAddress() {
-    fetch(
-      `${process.env.REACT_APP_MOCKBACKEND}/Address/${auth.currentUser.uid}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          "Transfer-Encoding": "gzip",
-        },
-        body: JSON.stringify(details),
-      }
-    )
+    fetch(`${process.env.REACT_APP_MOCKBACKEND}/Address`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "Transfer-Encoding": "gzip",
+      },
+      body: JSON.stringify({
+        details,
+        tokenId: sessionStorage.getItem("tokenId"),
+      }),
+    })
       .then((res) => {
         if (res.ok) navigate(`/billing-details`);
         else Promise.reject();
@@ -72,7 +71,10 @@ function BillingDetails() {
         "Content-Type": "application/json",
         "Transfer-Encoding": "gzip",
       },
-      body: JSON.stringify(addressObj),
+      body: JSON.stringify({
+        details: addressObj,
+        tokenId: sessionStorage.getItem("tokenId"),
+      }),
     })
       .then((res) => {
         if (res.ok) navigate(`/billing-details`);
