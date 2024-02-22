@@ -1,7 +1,6 @@
 import DeviceContext from "../DeviceContext.jsx";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 // import fetchProductImg from "../../data/fetchProductImg.js";
-import { TailSpin } from "react-loader-spinner";
 function DisplayOrderItem({ order }) {
   // const [img, setImg] = useState(undefined);
   const { isMobile } = useContext(DeviceContext);

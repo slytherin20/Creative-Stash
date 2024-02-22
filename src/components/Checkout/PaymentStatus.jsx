@@ -3,18 +3,15 @@ import { useEffect, useState, useContext } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import Loading from "../Modals/Loading.jsx";
 import CartContext from "../Cart/CartContext.jsx";
-//import { getAuth, onAuthStateChanged } from "firebase/app";
 import SuccessIcon from "../../images/correct.png";
 import FailureIcon from "../../images/warning.png";
-//import orderPlaced from "../../data/orderPlaced.jsx";
+import fetchBillingAddress from "../../data/fetchBillingAddress.jsx";
 function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
   const stripe = useStripe();
   const [message, setMessage] = useState(1);
   const [orderStatus, setOrderStatus] = useState(false);
   const [orderPlaced, setOrderPlaced] = useState(false);
   const cartItems = useContext(CartContext);
-  //   const [uid, setUid] = useState(null);
-  //const auth = getAuth();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
@@ -22,9 +19,6 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
   useEffect(() => {
     if (!orderPlaced && orderStatus && cartItems.length) placeOrder();
   }, [orderStatus, cartItems]);
-  //   onAuthStateChanged(auth, (user) => {
-  //     if (user) setUid(user.uid);
-  //   });
 
   function getStatus() {
     if (!stripe) return;
@@ -51,7 +45,7 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
 
   async function placeOrder() {
     setOrderPlaced(true);
-    let addressObject = await fetchUserAddress(cartItems[0].uid);
+    let addressObject = await fetchBillingAddress();
     let updatedItems = addCurrentDateAndAddressToItems(addressObject);
     Promise.all(
       updatedItems.map((item) =>
@@ -61,25 +55,27 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
             "Content-Type": "application/json",
             "Transfer-Encoding": "gzip",
           },
-          body: JSON.stringify(item),
+          body: JSON.stringify({
+            item,
+            tokenId: sessionStorage.getItem("tokenId"),
+          }),
         })
       )
     ).then(() => decreaseProductCount());
   }
 
-  async function fetchUserAddress(uid) {
-    let res = await fetch(
-      `${process.env.REACT_APP_MOCKBACKEND}/Address?id=${uid}`,
-      {
-        headers: {
-          "Transfer-Encoding": "gzip",
-        },
-      }
-    );
-    let address = await res.json();
+  // async function fetchUserAddress() {
+  //   let res = await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Address`, {
+  //     headers: {
+  //       "Transfer-Encoding": "gzip",
+  //       "Content-Type": "application/json",
+  //       Authorization: "Bearer " + sessionStorage.getItem("tokenId"),
+  //     },
+  //   });
+  //   let address = await res.json();
 
-    return address[0];
-  }
+  //   return address.details;
+  // }
   function addCurrentDateAndAddressToItems(addressObject) {
     let dateOrdered = new Date();
     let items = cartItems.map((item) => {
@@ -110,25 +106,11 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
         let updatedItemCount;
         if (Number(item.count) - Number(item.cartCount) === 0) {
           updatedItemCount = {
-            cat: item.cat,
-            subcat: item.subcat,
-            name: item.name,
-            brand: item.brand,
-            price: Number(item.price),
-            description: item.description,
-            id: item.id,
             count: `${Number(item.count) - Number(item.cartCount)}`,
             status: false,
           };
         } else {
           updatedItemCount = {
-            cat: item.cat,
-            subcat: item.subcat,
-            name: item.name,
-            brand: item.brand,
-            price: Number(item.price),
-            description: item.description,
-            id: item.id,
             count: `${Number(item.count) - Number(item.cartCount)}`,
             status: item.status,
           };
@@ -136,14 +118,17 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
         return fetch(
           `${process.env.REACT_APP_MOCKBACKEND}/${item.cat
             .split(" ")
-            .join("_")}-${item.subcat.split(" ").join("_")}/${item.id}`,
+            .join("-")}/${item.id}`,
           {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
               "Transfer-Encoding": "gzip",
             },
-            body: JSON.stringify(updatedItemCount),
+            body: JSON.stringify({
+              cartCount: updatedItemCount,
+              tokenId: sessionStorage.getItem("tokenId"),
+            }),
           }
         );
       })
@@ -159,7 +144,9 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
           method: "DELETE",
           headers: {
             "Transfer-Encoding": "gzip",
+            "Content-Type": "application/json",
           },
+          body: JSON.stringify({ tokenId: sessionStorage.getItem("tokenId") }),
         })
       )
     ).then(() => {
@@ -170,8 +157,6 @@ function PaymentStatus({ clearSessionHandler, fetchCartHandler }) {
   }
 
   if (message === 0) {
-    // orderPlaced(uid);
-    //payment succeeded
     return (
       <article className="w-100 vh-100 flex flex-column justify-center items-center">
         <section>

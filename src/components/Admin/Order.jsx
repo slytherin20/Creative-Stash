@@ -1,14 +1,11 @@
-import { TailSpin } from "react-loader-spinner";
 function Order({ order }) {
   return (
     <section className="flex ml4">
-      {order.img != undefined ? (
-        <img src={order.img} alt="product" className="h4 w4" />
-      ) : (
-        <div className="w-20 h-100 bg-white flex justify-center items-center">
-          <TailSpin width={20} height={20} color="purple" />
-        </div>
-      )}
+      <img
+        src={process.env.REACT_IMG_URL + order.cloudinaryId}
+        alt="product"
+        className="h4 w4"
+      />
 
       <section className="w-50">
         <p>{order.name}</p>

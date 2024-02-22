@@ -19,8 +19,9 @@ function OrderItemDetails() {
   async function fetchOrder() {
     let orderItem = await fetchOrderItem(params.id);
 
-    if (orderItem.uid === user) setOrder(orderItem);
-    else if (!orderItem) setOrder(null);
+    // if (orderItem.uid === user)
+    if (!orderItem) setOrder(null);
+    setOrder(orderItem);
   }
   onAuthStateChanged(auth, (user) => {
     if (user) setUser(user.uid);

@@ -8,7 +8,7 @@ import { /*useLocation,*/ useNavigate } from "react-router-dom";
 import addAnonymousCartItems from "../../data/addAnonymousCartItems.jsx";
 import { createCart } from "../../data/createCart.js";
 import { createWishlist } from "../../data/createWishlist.js";
-//import { createOrderslist } from "../../data/createOrdersList.js";
+import { createOrderslist } from "../../data/createOrdersList.js";
 
 function SignUpForm({ changeForm, changeModalContent }) {
   const [email, setEmail] = useState("");
@@ -32,7 +32,7 @@ function SignUpForm({ changeForm, changeModalContent }) {
               if (cartStatus == 200) {
                 addAnonymousCartItems(token);
                 createWishlist(token);
-                //  createOrderslist(token);
+                createOrderslist(token);
               }
             });
             navigate("/add-billing-address");
