@@ -38,21 +38,14 @@ function Consumer({ userid }) {
     if (paymentIntentId) {
       if (options.clientSecret) return;
       else {
-        fetch(
-          `${
-            process.env.NODE_ENV == "development"
-              ? "http://localhost:5000"
-              : process.env.REACT_APP_URI
-          }/secret`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "Transfer-Encoding": "gzip",
-            },
-            body: JSON.stringify({ pid: paymentIntentId }),
-          }
-        )
+        fetch(`${process.env.REACT_APP_URI}/secret`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Transfer-Encoding": "gzip",
+          },
+          body: JSON.stringify({ pid: paymentIntentId }),
+        })
           .then((res) => {
             return res.json();
           })
@@ -65,13 +58,7 @@ function Consumer({ userid }) {
           });
       }
     } else {
-      fetch(
-        `${
-          process.env.NODE_ENV == "development"
-            ? "http://localhost:5000"
-            : process.env.REACT_APP_URI
-        }/create-intent`
-      )
+      fetch(`${process.env.REACT_APP_URI}/create-intent`)
         .then((res) => {
           return res.json();
         })

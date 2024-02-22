@@ -66,7 +66,11 @@ function WishlistSingleItem({
         to={`/products/product?cat=${item.cat}&subcat=${item.subcat}&id=${item.productId}`}
         className="flex flex-column justify-content items-center"
       >
-        <img src={item.img} alt={item.name} className="item-icons" />
+        <img
+          src={process.env.REACT_IMG_URL + item.cloudinaryId}
+          alt={item.name}
+          className="item-icons"
+        />
 
         <p className="ma0 mt2">{item.name.slice(0, 30)}...</p>
         <p className="ma0 mt2 f6">{item.description.slice(0, 40)}...</p>
