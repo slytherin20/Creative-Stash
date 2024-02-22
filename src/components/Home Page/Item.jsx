@@ -18,25 +18,18 @@ function Item({ item, cat, subcat, addToCart }) {
   const { isMobile } = useContext(DeviceContext);
   useEffect(() => {
     if (uid) wishlistStatus(item.id);
-  }, []);
+  }, [uid]);
 
   async function wishlistStatus(id) {
     let wishlistPromise = checkItemWishlisted(id);
-    // let imagePromise = fetchProductImg(item.id);
     let responses = await Promise.all([wishlistPromise]);
     let [status, wishlistId] = responses[0];
-    // let res = responses[1];
+
     setWishlist({
       status: status,
       id: wishlistId,
     });
-    // setImg(res);
   }
-
-  // async function fetchImage(id) {
-  //   let res = await fetchProductImg(id);
-  //   setImg(res);
-  // }
 
   function removeWishlisted(id) {
     setLoading({ status: true, text: "Removing from wishlist" });
@@ -98,17 +91,12 @@ function Item({ item, cat, subcat, addToCart }) {
             }&subcat=${subcat}&id=${item.id}`}
             className="flex flex-column justify-center items-center"
           >
-            {/* {img != undefined ? ( */}
             <img
               src={process.env.REACT_IMG_URL + item.cloudinaryId}
               alt={item.name}
               className={` ${isMobile ? "item-icons" : "item-mobile-icons"}`}
             />
-            {/* ) : (
-              <div className="w-20 h-100 bg-white flex justify-center items-center">
-                <TailSpin width={20} height={20} color="purple" />
-              </div>
-            )} */}
+
             <p
               className={`ma0 mt2 tc ${
                 isMobile ? "item-mobile-name mb2" : "item-name b"

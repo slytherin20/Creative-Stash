@@ -5,13 +5,14 @@ async function checkItemWishlisted(productId) {
       headers: {
         "Transfer-Encoding": "gzip",
         Authorization: "Bearer " + sessionStorage.getItem("tokenId"),
+        "Content-Type": "application/json",
       },
     }
   );
   if (res.status == 400 || !res.ok) return [false, -1];
   else {
     let item = await res.json();
-    return item.wishlist.length > 0 ? [true, item.wishlist[0].id] : [false, -1];
+    return item ? [true, item.id] : [false, -1];
   }
 }
 

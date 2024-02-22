@@ -25,7 +25,7 @@ function SingleProduct({ fetchCartHandler }) {
 
   useEffect(() => {
     getProduct();
-  }, []);
+  }, [user]);
 
   async function getProduct() {
     let res = await fetch(
@@ -116,17 +116,11 @@ function SingleProduct({ fetchCartHandler }) {
     <>
       <main className={isMobile ? "flex flex-column pa1" : "flex ma4"}>
         <aside className={isMobile ? "w-100" : "w-50"}>
-          {/* {img != undefined ? ( */}
           <img
             src={process.env.REACT_IMG_URL + product.cloudinaryId}
             alt={product.name}
             className="w-80 h-80"
           />
-          {/* ) : (
-            <div className="w-20 h-100 bg-white flex justify-center items-center">
-              <TailSpin width={20} height={20} color="purple" />
-            </div>
-          )} */}
         </aside>
         <section className={`${isMobile ? "w-100" : "w-50"} flex flex-column`}>
           <h2>{product.name}</h2>
