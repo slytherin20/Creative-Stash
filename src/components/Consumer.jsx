@@ -7,7 +7,7 @@ import PaymentStatus from "./Checkout/PaymentStatus.jsx";
 import Cart from "./Cart/Cart.jsx";
 import NotFound from "./NotFound.jsx";
 import CartContext from "./Cart/CartContext.jsx";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import SingleProduct from "./ProductPage/SingleProduct.jsx";
 import AddBillingAddress from "./BillingAddress/AddBillingAddress.jsx";
 import DisplayBillingAddress from "./BillingAddress/DisplayBillingAddress.jsx";
@@ -20,10 +20,12 @@ import Wishlist from "./Wishlist/Wishlist.jsx";
 import AllSearchResults from "./ProductPage/AllSearchResults.jsx";
 import SearchByBrand from "./ProductPage/SearchByBrand.jsx";
 import Loading from "./Modals/Loading.jsx";
+import { AuthContext } from "./App.jsx";
 
 const stripePromise = loadStripe(process.env.PUBLISHABLE_KEY);
 
-function Consumer({ userid }) {
+function Consumer() {
+  const userid = useContext(AuthContext);
   const [cartItems, setCartItems] = useState([]);
   const [options, setOptions] = useState({ clientSecret: "" });
 
@@ -121,7 +123,7 @@ function Consumer({ userid }) {
   return (
     <main className="sans-serif overflow-hidden">
       <CartContext.Provider value={cartItems}>
-        <Navbar user={userid} admin={false} />
+        <Navbar admin={false} />
         <Routes>
           <Route
             path="/cart"

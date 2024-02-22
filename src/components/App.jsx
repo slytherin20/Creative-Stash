@@ -1,10 +1,12 @@
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase_config.js";
-import { useState } from "react";
+import { createContext, useState } from "react";
 import AdminPortal from "./Admin/AdminPortal.jsx";
 import Consumer from "./Consumer.jsx";
 import { useMediaQuery } from "react-responsive";
 import DeviceContext from "./DeviceContext.jsx";
+
+export const AuthContext = createContext(undefined);
 
 function App() {
   const [user, setUser] = useState(undefined);
@@ -38,7 +40,9 @@ function App() {
     <AdminPortal userid={user} />
   ) : (
     <DeviceContext.Provider value={{ isMobile: isMobile, isTablet: isTablet }}>
-      <Consumer userid={user ? user : undefined} />
+      <AuthContext.Provider value={user}>
+        <Consumer />
+      </AuthContext.Provider>
     </DeviceContext.Provider>
   );
 }

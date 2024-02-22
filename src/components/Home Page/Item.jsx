@@ -8,19 +8,20 @@ import HeartIcon from "../../images/heart.png";
 import HeartedIcon from "../../images/hearted.png";
 import Modal from "../Modals/Modal.jsx";
 import { TailSpin } from "react-loader-spinner";
-// import fetchProductImg from "../../data/fetchProductImg.js";
-function Item({ item, uid, cat, subcat, addToCart }) {
+import { AuthContext } from "../App.jsx";
+
+function Item({ item, cat, subcat, addToCart }) {
   const [wishlist, setWishlist] = useState({ status: false, id: -1 });
   const [loading, setLoading] = useState({ status: false, text: "" });
-  // const [img, setImg] = useState(undefined);
+  const uid = useContext(AuthContext);
+
   const { isMobile } = useContext(DeviceContext);
   useEffect(() => {
     if (uid) wishlistStatus(item.id);
-    // else fetchImage(item.id);
   }, []);
 
   async function wishlistStatus(id) {
-    let wishlistPromise = checkItemWishlisted(uid, id);
+    let wishlistPromise = checkItemWishlisted(id);
     // let imagePromise = fetchProductImg(item.id);
     let responses = await Promise.all([wishlistPromise]);
     let [status, wishlistId] = responses[0];

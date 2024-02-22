@@ -1,21 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Loading from "../Modals/Loading.jsx";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 import NotFound from "../NotFound.jsx";
 import WishlistSingleItem from "./WishlistSingleItem.jsx";
 import removeFromWishlist from "../../data/removeFromWishlist.js";
+import { AuthContext } from "../App.jsx";
 
 function Wishlist({ fetchCartHandler }) {
   const [wishlistItems, setWishlistItems] = useState([]);
-  const [user, setUser] = useState(undefined);
   const [loading, setLoading] = useState(true);
-  const auth = getAuth();
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      setUser(user.uid);
-    } else setUser(null);
-  });
-
+  const user = useContext(AuthContext);
   useEffect(() => {
     if (typeof user === "string" && wishlistItems.length === 0) {
       fetchWishlistItems();

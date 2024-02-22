@@ -1,14 +1,11 @@
 import Item from "./Item.jsx";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { useState } from "react";
+
+import { useContext } from "react";
 import checkCartItemExists from "../../data/checkCartItemExists.js";
+import { AuthContext } from "../App.jsx";
 function Items({ items, title, cat, subcat, fetchCartHandler }) {
-  const [user, setUser] = useState(undefined);
-  const auth = getAuth();
-  onAuthStateChanged(auth, (user) => {
-    if (user) setUser(user.uid);
-    else setUser(null);
-  });
+  const user = useContext(AuthContext);
+
   async function addToCart(item) {
     if (user) {
       //Save to user cart
@@ -74,7 +71,6 @@ function Items({ items, title, cat, subcat, fetchCartHandler }) {
             <Item
               key={item.id}
               item={item}
-              uid={user ? user : false}
               cat={cat}
               subcat={subcat}
               addToCart={addToCart}

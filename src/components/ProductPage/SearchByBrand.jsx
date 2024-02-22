@@ -1,21 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import Item from "../Home Page/Item.jsx";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Loading from "../Modals/Loading.jsx";
 import checkCartItemExists from "../../data/checkCartItemExists.js";
+import { AuthContext } from "../App.jsx";
 function SearchByBrand({ fetchCartHandler }) {
   const [items, setItems] = useState([]);
-  const [user, setUser] = useState(undefined);
   const [searchParams] = useSearchParams();
+  const user = useContext(AuthContext);
   const brand = searchParams.get("brand");
-
-  const auth = getAuth();
-
-  onAuthStateChanged(auth, (user) => {
-    if (user) setUser(user.uid);
-    else setUser(null);
-  });
 
   useEffect(() => {
     fetchProductsByBrands();
@@ -52,7 +45,7 @@ function SearchByBrand({ fetchCartHandler }) {
   }
 
   async function addToCart(item) {
-    if (auth.currentUser) {
+    if (user) {
       let itemExists = await checkCartItemExists(item);
       if (itemExists && itemExists.length > 0) {
         await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Cart/${item.id}`, {
@@ -117,7 +110,6 @@ function SearchByBrand({ fetchCartHandler }) {
           item={item}
           cat={item.cat}
           subcat={item.subcat}
-          uid={user}
           addToCart={addToCart}
         />
       );

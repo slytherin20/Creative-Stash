@@ -1,6 +1,5 @@
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 import addToWishlist from "../../data/addToWishlist.js";
 import checkItemWishlisted from "../../data/checkItemWishlisted.js";
 import removeFromWishlist from "../../data/removeFromWishlist.js";
@@ -12,23 +11,18 @@ import Modal from "../Modals/Modal.jsx";
 import { TailSpin } from "react-loader-spinner";
 // import fetchProductImg from "../../data/fetchProductImg.js";
 import checkCartItemExists from "../../data/checkCartItemExists.js";
+import { AuthContext } from "../App.jsx";
 function SingleProduct({ fetchCartHandler }) {
   const [product, setProduct] = useState({});
   const [wishlist, setWishlist] = useState({ status: false, id: -1 });
-  const [user, setUser] = useState(undefined);
   const [loading, setLoading] = useState({ status: false, text: "" });
   const { isMobile } = useContext(DeviceContext);
   const [searchParams] = useSearchParams();
-  // const [img, setImg] = useState(undefined);
+  const user = useContext(AuthContext);
   let cat = searchParams.get("cat").split(" ").join("-");
   let subcat = searchParams.get("subcat").split(" ").join("-");
   let itemId = searchParams.get("id");
-  const auth = getAuth();
 
-  onAuthStateChanged(auth, (user) => {
-    if (user) setUser(user.uid);
-    else setUser(null);
-  });
   useEffect(() => {
     getProduct();
   }, []);
@@ -45,16 +39,10 @@ function SingleProduct({ fetchCartHandler }) {
     let data = await res.json();
     setProduct(data);
     if (user) wishlistStatus(data.id);
-    // fetchImage(data.id);
   }
 
-  // async function fetchImage(id) {
-  //   let res = await fetchProductImg(id);
-  //   setImg(res);
-  // }
-
   async function wishlistStatus(id) {
-    let [status, wishlistId] = await checkItemWishlisted(user, id);
+    let [status, wishlistId] = await checkItemWishlisted(id);
     setWishlist({
       status: status,
       id: wishlistId,

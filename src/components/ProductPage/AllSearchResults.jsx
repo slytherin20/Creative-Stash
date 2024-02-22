@@ -1,18 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import Item from "../Home Page/Item.jsx";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Loading from "../Modals/Loading.jsx";
 import checkCartItemExists from "../../data/checkCartItemExists.js";
+import { AuthContext } from "../App.jsx";
 function AllSearchResults({ fetchCartHandler }) {
   const [products, setProducts] = useState([]);
-  const [user, setUser] = useState(undefined);
-  const auth = getAuth();
-
-  onAuthStateChanged(auth, (user) => {
-    if (user) setUser(user.uid);
-    else setUser(null);
-  });
+  const user = useContext(AuthContext);
   useEffect(() => fetchData(), []);
   const [searchParams] = useSearchParams();
   let keyword = searchParams.get("keyword");
@@ -58,7 +52,7 @@ function AllSearchResults({ fetchCartHandler }) {
   }
 
   async function addToCart(item) {
-    if (auth.currentUser) {
+    if (user) {
       //Save to user cart
       let itemExists = await checkCartItemExists(item);
       if (itemExists && itemExists.length > 0) {
@@ -122,7 +116,6 @@ function AllSearchResults({ fetchCartHandler }) {
         item={item}
         cat={item.cat}
         subcat={item.subcat}
-        uid={user}
         addToCart={addToCart}
       />
     ));

@@ -5,7 +5,7 @@ import {
   useStripe,
 } from "@stripe/react-stripe-js";
 import { TailSpin } from "react-loader-spinner";
-// import { getAuth, onAuthStateChanged } from "firebase/auth";
+
 import { useState, useContext, useEffect } from "react";
 import CartContext from "../Cart/CartContext.jsx";
 import ErrorPage from "../Modals/ErrorPage.jsx";
@@ -19,10 +19,8 @@ function CheckoutForm() {
   const { isMobile } = useContext(DeviceContext);
   const elements = useElements();
   const stripe = useStripe();
-  // const auth = getAuth();
-  const cartItems = useContext(CartContext);
 
-  // onAuthStateChanged(auth, (user) => setUid(user.uid));
+  const cartItems = useContext(CartContext);
 
   useEffect(() => sendCartItemsToServer(), [cartItems]);
 

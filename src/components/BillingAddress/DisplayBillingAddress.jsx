@@ -1,19 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import fetchBillingAddress from "../../data/fetchBillingAddress.jsx";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+
 import Loading from "../Modals/Loading.jsx";
 import NotFound from "../NotFound.jsx";
 import Address from "./Address.jsx";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../App.jsx";
 function DisplayBillingAddress({ width }) {
   const [address, setAddress] = useState({});
-  const [uid, setUid] = useState(undefined);
-  const auth = getAuth();
   const navigate = useNavigate();
-  onAuthStateChanged(auth, (user) => {
-    if (user) setUid(user.uid);
-    else setUid(null);
-  });
+  const uid = useContext(AuthContext);
   useEffect(() => {
     getAddress();
   }, [uid]);
