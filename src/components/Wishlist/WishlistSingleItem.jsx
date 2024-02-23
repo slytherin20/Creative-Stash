@@ -47,6 +47,7 @@ function WishlistSingleItem({
             price: item.price,
             count: item.count,
             status: item.status,
+            cloudinaryId: item.cloudinaryId,
             cartCount: 1,
           },
           tokenId: sessionStorage.getItem("tokenId"),
