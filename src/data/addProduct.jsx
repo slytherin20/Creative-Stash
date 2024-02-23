@@ -22,6 +22,7 @@ async function addProduct(inputs) {
   async function addImageToDB() {
     let formdata = new FormData();
     formdata.append("file", inputs.img);
+    formdata.append("tokenId", sessionStorage.getItem("tokenId"));
     let res = await fetch(`${process.env.REACT_APP_MOCKBACKEND}/images`, {
       method: "POST",
       body: formdata,
@@ -43,7 +44,10 @@ async function addProduct(inputs) {
               "Content-Type": "application/json",
               "Transfer-Encoding": "gzip",
             },
-            body: JSON.stringify(productDetails),
+            body: JSON.stringify({
+              details: productDetails,
+              tokenId: sessionStorage.getItem("tokenId"),
+            }),
           }
         );
         await fetch(
@@ -54,7 +58,10 @@ async function addProduct(inputs) {
               "Content-Type": "application/json",
               "Transfer-Encoding": "gzip",
             },
-            body: JSON.stringify(newBrand),
+            body: JSON.stringify({
+              newBrand: newBrand,
+              tokenId: sessionStorage.getItem("tokenId"),
+            }),
           }
         );
         return "success";

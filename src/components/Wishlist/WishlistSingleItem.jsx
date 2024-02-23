@@ -1,28 +1,19 @@
 import { Link } from "react-router-dom";
 import HeartIcon from "../../images/hearted.png";
 import DeviceContext from "../DeviceContext.jsx";
-import { useContext, useEffect, useState } from "react";
-import fetchProductImg from "../../data/fetchProductImg.js";
+import { useContext } from "react";
 import checkCartItemExists from "../../data/checkCartItemExists";
-import { TailSpin } from "react-loader-spinner";
+
 function WishlistSingleItem({
   item,
-  uid,
   removeItemFromWishlist,
   fetchCartHandler,
 }) {
-  const [img, setImg] = useState(undefined);
   const { isMobile } = useContext(DeviceContext);
 
-  useEffect(() => fetchImage(), []);
-
-  async function fetchImage() {
-    let res = await fetchProductImg(item.productId);
-    setImg(res);
-  }
   async function addToCart() {
-    let itemExists = await checkCartItemExists(item, uid);
-    if (itemExists.length > 0) {
+    let itemExists = await checkCartItemExists(item);
+    if (itemExists && itemExists.length > 0) {
       await fetch(
         `${process.env.REACT_APP_MOCKBACKEND}/Cart/${item.productId}`,
         {
@@ -31,8 +22,8 @@ function WishlistSingleItem({
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            ...itemExists[0],
             cartCount: itemExists[0].cartCount + 1,
+            tokenId: sessionStorage.getItem("tokenId"),
           }),
         }
       )
@@ -46,17 +37,19 @@ function WishlistSingleItem({
           "Transfer-Encoding": "gzip",
         },
         body: JSON.stringify({
-          cat: item.cat,
-          subcat: item.subcat,
-          name: item.name,
-          description: item.description,
-          id: item.productId,
-          brand: item.brand,
-          price: item.price,
-          count: item.count,
-          status: item.status,
-          uid: uid,
-          cartCount: 1,
+          item: {
+            cat: item.cat,
+            subcat: item.subcat,
+            name: item.name,
+            description: item.description,
+            id: item.productId,
+            brand: item.brand,
+            price: item.price,
+            count: item.count,
+            status: item.status,
+            cartCount: 1,
+          },
+          tokenId: sessionStorage.getItem("tokenId"),
         }),
       })
         .then(() => fetchCartHandler())
@@ -73,13 +66,11 @@ function WishlistSingleItem({
         to={`/products/product?cat=${item.cat}&subcat=${item.subcat}&id=${item.productId}`}
         className="flex flex-column justify-content items-center"
       >
-        {img != undefined ? (
-          <img src={img} alt={item.name} className="item-icons" />
-        ) : (
-          <div className="w-20 h-100 bg-white flex justify-center items-center">
-            <TailSpin width={20} height={20} color="purple" />
-          </div>
-        )}
+        <img
+          src={process.env.REACT_IMG_URL + item.cloudinaryId}
+          alt={item.name}
+          className="item-icons"
+        />
 
         <p className="ma0 mt2">{item.name.slice(0, 30)}...</p>
         <p className="ma0 mt2 f6">{item.description.slice(0, 40)}...</p>

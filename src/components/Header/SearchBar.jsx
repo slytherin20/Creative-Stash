@@ -57,11 +57,14 @@ function SearchBar({ isMobile }) {
   }
 
   async function fetchSearchResults() {
-    let res = await fetch(`${process.env.REACT_APP_MOCKBACKEND}/BrandSearch`, {
-      headers: {
-        "Transfer-Encoding": "gzip",
-      },
-    });
+    let res = await fetch(
+      `${process.env.REACT_APP_MOCKBACKEND}/dashboard/BrandSearch`,
+      {
+        headers: {
+          "Transfer-Encoding": "gzip",
+        },
+      }
+    );
     let data = await res.json();
     setKeywords(data);
   }

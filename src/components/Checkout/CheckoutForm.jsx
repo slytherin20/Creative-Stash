@@ -5,7 +5,7 @@ import {
   useStripe,
 } from "@stripe/react-stripe-js";
 import { TailSpin } from "react-loader-spinner";
-// import { getAuth, onAuthStateChanged } from "firebase/auth";
+
 import { useState, useContext, useEffect } from "react";
 import CartContext from "../Cart/CartContext.jsx";
 import ErrorPage from "../Modals/ErrorPage.jsx";
@@ -19,10 +19,8 @@ function CheckoutForm() {
   const { isMobile } = useContext(DeviceContext);
   const elements = useElements();
   const stripe = useStripe();
-  // const auth = getAuth();
-  const cartItems = useContext(CartContext);
 
-  // onAuthStateChanged(auth, (user) => setUid(user.uid));
+  const cartItems = useContext(CartContext);
 
   useEffect(() => sendCartItemsToServer(), [cartItems]);
 
@@ -33,21 +31,14 @@ function CheckoutForm() {
     }, 50);
     setAmt(res);
     let paymentIntentId = localStorage.getItem("pid");
-    fetch(
-      `${
-        process.env.NODE_ENV == "development"
-          ? "http://localhost:5000"
-          : process.env.REACT_APP_URI
-      }/cart-checkout`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Transfer-Encoding": "gzip",
-        },
-        body: JSON.stringify({ amount: res, paymentIntentId: paymentIntentId }),
-      }
-    )
+    fetch(`${process.env.REACT_APP_URI}/cart-checkout`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Transfer-Encoding": "gzip",
+      },
+      body: JSON.stringify({ amount: res, paymentIntentId: paymentIntentId }),
+    })
       .then((res) => {
         if (!res.ok) Promise.reject();
         else setShowPayBtn(true);
@@ -62,10 +53,7 @@ function CheckoutForm() {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url:
-          process.env.NODE_ENV == "development"
-            ? "http://localhost:5000/payment-status"
-            : `${process.env.REACT_APP_URI}/payment-status`,
+        return_url: `${process.env.REACT_APP_URI}/payment-status`,
       },
     });
 

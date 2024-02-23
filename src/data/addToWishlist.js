@@ -4,7 +4,6 @@ async function addToWishlist(item, uid) {
   let updatedItem = {
     ...item,
     id: id,
-    uid: uid,
     productId: item.id,
   };
 
@@ -14,7 +13,10 @@ async function addToWishlist(item, uid) {
       "Content-Type": "application/json",
       "Transfer-Encoding": "gzip",
     },
-    body: JSON.stringify(updatedItem),
+    body: JSON.stringify({
+      item: updatedItem,
+      tokenId: sessionStorage.getItem("tokenId"),
+    }),
   });
   return;
 }

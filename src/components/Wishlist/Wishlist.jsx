@@ -1,21 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Loading from "../Modals/Loading.jsx";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 import NotFound from "../NotFound.jsx";
 import WishlistSingleItem from "./WishlistSingleItem.jsx";
 import removeFromWishlist from "../../data/removeFromWishlist.js";
+import { AuthContext } from "../App.jsx";
 
 function Wishlist({ fetchCartHandler }) {
   const [wishlistItems, setWishlistItems] = useState([]);
-  const [user, setUser] = useState(undefined);
   const [loading, setLoading] = useState(true);
-  const auth = getAuth();
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      setUser(user.uid);
-    } else setUser(null);
-  });
-
+  const user = useContext(AuthContext);
   useEffect(() => {
     if (typeof user === "string" && wishlistItems.length === 0) {
       fetchWishlistItems();
@@ -23,14 +16,12 @@ function Wishlist({ fetchCartHandler }) {
   }, [user]);
 
   async function fetchWishlistItems() {
-    let res = await fetch(
-      `${process.env.REACT_APP_MOCKBACKEND}/Wishlist?uid=${user}`,
-      {
-        headers: {
-          "Transfer-Encoding": "gzip",
-        },
-      }
-    );
+    let res = await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Wishlist`, {
+      headers: {
+        "Transfer-Encoding": "gzip",
+        Authorization: "Bearer " + sessionStorage.getItem("tokenId"),
+      },
+    });
     let items = await res.json();
     setWishlistItems(items);
     setLoading(false);
@@ -53,11 +44,10 @@ function Wishlist({ fetchCartHandler }) {
         <article className="pa2">
           <h2>Wishlist</h2>
           <div className="flex flex-wrap">
-            {wishlistItems.map((item) => (
+            {wishlistItems.wishlist.map((item) => (
               <WishlistSingleItem
                 key={item.id}
                 item={item}
-                uid={user}
                 fetchCartHandler={fetchCartHandler}
                 removeItemFromWishlist={removeItemFromWishlistHandler}
               />

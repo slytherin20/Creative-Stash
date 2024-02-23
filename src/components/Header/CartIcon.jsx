@@ -11,7 +11,7 @@ function CartIcon() {
     <Link to={`/cart`}>
       <button className="btn  bg-white flex items-center justify-center ma1 cart-btn lg-btn mt2">
         <img src={CartImg} alt="cart" />
-        {cart.length > 0 && (
+        {cart && cart.length > 0 && (
           <span className="cart-count w1 h1 pa1 white bg-dark-red br-100 bn  z-99 f7">
             {cart.length}
           </span>

@@ -30,7 +30,7 @@ function ShowAllProducts({ fetchCartHandler }) {
   useEffect(() => getData(), [subcats]);
   useEffect(() => renderCategory(), [products]);
   async function getData() {
-    let category = params.id.split("-").join("_");
+    let category = params.id;
     let data = {};
     subcats.map((subcat, i) =>
       fetchSubCatItems(category, subcat).then((items) => {
@@ -44,9 +44,9 @@ function ShowAllProducts({ fetchCartHandler }) {
 
   async function fetchSubCatItems(category, subcat) {
     let res = await fetch(
-      `${process.env.REACT_APP_MOCKBACKEND}/${category}-${subcat
+      `${process.env.REACT_APP_MOCKBACKEND}/${category}/${subcat
         .split(" ")
-        .join("_")}`,
+        .join("-")}`,
       {
         headers: {
           "Transfer-Encoding": "gzip",

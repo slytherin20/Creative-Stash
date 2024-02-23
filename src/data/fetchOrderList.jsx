@@ -1,12 +1,10 @@
-async function fetchOrderList(uid) {
-  let res = await fetch(
-    `${process.env.REACT_APP_MOCKBACKEND}/Orders?uid=${uid}`,
-    {
-      headers: {
-        "Transfer-Encoding": "gzip",
-      },
-    }
-  );
+async function fetchOrderList() {
+  let res = await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Orders`, {
+    headers: {
+      "Transfer-Encoding": "gzip",
+      Authorization: "Bearer " + sessionStorage.getItem("tokenId"),
+    },
+  });
   let orderList = await res.json();
   return orderList;
 }

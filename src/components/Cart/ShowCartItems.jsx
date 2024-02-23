@@ -2,13 +2,10 @@ import { useState, useEffect, useContext } from "react";
 import TotalPayment from "./TotalPayment.jsx";
 import DeviceContext from "../DeviceContext.jsx";
 import Modal from "../Modals/Modal.jsx";
-import fetchAllProductImgs from "../../data/fetchAllProductImgs.js";
-import addimgToDisplayCart from "../../data/addimgToDisplayCart";
 import { TailSpin } from "react-loader-spinner";
 function ShowCartItems({ items, getCartItems, loginSuccess }) {
   const [totalPrice, setTotalPrice] = useState(0);
-  const [cartImgs, setCartImgs] = useState([]);
-  const [cartItems, setCartItems] = useState(items);
+
   const [loading, setLoading] = useState(false);
   const { isMobile } = useContext(DeviceContext);
 
@@ -20,42 +17,10 @@ function ShowCartItems({ items, getCartItems, loginSuccess }) {
     setTotalPrice(total);
   }, [items]);
 
-  useEffect(() => {
-    fetchCartItemImgs();
-  }, [items]);
-
-  async function fetchCartItemImgs() {
-    if (items.length === 0) return;
-    if (cartImgs.length > 0) mergeImgsAndCartDetails(cartImgs);
-    else {
-      let imgs = await fetchAllProductImgs(items);
-      setCartImgs(imgs);
-      mergeImgsAndCartDetails(imgs);
-    }
-  }
-
-  function mergeImgsAndCartDetails(imgs) {
-    if (items.length === 0) return;
-    let mergedItems = addimgToDisplayCart(imgs, items);
-    setCartItems(mergedItems);
-  }
-
   async function increaseItemCount(item) {
     if (Number(item.cartCount) + 1 > item.count) return;
     setLoading(true);
-    let newItem = {
-      id: item.id,
-      name: item.name,
-      cartCount: Number(item.cartCount) + 1,
-      price: Number(item.price),
-      description: item.description,
-      status: true,
-      count: Number(item.count),
-      cat: item.cat,
-      subcat: item.subcat,
-      brand: item.brand,
-      uid: item.uid,
-    };
+
     if (loginSuccess) {
       fetch(`${process.env.REACT_APP_MOCKBACKEND}/Cart/${item.id}`, {
         method: "PUT",
@@ -63,7 +28,10 @@ function ShowCartItems({ items, getCartItems, loginSuccess }) {
           "Content-Type": "application/json",
           "Transfer-Encoding": "gzip",
         },
-        body: JSON.stringify(newItem),
+        body: JSON.stringify({
+          cartCount: Number(item.cartCount) + 1,
+          tokenId: sessionStorage.getItem("tokenId"),
+        }),
       })
         .then(() => {
           getCartItems();
@@ -81,9 +49,9 @@ function ShowCartItems({ items, getCartItems, loginSuccess }) {
           index = i;
         }
       });
-      let productDetails = product.split("-");
+      let productDetails = product.split("|");
       productDetails[3] = Number(productDetails[3]) + 1;
-      productDetails = productDetails.join("-");
+      productDetails = productDetails.join("|");
       cartItems[index] = productDetails;
       cart = cartItems.join(",");
       localStorage.setItem("cart", cart);
@@ -95,19 +63,7 @@ function ShowCartItems({ items, getCartItems, loginSuccess }) {
   async function decreaseItemCount(item) {
     if (item.cartCount == 1) return removeItem(item);
     setLoading(true);
-    let newItem = {
-      id: item.id,
-      name: item.name,
-      cartCount: Number(item.cartCount) - 1,
-      price: Number(item.price),
-      description: item.description,
-      status: true,
-      count: Number(item.count),
-      cat: item.cat,
-      subcat: item.subcat,
-      brand: item.brand,
-      uid: item.uid,
-    };
+
     if (loginSuccess) {
       fetch(`${process.env.REACT_APP_MOCKBACKEND}/Cart/${item.id}`, {
         method: "PUT",
@@ -115,7 +71,10 @@ function ShowCartItems({ items, getCartItems, loginSuccess }) {
           "Content-Type": "application/json",
           "Transfer-Encoding": "gzip",
         },
-        body: JSON.stringify(newItem),
+        body: JSON.stringify({
+          cartCount: Number(item.cartCount) - 1,
+          tokenId: sessionStorage.getItem("tokenId"),
+        }),
       })
         .then(() => {
           getCartItems();
@@ -133,9 +92,9 @@ function ShowCartItems({ items, getCartItems, loginSuccess }) {
           index = i;
         }
       });
-      let productDetails = product.split("-");
+      let productDetails = product.split("|");
       productDetails[3] = Number(productDetails[3]) - 1;
-      productDetails = productDetails.join("-");
+      productDetails = productDetails.join("|");
       cartItems[index] = productDetails;
       cart = cartItems.join(",");
       localStorage.setItem("cart", cart);
@@ -150,8 +109,10 @@ function ShowCartItems({ items, getCartItems, loginSuccess }) {
       await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Cart/${item.id}`, {
         method: "DELETE",
         headers: {
+          "Content-Type": "application/json",
           "Transfer-Encoding": "gzip",
         },
+        body: JSON.stringify({ tokenId: sessionStorage.getItem("tokenId") }),
       })
         .then(() => {
           getCartItems();
@@ -184,24 +145,19 @@ function ShowCartItems({ items, getCartItems, loginSuccess }) {
         >
           <section className={`${isMobile ? "w-100" : "w-60"} pa3`}>
             <h3>Cart Items</h3>
-            {cartItems.length > 0 &&
-              cartItems.map((item) => {
+            {items.length > 0 &&
+              items.map((item) => {
                 return (
                   <section
                     key={item.id}
                     className="w-80 h-40 flex items-center"
                   >
-                    {item.img != undefined ? (
-                      <img
-                        src={item.img}
-                        alt="product icon"
-                        className="w-20 h-100"
-                      />
-                    ) : (
-                      <div className="w-20 h-100 bg-white flex justify-center items-center">
-                        <TailSpin width={20} height={20} color="purple" />
-                      </div>
-                    )}
+                    <img
+                      src={process.env.REACT_IMG_URL + item.cloudinaryId}
+                      alt="product icon"
+                      className="w-20 h-100"
+                    />
+
                     <section className="w-80 h-100">
                       <h4>{item.name}</h4>
                       <p>{item.description.slice(0, 100)}...</p>
@@ -239,7 +195,7 @@ function ShowCartItems({ items, getCartItems, loginSuccess }) {
           </section>
           <TotalPayment
             totalPrice={totalPrice}
-            count={cartItems.length}
+            count={items.length}
             loginStatus={loginSuccess}
             isMobile={isMobile}
           />

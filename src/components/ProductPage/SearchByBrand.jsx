@@ -1,21 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import Item from "../Home Page/Item.jsx";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Loading from "../Modals/Loading.jsx";
 import checkCartItemExists from "../../data/checkCartItemExists.js";
+import { AuthContext } from "../App.jsx";
 function SearchByBrand({ fetchCartHandler }) {
   const [items, setItems] = useState([]);
-  const [user, setUser] = useState(undefined);
   const [searchParams] = useSearchParams();
+  const user = useContext(AuthContext);
   const brand = searchParams.get("brand");
-
-  const auth = getAuth();
-
-  onAuthStateChanged(auth, (user) => {
-    if (user) setUser(user.uid);
-    else setUser(null);
-  });
 
   useEffect(() => {
     fetchProductsByBrands();
@@ -25,7 +18,7 @@ function SearchByBrand({ fetchCartHandler }) {
     let res = await fetch(
       `${
         process.env.REACT_APP_MOCKBACKEND
-      }/BrandSearch?brand=${encodeURIComponent(brand)}`,
+      }/dashboard/BrandSearch?brand=${encodeURIComponent(brand)}`,
       {
         headers: {
           "Transfer-Encoding": "gzip",
@@ -36,9 +29,9 @@ function SearchByBrand({ fetchCartHandler }) {
     let productArr = [];
     data.forEach(async (obj) => {
       let res = await fetch(
-        `${process.env.REACT_APP_MOCKBACKEND}/${obj.cat
-          .split(" ")
-          .join("_")}-${obj.subcat.split(" ").join("_")}?id=${obj.id}`,
+        `${process.env.REACT_APP_MOCKBACKEND}/${obj.cat.split(" ").join("-")}/${
+          obj.id
+        }`,
         {
           headers: {
             "Transfer-Encoding": "gzip",
@@ -46,23 +39,23 @@ function SearchByBrand({ fetchCartHandler }) {
         }
       );
       let product = await res.json();
-      productArr.push(product[0]);
+      productArr.push(product);
       if (productArr.length === data.length) setItems(productArr);
     });
   }
 
   async function addToCart(item) {
-    if (auth.currentUser) {
-      let itemExists = await checkCartItemExists(item, auth.currentUser.uid);
-      if (itemExists.length > 0) {
+    if (user) {
+      let itemExists = await checkCartItemExists(item);
+      if (itemExists && itemExists.length > 0) {
         await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Cart/${item.id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            ...itemExists[0],
             cartCount: itemExists[0].cartCount + 1,
+            tokenId: sessionStorage.getItem("tokenId"),
           }),
         })
           .then(() => fetchCartHandler())
@@ -75,9 +68,11 @@ function SearchByBrand({ fetchCartHandler }) {
             "Transfer-Encoding": "gzip",
           },
           body: JSON.stringify({
-            ...item,
-            uid: auth.currentUser.uid,
-            cartCount: 1,
+            item: {
+              ...item,
+              cartCount: 1,
+            },
+            tokenId: sessionStorage.getItem("tokenId"),
           }),
         })
           .then(() => fetchCartHandler())
@@ -89,16 +84,16 @@ function SearchByBrand({ fetchCartHandler }) {
       if (cart) {
         cart = [
           cart,
-          `${item.cat.split(" ").join("_")}-${item.subcat
+          `${item.cat.split(" ").join("-")}|${item.subcat
             .split(" ")
-            .join("_")}-${item.id}-1`,
+            .join("-")}|${item.id}|1`,
         ];
         localStorage.setItem("cart", cart);
       } else {
         localStorage.setItem("cart", [
-          `${item.cat.split(" ").join("_")}-${item.subcat
+          `${item.cat.split(" ").join("-")}|${item.subcat
             .split(" ")
-            .join("_")}-${item.id}-1`,
+            .join("-")}|${item.id}|1`,
         ]);
       }
       fetchCartHandler();
@@ -115,7 +110,6 @@ function SearchByBrand({ fetchCartHandler }) {
           item={item}
           cat={item.cat}
           subcat={item.subcat}
-          uid={user}
           addToCart={addToCart}
         />
       );

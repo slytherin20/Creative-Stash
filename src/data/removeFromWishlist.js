@@ -3,7 +3,9 @@ async function removeFromWishlist(id) {
     method: "DELETE",
     headers: {
       "Transfer-Encoding": "gzip",
+      "Content-Type": "application/json",
     },
+    body: JSON.stringify({ tokenId: sessionStorage.getItem("tokenId") }),
   });
 }
 

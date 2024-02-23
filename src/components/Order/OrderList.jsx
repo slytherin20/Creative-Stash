@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import fetchOrderList from "../../data/fetchOrderList.jsx";
 import Loading from "../Modals/Loading.jsx";
 import OrderItem from "./OrderItem.jsx";
-function OrderList({ uid, setOrderDetailsHandler }) {
+function OrderList({ setOrderDetailsHandler }) {
   const [orderList, setOrderList] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => getOrders(), []);
 
   async function getOrders() {
-    let orders = await fetchOrderList(uid);
+    let orders = await fetchOrderList();
     setOrderList(orders);
     if (orders.length != 0) setLoading(false);
     else setLoading(null);
@@ -25,7 +25,7 @@ function OrderList({ uid, setOrderDetailsHandler }) {
         </div>
       ) : (
         <article className="w-90">
-          {orderList.map((item) => (
+          {orderList.orders.map((item) => (
             <OrderItem
               key={item.id}
               item={item}

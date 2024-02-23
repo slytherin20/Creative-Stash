@@ -10,12 +10,14 @@ import logo from "../../images/logo.png";
 import DeviceContext from "../DeviceContext.jsx";
 import { useContext, useState } from "react";
 import Modal from "../Modals/Modal.jsx";
+import { AuthContext } from "../App.jsx";
 
-function Navbar({ user, admin }) {
+function Navbar({ admin }) {
   const [showMenuStatus, setShowMenuStatus] = useState(false);
   const { isMobile } = useContext(DeviceContext);
   const body = document.getElementById("body");
   const navigate = useNavigate();
+  const user = useContext(AuthContext);
   function showMenu() {
     setShowMenuStatus(!showMenuStatus);
     if (showMenuStatus === true) body.classList.remove("overflow-hidden");

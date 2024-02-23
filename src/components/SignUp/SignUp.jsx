@@ -6,6 +6,10 @@ import {
 import { useState } from "react";
 import { /*useLocation,*/ useNavigate } from "react-router-dom";
 import addAnonymousCartItems from "../../data/addAnonymousCartItems.jsx";
+import { createCart } from "../../data/createCart.js";
+import { createWishlist } from "../../data/createWishlist.js";
+import { createOrderslist } from "../../data/createOrdersList.js";
+
 function SignUpForm({ changeForm, changeModalContent }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,9 +27,15 @@ function SignUpForm({ changeForm, changeModalContent }) {
         createUserWithEmailAndPassword(auth, email, password)
           .then(() => {
             changeModalContent("loading");
-            addAnonymousCartItems(auth.currentUser.uid);
+            auth.currentUser.getIdToken().then(async (token) => {
+              let cartStatus = await createCart(token);
+              if (cartStatus == 200) {
+                addAnonymousCartItems(token);
+                createWishlist(token);
+                createOrderslist(token);
+              }
+            });
             navigate("/add-billing-address");
-            //  if (currentPage === "cart") navigate("/cart");
             sendEmailVerification(auth.currentUser).then(() => {
               changeModalContent("email sent");
             });

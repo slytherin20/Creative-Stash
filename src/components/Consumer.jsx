@@ -7,7 +7,7 @@ import PaymentStatus from "./Checkout/PaymentStatus.jsx";
 import Cart from "./Cart/Cart.jsx";
 import NotFound from "./NotFound.jsx";
 import CartContext from "./Cart/CartContext.jsx";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import SingleProduct from "./ProductPage/SingleProduct.jsx";
 import AddBillingAddress from "./BillingAddress/AddBillingAddress.jsx";
 import DisplayBillingAddress from "./BillingAddress/DisplayBillingAddress.jsx";
@@ -20,10 +20,12 @@ import Wishlist from "./Wishlist/Wishlist.jsx";
 import AllSearchResults from "./ProductPage/AllSearchResults.jsx";
 import SearchByBrand from "./ProductPage/SearchByBrand.jsx";
 import Loading from "./Modals/Loading.jsx";
+import { AuthContext } from "./App.jsx";
 
 const stripePromise = loadStripe(process.env.PUBLISHABLE_KEY);
 
-function Consumer({ userid }) {
+function Consumer() {
+  const userid = useContext(AuthContext);
   const [cartItems, setCartItems] = useState([]);
   const [options, setOptions] = useState({ clientSecret: "" });
 
@@ -38,21 +40,14 @@ function Consumer({ userid }) {
     if (paymentIntentId) {
       if (options.clientSecret) return;
       else {
-        fetch(
-          `${
-            process.env.NODE_ENV == "development"
-              ? "http://localhost:5000"
-              : process.env.REACT_APP_URI
-          }/secret`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "Transfer-Encoding": "gzip",
-            },
-            body: JSON.stringify({ pid: paymentIntentId }),
-          }
-        )
+        fetch(`${process.env.REACT_APP_URI}/secret`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Transfer-Encoding": "gzip",
+          },
+          body: JSON.stringify({ pid: paymentIntentId }),
+        })
           .then((res) => {
             return res.json();
           })
@@ -61,17 +56,11 @@ function Consumer({ userid }) {
           )
           .catch(() => {
             console.log("Server Connection Error. Connecting Again...");
-            fetchSecretKey();
+            // fetchSecretKey();
           });
       }
     } else {
-      fetch(
-        `${
-          process.env.NODE_ENV == "development"
-            ? "http://localhost:5000"
-            : process.env.REACT_APP_URI
-        }/create-intent`
-      )
+      fetch(`${process.env.REACT_APP_URI}/create-intent`)
         .then((res) => {
           return res.json();
         })
@@ -81,7 +70,7 @@ function Consumer({ userid }) {
         })
         .catch(() => {
           console.log("Server Connection Error. Connecting again...");
-          fetchSecretKey();
+          // fetchSecretKey();
         });
     }
   }
@@ -93,16 +82,14 @@ function Consumer({ userid }) {
 
   async function fetchCartItems() {
     if (userid) {
-      let res = await fetch(
-        `${process.env.REACT_APP_MOCKBACKEND}/Cart?uid=${userid}`,
-        {
-          headers: {
-            "Transfer-Encoding": "gzip",
-          },
-        }
-      );
+      let res = await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Cart`, {
+        headers: {
+          "Transfer-Encoding": "gzip",
+          Authorization: "Bearer " + sessionStorage.getItem("tokenId"),
+        },
+      });
       let cart = await res.json();
-      setCartItems(cart);
+      if (cart) setCartItems(cart.cart);
     } else {
       let cart = localStorage.getItem("cart");
       if (cart) {
@@ -111,23 +98,19 @@ function Consumer({ userid }) {
         let cartLen = cart.length;
         let noOfFetcheditems = 0;
         cart.forEach((item) => {
-          let values = item.split("-");
+          let values = item.split("|");
           let cat = values[0];
-          let subcat = values[1];
           let itemId = values[2];
           let cartCount = Number(values[3]);
-          fetch(
-            `${process.env.REACT_APP_MOCKBACKEND}/${cat}-${subcat}?id=${itemId}`,
-            {
-              headers: {
-                "Transfer-Encoding": "gzip",
-              },
-            }
-          )
+          fetch(`${process.env.REACT_APP_MOCKBACKEND}/${cat}/${itemId}`, {
+            headers: {
+              "Transfer-Encoding": "gzip",
+            },
+          })
             .then((res) => res.json())
             .then((data) => {
-              data[0].cartCount = Number(cartCount);
-              cartItems.push(...data);
+              data.cartCount = Number(cartCount);
+              cartItems.push(data);
               noOfFetcheditems += 1;
               if (cartLen === noOfFetcheditems) setCartItems(cartItems);
             });
@@ -140,7 +123,7 @@ function Consumer({ userid }) {
   return (
     <main className="sans-serif overflow-hidden">
       <CartContext.Provider value={cartItems}>
-        <Navbar user={userid} admin={false} />
+        <Navbar admin={false} />
         <Routes>
           <Route
             path="/cart"

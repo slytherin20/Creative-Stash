@@ -12,10 +12,7 @@ let paymentIntentId;
 //Get the amount of items
 app.use(
   cors({
-    origin:
-      process.env.NODE_ENV == "development"
-        ? "http://localhost:5000"
-        : [process.env.REACT_APP_URI, process.env.REACT_APP_HTTP_URI],
+    origin: process.env.REACT_APP_URI,
   })
 );
 app.use(bodyParser.json()); //parse application/json
@@ -36,8 +33,8 @@ app.post("/cart-checkout", async (req, res) => {
 
   if (typeof amount === "number") {
     await updatePaymentAmount(paymentIntentId);
-    res.sendStatus(200);
-  } else res.sendStatus(400);
+    res.status(200).send("amount received");
+  } else res.status(400).send("Error");
 });
 
 async function updatePaymentAmount(paymentIntentId) {

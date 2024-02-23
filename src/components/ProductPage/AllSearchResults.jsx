@@ -1,28 +1,25 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import Item from "../Home Page/Item.jsx";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Loading from "../Modals/Loading.jsx";
 import checkCartItemExists from "../../data/checkCartItemExists.js";
+import { AuthContext } from "../App.jsx";
 function AllSearchResults({ fetchCartHandler }) {
   const [products, setProducts] = useState([]);
-  const [user, setUser] = useState(undefined);
-  const auth = getAuth();
-
-  onAuthStateChanged(auth, (user) => {
-    if (user) setUser(user.uid);
-    else setUser(null);
-  });
+  const user = useContext(AuthContext);
   useEffect(() => fetchData(), []);
   const [searchParams] = useSearchParams();
   let keyword = searchParams.get("keyword");
 
   async function fetchData() {
-    let res = await fetch(`${process.env.REACT_APP_MOCKBACKEND}/BrandSearch`, {
-      headers: {
-        "Transfer-Encoding": "gzip",
-      },
-    });
+    let res = await fetch(
+      `${process.env.REACT_APP_MOCKBACKEND}/dashboard/BrandSearch`,
+      {
+        headers: {
+          "Transfer-Encoding": "gzip",
+        },
+      }
+    );
     let data = await res.json();
     let items = [];
     data.map(async (obj) => {
@@ -41,9 +38,9 @@ function AllSearchResults({ fetchCartHandler }) {
 
   async function fetchProductItem(obj) {
     let res = await fetch(
-      `${process.env.REACT_APP_MOCKBACKEND}/${obj.cat
-        .split(" ")
-        .join("_")}-${obj.subcat.split(" ").join("_")}?id=${obj.id}`,
+      `${process.env.REACT_APP_MOCKBACKEND}/${obj.cat.split(" ").join("-")}/${
+        obj.id
+      }`,
       {
         headers: {
           "Transfer-Encoding": "gzip",
@@ -55,18 +52,18 @@ function AllSearchResults({ fetchCartHandler }) {
   }
 
   async function addToCart(item) {
-    if (auth.currentUser) {
+    if (user) {
       //Save to user cart
-      let itemExists = await checkCartItemExists(item, auth.currentUser.uid);
-      if (itemExists.length > 0) {
+      let itemExists = await checkCartItemExists(item);
+      if (itemExists && itemExists.length > 0) {
         await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Cart/${item.id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            ...itemExists[0],
             cartCount: itemExists[0].cartCount + 1,
+            tokenId: sessionStorage.getItem("tokenId"),
           }),
         })
           .then(() => fetchCartHandler())
@@ -79,9 +76,11 @@ function AllSearchResults({ fetchCartHandler }) {
             "Transfer-Encoding": "gzip",
           },
           body: JSON.stringify({
-            ...item,
-            uid: auth.currentUser.uid,
-            cartCount: 1,
+            item: {
+              ...item,
+              cartCount: 1,
+            },
+            tokenId: sessionStorage.getItem("tokenId"),
           }),
         })
           .then(() => fetchCartHandler())
@@ -93,16 +92,16 @@ function AllSearchResults({ fetchCartHandler }) {
       if (cart) {
         cart = [
           cart,
-          `${item.cat.split(" ").join("_")}-${item.subcat
+          `${item.cat.split(" ").join("-")}|${item.subcat
             .split(" ")
-            .join("_")}-${item.id}-1`,
+            .join("-")}|${item.id}|1`,
         ];
         localStorage.setItem("cart", cart);
       } else {
         localStorage.setItem("cart", [
-          `${item.cat.split(" ").join("_")}-${item.subcat
+          `${item.cat.split(" ").join("-")}|${item.subcat
             .split(" ")
-            .join("_")}-${item.id}-1`,
+            .join("-")}|${item.id}|1`,
         ]);
       }
       fetchCartHandler();
@@ -117,7 +116,6 @@ function AllSearchResults({ fetchCartHandler }) {
         item={item}
         cat={item.cat}
         subcat={item.subcat}
-        uid={user}
         addToCart={addToCart}
       />
     ));

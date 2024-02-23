@@ -43,12 +43,9 @@ function ShowProducts({ fetchCartHandler }) {
 
   async function getData() {
     let cat = path.pathname.split("/")[2]; //Getting the second last part of url.
-    cat = cat.split("-").join("_");
     //getting the products
     let res = await fetch(
-      `${process.env.REACT_APP_MOCKBACKEND}/${cat}-${params.id
-        .split("-")
-        .join("_")}`,
+      `${process.env.REACT_APP_MOCKBACKEND}/${cat}/${params.id}`,
       {
         headers: {
           "Transfer-Encoding": "gzip",
