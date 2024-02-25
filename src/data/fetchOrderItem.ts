@@ -1,4 +1,6 @@
-async function fetchOrderItem(orderId) {
+import { OrderItem } from "../interfaces/app_interface";
+
+async function fetchOrderItem(orderId:number):Promise<OrderItem> {
   let res = await fetch(
     `${process.env.REACT_APP_MOCKBACKEND}/Orders/${orderId}`,
     {
@@ -8,7 +10,7 @@ async function fetchOrderItem(orderId) {
       },
     }
   );
-  let data = await res.json();
+  let data:OrderItem = await res.json();
   return data;
 }
 

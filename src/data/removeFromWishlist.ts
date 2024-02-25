@@ -1,4 +1,4 @@
-async function removeFromWishlist(id) {
+async function removeFromWishlist(id:string) {
   return await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Wishlist/${id}`, {
     method: "DELETE",
     headers: {

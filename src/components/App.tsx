@@ -1,10 +1,10 @@
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase_config.js";
 import { createContext, useState } from "react";
-import AdminPortal from "./Admin/AdminPortal.jsx";
-import Consumer from "./Consumer.jsx";
+import AdminPortal from "./Admin/AdminPortal";
+import Consumer from "./Consumer.js";
 import { useMediaQuery } from "react-responsive";
-import DeviceContext from "./DeviceContext.jsx";
+import DeviceContext from "./DeviceContext.js";
 
 export const AuthContext = createContext(undefined);
 
@@ -26,7 +26,7 @@ function App() {
     } else setUser(null);
   });
 
-  function checkIfAdmin() {
+  function checkIfAdmin(): boolean {
     if (user) {
       if (user === process.env.REACT_APP_ADMIN_UID) {
         return true;

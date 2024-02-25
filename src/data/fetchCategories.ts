@@ -1,4 +1,6 @@
-async function fetchCategories() {
+import { Categories } from "../interfaces/app_interface";
+
+async function fetchCategories():Promise<Categories> {
   let res = await fetch(
     `${process.env.REACT_APP_MOCKBACKEND}/dashboard/Categories`,
     {
@@ -7,7 +9,7 @@ async function fetchCategories() {
       },
     }
   );
-  let categories = await res.json();
+  let categories:Categories = await res.json();
   return categories;
 }
 

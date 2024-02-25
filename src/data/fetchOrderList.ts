@@ -1,3 +1,5 @@
+import { OrderDoc } from "../interfaces/app_interface";
+
 async function fetchOrderList() {
   let res = await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Orders`, {
     headers: {
@@ -5,7 +7,7 @@ async function fetchOrderList() {
       Authorization: "Bearer " + sessionStorage.getItem("tokenId"),
     },
   });
-  let orderList = await res.json();
+  let orderList:OrderDoc = await res.json();
   return orderList;
 }
 

@@ -1,6 +1,9 @@
+import { ReturnMsg } from "../enum/app_enums";
+import { Brand, Product } from "../interfaces/app_interface";
+
 async function addProduct(inputs) {
   let generateId = Date.now();
-  let productDetails = {
+  let productDetails:Product = {
     cat: inputs.cat,
     subcat: inputs.subcat,
     name: inputs.name,
@@ -10,19 +13,21 @@ async function addProduct(inputs) {
     count: Number(inputs.count),
     status: true,
     id: generateId,
+    cloudinaryId:""
   };
 
-  let newBrand = {
+  let newBrand:Brand = {
     brand: inputs.brand,
     cat: inputs.cat,
     subcat: inputs.subcat,
     id: generateId,
   };
-
-  async function addImageToDB() {
+ 
+  async function addImageToDB():Promise<void> {
     let formdata = new FormData();
     formdata.append("file", inputs.img);
-    formdata.append("tokenId", sessionStorage.getItem("tokenId"));
+    let tokenId:string= sessionStorage.getItem("tokenId") || '';
+    formdata.append("tokenId", tokenId);
     let res = await fetch(`${process.env.REACT_APP_MOCKBACKEND}/images`, {
       method: "POST",
       body: formdata,
@@ -32,7 +37,7 @@ async function addProduct(inputs) {
   }
 
   return addImageToDB()
-    .then(async () => {
+    .then(async ():Promise<ReturnMsg> => {
       try {
         await fetch(
           `${process.env.REACT_APP_MOCKBACKEND}/${inputs.cat
@@ -64,13 +69,13 @@ async function addProduct(inputs) {
             }),
           }
         );
-        return "success";
+        return ReturnMsg.SUCCESS;
       } catch (err) {
-        return "error";
+        return ReturnMsg.ERROR;
       }
     })
     .catch(() => {
-      return "error";
+      return ReturnMsg.ERROR;
     });
 }
 

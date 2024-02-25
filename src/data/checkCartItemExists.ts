@@ -1,5 +1,8 @@
-async function checkCartItemExists(item) {
-  let id = item.productId ? item.productId : item.id;
+import { CartItem } from "../interfaces/app_interface";
+
+async function checkCartItemExists<T1 extends {productId?:number,id:number|string}>(item:T1):Promise<T1 | null> {
+  let id:number|string;
+  id = item.productId ? item.productId : item.id;
 
   let res = await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Cart/${id}`, {
     headers: {
@@ -8,7 +11,7 @@ async function checkCartItemExists(item) {
     },
   });
   if (res.status == 404) return null;
-  let data = await res.json();
+  let data:T1 = await res.json();
 
   return data;
 }

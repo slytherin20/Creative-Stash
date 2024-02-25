@@ -1,4 +1,4 @@
-export async function createCart(tokenId) {
+export async function createCart(tokenId:string) {
   let res = await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Cart`, {
     method: "POST",
     headers: {
