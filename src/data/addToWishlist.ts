@@ -1,7 +1,9 @@
-async function addToWishlist(item, uid) {
+import { Product, WishlistItem } from "../interfaces/app_interface";
+
+async function addToWishlist(item:Product, uid:string):Promise<void> {
   let generatedTime = Date.now();
   let id = generatedTime + uid;
-  let updatedItem = {
+  let updatedItem:WishlistItem = {
     ...item,
     id: id,
     productId: item.id,

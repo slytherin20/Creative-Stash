@@ -1,4 +1,4 @@
-export async function createWishlist(tokenId) {
+export async function createWishlist(tokenId:string) {
   let res = await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Wishlist`, {
     method: "POST",
     headers: {

@@ -1,16 +1,18 @@
+import { CartItem, Product } from "../interfaces/app_interface";
 import checkCartItemExists from "./checkCartItemExists";
-function addAnonymousCartItems() {
-  let cart = localStorage.getItem("cart");
-  if (!cart) return [];
-  let cartItems = cart.split(",");
-  let newCartItems = [];
-  let cartLength = cartItems.length;
-  let noOfFetchedItems = 0;
-  cartItems.forEach((item) => {
-    item = item.split("|");
-    let cat = item[0];
-    let itemId = item[2];
-    let cartCount = Number(item[3]);
+
+function addAnonymousCartItems():void {
+  let cart:string|null = localStorage.getItem("cart");
+  if (!cart) return;
+  let cartItems:string[] = cart.split(",");
+  let newCartItems:CartItem[] = [];
+  let cartLength:number = cartItems.length;
+  let noOfFetchedItems:number = 0;
+  cartItems.forEach((item:string):void => {
+    let itemArr:string[] = item.split("|");
+    let cat = itemArr[0];
+    let itemId = itemArr[2];
+    let cartCount = Number(itemArr[3]);
 
     fetch(`${process.env.REACT_APP_MOCKBACKEND}/${cat}/${itemId}`, {
       headers: {
@@ -18,19 +20,22 @@ function addAnonymousCartItems() {
       },
     })
       .then((res) => res.json())
-      .then((data) => {
-        data.cartCount = Number(cartCount);
-        newCartItems.push(data);
+      .then((data:Product) => {
+        let item:CartItem={
+          ...data,
+          cartCount:cartCount,
+        }
+        newCartItems.push(item);
         ++noOfFetchedItems;
         if (noOfFetchedItems === cartLength) addItemsToDB(newCartItems);
       });
   });
 }
 
-function addItemsToDB(items) {
-  let itemsLength = items.length;
-  items.forEach(async (item) => {
-    let itemExists = await checkCartItemExists(item);
+function addItemsToDB(items:CartItem[]):void {
+  let itemsLength:number = items.length;
+  items.forEach(async (item):Promise<void> => {
+    let itemExists = await checkCartItemExists<CartItem>(item);
     if (itemExists) {
       await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Cart/${item.id}`, {
         method: "PUT",

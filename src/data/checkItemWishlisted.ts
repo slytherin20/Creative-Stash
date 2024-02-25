@@ -1,4 +1,6 @@
-async function checkItemWishlisted(productId) {
+import { WishlistItem } from "../interfaces/app_interface";
+
+async function checkItemWishlisted(productId:number):Promise<[boolean,number|string]> {
   let res = await fetch(
     `${process.env.REACT_APP_MOCKBACKEND}/Wishlist/${productId}`,
     {
@@ -11,7 +13,7 @@ async function checkItemWishlisted(productId) {
   );
   if (res.status == 400 || !res.ok) return [false, -1];
   else {
-    let item = await res.json();
+    let item:WishlistItem = await res.json();
     return item ? [true, item.id] : [false, -1];
   }
 }

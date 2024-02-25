@@ -1,4 +1,4 @@
-export async function createOrderslist(tokenId) {
+export async function createOrderslist(tokenId:string) {
   let res = await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Orders`, {
     method: "POST",
     headers: {
