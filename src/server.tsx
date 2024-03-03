@@ -1,14 +1,20 @@
-const dotenv = require("dotenv");
-const express = require("express");
-const path = require("path");
-const app = express();
-const cors = require("cors");
-dotenv.config();
-const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
-const bodyParser = require("body-parser");
-const serverPort = process.env.PORT || 5000;
-let amount;
-let paymentIntentId;
+import 'dotenv/config'
+import { Application } from "express";
+import Stripe from "stripe";
+import bodyParser from 'body-parser'
+import express from 'express'
+import path from 'path'
+const app:Application = express();
+import cors from 'cors';
+import {fileURLToPath } from 'url'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const stripe = new Stripe(process.env.STRIPE_PRIVATE_KEY!,{
+  apiVersion:'2020-08-27'
+});
+const serverPort = Number(process.env.PORT) || 5000;
+let amount:number;
+let paymentIntentId:string;
 //Get the amount of items
 app.use(
   cors({
@@ -22,7 +28,7 @@ app.post("/secret", async (req, res) => {
     paymentIntentId = req.body.pid;
     let paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
     res.send({ client_secret: paymentIntent.client_secret });
-  } catch (e) {
+  } catch (e:any) {
     res.status(400).json({ error: e.message });
   }
 });
@@ -37,7 +43,7 @@ app.post("/cart-checkout", async (req, res) => {
   } else res.status(400).send("Error");
 });
 
-async function updatePaymentAmount(paymentIntentId) {
+async function updatePaymentAmount(paymentIntentId:string) {
   return await stripe.paymentIntents.update(paymentIntentId, {
     amount: amount,
     currency: "inr",
@@ -55,7 +61,7 @@ app.get("/create-intent", async (req, res) => {
       client_secret: paymentIntent.client_secret,
       paymentIntentId: paymentIntent.id,
     });
-  } catch (e) {
+  } catch (e:any) {
     res.status(400).json({ error: e.message });
   }
 });
