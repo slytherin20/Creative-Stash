@@ -20,10 +20,7 @@ export interface CartDoc{
 }
 
 export interface CartItem extends Product{
-    count:number;
-    status:boolean;
-    cartCount:number
-
+    cartCount:number;
 }
 type MongoId = ObjectId | string;
 export interface OrderDoc{
@@ -36,10 +33,10 @@ productId: number;
 orderDate:Date;
 userName:string;
 phoneNo:number;
-address:string
+address:string;
 }
 
-export interface WishistDoc extends WishlistItem{
+export interface WishistDoc{
     _id: ObjectId;
     uid:string;
     wishlist: WishlistItem[];
@@ -56,22 +53,54 @@ export interface Brand{
     subcat:string;
     id:number;
 }
-export interface Categories{
+export interface keyInterface{
+    [key:string]:string[];
+}
+export interface Categories extends keyInterface{
         Paints:string[];
         'Painting Medium':string[];
         Canvas:string[];
         Brushes:string[];
         'Pens and Markers':string[];
 }
+
+export interface SubCatProducts{
+    [key:string]:Product[]
+}
 export interface Address{
     _id: ObjectId;
     uid:string;
-    details:{
-        name:string;
-        phoneNo:string;
-        deliveryAddress:string;
-        city:string;
-        state:string;
-        pinCode:string;
-    }
+    details: BillingDetails;
+}
+export interface BillingDetails{
+    name:string;
+    phoneNo:string;
+    deliveryAddress:string;
+    city:string;
+    state:string;
+    pinCode:string;
+}
+export interface DisplayResults{
+    name: string;
+    type: string;
+    link: string;
+    cat?: string;
+}
+
+export interface UserInput{
+    cat: string;
+    subcat: string;
+    name: string;
+    price: number;
+    description: string;
+    count: number;
+    img: File | null;
+    imgSrc:string;
+    brand: string;
+}
+
+export interface Image{
+    id:number;
+    original:string;
+    link:string;
 }
