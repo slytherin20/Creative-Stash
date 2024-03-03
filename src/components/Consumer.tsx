@@ -1,32 +1,33 @@
-import Navbar from "./Header/Navbar.jsx";
+import Navbar from "./Header/Navbar";
 import { Routes, Route } from "react-router-dom";
-import MainPage from "../components/Home Page/MainPage.jsx";
-import ShowAllProducts from "./ProductPage/ShowAllProducts.jsx";
-import ShowProducts from "./ProductPage/ShowProducts.jsx";
-import PaymentStatus from "./Checkout/PaymentStatus.jsx";
-import Cart from "./Cart/Cart.jsx";
-import NotFound from "./NotFound.jsx";
-import CartContext from "./Cart/CartContext.jsx";
+import MainPage from "./Home Page/MainPage";
+import ShowAllProducts from "./ProductPage/ShowAllProducts";
+import ShowProducts from "./ProductPage/ShowProducts";
+import PaymentStatus from "./Checkout/PaymentStatus";
+import Cart from "./Cart/Cart";
+import NotFound from "./NotFound";
+import CartContext from "./Cart/CartContext";
 import { useState, useEffect, useContext } from "react";
-import SingleProduct from "./ProductPage/SingleProduct.jsx";
-import AddBillingAddress from "./BillingAddress/AddBillingAddress.jsx";
-import DisplayBillingAddress from "./BillingAddress/DisplayBillingAddress.jsx";
-import CheckoutForm from "./Checkout/CheckoutForm.jsx";
+import SingleProduct from "./ProductPage/SingleProduct";
+import AddBillingAddress from "./BillingAddress/AddBillingAddress";
+import DisplayBillingAddress from "./BillingAddress/DisplayBillingAddress";
+import CheckoutForm from "./Checkout/CheckoutForm";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import ShowOrders from "./Order/ShowOrders.jsx";
-import OrderItemDetails from "./Order/OrderItemDetails.jsx";
-import Wishlist from "./Wishlist/Wishlist.jsx";
-import AllSearchResults from "./ProductPage/AllSearchResults.jsx";
-import SearchByBrand from "./ProductPage/SearchByBrand.jsx";
-import Loading from "./Modals/Loading.jsx";
-import { AuthContext } from "./App.jsx";
+import ShowOrders from "./Order/ShowOrders";
+import OrderItemDetails from "./Order/OrderItemDetails";
+import Wishlist from "./Wishlist/Wishlist";
+import AllSearchResults from "./ProductPage/AllSearchResults";
+import SearchByBrand from "./ProductPage/SearchByBrand";
+import Loading from "./Modals/Loading";
+import { AuthContext } from "./App";
+import { CartDoc, CartItem, Product } from "../interfaces/app_interface";
 
-const stripePromise = loadStripe(process.env.PUBLISHABLE_KEY);
+const stripePromise = loadStripe(process.env.PUBLISHABLE_KEY || '');
 
 function Consumer() {
   const userid = useContext(AuthContext);
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [options, setOptions] = useState({ clientSecret: "" });
 
   useEffect(() => {
@@ -88,16 +89,16 @@ function Consumer() {
           Authorization: "Bearer " + sessionStorage.getItem("tokenId"),
         },
       });
-      let cart = await res.json();
+      let cart:CartDoc = await res.json();
       if (cart) setCartItems(cart.cart);
     } else {
       let cart = localStorage.getItem("cart");
       if (cart) {
-        let cartItems = [];
-        cart = cart.split(",");
-        let cartLen = cart.length;
-        let noOfFetcheditems = 0;
-        cart.forEach((item) => {
+        let cartItems:CartItem[] = [];
+        let cartArr:string[] = cart.split(",");
+        let cartLen:number = cartArr.length;
+        let noOfFetcheditems:number = 0;
+        cartArr.forEach((item) => {
           let values = item.split("|");
           let cat = values[0];
           let itemId = values[2];
@@ -108,9 +109,12 @@ function Consumer() {
             },
           })
             .then((res) => res.json())
-            .then((data) => {
-              data.cartCount = Number(cartCount);
-              cartItems.push(data);
+            .then((data:Product) => {
+              let item:CartItem={
+                ...data,
+                cartCount: cartCount
+              }
+              cartItems.push(item);
               noOfFetcheditems += 1;
               if (cartLen === noOfFetcheditems) setCartItems(cartItems);
             });
@@ -123,18 +127,13 @@ function Consumer() {
   return (
     <main className="sans-serif overflow-hidden">
       <CartContext.Provider value={cartItems}>
-        <Navbar admin={false} />
+        <Navbar admin={false} userid={null} />
         <Routes>
           <Route
             path="/cart"
             element={
               <Cart loginStatus={!!userid} fetchCartHandler={fetchCartItems} />
             }
-          />
-          <Route
-            exact
-            path="/"
-            element={<MainPage fetchCartHandler={fetchCartItems} />}
           />
           <Route
             path="/products/product"
@@ -209,6 +208,10 @@ function Consumer() {
           <Route
             path="/products/brands"
             element={<SearchByBrand fetchCartHandler={fetchCartItems} />}
+          />
+            <Route
+            path="/"
+            element={<MainPage  />}
           />
           <Route path="*" element={<NotFound />} />
         </Routes>
