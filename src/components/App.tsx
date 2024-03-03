@@ -1,21 +1,20 @@
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../firebase_config.js";
+import { auth } from "../firebase_config";
 import { createContext, useState } from "react";
 import AdminPortal from "./Admin/AdminPortal";
-import Consumer from "./Consumer.js";
+import Consumer from "./Consumer";
 import { useMediaQuery } from "react-responsive";
-import DeviceContext from "./DeviceContext.js";
+import DeviceContext from "./DeviceContext";
 
-export const AuthContext = createContext(undefined);
+export const AuthContext = createContext<undefined | null | string>(undefined);
 
 function App() {
-  const [user, setUser] = useState(undefined);
-  const isMobile = useMediaQuery({ query: "(max-width:480px)" });
-  const isTablet = useMediaQuery({ query: "(max-width:1224px)" });
+  const [user, setUser] = useState<undefined | null | string>(undefined);
+  const isMobile:boolean = useMediaQuery({ query: "(max-width:480px)" });
+  const isTablet:boolean = useMediaQuery({ query: "(max-width:1224px)" });
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      auth.currentUser
-        .getIdToken()
+      auth.currentUser?.getIdToken()
         .then(function (idtoken) {
           sessionStorage.setItem("tokenId", idtoken);
           setUser(user.uid);
@@ -37,7 +36,7 @@ function App() {
   }
 
   return checkIfAdmin() ? (
-    <AdminPortal userid={user} />
+    <AdminPortal userid={user!} />
   ) : (
     <DeviceContext.Provider value={{ isMobile: isMobile, isTablet: isTablet }}>
       <AuthContext.Provider value={user}>
