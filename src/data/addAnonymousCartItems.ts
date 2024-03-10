@@ -37,12 +37,14 @@ function addItemsToDB(items:CartItem[]):void {
   items.forEach(async (item):Promise<void> => {
     let itemExists = await checkCartItemExists<CartItem>(item);
     if (itemExists && itemExists.length) {
+
       await fetch(`${process.env.REACT_APP_MOCKBACKEND}/Cart/${item.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+
           cartCount: itemExists[0].cartCount + 1,
           tokenId: sessionStorage.getItem("tokenId"),
         }),
