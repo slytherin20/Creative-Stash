@@ -1,6 +1,9 @@
 import { CartItem } from "../interfaces/app_interface";
 
-async function checkCartItemExists<T1 extends {productId?:number,id:number|string}>(item:T1):Promise<T1 | null> {
+
+
+async function checkCartItemExists<T1 extends {productId?:number,id:number|string}>(item:T1):Promise<CartItem[] | null> {
+
   let id:number|string;
   id = item.productId ? item.productId : item.id;
 
@@ -11,7 +14,9 @@ async function checkCartItemExists<T1 extends {productId?:number,id:number|strin
     },
   });
   if (res.status == 404) return null;
-  let data:T1 = await res.json();
+
+  let data:CartItem[] = await res.json();
+
 
   return data;
 }
