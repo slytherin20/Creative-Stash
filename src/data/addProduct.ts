@@ -1,7 +1,7 @@
 import { ReturnMsg } from "../enum/app_enums";
-import { Brand, Product } from "../interfaces/app_interface";
+import { Brand, Product, UserInput } from "../interfaces/app_interface";
 
-async function addProduct(inputs) {
+async function addProduct(inputs:UserInput) {
   let generateId = Date.now();
   let productDetails:Product = {
     cat: inputs.cat,
@@ -25,7 +25,7 @@ async function addProduct(inputs) {
  
   async function addImageToDB():Promise<void> {
     let formdata = new FormData();
-    formdata.append("file", inputs.img);
+    formdata.append("file", inputs.img!);
     let tokenId:string= sessionStorage.getItem("tokenId") || '';
     formdata.append("tokenId", tokenId);
     let res = await fetch(`${process.env.REACT_APP_MOCKBACKEND}/images`, {
