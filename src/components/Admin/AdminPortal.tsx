@@ -1,13 +1,13 @@
 import { Route, Routes } from "react-router-dom";
-import Navbar from "../Header/Navbar.jsx";
-import NotFound from "../NotFound.jsx";
-import AddProducts from "./AddProducts.jsx";
-import AdminHomepage from "./AdminHomepage.jsx";
-import ShowOrdersReceived from "./ShowOrdersReceived.jsx";
-function AdminPortal({ userid }) {
+import Navbar from "../Header/Navbar";
+import NotFound from "../NotFound";
+import AddProducts from "./AddProducts";
+import AdminHomepage from "./AdminHomepage";
+import ShowOrdersReceived from "./ShowOrdersReceived";
+function AdminPortal({ userid }:{userid:string}) {
   return (
     <main className="sans-serif overflow-hidden">
-      <Navbar user={userid} admin={true} />
+      <Navbar  admin={true} userid={userid} />
       <Routes>
         <Route path="/" element={<AdminHomepage />} />
         <Route
